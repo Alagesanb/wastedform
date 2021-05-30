@@ -1,0 +1,8 @@
+.is-invalid {
+    border: 1px solid red !important
+
+  }
+  .boat-image {
+    width: 100% !important;
+    margin: 0px 0px 0px 15px !important;
+}   
