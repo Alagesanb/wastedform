@@ -1,0 +1,396 @@
+
+
+ $(document).ready(function(){
+
+
+ var templates = {
+//   popupIsAllDay: function () {
+//       return 'All Day';
+//   },
+//   popupStateFree: function () {
+//       return 'Free';
+//   },
+//   popupStateBusy: function () {
+//       return 'Busy';
+//   },
+//   titlePlaceholder: function () {
+//       return 'Subject';
+//   },
+//   locationPlaceholder: function () {
+//       return 'Location';
+//   },
+//   startDatePlaceholder: function () {
+//       return 'Start date';
+//   },
+//   endDatePlaceholder: function () {
+//       return 'End date';
+//   },
+  popupSave: function () {
+      return 'Save';
+  },
+  popupUpdate: function () {
+      return 'Update';
+  },
+//   popupDetailDate: function (isAllDay, start, end) {
+//       var isSameDate = moment(start).isSame(end);
+//       var endFormat = (isSameDate ? '' : 'YYYY.MM.DD ') + 'hh:mm a';
+
+//       if (isAllDay) {
+//           return moment(start).format('YYYY.MM.DD') + (isSameDate ? '' : ' - ' + moment(end).format('YYYY.MM.DD'));
+//       }
+
+//       return (moment(start).format('YYYY.MM.DD hh:mm a') + ' - ' + moment(end).format(endFormat));
+//   },
+//   popupDetailLocation: function (schedule) {
+//       return 'Location : ' + schedule.location;
+//   },
+//   popupDetailUser: function (schedule) {
+//       return 'User : ' + (schedule.attendees || []).join(', ');
+//   },
+//   popupDetailState: function (schedule) {
+//       return 'State : ' + schedule.state || 'Busy';
+//   },
+//   popupDetailRepeat: function (schedule) {
+//       return 'Repeat : ' + schedule.recurrenceRule;
+//   },
+//   popupDetailBody: function (schedule) {
+//       return 'Discription : ' + schedule.title;
+//   },
+  popupEdit: function () {
+      return 'Edit';
+  },
+  popupDelete: function () {
+      return 'Delete';
+  }
+};
+
+var cal = new tui.Calendar('#calendar', {
+  defaultView: 'month',
+  template: templates,
+  useCreationPopup: true,
+  useDetailPopup: true
+});
+
+
+
+
+
+//.................sheduler...End...................
+
+///Sheduler............Datas...................Start........
+
+
+
+function init() {
+
+
+
+cal.setCalendars(CalendarList);
+
+setRenderRangeText();
+setSchedules();
+setEventListener();
+}
+
+function getDataAction(target) {
+return target.dataset ? target.dataset.action : target.getAttribute('data-action');
+}
+
+function setDropdownCalendarType() {
+var calendarTypeName = document.getElementById('calendarTypeName');
+var calendarTypeIcon = document.getElementById('calendarTypeIcon');
+var options = cal.getOptions();
+var type = cal.getViewName();
+var iconClassName;
+
+if (type === 'day') {
+ type = 'Daily';
+ iconClassName = 'calendar-icon ic_view_day';
+} else if (type === 'week') {
+ type = 'Weekly';
+ iconClassName = 'calendar-icon ic_view_week';
+} else if (options.month.visibleWeeksCount === 2) {
+ type = '2 weeks';
+ iconClassName = 'calendar-icon ic_view_week';
+} else if (options.month.visibleWeeksCount === 3) {
+ type = '3 weeks';
+ iconClassName = 'calendar-icon ic_view_week';
+} else {
+ type = 'Monthly';
+ iconClassName = 'calendar-icon ic_view_month';
+}
+
+calendarTypeName.innerHTML = type;
+calendarTypeIcon.className = iconClassName;
+}
+
+function onClickMenu(e) {
+var target = $(e.target).closest('a[role="menuitem"]')[0];
+var action = getDataAction(target);
+var options = cal.getOptions();
+var viewName = '';
+
+switch (action) {
+case 'toggle-daily':
+  viewName = 'day';
+  break;
+case 'toggle-weekly':
+  viewName = 'week';
+  break;
+case 'toggle-monthly':
+  options.month.visibleWeeksCount = 0;
+  viewName = 'month';
+  break;
+case 'toggle-weeks2':
+  options.month.visibleWeeksCount = 2;
+  viewName = 'month';
+  break;
+case 'toggle-weeks3':
+  options.month.visibleWeeksCount = 3;
+  viewName = 'month';
+  break;
+case 'toggle-narrow-weekend':
+  options.month.narrowWeekend = !options.month.narrowWeekend;
+  options.week.narrowWeekend = !options.week.narrowWeekend;
+  viewName = cal.getViewName();
+
+  target.querySelector('input').checked = options.month.narrowWeekend;
+  break;
+case 'toggle-start-day-1':
+  options.month.startDayOfWeek = options.month.startDayOfWeek ? 0 : 1;
+  options.week.startDayOfWeek = options.week.startDayOfWeek ? 0 : 1;
+  viewName = cal.getViewName();
+
+  target.querySelector('input').checked = options.month.startDayOfWeek;
+  break;
+case 'toggle-workweek':
+  options.month.workweek = !options.month.workweek;
+  options.week.workweek = !options.week.workweek;
+  viewName = cal.getViewName();
+
+  target.querySelector('input').checked = !options.month.workweek;
+  break;
+default:
+  break;
+}
+
+cal.setOptions(options, true);
+cal.changeView(viewName, true);
+
+setDropdownCalendarType();
+setRenderRangeText();
+setSchedules();
+}
+
+function onClickNavi(e) {
+var action = getDataAction(e.target);
+
+switch (action) {
+case 'move-prev':
+  cal.prev();
+  break;
+case 'move-next':
+  cal.next();
+  break;
+case 'move-today':
+  cal.today();
+  break;
+default:
+  return;
+}
+
+setRenderRangeText();
+setSchedules();
+}
+
+function setRenderRangeText() {
+var renderRange = document.getElementById('renderRange');
+var options = cal.getOptions();
+var viewName = cal.getViewName();
+var html = [];
+if (viewName === 'day') {
+html.push(moment(cal.getDate().getTime()).format('YYYY.MM.DD'));
+} else if (viewName === 'month' &&
+(!options.month.visibleWeeksCount || options.month.visibleWeeksCount > 4)) {
+html.push(moment(cal.getDate().getTime()).format('YYYY.MM'));
+} else {
+html.push(moment(cal.getDateRangeStart().getTime()).format('YYYY.MM.DD'));
+html.push(' ~ ');
+html.push(moment(cal.getDateRangeEnd().getTime()).format(' MM.DD'));
+}
+renderRange.innerHTML = html.join('');
+}
+
+function setSchedules() {
+cal.clear();
+
+// var start = new Date("Sat May 08 2021 00:00:00 GMT+0530 (India Standard Time)");
+// var end = new Date("Sat May 10 2021 00:00:00 GMT+0530 (India Standard Time)");
+
+//generateSchedule(cal.getViewName(), start, end);
+generateSchedule();  
+//cal.createSchedules(ScheduleList);
+//console.log(ScheduleList);
+refreshScheduleVisibility();
+}
+
+
+function refreshScheduleVisibility() {
+var calendarElements = Array.prototype.slice.call(document.querySelectorAll('#calendarList input'));
+
+CalendarList.forEach(function(calendar) {
+cal.toggleSchedules(calendar.id, !calendar.checked, false);
+});
+
+cal.render(true);
+
+calendarElements.forEach(function(input) {
+var span = input.nextElementSibling;
+span.style.backgroundColor = input.checked ? span.style.borderColor : 'transparent';
+});
+}
+
+resizeThrottled = tui.util.throttle(function() {
+cal.render();
+}, 50);
+
+function setEventListener() {
+$('.dropdown-menu a[role="menuitem"]').on('click', onClickMenu);
+$('#menu-navi').on('click', onClickNavi);
+window.addEventListener('resize', resizeThrottled);
+}
+
+cal.on({
+'clickTimezonesCollapseBtn': function(timezonesCollapsed) {
+if (timezonesCollapsed) {
+  cal.setTheme({
+    'week.daygridLeft.width': '77px',
+    'week.timegridLeft.width': '77px'
+  });
+} else {
+  cal.setTheme({
+    'week.daygridLeft.width': '60px',
+    'week.timegridLeft.width': '60px'
+  });
+}
+
+return true;
+}
+});
+
+function generateSchedule(){
+
+    cal.clear();
+    ScheduleList = [];   
+
+    $.ajax({
+        url: public_URL+"ViewAllSchedule",
+        type: 'GET',
+        dataType: 'json',        
+        success: function(datas) {
+            var respon =  datas.response;
+                       
+            $.each(respon, function (key, val) {                
+                generateRandomSchedule(val);                 
+            });
+
+            cal.createSchedules(ScheduleList);
+            
+            
+                   
+
+         },
+         error: function (error) {          
+            //$("#responceDiv").html(error.responseText);            
+          }
+    });
+    
+}
+
+
+
+init();
+
+
+
+
+
+
+ });
+
+
+ ////////// datas..............
+
+ 'use strict';
+
+/*eslint-disable*/
+
+var ScheduleList = [];
+
+var SCHEDULE_CATEGORY = [
+    'milestone',
+    'task'
+];
+
+function ScheduleInfo() {
+    this.id = null;
+    this.calendarId = null;
+
+    this.title = null;
+    this.body = null;
+    this.isAllday = false;
+    this.start = null;
+    this.end = null;
+    this.category = '';
+    this.dueDateClass = '';
+
+    this.color = null;
+    this.bgColor = null;
+    this.dragBgColor = null;
+    this.borderColor = null;
+    this.customStyle = '';
+
+    this.isFocused = false;
+    this.isPending = false;
+    this.isVisible = true;
+    this.isReadOnly = false;
+    this.goingDuration = 0;
+    this.comingDuration = 0;
+    this.recurrenceRule = '';
+    this.state = '';
+
+    this.raw = {
+        memo: '',
+        hasToOrCc: false,
+        hasRecurrenceRule: false,
+        location: null,
+        class: 'public', // or 'private'
+        creator: {
+            name: '',
+            avatar: '',
+            company: '',
+            email: '',
+            phone: ''
+        }
+    };
+}
+
+function generateNames_orginal() {
+    var names = [];
+    var i = 0;
+    var length = chance.integer({min: 1, max: 10});
+
+    for (; i < length; i += 1) {
+        names.push(chance.name());
+    }
+
+    return names;
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,469 @@
+<div class="main-page">
+    <app-sidemenu></app-sidemenu>
+    <div class="contents-page col-lg-9">
+        <app-header></app-header>
+        <div class="headingz">
+            <h4>Settings</h4>
+        </div>
+        
+        
+        
+        <div class="page contents">
+            
+           
+<div class="container">
+<ul id="tabs" class="nav nav-tabs booking-tabs" role="tablist">
+  <li class="nav-item">
+      <a id="tab-A" href="#pane-A" class="nav-link active" data-toggle="tab" role="tab">Manage Boat Type</a>
+  </li>
+  <li class="nav-item">
+      <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab">Unavailable Days</a>
+  </li>
+  <li class="nav-item">
+    <a id="tab-C" href="#pane-C" class="nav-link" data-toggle="tab" role="tab">Consecutive Days</a>
+</li>
+<li class="nav-item">
+  <a id="tab-D" href="#pane-D" class="nav-link" data-toggle="tab" role="tab">Next Booking Days</a>
+</li>
+<li class="nav-item">
+  <a id="tab-E" href="#pane-E" class="nav-link" data-toggle="tab" role="tab">Share Allocation</a>
+</li>
+</ul>
+
+
+
+<div id="div-data-table">
+
+<div id="content" class="tab-content" role="tablist">
+  <div id="pane-A" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
+
+
+
+  <div class="row" style="margin-top: 25px;"> 
+            
+    <div class="col-md-12 reports" id="temp-data-bindings">
+              
+                    
+                   
+    </div>  
+                
+  </div>
+
+
+
+
+      
+      
+       
+<button style="display:none" type="button" id="error-disp-btns" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boat-type">Open Modal</button>
+
+
+
+<div class="modal fade" id="boat-type" tabindex="-1" role="dialog" aria-labelledby="boat-typeModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel">EDIT BOAT TYPE</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="form"  novalidate>
+<div class="modal-body">
+  <div class="form-group col-md-12">
+<label>Boat Type Name</label>
+<input type="text" class="form-control"   formControlName="Boat_Type" [ngClass]="{ 'is-invalid': submitted && f.Boat_Type.errors }">
+</div>
+
+
+      <div class="form-group col-md-12">
+<label>Description</label>
+  <textarea class="form-control" rows="3"   formControlName="Type_Description" [ngClass]="{ 'is-invalid': submitted && f.Type_Description.errors }"> </textarea>
+</div>
+
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)=updateBoattype()>UPDATE</button>
+</div>
+</form>
+</div>
+</div>
+</div>  
+  </div>
+
+  <div id="pane-B" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-B">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="sbg-form"  style="margin-top: 25px;"> 
+          <form>              
+            <div class="form-row"> 
+              <div class="col-md-10 add-date-default" style="padding: 0;">                      
+                <div class="row">                 
+                  <div class="form-group col-md-7 ">
+                      <label>Unavailable Dates</label>
+                      <div class="input_fields_wrap input_fields_wrap_commen">
+                      <div>
+                        <input type="date" name="mytext[]"  class="form-control" data-zdp_readonly_element="false"></div>
+                      </div>
+                    </div>
+                    <div class="form-group col-md-2">     
+                      <button class="add_field_default_button">Add</button>
+                    </div>           
+                  </div>  
+                </div>  
+              </div>  
+               <div class="form-row">     
+              <div class="col-md-2">
+                <a class="btn btn-primary" id="id-btn-unAvilableDate-Commen" style="margin-top: 32px;">SAVE</a>
+              </div>             
+              </div>
+             </form>     
+         </div>  
+      </div>
+      <div class="vl"></div>
+      <div class="col-md-6">
+        <div class="sbg-form"  style="margin-top: 25px;"> 
+          <form>
+          <div class="form-row">
+              
+<div class="form-group col-md-12">
+    <label>Boat Name</label>
+      
+    <ng-multiselect-dropdown
+      [placeholder]="'Select'"
+      [settings]="dropdownSettings_UNAVAILABLE_DATE"
+      [data]="dropdownList_filted"                                    
+      (onSelect)="onItemSelect_UNAVAILABLE_DATE($event)"
+      (onDeSelect)="onDeSelect_UNAVAILABLE_DATE($event)"
+      (onSelectAll)="onSelectAll_UNAVAILABLE_DATE($event)"
+      (onDeSelectAll)="onDeSelectAll_UNAVAILABLE_DATE($event)"            
+      
+    >
+    </ng-multiselect-dropdown>
+  
+</div>  
+              </div>               
+              
+             <div class="form-row"> 
+                 
+<div class="col-md-12 add-date" style="padding: 0;">                      
+<div class="row">                 
+<div class="form-group col-md-7 ">
+<label>Unavailable Date</label>
+
+
+
+<div class="input_fields_wrap input_fields_wrap_single">
+
+<div><input type="date" name="mytext[]"  class="form-control" data-zdp_readonly_element="false"></div>
+ 
+</div>
+
+</div>
+                 
+                 <div class="form-group col-md-2">     
+                 
+                 <button class="add_field_button">Add</button>
+                 
+                 
+                 </div>           
+                 
+                 
+
+              </div>  
+              </div>  
+              </div>  
+              
+               <div class="form-row">     
+
+<div class="col-md-2">
+ 
+ <a class="btn btn-primary" id="id-btn-unAvilableDate-single" style="margin-top: 32px;">SAVE</a>
+              </div>             
+              
+</div>
+             
+                        
+              
+             </form>     
+          
+            
+   </div>
+      </div>
+          
+       
+    </div>
+   
+  </div>
+ 
+  <div id="pane-C" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-C">
+    <div class="sbg-form"  style="margin-top: 25px;"> 
+       <form  [formGroup]="Consecutiveform">
+
+        <div class="form-row">
+           
+          <div class="form-group col-md-4">
+          
+            <label>Boat Name</label>
+            <ng-multiselect-dropdown
+            [placeholder]="'Select'"
+            [settings]="dropdownSettings_CONSECUTIVEDAYS"
+            [data]="dropdownList_filted"                                    
+            (onSelect)="onItemSelect_CONSECUTIVEDAYS($event)"            
+            class="singleselect_drop"
+        >
+        </ng-multiselect-dropdown>
+        </div>  
+      </div> 
+
+       <div class="form-row">
+           
+          <div class="form-group col-md-4">
+          <label>Summer Consecutive Days Allowed For Booking</label>
+          <input type="text" class="form-control" value="{{SUMMER_CONSECUTIVE_DAYS_ALLOWED}}" formControlName="Summer_ConsecutiveDays" [ngClass]="{ 'is-invalid': ConsecutiveSubmitted && cf.Summer_ConsecutiveDays.errors }">
+          </div>  
+      </div>               
+           
+           <div class="form-row">
+           
+            <div class="form-group col-md-4">
+            <label>Winter Consecutive Days Allowed For Booking</label>
+            <input type="text" class="form-control" value="{{WINTER_CONSECUTIVE_DAYS_ALLOWED}}" formControlName="Winter_ConsecutiveDays" [ngClass]="{ 'is-invalid': ConsecutiveSubmitted && cf.Winter_ConsecutiveDays.errors }">
+            </div>  
+                       </div>  
+           
+            <div class="form-row">     
+
+<div class="col-md-2">
+
+<a  class="btn btn-primary" style="margin-top: 32px;" (click)="Add_CONSECUTIVE_DAYS()">SAVE</a>
+           </div>             
+           
+</div>
+          
+                     
+           
+          </form>     
+       
+         
+      </div>  
+
+</div>
+<div id="pane-D" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-D">
+  <div class="sbg-form"  style="margin-top: 25px;"> 
+     <form  [formGroup]="Bookingform">
+     
+     
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          
+          <label>Boat Name</label>
+          <ng-multiselect-dropdown
+          [placeholder]="'Select'"
+          [settings]="dropdownSettings_CONSECUTIVEDAYS"
+          [data]="dropdownList_filted"                                    
+          (onSelect)="onItemSelect_Next_Booking_Day($event)"            
+          class="singleselect_drop"
+      >
+      </ng-multiselect-dropdown>
+      </div>  
+
+      </div>
+     
+     
+      <div class="form-row">    
+            <div class="form-group col-md-4">
+            <label>Next Booking Day Will Be Open After</label>
+            <input type="text" class="form-control" value="{{NEXT_BOOKING_DAYS_ALLOWED}}" formControlName="Next_BookingDay" [ngClass]="{ 'is-invalid': BookingSubmitted && bf.Next_BookingDay.errors }">
+            </div>  
+         </div>               
+         
+          <div class="form-row">     
+
+<div class="col-md-2">
+
+<a  class="btn btn-primary" style="margin-top: 32px;" (click)="Add_NEXT_BOOKING_DAY()">SAVE</a>
+         </div>             
+         
+</div>
+        
+                   
+         
+        </form>     
+     
+       
+    </div>  
+
+</div>
+
+
+<div id="pane-E" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-E">
+  <div class="sbg-form"  style="margin-top: 25px;"> 
+       
+
+<div class="col-md-2">
+
+<button  class="btn btn-primary" style="margin-top: 32px;" (click)="addShare()">ADD New Share</button>
+         
+       
+    </div>  
+
+    
+</div>
+</div>
+  <button style="display:none" type="button" id="pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+            
+              
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+  
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Boat Type</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getResponce}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<button style="display:none" type="button" id="removeBoat" class="btn btn-info btn-lg" data-toggle="modal" data-target="#removeBoats">Open Modal</button>
+
+
+<div class="modal fade" id="removeBoats" role="dialog">
+  <div class="modal-dialog">
+  
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Boat Type</h4>
+      </div>
+      <div class="modal-body">
+         
+     <span class="red">ARE YOU SURE ?</span>
+        <p>You Want To Delete Boat Type!!!.</p>
+      </div>
+      <div class="modal-footer">
+    <span a href="#" (click)=deleteBoat() class="confirm-bttn">CONFIRM</span>
+    <span a href="#" data-dismiss="modal" class="cancel-bttn">CANCEL</span>
+       </div>
+    </div>
+    
+  </div>
+</div>
+
+
+ 
+
+</div>
+
+
+<!-- .......................... -->
+
+</div>
+
+</div>     
+            
+<button style="display:none" type="button" id="addshare" class="btn btn-info btn-lg" data-toggle="modal" data-target="#shareModel">Open Modal</button>
+
+
+<div class="modal fade" id="shareModel" role="dialog">
+  <div class="modal-dialog">
+  
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add Share</h4>
+      </div>
+      <form [formGroup]="Shareform">
+        <div class="form-group col-md-8">
+          <label>Select boat</label> 
+         <ng-multiselect-dropdown 
+         [placeholder]="'Select'"
+         [settings]="dropdownSettings"
+         [data]="dropdownList_filted"                                    
+         (onSelect)="onItemSelect($event)"
+         (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+        </div>
+        <div class="form-group col-md-8">
+        <label>No:Of Shares </label>
+        <input type="text" class="form-control" readonly formControlName="No_of_Shares" [ngClass]="{ 'is-invalid': shareSubmitted && sf.No_of_Shares.errors }" >
+        </div>  
+        <div class="form-group col-md-8">
+        <label>No:Of Summer Weekdays Per Owner</label>
+        <input type="text" class="form-control"formControlName="No_of_SummerWeekDays" [ngClass]="{ 'is-invalid': shareSubmitted && sf.No_of_SummerWeekDays.errors }" >
+        </div> 
+        <div class="form-group col-md-8">
+          <label>No:Of Summer Weekends Per Owner</label>
+          <input type="text" class="form-control" formControlName="No_of_SummerWeekEndDays" [ngClass]="{ 'is-invalid': shareSubmitted && sf.No_of_SummerWeekEndDays.errors }">
+        </div>
+        <div class="form-group col-md-8">
+          <label>No:Of Winter Weekdays Per Owner</label>
+          <input type="text" class="form-control"formControlName="No_of_WinterWeekDays" [ngClass]="{ 'is-invalid': shareSubmitted && sf.No_of_WinterWeekDays.errors }" >
+          </div> 
+        <div class="form-group col-md-8">
+          <label>No:Of Winter Weekends Per Owner</label>
+          <input type="text" class="form-control" formControlName="No_of_WinterWeekEndDays" [ngClass]="{ 'is-invalid': shareSubmitted && sf.No_of_WinterWeekEndDays.errors }">
+        </div>
+      <div class="modal-footer">
+    <span a href="#" (click)=saveShare() class="confirm-bttn">Save</span>
+       </div>
+       </form>
+    </div>
+    
+  </div>
+</div>        
+
+            
+<button style="display:none" type="button" id="Sharepop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myMessageModal">Open Modal</button>
+            
+              
+<div class="modal fade" id="myMessageModal" role="dialog">
+  <div class="modal-dialog">
+  
+    
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{modelTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getResponce}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div>        
+            
+            
+            
+          
+            
+            
+       
+            
+            
+           
+            
+            
+            
+             
+        </div>
+    </div>
+</div>
+<div class="dash-footer">
+  <app-footer-adminsession></app-footer-adminsession>    
+</div>

@@ -1,0 +1,174 @@
+<div class="main-page">
+    <app-sidemenu></app-sidemenu>
+    <div class="contents-page col-lg-9">
+        <app-header></app-header>
+        <div class="headingz">
+            <h4>Owners</h4>
+        </div>
+        
+        
+        
+        <div class="page contents">
+            
+            <div class="row">
+                
+                
+                <!-- <div class="col-md-2 dash-filter">   
+            <div class="dropdown">
+<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Boat Name
+<span><i class="fas fa-filter"></i></span></button>
+<ul class="dropdown-menu">
+  <li *ngFor="let loc of boats  let i = index;">
+    <a style="cursor:pointer;"  (click)="getBoatTypeId(loc)">{{loc.Boat_Name}}</a>
+  </li>
+</ul>
+                  </div>
+               </div>  -->
+                
+                 <div class="col-md-4 boat-search">
+                     <div class="input-group mb-3">
+                        <input class="form-control" id="myInput" type="text" placeholder="Search.." [(ngModel)]="searchLoction">
+
+<!-- <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" [(ngModel)]="searchLoction" aria-describedby="basic-addon2"> -->
+
+</div>
+                  </div> 
+                
+                
+                
+                
+            <div class="col-md-6">
+                <ul class="top-btn" style="float: right;">   
+                 <li><a href="#" routerLink="/add-owner/" class="btn btn-primary">ADD OWNER</a></li>
+                 <li><a href="ownership-transfer.html" class="btn btn-primary">OWNERSHIP TRANSFER</a></li>
+                </ul>       
+            </div>
+            </div>
+            
+            <div class="container profile-page">
+<div class="row">
+  
+  <div class="col-xl-6 col-lg-12 col-md-6" *ngFor="let owner of allOwners | filter: searchLoction let i = index;" >
+      <div class="card profile-header">
+          <div class="body">
+              <div class="row">
+                 <div class="col-lg-3 col-md-3 col-12">
+                      <div class="profile-image float-md-right">
+                         <!-- <img src="/assets/images/owner-img-1.jpg" alt="owner-img"> -->
+                        
+                         <img class="img-responsive" *ngIf="!owner.Profile_Image" src="../../assets/images/owner-img-1.jpg" alt="">
+                             <img class="img-responsive" *ngIf="owner.Profile_Image" src="{{imgUrl+owner.Profile_Image}}" alt="">
+                        
+                         
+                        </div>
+                  </div>
+                  <div class="col-lg-7 col-md-9 col-12">
+                      <h4 class="m-t-0 m-b-0"><strong>{{owner.First_Name}}</strong> {{owner.Last_Name}}</h4>
+                      <span class="email"><i class="far fa-envelope"></i> {{owner.Email}}</span> <br>
+                      <span class="phone"><i class="fas fa-mobile-alt"></i> {{owner.Mobile}}</span> <br>
+                      <span class="phone"><i class="fas fa-house-user"></i> {{owner.Family_Name}}</span><br>
+                      <span *ngIf="!owner.boatName" class="phone"><i class="fas fa-ship"></i> No Boats Assigned</span>
+                      <span *ngIf="owner.boatName" class="phone"><i class="fas fa-ship"></i> {{owner.boatName}}</span>
+
+                  </div>  
+                  
+                  <div class="col-md-2 update-user">
+                      <ul>
+                          <li><button (click)= deleteownerModel(owner._id)><i class="far fa-trash-alt"></i> </button></li>
+                          <li><button (click)= editOwner(owner)><i class="far fa-edit"></i> </button></li>
+                          <li><a ><button (click)= viewOwner(owner)><i class="far fa-eye"></i> </button></a></li>
+                      </ul>    
+                  </div>
+                  <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
+                      <ul>
+                  <li><h6>TOTAL DAYS BOOKED </h6> <span>{{owner.Total_Days}}/60</span></li>
+                  <li><h6>SUMMER WEEKENDS </h6> <span>{{owner.Summer_WeekEndDays}}/15</span></li>
+                  <li><h6>WINTER WEEKENDS </h6> <span>{{owner.Winter_WeekEndDays}}/15</span></li>
+                      </ul>
+                  </div>  
+                  
+                    <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
+                      <ul>
+                  <li><h6>SUMMER WEEKDAYS </h6> <span>{{owner.Summer_WeekDays}}/15</span></li>
+                  <li><h6>WINTER WEEKDAYS </h6> <span>{{owner.Winter_WeekDays}}/15</span></li>
+                      </ul>
+                  </div>  
+                    <div class="col-md-6 owner-datas" *ngIf="!owner.boatName">
+                        <ul>
+                    <li><h6>TOTAL DAYS BOOKED </h6> <span>0/60</span></li>
+                    <li><h6>SUMMER WEEKENDS </h6> <span>0/15</span></li>
+                    <li><h6>WINTER WEEKENDS </h6> <span>0/15</span></li>
+                        </ul>
+                    </div>  
+                    
+                      <div class="col-md-6 owner-datas" *ngIf="!owner.boatName">
+                        <ul>
+                    <li><h6>SUMMER WEEKDAYS </h6> <span>0/15</span></li>
+                    <li><h6>WINTER WEEKDAYS </h6> <span>0/15</span></li>
+                        </ul>
+                    </div>  
+                 </div>
+          </div>                    
+      </div>
+  </div>  
+  
+</div>
+  
+
+</div>   
+           
+            
+        </div>
+    </div>
+</div>
+<div class="dash-footer">
+    <app-footer-adminsession></app-footer-adminsession>    
+</div>
+
+<!-- --------- -->
+<button style="display:none" type="button" id="removeBoat" class="btn btn-info btn-lg" data-toggle="modal" data-target="#removeBoats">Open Modal</button>
+
+<!-- Modal -->
+<div class="modal fade" id="removeBoats" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Owner</h4>
+      </div>
+      <div class="modal-body">
+     <span class="red">ARE YOU SURE ?</span>
+        <p>You are about to a delete owner!!!.</p>
+      </div>
+      <div class="modal-footer">
+    <span a href="#" (click)=deleteOwner() class="confirm-bttn">CONFIRM</span>
+    <span a href="#" data-dismiss="modal" class="cancel-bttn">CANCEL</span>
+       </div>
+    </div>
+
+  </div>
+</div>
+
+<button style="display:none" type="button" id="pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Boat </h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getResponce}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+
+  </div>
+</div>

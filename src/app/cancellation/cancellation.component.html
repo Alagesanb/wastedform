@@ -1,0 +1,264 @@
+<div class="main-page">
+    <app-sidemenu></app-sidemenu>
+    <div class="contents-page col-lg-9">
+        <app-header></app-header>
+        <div class="headingz">
+            <h4>Cancellation</h4>
+        </div>
+        <div class="page contents">
+                  
+            <div class="row" style="margin-bottom: 25px;">
+                   
+            <div class="col-md-8 dash-filter">   
+             <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Launch Date
+                <span><i class="fas fa-filter" aria-hidden="true"></i></span></button>
+                <ul class="dropdown-menu">
+                <li><a href="#">Launch Date</a></li>
+                <li><a href="#">Pre-Launch Date</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Location
+                <span><i class="fas fa-filter" aria-hidden="true"></i></span></button>
+                <ul class="dropdown-menu">
+                <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                <li><a href="#">A</a></li>
+                <li><a href="#">B</a></li>
+                <li><a href="#">C</a></li>
+                <li><a href="#">D</a></li>
+                </ul>
+            </div>
+            </div>        
+            <div class="col-md-4 boat-search">
+                <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
+                </div>
+                </div>
+            </div>   
+            </div>  
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-lg-12">
+                <div class="request">
+                    <div class="img-boat">
+                        <img src="../../assets/images/boat1.jpg">
+                    </div>
+                    
+                    
+                    <div class="boat-info">
+                        <div class="row">
+                            <h6 class="vendor-name">Booking Number</h6> <span>:</span> <h4>1001</h4>
+                        </div>
+                        
+                        <div class="row">
+                            <h6 class="vendor-name">Booking Days</h6> <span>:</span> <h4>11-sep-21 To 11-Dec-21</h4>
+                        </div>
+                        
+                        <div class="row">
+                            <h6 class="vendor-name">Owner Name</h6> <span>:</span> <h4>David</h4>
+                        </div>
+                        
+                        <div class="row">
+                            <h6 class="vendor-name">Boat Type</h6> <span>:</span> <h4>Lorem Ipsm</h4>
+                        </div>
+                        
+                    
+                    </div>
+                    
+                <div class="boat-info">
+                    
+                        <div class="row">
+                            <h6 class="vendor-name">Boat Name</h6> <span>:</span> <h4>Lorem Ipsm</h4>
+                        </div>
+                        
+                        <div class="row">
+                            
+                            <h6 class="vendor-name">No of LOA</h6> <span>:</span> 
+                            <h4><div id="edit" contenteditable="true">1</div></h4>
+                        </div>
+                    
+                    <div style="text-align: center;margin: 0 auto;margin-top: 10px;width: 100%; padding: 0;">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-02">APPROVE</button>
+                    <button type="button" class="btn btn-info btn-lg">DECLINE</button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-12">
+            <div class="request">
+                <div class="img-boat">
+                    <img src="../../assets/images/boat1.jpg">
+                </div>    
+                <div class="boat-info">
+                    <div class="row">
+                        <h6 class="vendor-name">Booking Number</h6> <span>:</span> <h4>1002</h4>
+                    </div>
+                    
+                    <div class="row">
+                        <h6 class="vendor-name">Booking Days</h6> <span>:</span> <h4>11-sep-21 To 11-Dec-21</h4>
+                    </div>
+                    
+                    <div class="row">
+                        <h6 class="vendor-name">Owner Name</h6> <span>:</span> <h4>David</h4>
+                    </div>
+                    
+                    <div class="row">
+                        <h6 class="vendor-name">Boat Type</h6> <span>:</span> <h4>Lorem Ipsm</h4>
+                    </div>
+                </div>
+            <div class="boat-info">
+                    <div class="row">
+                        <h6 class="vendor-name">Boat Name</h6> <span>:</span> <h4>Lorem Ipsm</h4>
+                    </div>
+                    
+                    <div class="row">
+                        
+                        <h6 class="vendor-name">No of LOA</h6> <span>:</span> 
+                        <h4><div id="edit" contenteditable="true">3</div></h4>
+                    </div>
+                
+                <div style="text-align: center;margin: 0 auto;margin-top: 10px;width: 100%; padding: 0;">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal-01">APPROVE</button>
+                <button type="button" class="btn btn-info btn-lg">DECLINE</button>
+                </div>
+            </div>
+                
+            </div>
+        </div>
+                             
+                             
+<style>
+.modal-body P {
+TEXT-ALIGN: CENTER;
+font-size: 20px;
+margin-top: 30px;
+}
+
+button.close {position: absolute;right: 2vh;top: 4px;font-size: 40px;color: #fff;}
+
+h4.modal-title {
+text-align: center;
+margin: 0px auto;
+font-size: 22px;
+font-weight: 500;
+}
+button.btn.btn-info.btn-lg {
+background: #d50000;
+border: NONE;
+padding: 7px 10px;
+font-size: 16px;
+cursor: pointer;
+}	
+</style>							  
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+ <!-- Modal content-->
+ <div class="modal-content">
+   <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal">×</button>
+     <h4 class="modal-title">Boat Type</h4>
+   </div>
+   <div class="modal-body">
+     <p>Boat Type Added Successful!!!.</p>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+   </div>
+ </div>
+ 
+</div>
+</div>
+
+
+
+<div class="modal fade" id="myModal-01" role="dialog">
+<div class="modal-dialog">
+
+ <!-- Modal content-->
+ <div class="modal-content">
+   <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal">×</button>
+     <h4 class="modal-title">Boat Type</h4>
+   </div>
+   <div class="modal-body">
+     <p>Boat Type Added Successful!!!.</p>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+   </div>
+ </div>
+ 
+</div>
+</div>
+
+<div class="modal fade" id="myModal-02" role="dialog">
+<div class="modal-dialog">
+
+ <!-- Modal content-->
+ <div class="modal-content">
+   <div class="modal-header">
+     <button type="button" class="close" data-dismiss="modal">×</button>
+     <h4 class="modal-title">Boat Type</h4>
+   </div>
+   <div class="modal-body">
+     <p>Boat Type Added Successful!!!.</p>
+   </div>
+   <div class="modal-footer">
+     <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+   </div>
+ </div>
+ 
+</div>
+</div>
+                <div class="col-lg-12">
+                            <div class="request">
+                                <div class="img-boat">
+                                    <img src="../../assets/images/boat1.jpg">
+                                </div>
+                                <div class="boat-info">
+                                    <div class="row">
+                                        <h6 class="vendor-name">Booking Number</h6> <span>:</span> <h4>1003</h4>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <h6 class="vendor-name">Booking Days</h6> <span>:</span> <h4>11-sep-21 To 11-Dec-21</h4>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <h6 class="vendor-name">Owner Name</h6> <span>:</span> <h4>David</h4>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <h6 class="vendor-name">Boat Type</h6> <span>:</span> <h4>Lorem Ipsm</h4>
+                                    </div>
+                                </div>
+                                
+                            <div class="boat-info">
+                                <div class="row">
+                                    <h6 class="vendor-name">Boat Name</h6> <span>:</span> <h4>Lorem Ipsm</h4>
+                                </div>
+                                <div class="row">    
+                                <h6 class="vendor-name">No of LOA</h6> <span>:</span> 
+                                <h4><div id="edit" contenteditable="true">6</div></h4>
+                                </div>
+                                <div style="text-align: center;margin: 0 auto;margin-top: 10px;width: 100%; padding: 0;">
+                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">APPROVE</button>
+                                  <button type="button" class="btn btn-info btn-lg">DECLINE</button>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+         </div>
+    </div>
+</div>
+<div class="dash-footer">
+<!-- <small>© Copyright SMART Boating 2021. All Rights Reserved.</small>   -->
+<app-footer-adminsession></app-footer-adminsession>  
+</div>
