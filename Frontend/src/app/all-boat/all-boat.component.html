@@ -11,11 +11,17 @@
         <div class="page contents">
               <div class="row" >
 
-           <div class="col-md-6 dash-filter">
+           <div class="col-md-4 dash-filter" >
 
-               <div class="dropdown">
-<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{Location_Name_dropDown}}
-<span><i class="fas fa-filter"></i></span></button>
+               <div class="dropdown" >
+
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">{{Location_Name_dropDown}}
+                  <span><i class="fas fa-filter"></i></span></button>
+
+
+
+<!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{Location_Name_dropDown}} -->
+<!-- <span><i class="fas fa-filter"></i></span></button> -->
 <ul class="dropdown-menu">
 <input class="form-control" id="myInput" type="text" placeholder="Search.." [(ngModel)]="searchLoction">
 <li *ngFor="let loc of loctions | filter: searchLoction let i = index;">
@@ -35,9 +41,9 @@
 </div>
                   </div>
 
-            <div class="col-md-2">
-                <ul class="top-btn">
-                 <li><a href="#" routerLink="/add-boat/" class="btn btn-primary">ADD BOAT</a></li>
+            <div class="col-md-4">
+                <ul style="width: 100%;" class="top-btn">
+                 <li style="width: 100%;"><a href="#" style="width: 100%;" routerLink="/add-boat/" class="btn btn-primary">ADD BOAT</a></li>
                 </ul>
             </div>
             </div>
@@ -128,8 +134,8 @@
 
               <div class="card col-md-4" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
                <div class="profile-pic">
-                  <a href="boat-details.html"><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
-                  <a href="boat-details.html"><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
+                  <a ><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
+                  <a ><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
                   <!-- <iframe class="card-img-top"  *ngIf="boat.Boat_HandBook" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgUrl+boat.Boat_HandBook)" ></iframe> -->
 
                                    <ul class="edit">
@@ -144,17 +150,17 @@
 
 <div class="card-body">
     <div *ngIf="boat.Location_Name">
-    <a href="#" class="card-link"><i class="fas fa-map-marker-alt" ></i> {{boat.Location_Name}}</a>
-    <a href="#" class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a>
+    <a  class="card-link"><i class="fas fa-map-marker-alt" ></i> {{boat.Location_Name}}</a>
+    <a  class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a>
 </div>
 <div *ngIf="!boat.Location_Name">
-<a href="#" class="card-link"><i class="fas fa-map-marker-alt" ></i> {{boat.locationDetails[0].Boat_Location}}</a>
-<a href="#" class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a>
+<a  class="card-link"><i class="fas fa-map-marker-alt" ></i> {{boat.locationDetails[0].Boat_Location}}</a>
+<a  class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a>
 </div>
 
 </div>
 <div class="card-header">
-<a href="boat-details.html"> {{boat.Boat_Name}}</a>
+<a > {{boat.Boat_Name}}</a>
 </div>
 
 <div class="card-body row">

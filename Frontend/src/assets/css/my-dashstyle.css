@@ -1634,7 +1634,9 @@ button.close {
 
 .dash-filter .dropdown{
     float:left;
-    margin:0 5px;
+    margin: -12px 5px 0px -9px;
+    width: 100%;
+    padding: 14px;
 }
 
 .top-btn{
