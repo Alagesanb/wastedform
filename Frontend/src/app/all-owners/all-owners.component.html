@@ -81,16 +81,16 @@
                   </div>
                   <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
                       <ul>
-                  <li><h6>TOTAL DAYS BOOKED </h6> <span>{{owner.Total_Days}}/60</span></li>
-                  <li><h6>SUMMER WEEKENDS </h6> <span>{{owner.Summer_WeekEndDays}}/15</span></li>
-                  <li><h6>WINTER WEEKENDS </h6> <span>{{owner.Winter_WeekEndDays}}/15</span></li>
-                      </ul>
-                  </div>  
-                  
-                    <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
-                      <ul>
-                  <li><h6>SUMMER WEEKDAYS </h6> <span>{{owner.Summer_WeekDays}}/15</span></li>
-                  <li><h6>WINTER WEEKDAYS </h6> <span>{{owner.Winter_WeekDays}}/15</span></li>
+                        <li><h6>TOTAL DAYS BOOKED </h6> <span>0/{{owner.Total_Days}}</span></li>
+                        <li><h6>SUMMER WEEKENDS </h6> <span>0/{{owner.Summer_WeekEndDays}}</span></li>
+                        <li><h6>WINTER WEEKENDS </h6> <span>0/{{owner.Winter_WeekEndDays}}</span></li>
+                            </ul>
+                        </div>  
+                        
+                          <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
+                            <ul>
+                        <li><h6>SUMMER WEEKDAYS </h6> <span>0/{{owner.Summer_WeekDays}}</span></li>
+                        <li><h6>WINTER WEEKDAYS </h6> <span>0/{{owner.Winter_WeekDays}}</span></li>
                       </ul>
                   </div>  
                     <div class="col-md-6 owner-datas" *ngIf="!owner.boatName">

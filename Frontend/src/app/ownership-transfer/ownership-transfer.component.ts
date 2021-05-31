@@ -19,11 +19,12 @@ export class OwnershipTransferComponent implements OnInit {
   dropdownOwnerList_filted = [];
   dropdownOwnerList = [];
   url = "http://65.2.28.16/api/Boat"
-  OwnerUrl = "http://65.2.28.16/api/Owner"
+  OwnerUrl = "http://65.2.28.16/api/Owner" 
   owners: any=[];
   boats: any=[];
   dropdownList = [];
   dropdownList_filted = [];
+  dropdownOwn: any;
 
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router, private scroll: ViewportScroller) { 
