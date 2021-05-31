@@ -1004,6 +1004,7 @@ h6.vendor-name span {
     border: 1px solid #ced4da00;
     border-radius: 0px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin: 0px 0px 0px 15px;
 }
 
 .sbg-form .btn-outline-secondary {
@@ -1899,6 +1900,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type="text"] {
+    margin: 0px 0px 0px 0px;
     border: 1px solid #999;
 }
 textarea {
@@ -1953,7 +1955,15 @@ ul.top-btn li {
     .page.contents {
         margin-right: 0px;
         margin-bottom: 0px;
+        width: 100%;
+        display: block;
+        position: relative;
+        margin-left: auto;
+
+        /* margin-right: 0px;
+        margin-bottom: 0px; */
     }
+
         .request .boat-info:last-child{
         margin-top: -16px !important;
     }
@@ -1965,7 +1975,6 @@ ul.top-btn li {
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        /* padding: 15px; */
         position: fixed;
         top: 0;
         left: 0;
@@ -1973,6 +1982,7 @@ ul.top-btn li {
         background: #35439e;
         z-index: 99;
     }
+  
     .settings i {
     color: #fff;
 }

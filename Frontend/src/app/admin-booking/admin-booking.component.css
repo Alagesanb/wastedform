@@ -1,3 +1,7 @@
 .calender-custom .code-html #calendar {
     max-width: 100% !important;
-}
+}  
+.boat-image {
+    width: 100% !important;
+    margin: 19px 0px 0px 0px !important;
+}   
