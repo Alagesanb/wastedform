@@ -13,15 +13,7 @@
            <form [formGroup]="form"> 
             
             <div class="form-row">
-<!-- <div class="form-group col-md-4">
-<label for="BoatType">Owner Name</label>
-<select class="form-control">
-  <option value="" selected disabled>-- Select --</option>
-  <option value="">A - (aaa@gmail.com)</option>
-  <option value="">B - (bbb@gmail.com)</option>
-  <option value="">C - (ccc@gmail.com)</option>
-  </select> 
-</div> -->
+
 
             <div class="form-group col-md-6">
               <label>Owner Name</label> 
@@ -38,15 +30,7 @@
             
             </div>
 
-<!-- <div class="form-group col-md-4">
-<label for="BoatType">Select boat </label>
-<select class="form-control">
-  <option value="" selected disabled>-- Select --</option>
-  <option value="">A</option>
-  <option value="">B</option>
-  <option value="">C</option>
-  </select>    
-</div>                  -->
+
 
             <div class="form-group col-md-6">
               <label>Select boat</label> 
@@ -97,32 +81,10 @@
            <div class="row" style="margin-top: 25px;">
            <div class="col-md-12 reports">
           
-               <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-  <thead>
-      <tr>
-          <th>OWNER NAME</th>
-          <th>BOAT NAME</th>
-          <th>FROM DATE</th>
-          <th>TO DATE</th>
-          <th>ACTION</th>
-        </tr>
-  </thead>
-  <tbody>
-      <tr *ngFor="let due of Duration  let i = index;" >
-          <td>{{due.Owner_Name}}</td>
-          <td>{{due.Boat_Type}}</td>
-          <td>{{due.Duration_SDate}}</td>
-          <td>{{due.Duration_EDate}}</td>
-          <td>
-           <ul class="table-action">
-               <li><a href="#"><i class="far fa-edit" aria-hidden="true"></i></a></li>
-               <li><button  type="button" id="renew" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#renewModal">Renew</button></li>
-              </ul>
-          </td>
-      </tr>
-      
-  </tbody>
-</table>
+<div id="id-table-databinding">
+
+</div>
+
             
                 </div>
             </div>   

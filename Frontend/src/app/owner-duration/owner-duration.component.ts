@@ -44,6 +44,9 @@ export class OwnerDurationComponent implements OnInit {
    }
 
   ngOnInit(): void {
+
+    var owner_url = "http://65.2.28.16/api/Owner/";
+
    this.sidemenuloder();
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
@@ -64,6 +67,93 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   
        
   });
+
+///////////////////////01/Jun/-2021
+//cls-OwnerDuration
+
+$(document).on("click",".cls-OwnerDuration",function() {
+  
+  var getdeleteid = $(this).attr('attrid');
+
+  sessionStorage.setItem("OwnerDuration_current",getdeleteid);
+
+  alert(getdeleteid);  
+
+ });
+
+
+Binding_OwnerDuration();
+function Binding_OwnerDuration(){
+
+  /*
+  var obj = Object();
+  obj.id_ ="";
+  
+  */
+  
+
+  $.ajax({
+    url: owner_url +'ListAllDuration',
+    type: 'get',
+    dataType: 'json',
+    //data: obj,
+    contentType: 'application/json',
+    success: function (data) {
+
+      var firstChek = 0;
+      var bindingTableData;
+      $.each(data.response, function(index, val) { 
+
+       var _id = val._id;
+       var Owner_Id = val.Owner_Id;
+       var Owner_Name = val.Owner_Name;
+       var Duration_SDate = val.Duration_SDate;
+       var Duration_EDate =  val.Duration_EDate;
+       var Boat_Type = val.Boat_Type;
+
+        if(firstChek == 0){
+
+          bindingTableData = '<tr><td>'+Owner_Name+'</td><td>'+Boat_Type+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
+          <td><ul class="table-action"><li><a href="#"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
+          <button  type="button" id="renew" attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" data-toggle="modal" data-target="#renewModal">Renew</button></li></ul></td></tr>';
+
+          firstChek = firstChek + 1;
+        }
+        else{
+
+          bindingTableData += '<tr><td>'+Owner_Name+'</td><td>'+Boat_Type+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
+          <td><ul class="table-action"><li><a href="#"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
+          <button  type="button" id="renew" attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" data-toggle="modal" data-target="#renewModal">Renew</button></li></ul></td></tr>';
+
+        }
+
+      });
+
+      var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({"ordering": false,responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+      var bindingTabledataFirst = '<table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">\
+      <thead><tr><th>OWNER NAME</th><th>BOAT NAME</th><th>FROM DATE</th><th>TO DATE</th><th>ACTION</th></tr></thead>\
+      <tbody>'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+      $("#id-table-databinding").html("");
+      $("#id-table-databinding").html(bindingTabledataFirst);
+  
+
+    }
+   
+}); 
+
+
+}
+
+
+
+
+
+
+
+
+//////////////////////////////
   
   $('#datepicker-4').Zebra_DatePicker({
      
