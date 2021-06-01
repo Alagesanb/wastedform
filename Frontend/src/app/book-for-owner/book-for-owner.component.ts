@@ -149,6 +149,11 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    
   }
 
+  onDeSelect_boat(items: any) {
+    sessionStorage.removeItem('AdminSelectBoat');
+     
+  }
+
  
 
   Fun_getallDropDownDatas_Owner(){ 

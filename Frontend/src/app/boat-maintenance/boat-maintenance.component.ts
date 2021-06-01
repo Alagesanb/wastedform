@@ -90,6 +90,11 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   onSelectAll(items: any) {
     
   }
+
+  onDeSelect(items: any) {
+    sessionStorage.removeItem('AdminSelectBoat');
+     
+  }
    
   Fun_getallDropDownDatas(){
       var obj = Object();

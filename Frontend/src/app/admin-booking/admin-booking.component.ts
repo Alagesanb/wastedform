@@ -87,6 +87,11 @@ export class AdminBookingComponent implements OnInit {
         
         
        }
+       //onDeSelect
+       onDeSelect(items: any) {
+        sessionStorage.removeItem('AdminSelectBoat');
+         
+      }
        onSelectAll(items: any) {
          
        }

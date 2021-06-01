@@ -49,6 +49,7 @@ function padValue(value) {
 
 
 function generateRandomSchedule(val){
+    
     var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction");
     if(pageIdentiFication == "AdminBooking"){
 
@@ -88,7 +89,12 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#047b0f";
             schedule.dragBgColor = "#047b0f";
             schedule.borderColor = "#047b0f";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
+
 
         }
         else if(val.User_RoleType == "Owner")
@@ -125,6 +131,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#D50000";
             schedule.dragBgColor = "#D50000";
             schedule.borderColor = "#D50000";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
 
         }
@@ -162,6 +172,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#2c46f8";
             schedule.dragBgColor = "#2c46f8";
             schedule.borderColor = "#2c46f8";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
         }
 
@@ -205,6 +219,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#047b0f";
             schedule.dragBgColor = "#047b0f";
             schedule.borderColor = "#047b0f";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
 
         }
@@ -242,6 +260,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#D50000";
             schedule.dragBgColor = "#D50000";
             schedule.borderColor = "#D50000";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
 
         }
@@ -279,6 +301,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#2c46f8";
             schedule.dragBgColor = "#2c46f8";
             schedule.borderColor = "#2c46f8";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
         }
 
@@ -319,6 +345,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#047b0f";
             schedule.dragBgColor = "#047b0f";
             schedule.borderColor = "#047b0f";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
 
         }
@@ -356,6 +386,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#D50000";
             schedule.dragBgColor = "#D50000";
             schedule.borderColor = "#D50000";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
 
         }
@@ -393,6 +427,10 @@ function generateRandomSchedule(val){
             schedule.bgColor = "#2c46f8";
             schedule.dragBgColor = "#2c46f8";
             schedule.borderColor = "#2c46f8";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
             ScheduleList.push(schedule);
         }
 

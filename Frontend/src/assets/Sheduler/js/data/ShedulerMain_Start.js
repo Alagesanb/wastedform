@@ -2,6 +2,8 @@
 
  $(document).ready(function(){
 
+  var sorted_ShedulList = null;
+
 
  var templates = {
 //   popupIsAllDay: function () {
@@ -200,7 +202,7 @@ default:
 }
 
 setRenderRangeText();
-setSchedules();
+setSchedules_Next_Prev();
 }
 
 function setRenderRangeText() {
@@ -220,6 +222,16 @@ html.push(moment(cal.getDateRangeEnd().getTime()).format(' MM.DD'));
 }
 renderRange.innerHTML = html.join('');
 }
+
+function setSchedules_Next_Prev() {
+  cal.clear();
+  
+  cal.createSchedules(sorted_ShedulList);
+ // generateSchedule();  
+  
+  refreshScheduleVisibility();
+  }
+  
 
 function setSchedules() {
 cal.clear();
@@ -294,6 +306,9 @@ function generateSchedule(){
                 generateRandomSchedule(val);                 
             });
 
+           // console.log(ScheduleList);
+
+           sorted_ShedulList = ScheduleList;
             cal.createSchedules(ScheduleList);
             
             
@@ -311,8 +326,76 @@ function generateSchedule(){
 
 init();
 
+//multiselect-dropdown
 
+$(document).on("click",".multiselect-dropdown",function() {
 
+  var pageIdentiFiction = sessionStorage.getItem("pageIdentiFiction");
+
+  if(pageIdentiFiction == "AdminBooking")
+  {
+    sorted_ShedulList = ScheduleList;    
+    var datas = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));
+    if (typeof datas !== "undefined" && datas != null)
+    {
+    cal.clear();     
+    sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
+    cal.createSchedules(sorted_ShedulList);     
+    
+    }
+    else{
+
+      cal.clear();    
+      cal.createSchedules(ScheduleList);
+
+    }
+        
+  }
+
+  else if(pageIdentiFiction == "book-for-owner")
+  {
+    sorted_ShedulList = ScheduleList;    
+    var datas = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));
+    if (typeof datas !== "undefined" && datas != null)
+    {
+    cal.clear();     
+    sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
+    cal.createSchedules(sorted_ShedulList);     
+    
+    }
+    else{
+
+      cal.clear();    
+      cal.createSchedules(ScheduleList);
+
+    }
+        
+  }
+
+  else if(pageIdentiFiction == "boat-maintenance")
+  {
+    sorted_ShedulList = ScheduleList;    
+    var datas = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));
+    if (typeof datas !== "undefined" && datas != null)
+    {
+    cal.clear();     
+    sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
+    cal.createSchedules(sorted_ShedulList);     
+    
+    }
+    else{
+
+      cal.clear();    
+      cal.createSchedules(ScheduleList);
+
+    }
+        
+  }
+
+  
+   
+
+ });
 
 
 
@@ -358,6 +441,9 @@ function ScheduleInfo() {
     this.comingDuration = 0;
     this.recurrenceRule = '';
     this.state = '';
+
+    this.Boat_Id = null;
+    this.Boat_Name = null;
 
     this.raw = {
         memo: '',

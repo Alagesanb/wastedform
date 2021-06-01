@@ -19,9 +19,11 @@
                         [data]="dropdownList_filted"                                    
                         (onSelect)="onItemSelect($event)"
                         (onSelectAll)="onSelectAll($event)"
-                        class="singleselect_drop"
+                        (onDeSelect)="onDeSelect($event)"
+                        
                     >
                     </ng-multiselect-dropdown>
+                    <!-- class="singleselect_drop" -->
                     <!-- class="singleselect_drop" -->
                     </div>
                     <div class="form-group col-md-4">
