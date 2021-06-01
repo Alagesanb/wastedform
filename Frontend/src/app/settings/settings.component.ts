@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
   getResponce: any;
   boatTypeId: any;
   modelTitle: string;
-  shareAllocation: any;
+  shareAllocation: any=[];
   set_BoatType = "";
   dropdownList = [];
   dropdownList_filted = [];
@@ -397,6 +397,77 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
           e.preventDefault(); $(this).parent('div').remove(); x--;
         })
       }); 
+
+
+
+///////////data table jitheesh////
+var owner_url = "http://65.2.28.16/api/Days/";
+
+Binding_OwnerDuration();
+function Binding_OwnerDuration(){
+
+  /*
+  var obj = Object();
+  obj.id_ ="";
+  
+  */
+  
+
+  $.ajax({
+    url: owner_url +'ViewAllShares',
+    type: 'get',
+    dataType: 'json',
+    //data: obj,
+    contentType: 'application/json',
+    success: function (data) {
+      var firstChek = 0;
+      var bindingTableData;
+      $.each(data.response, function(index, val) { 
+
+       var _id = val._id;
+       var No_of_Shares = val.No_of_Shares;
+       var Boat_Name = val.Boat_Name;
+       var No_of_SummerWeekDays = val.No_of_SummerWeekDays;
+       var No_of_SummerWeekEndDays =  val.No_of_SummerWeekEndDays;
+       var No_of_WinterWeekDays = val.No_of_WinterWeekDays;
+       var No_of_WinterWeekEndDays = val.No_of_WinterWeekEndDays;
+
+        if(firstChek == 0){
+
+          bindingTableData = '<tr><td>'+Boat_Name+'</td><td>'+No_of_Shares+'</td><td>'+No_of_SummerWeekDays+'</td><td>'+No_of_SummerWeekEndDays+'</td>\
+          <td>'+No_of_WinterWeekDays+'</td><td>'+No_of_WinterWeekEndDays+'</td></tr>';
+
+          firstChek = firstChek + 1;
+        }
+        else{
+
+          bindingTableData += '<tr><td>'+Boat_Name+'</td><td>'+No_of_Shares+'</td><td>'+No_of_SummerWeekDays+'</td><td>'+No_of_SummerWeekEndDays+'</td>\
+          <td>'+No_of_WinterWeekDays+'</td><td>'+No_of_WinterWeekEndDays+'</td></tr>';
+
+        }
+
+      });
+
+      var sriptTemp = '<script>$(document).ready(function(){$("#example1").DataTable({"ordering": false,responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+      var bindingTabledataFirst = '<table id="example1" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">\
+      <thead><tr><th>BOAT NAME</th><th>NO:OF SHARES</th><th>NO:OF SUMMER WEEKDAYS</th><th>NO:OF SUMMER WEEKENDS</th><th>NO:OF WINTER WEEKDAYS</th><th>NO:OF WINTER WEEKENDS</th></tr></thead>\
+      <tbody>'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+      $("#id-table-databinding").html("");
+      $("#id-table-databinding").html(bindingTabledataFirst);
+  
+
+    }
+   
+}); 
+
+
+}
+///////////data table jitheesh////
+
+
+
       this.getAllBoatTYpes()  
       this.getAllshare();
       this.getBoats()

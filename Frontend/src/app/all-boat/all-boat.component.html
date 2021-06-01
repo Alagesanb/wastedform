@@ -15,10 +15,11 @@
 
                <div class="dropdown" >
 
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">{{Location_Name_dropDown}}
-                  <span><i class="fas fa-filter"></i></span></button>
+                <!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;margin: -3px 0px 0px 0px;">{{Location_Name_dropDown}}
+                  <span><i class="fas fa-filter"></i></span></button> -->
 
-
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">{{Location_Name_dropDown}}
+                    <span><i class="fas fa-filter"></i></span></button>
 
 <!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{Location_Name_dropDown}} -->
 <!-- <span><i class="fas fa-filter"></i></span></button> -->
@@ -34,16 +35,16 @@
                  </div>
                  <div class="col-md-4 boat-search">
                      <div class="input-group mb-3">
-<input type="text" class="form-control" [(ngModel)]="searchText" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+<input type="text" class="form-control" style="height: 36px;" [(ngModel)]="searchText" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
 <div class="input-group-append">
-<button class="btn btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+<button class="btn btn-outline-secondary" style="height: 36px;" type="button"><i class="fas fa-search"></i></button>
 </div>
 </div>
                   </div>
 
             <div class="col-md-4">
                 <ul style="width: 100%;" class="top-btn">
-                 <li style="width: 100%;"><a href="#" style="width: 100%;" routerLink="/add-boat/" class="btn btn-primary">ADD BOAT</a></li>
+                 <li style="width: 100%;"><a href="#" style="width: 96%;" routerLink="/add-boat/" class="btn btn-primary">ADD BOAT</a></li>
                 </ul>
             </div>
             </div>
@@ -52,7 +53,7 @@
                 <div class="row date-filter" style="padding: 0 5px;">
 
 
-                  <div class="form-group col-md-3" style="margin-top: 30px;">
+                  <div class="form-group col-md-3" style="margin-top: 33px;">
                     <div class="dropdown">
 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">{{Launch_Date_DropDown}}
 <span><i class="fas fa-filter"></i></span></button>
@@ -69,7 +70,7 @@
    <!-- <input id="datepicker" type="text" class="form-control" data-zdp_readonly_element="false" formControlName="Launch_Date1" (focusout)="fromDates($event)"
     [ngClass]="{ 'is-invalid': submitted && f.Launch_Date1.errors }"> -->
 
-    <input id="datepiker-all-boat-from-date" type="text" class="form-control" data-zdp_readonly_element="true" formControlName="Launch_Date1" (focusout)="fromDates($event)"
+    <input style="height: 36px;" id="datepiker-all-boat-from-date" type="text" class="form-control" data-zdp_readonly_element="true" formControlName="Launch_Date1" (focusout)="fromDates($event)"
     [ngClass]="{ 'is-invalid': submitted && f.Launch_Date1.errors }">
 
 
@@ -79,13 +80,13 @@
  <!-- <input id="datepicker-2" type="text" class="form-control" data-zdp_readonly_element="false" formControlName="Launch_Date2" (focusout)="toDates($event)"
  [ngClass]="{ 'is-invalid': submitted && f.Launch_Date2.errors }"> -->
 
- <input id="datepiker-all-boat-to-date" type="text" class="form-control" data-zdp_readonly_element="true" formControlName="Launch_Date2" (focusout)="toDates($event)"
+ <input style="height: 36px;" id="datepiker-all-boat-to-date" type="text" class="form-control" data-zdp_readonly_element="true" formControlName="Launch_Date2" (focusout)="toDates($event)"
  [ngClass]="{ 'is-invalid': submitted && f.Launch_Date2.errors }">
 
 
 
 </div>
-<div class="col-md-3" style="padding-top: 32px; text-align: right;">
+<div class="col-md-3" style="padding-top: 33px; text-align: right;">
 <!--           <a href="#" class="btn btn-primary" style="width: 100%;">SEARCH</a>-->
    <button type="button" class="btn btn-primary"  (click)="getSearchData()" style="width: 100%;">SEARCH</button>
                 </div>
