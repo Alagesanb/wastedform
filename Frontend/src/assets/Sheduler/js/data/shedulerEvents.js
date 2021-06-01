@@ -93,6 +93,8 @@ function generateRandomSchedule(val){
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
 
+            schedule.Owner_Id = val.User_Id;  
+
             ScheduleList.push(schedule);
 
 
@@ -135,6 +137,8 @@ function generateRandomSchedule(val){
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
 
+            schedule.Owner_Id = val.User_Id;  
+
             ScheduleList.push(schedule);
 
         }
@@ -175,6 +179,8 @@ function generateRandomSchedule(val){
 
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
+
+            schedule.Owner_Id = val.User_Id;  
 
             ScheduleList.push(schedule);
         }
@@ -223,6 +229,8 @@ function generateRandomSchedule(val){
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
 
+            schedule.Owner_Id = val.User_Id;           
+
             ScheduleList.push(schedule);
 
         }
@@ -264,6 +272,8 @@ function generateRandomSchedule(val){
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
 
+            schedule.Owner_Id = val.User_Id;  
+
             ScheduleList.push(schedule);
 
         }
@@ -304,6 +314,8 @@ function generateRandomSchedule(val){
 
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
+
+            schedule.Owner_Id = val.User_Id;  
 
             ScheduleList.push(schedule);
         }
@@ -349,6 +361,8 @@ function generateRandomSchedule(val){
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
 
+            schedule.Owner_Id = val.User_Id;  
+
             ScheduleList.push(schedule);
 
         }
@@ -390,6 +404,8 @@ function generateRandomSchedule(val){
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
 
+            schedule.Owner_Id = val.User_Id;  
+
             ScheduleList.push(schedule);
 
         }
@@ -430,6 +446,8 @@ function generateRandomSchedule(val){
 
             schedule.Boat_Id = val.Boat_Id;
             schedule.Boat_Name = val.Boat_Name;
+
+            schedule.Owner_Id = val.User_Id;  
 
             ScheduleList.push(schedule);
         }
@@ -832,7 +850,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
             dataSelected_OwnerDropDown = JSON.parse(dataSelected_OwnerDropDown);
             dataGet_AdminSelectBoat = JSON.parse(dataGet_AdminSelectBoat);
             var setTitle = dataSelected_OwnerDropDown.First_Name  + "(" + dataGet_AdminSelectBoat.Boat_Name+")";
-
+            var user_id_owner = dataSelected_OwnerDropDown._id;
             
 
                 if(checkController == "Save"){    
@@ -862,7 +880,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     obj.WeekDay_Count = Temp_Date_weekdays;
                 
                     obj.User_RoleType = "Owner";
-                    obj.User_Id = AdminId_get;
+                    obj.User_Id = user_id_owner;
                     obj.Admin_Id = AdminId_get;
 
                     obj.Boat_Id = dataGet_AdminSelectBoat._id;
@@ -954,7 +972,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     
                     obj._id = public_shedulDataId;
                     obj.User_RoleType = "Owner";
-                    obj.User_Id = AdminId_get;
+                    obj.User_Id = user_id_owner;
                     obj.Admin_Id = AdminId_get;
 
                     obj.Boat_Id = dataGet_AdminSelectBoat._id;

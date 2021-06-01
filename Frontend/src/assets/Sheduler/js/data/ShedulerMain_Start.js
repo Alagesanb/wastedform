@@ -354,21 +354,43 @@ $(document).on("click",".multiselect-dropdown",function() {
 
   else if(pageIdentiFiction == "book-for-owner")
   {
+    
     sorted_ShedulList = ScheduleList;    
     var datas = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));
-    if (typeof datas !== "undefined" && datas != null)
+    var bookforOwner = JSON.parse(sessionStorage.getItem("Owner_SelectOwner"));
+    if(typeof bookforOwner !== "undefined" && bookforOwner != null)
     {
-    cal.clear();     
-    sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
-    cal.createSchedules(sorted_ShedulList);     
-    
-    }
-    else{
+      //debugger;
+      console.log(sorted_ShedulList);
+      cal.clear();     
+      sorted_ShedulList = sorted_ShedulList.filter(x => x.Owner_Id == bookforOwner._id);
+      cal.createSchedules(sorted_ShedulList); 
 
+      if (typeof datas !== "undefined" && datas != null)
+      {
+        cal.clear();     
+        sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
+        cal.createSchedules(sorted_ShedulList);     
+      
+      }
+      // else{
+      //   cal.clear();    
+      //   cal.createSchedules(ScheduleList);
+      // }
+
+
+
+
+    }
+    else
+    {
       cal.clear();    
       cal.createSchedules(ScheduleList);
-
+  
     }
+
+      
+ 
         
   }
 
@@ -444,6 +466,9 @@ function ScheduleInfo() {
 
     this.Boat_Id = null;
     this.Boat_Name = null;
+
+    this.Owner_Id = null;
+    this.Owner_Name = null;
 
     this.raw = {
         memo: '',

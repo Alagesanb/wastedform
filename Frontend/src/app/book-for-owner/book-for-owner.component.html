@@ -154,7 +154,8 @@
     [settings]="dropdownSettings_Owner"
     [data]="dropdownList_filted_Owner"                                    
     (onSelect)="onItemSelect_Owner($event)"
-    class="singleselect_drop cls-Boat-Owner"
+    (onDeSelect)="onDeSelect_Owner($event)"  
+    class="cls-Boat-Owner"
     
     
 >
