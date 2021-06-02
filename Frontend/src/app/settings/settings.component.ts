@@ -535,7 +535,7 @@ function Binding_OwnerDuration(){
   //onDeSelect_UNAVAILABLE_DATE
 
   GetNextBookingDaysByBoatId(id){
-    
+   
     var dattr = Object();
     dattr.Boat_Id = id;
     this.NEXT_BOOKING_DAYS_ALLOWED ="";
@@ -543,13 +543,14 @@ function Binding_OwnerDuration(){
 
     this.http.post<any>(`${this.shareUrl}/GetNextBookingDaysByBoatId`,  dattr  ).subscribe(data => {
     
-      if(data.Status == true){
-        this.NEXT_BOOKING_DAYS_ALLOWED = data.Data.Next_BookingDay;
-        this.Bookingform.get('Next_BookingDay').setValue(data.Data.Next_BookingDay);
+      if(data.status == true){
+        var temp_res = data.response;       
+        this.NEXT_BOOKING_DAYS_ALLOWED = temp_res[0].Next_BookingDay;
+        this.Bookingform.get('Next_BookingDay').setValue(temp_res[0].Next_BookingDay);
 
         
       }
-      else if(data.Status == false){
+      else if(data.status == false){
           alert(data.message)
       }
         }, err => {
