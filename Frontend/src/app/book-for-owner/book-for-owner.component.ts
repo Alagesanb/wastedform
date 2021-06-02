@@ -18,6 +18,7 @@ export class BookForOwnerComponent implements OnInit {
   
    url = "http://65.2.28.16/api/Schedule/";
    url_Owner = "http://65.2.28.16/api/Owner/";
+   url_Days = "http://65.2.28.16/api/Days/";
    dropdownList = [];
    SelectOwner_dropdownList = [];
    dropdownList_filted = [];
@@ -136,6 +137,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
      this.public_selectBoatId = details._id; 
      this.Fun_getallDropDownDatas(details._id);   
      sessionStorage.setItem("Owner_SelectOwner",JSON.stringify(details));
+     sessionStorage.removeItem('SettNextBookingDays_boat');
    
    
   }
@@ -144,7 +146,10 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    
     var finddate = this.dropdownList.find(x => x._id == item.item_id);
     this.set_BoatType = finddate.Boattype_Name;
-    sessionStorage.setItem("AdminSelectBoat",JSON.stringify(finddate));    
+    sessionStorage.setItem("AdminSelectBoat",JSON.stringify(finddate)); 
+    this.GetNextBookingDaysByBoatId(item.item_id);
+    
+    
     //this.Fun_getallDropDownDatas(this.public_selectBoatId);
    
   }
@@ -157,6 +162,31 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   onDeSelect_Owner(items: any) {
     sessionStorage.removeItem('Owner_SelectOwner');
      
+  }
+
+  GetNextBookingDaysByBoatId(Boat_Id){
+
+    sessionStorage.removeItem('SettNextBookingDays_boat');
+
+    var obj = Object();
+        obj.Boat_Id = Boat_Id;
+        //url_Days = "http://65.2.28.16/api/Days/GetNextBookingDaysByBoatId"
+      this.http.post<any>(`${this.url_Days}GetNextBookingDaysByBoatId`, obj).subscribe(results => { 
+        //debugger;       
+        if(results.status == true)
+        {
+          var temp_resp = results.response;
+          if (typeof temp_resp  !== 'undefined' && temp_resp.length > 0) {
+            sessionStorage.setItem("SettNextBookingDays_boat",JSON.stringify(temp_resp[0]));
+          }
+           
+        }
+                
+      
+        }, err => {
+          console.log(err);
+        })
+
   }
 
  

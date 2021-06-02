@@ -637,6 +637,66 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     //tui-full-calendar-popup-delete
 
+    function calculate_NextBookingDays(datas,tmb_Obj)
+    {
+
+        debugger;
+        var temp_data = JSON.parse(datas);
+         /*
+            tmb_Obj.Start_Date;
+            tmb_Obj.End_Date;
+        */
+
+        if(typeof temp_data !== "undefined" && temp_data != null)
+        {
+            var temp_BoatDetails = temp_data.BoatDetails[0];
+
+            var currentDate = new Date();
+            //var currentDate = new Date("2021-06-20T00:00:00.000Z");
+
+            var Launch_Date = new Date(temp_BoatDetails.Launch_Date);
+            var PreLaunch_Date = new Date(temp_BoatDetails.PreLaunch_Date);                   
+
+            var Start_Date =  tmb_Obj.Start_Date;
+            var End_Date = tmb_Obj.End_Date;
+
+            if(PreLaunch_Date <= Start_Date && Launch_Date >=  Start_Date)
+            {
+                //prelaunch date..
+               // alert("pre-"+ PreLaunch_Date +"-Start_Date-"+Start_Date+"-Launch_Date-"+Launch_Date+"prelaunch date..");
+               // alert(1);
+               return 1;
+
+            }
+            else if(PreLaunch_Date <= Start_Date && Launch_Date <=  Start_Date && currentDate <= Launch_Date)
+            {
+                //launch date after
+               // alert("pre-"+ PreLaunch_Date +"-Start_Date-"+Start_Date+"-Launch_Date-"+Launch_Date+"-currentDate-"+currentDate+"launch date after..");
+                //alert("launch date after");
+                //alert(2);
+
+                return 2;
+            }
+            else if(PreLaunch_Date <= Start_Date && Launch_Date <=  Start_Date && Launch_Date <= currentDate )
+            {
+                //current day after the launch date
+
+               // alert("pre-"+ PreLaunch_Date +"-Start_Date-"+Start_Date+"-Launch_Date-"+Launch_Date+"-currentDate-"+currentDate+"current day after the launch date..");
+                //alert(3);
+
+                return 3;
+
+               // alert("current day after the launch date");
+            }
+
+
+           
+        }
+
+
+
+    }
+
 
 $(document).on("click",".tui-full-calendar-popup-save",function() { 
         
@@ -676,7 +736,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                     // ...................  
                         var obj = Object();
-
+                        
                         obj.TotalDay_Count = Temp_Date_dateDiff;
                         obj.WeekEnd_Count = Temp_Date_weekenddays;
                         obj.WeekDay_Count = Temp_Date_weekdays;
@@ -851,15 +911,30 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
             dataGet_AdminSelectBoat = JSON.parse(dataGet_AdminSelectBoat);
             var setTitle = dataSelected_OwnerDropDown.First_Name  + "(" + dataGet_AdminSelectBoat.Boat_Name+")";
             var user_id_owner = dataSelected_OwnerDropDown._id;
-            
+                       
 
                 if(checkController == "Save"){    
 
                 var startdate_date = new Date($("#tui-full-calendar-schedule-start-date").val());
                 var enddate_date = new Date( $("#tui-full-calendar-schedule-end-date").val());
-                var start_str =startdate_date .toString();
+                var start_str =startdate_date.toString();
                 var end_str = enddate_date.toString();    
                 var AdminId_get = sessionStorage.getItem("UserId");
+
+
+                //this to start
+                var Next_Booking_Days_check = sessionStorage.getItem("SettNextBookingDays_boat");
+                var nextBookingDay = 0;
+                if(typeof Next_Booking_Days_check !== "undefined" && Next_Booking_Days_check != null)
+                {
+                    ////sumthinggggg
+                    var tmb_Obj = Object()
+                    tmb_Obj.Start_Date = startdate_date;
+                    tmb_Obj.End_Date = enddate_date;
+
+                    nextBookingDay = calculate_NextBookingDays(Next_Booking_Days_check,tmb_Obj);
+
+                }
                     
                     
                     // day calculations.....
@@ -871,9 +946,10 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     const Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
                     const Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
 
-                    
-                // ...................  
+                     // ...................  
                     var obj = Object();
+
+                    obj.Check_Status = nextBookingDay;
 
                     obj.TotalDay_Count = Temp_Date_dateDiff;
                     obj.WeekEnd_Count = Temp_Date_weekenddays;
@@ -911,7 +987,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     obj.raw ="";
                     obj.state ="";
                     obj.Status = "Enable";
-                    obj.IsActive = true;
+                    obj.IsActive = true;                   
                 
                     $.ajax({
                         url: public_URL+"AddSchedule",
