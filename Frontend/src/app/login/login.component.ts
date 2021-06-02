@@ -55,7 +55,8 @@ login(){
 
       sessionStorage.setItem('userToken', JSON.stringify(data.token));   // if it's object
 
-    
+      sessionStorage.setItem('adminLogin', JSON.stringify(true));   // if it's object
+
       //   let seassionVal = sessionStorage.getItem('seassionObj');
       //   if (seassionVal !== null) {
       //     let sessionObj = JSON.parse(seassionVal);

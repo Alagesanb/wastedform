@@ -47,6 +47,7 @@ export class SettingsComponent implements OnInit {
   UNAVAILABLE_DATE_userSelect = [];
   dropdownOwn: any;
   bookdropdownOwn: any;
+  adminlogin: any;
 
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,
@@ -60,6 +61,10 @@ export class SettingsComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");

@@ -17,11 +17,16 @@ export class DashboardComponent implements OnInit {
   Cancellations: any=[];
   imgUrl = "http://65.2.28.16/api/uploads/"
   Cancels: any=[];
+  adminlogin: any;
 
   constructor(private httpClient: HttpClient,private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute) {
      }
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
 this.getBooking()
 this.getCancellations()
     sessionStorage.setItem("relodePg_book-for-owner","1");

@@ -25,11 +25,16 @@ export class OwnershipTransferComponent implements OnInit {
   dropdownList = [];
   dropdownList_filted = [];
   dropdownOwn: any;
+  adminlogin: any;
 
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router, private scroll: ViewportScroller) { 
   }
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     this.sidemenuloder();
     this.getOwners()
     this.getBoats()

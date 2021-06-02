@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 
 declare var $: any;
 declare var jQuery: any; 
@@ -37,14 +38,18 @@ export class OwnerDurationComponent implements OnInit {
   dropdownOwn: any;
   dropdownBoat: any;
   durationSubmitted = false;
+  adminlogin: any;
 
-  constructor(private http: HttpClient ,private fb: FormBuilder,) {
+  constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) {
     this.createForm();
 
    }
 
   ngOnInit(): void {
-
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     var owner_url = "http://65.2.28.16/api/Owner/";
 
    this.sidemenuloder();
@@ -77,7 +82,7 @@ $(document).on("click",".cls-OwnerDuration",function() {
 
   sessionStorage.setItem("OwnerDuration_current",getdeleteid);
 
-  //alert(getdeleteid);  
+  alert(getdeleteid);  
 
  });
 
@@ -205,26 +210,23 @@ function Binding_OwnerDuration(){
     $('.calendar-wrapper').calendar(defaultConfig);
 
 
-    $("input[type='number']").inputSpinner();
+    $("input[type='number']").inputSpinner()
 
-/*
-      $('#example').DataTable( {
-          responsive: {
-              details: {
-                  display: $.fn.dataTable.Responsive.display.modal( {
-                      header: function ( row ) {
-                          var data = row.data();
-                          return 'Details for '+data[0]+' '+data[1];
-                      }
-                  } ),
-                  renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-                      tableClass: 'table'
-                  } )
-              }
-          }
-      } );
-
-      */
+      // $('#example').DataTable( {
+      //     responsive: {
+      //         details: {
+      //             display: $.fn.dataTable.Responsive.display.modal( {
+      //                 header: function ( row ) {
+      //                     var data = row.data();
+      //                     return 'Details for '+data[0]+' '+data[1];
+      //                 }
+      //             } ),
+      //             renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+      //                 tableClass: 'table'
+      //             } )
+      //         }
+      //     }
+      // } );
  
     this.getOwners();
     this.getBoats()
@@ -270,7 +272,7 @@ this.getDuration()
     this.http.post<any>(`${this.OwnerUrl}/AddDuration`,  this.form.value  ).subscribe(data => {
       console.log(data)
   if(data.status == true){
-this.ngOnInit()
+    this.ngOnInit()
     this.dropdownOwn =[]; 
     this.dropdownBoat = []
     this.getResponce = data.message

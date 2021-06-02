@@ -71,6 +71,7 @@ export class AddBoatComponent implements OnInit {
   stD: string;
   fwD: string;
   fwd: string;
+  adminlogin: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,private SpinnerService: NgxSpinnerService) { 
     this.createForm();
     this.createBoatForm();
@@ -82,7 +83,13 @@ export class AddBoatComponent implements OnInit {
 
 
 ngOnInit(): void {
+  this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+  if(this.adminlogin==false){
+    this.router.navigate(['']);
+  }
   this.sidemenuloder();
+  this.boatform.get('Boat_Status').setValue("Enable");
+
   sessionStorage.setItem("relodePg_book-for-owner","1");
   sessionStorage.setItem("Adminbooking-relodePg","1");
    sessionStorage.setItem("boat-maintenance-reload","1");

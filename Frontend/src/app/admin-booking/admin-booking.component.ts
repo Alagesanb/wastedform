@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';//'ng-multiselect-dropdown';
+import { Router } from '@angular/router';
 
 
 declare var $: any;
@@ -25,13 +26,17 @@ export class AdminBookingComponent implements OnInit {
    dropdownSettings : IDropdownSettings ;
  
    set_BoatType = "";
+  adminlogin: any;
  
-   constructor(private fb: FormBuilder,private http: HttpClient) { 
+   constructor(private fb: FormBuilder,private http: HttpClient, private router: Router,) { 
      //this.createForm();
    }
  
    ngOnInit(): void {
-
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     sessionStorage.setItem("relodePg_book-for-owner","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
  

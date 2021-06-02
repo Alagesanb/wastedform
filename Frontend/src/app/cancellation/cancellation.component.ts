@@ -15,10 +15,15 @@ export class CancellationComponent implements OnInit {
   imagePath= "http://65.2.28.16/api/uploads/";
   cancellationInfo: any;
   searchLoction: any = '';
+  adminlogin: any;
 
   constructor(private http: HttpClient, private router: Router,) { }
 
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     sessionStorage.setItem("relodePg_book-for-owner","1");
     sessionStorage.setItem("Adminbooking-relodePg","1");
     sessionStorage.setItem("boat-maintenance-reload","1");

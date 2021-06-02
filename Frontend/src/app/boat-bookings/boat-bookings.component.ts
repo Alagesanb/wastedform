@@ -30,10 +30,15 @@ export class BoatBookingsComponent implements OnInit {
 
   Location_Name_dropDown: any = "Location";
   Launch_Date_DropDown: any = "Launch Date";
+  adminlogin: any;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private router: Router,) { }
 
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     this.boatbookingform = this.fb.group({
     From_Date: new FormControl('', [Validators.required,]),
     To_Date: new FormControl('', [Validators.required,]),

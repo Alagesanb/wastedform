@@ -17,6 +17,7 @@ export class ManageOwnerComponent implements OnInit {
 
   pageYoffset = 0;
   boatId: any;
+  adminlogin: any;
   @HostListener('window:scroll', ['$event']) onScroll(event){
     this.pageYoffset = window.pageYOffset;
   }
@@ -56,6 +57,10 @@ export class ManageOwnerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     this.sidemenuloder();
     sessionStorage.setItem("relodePg_book-for-owner","1");
     sessionStorage.setItem("Adminbooking-relodePg","1");

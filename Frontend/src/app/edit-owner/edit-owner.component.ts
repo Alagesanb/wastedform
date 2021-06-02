@@ -21,12 +21,17 @@ export class EditOwnerComponent implements OnInit {
   imgUrl = "http://65.2.28.16/api/uploads/"
 
   singleFileDetails: any;
+  adminlogin: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
 
  
    ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     this.data = JSON.parse(sessionStorage.getItem('ownerData')); 
     this.setOwnersValues()
 

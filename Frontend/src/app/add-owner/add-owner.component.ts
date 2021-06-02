@@ -17,11 +17,16 @@ export class AddOwnerComponent implements OnInit {
   submitted = false;
   handBook: File;
   singleFileDetails : any;
+  adminlogin: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
 
   ngOnInit(): void {
+    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    if(this.adminlogin==false){
+      this.router.navigate(['']);
+    }
     this.sidemenuloder();
     sessionStorage.setItem("relodePg_book-for-owner","1");
     sessionStorage.setItem("Adminbooking-relodePg","1");

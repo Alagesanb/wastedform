@@ -25,5 +25,8 @@ export class HeaderComponent implements OnInit {
      });
 
   }
+  logout(){
+    sessionStorage.setItem('adminLogin', JSON.stringify(false));   // if it's object
 
+  }
 }
