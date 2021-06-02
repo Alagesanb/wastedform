@@ -207,6 +207,8 @@
           
             <label>Boat Name</label>
             <ng-multiselect-dropdown
+            [(ngModel)]="dropdownOwn"
+            [ngModelOptions]="{standalone: true}" 
             [placeholder]="'Select'"
             [settings]="dropdownSettings_CONSECUTIVEDAYS"
             [data]="dropdownList_filted"                                    
@@ -260,6 +262,8 @@
           
           <label>Boat Name</label>
           <ng-multiselect-dropdown
+          [(ngModel)]="bookdropdownOwn"
+          [ngModelOptions]="{standalone: true}" 
           [placeholder]="'Select'"
           [settings]="dropdownSettings_CONSECUTIVEDAYS"
           [data]="dropdownList_filted"                                    

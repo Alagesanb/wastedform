@@ -45,6 +45,9 @@ export class SettingsComponent implements OnInit {
   WINTER_CONSECUTIVE_DAYS_ALLOWED : any;
   NEXT_BOOKING_DAYS_ALLOWED: any;
   UNAVAILABLE_DATE_userSelect = [];
+  dropdownOwn: any;
+  bookdropdownOwn: any;
+
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute,private ps: GetServiceService) {
@@ -537,7 +540,8 @@ function Binding_OwnerDuration(){
     
       if(data.Status == true){
         this.NEXT_BOOKING_DAYS_ALLOWED = data.Data.Next_BookingDay;
-       
+        this.Bookingform.get('Next_BookingDay').setValue(data.Data.Next_BookingDay);
+
         
       }
       else if(data.Status == false){
@@ -560,6 +564,8 @@ function Binding_OwnerDuration(){
       if(data.Status == true){
         this.SUMMER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Summer_ConsecutiveDays;
         this.WINTER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Winter_ConsecutiveDays;
+        this.Consecutiveform.get('Summer_ConsecutiveDays').setValue(data.Data.Summer_ConsecutiveDays);
+        this.Consecutiveform.get('Winter_ConsecutiveDays').setValue(data.Data.Winter_ConsecutiveDays);
 
         //console.log(this.SUMMER_CONSECUTIVE_DAYS_ALLOWED +"--"+ this.WINTER_CONSECUTIVE_DAYS_ALLOWED);
         
@@ -837,13 +843,15 @@ addShare(){
 
 
   Add_NEXT_BOOKING_DAY(){
+    this.Bookingform.get('IsActive').setValue(true);
+    this.Bookingform.get('Status').setValue("Enable");
+    this.Bookingform.get('Block').setValue(true);
+    console.log(this.Bookingform.value)
     this.BookingSubmitted = true;
     if (this.Bookingform.invalid) {
       return;
     }
-    this.Bookingform.get('IsActive').setValue(true);
-    this.Bookingform.get('Status').setValue("Enable");
-    this.Bookingform.get('Block').setValue(true);
+    
 
     var NEXT_BOOKING_DAY_selected_Boat = sessionStorage.getItem("Next_Booking_Day_boat");
     NEXT_BOOKING_DAY_selected_Boat = JSON.parse(NEXT_BOOKING_DAY_selected_Boat);
@@ -858,6 +866,7 @@ addShare(){
     if(data.status == true){
       this.getResponce = data.message
       this.Bookingform.reset()
+      this.bookdropdownOwn =[]; 
 
       this.modelTitle = "Next Booking Days"
       $('#Sharepop-up-btn').trigger('click');
@@ -875,14 +884,17 @@ addShare(){
 
 
   Add_CONSECUTIVE_DAYS(){
+    this.Consecutiveform.get('IsActive').setValue(true);
+    this.Consecutiveform.get('Status').setValue("Enable");
+    this.Consecutiveform.get('Block').setValue(true);
     this.shareSubmitted = true;
+    console.log(this.Consecutiveform.value)
+
     if (this.Consecutiveform.invalid) {
       return;
     }
     
-    this.Consecutiveform.get('IsActive').setValue(true);
-    this.Consecutiveform.get('Status').setValue("Enable");
-    this.Consecutiveform.get('Block').setValue(true);
+  
 
     
     var CONSECUTIVEDAYS_selected_Boat = sessionStorage.getItem("CONSECUTIVEDAYS_boat");
@@ -901,6 +913,7 @@ addShare(){
     if(data.status == true){
       this.getResponce = data.message
       this.Consecutiveform.reset()
+      this.dropdownOwn =[]; 
 
       this.modelTitle = "Consecutive Days"
       $('#Sharepop-up-btn').trigger('click');

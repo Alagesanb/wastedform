@@ -82,7 +82,7 @@ $(document).on("click",".cls-OwnerDuration",function() {
  });
 
 
-Binding_OwnerDuration();
+ Binding_OwnerDuration();
 function Binding_OwnerDuration(){
 
   /*
@@ -267,6 +267,7 @@ this.getDuration()
     this.http.post<any>(`${this.OwnerUrl}/AddDuration`,  this.form.value  ).subscribe(data => {
       console.log(data)
   if(data.status == true){
+this.ngOnInit()
     this.dropdownOwn =[]; 
     this.dropdownBoat = []
     this.getResponce = data.message
