@@ -356,31 +356,13 @@ $(document).on("click",".multiselect-dropdown",function() {
   {
     
     sorted_ShedulList = ScheduleList;    
-    var datas = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));
-    var bookforOwner = JSON.parse(sessionStorage.getItem("Owner_SelectOwner"));
-    if(typeof bookforOwner !== "undefined" && bookforOwner != null)
+    var datas = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));        
+    if (typeof datas !== "undefined" && datas != null)
     {
-      //debugger;
-      console.log(sorted_ShedulList);
       cal.clear();     
-      sorted_ShedulList = sorted_ShedulList.filter(x => x.Owner_Id == bookforOwner._id);
-      cal.createSchedules(sorted_ShedulList); 
-
-      if (typeof datas !== "undefined" && datas != null)
-      {
-        cal.clear();     
-        sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
-        cal.createSchedules(sorted_ShedulList);     
-      
-      }
-      // else{
-      //   cal.clear();    
-      //   cal.createSchedules(ScheduleList);
-      // }
-
-
-
-
+      sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
+      cal.createSchedules(sorted_ShedulList);     
+    
     }
     else
     {
