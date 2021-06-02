@@ -77,7 +77,7 @@ $(document).on("click",".cls-OwnerDuration",function() {
 
   sessionStorage.setItem("OwnerDuration_current",getdeleteid);
 
-  alert(getdeleteid);  
+  //alert(getdeleteid);  
 
  });
 
@@ -205,8 +205,9 @@ function Binding_OwnerDuration(){
     $('.calendar-wrapper').calendar(defaultConfig);
 
 
-    $("input[type='number']").inputSpinner()
+    $("input[type='number']").inputSpinner();
 
+/*
       $('#example').DataTable( {
           responsive: {
               details: {
@@ -222,6 +223,8 @@ function Binding_OwnerDuration(){
               }
           }
       } );
+
+      */
  
     this.getOwners();
     this.getBoats()
