@@ -27,6 +27,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { EditBoatComponent } from './edit-boat/edit-boat.component';
 import { ManageOwnerComponent } from './manage-owner/manage-owner.component';
 import { NgxSpinnerModule } from "ngx-spinner"; 
+import { JwPaginationModule } from 'jw-angular-pagination';
 
 //import { TempShedulerFirstComponent } from './temp-sheduler-first/temp-sheduler-first.component';
 
@@ -106,7 +107,7 @@ import { OwnerHeaderComponent } from './owner-header/owner-header.component';
 
   ],
   imports: [
-   
+    JwPaginationModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
