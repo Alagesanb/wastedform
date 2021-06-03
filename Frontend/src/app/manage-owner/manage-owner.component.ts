@@ -160,7 +160,7 @@ $(document).on("click",".cls-delete-single",function() {
   
   var getdeleteid = $(this).attr('id');
 
-  //alert(getdeleteid);
+  alert(JSON.stringify(getdeleteid));
 
   //singleselect_drop
 
@@ -191,12 +191,13 @@ function Binding_ManageOwner(){
           var bindingNumber = 1;
           var firstChek = 0;
 
-          
+
 
 
           $.each(data.response , function(index, val) { 
 
-           
+            var obj2 = val
+
             var tmb_Id = val._id;
             var boatDetails = val.BoatDetails[0];
             var tmb_Owner_Name = val.Owner_Name;
@@ -225,7 +226,7 @@ function Binding_ManageOwner(){
 
             if(firstChek == 0){              
               
-              bindingTableData ='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+tmb_Id+'"><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
+              bindingTableData ='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+obj2+'"><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
 
               firstChek = 1;
 
@@ -233,7 +234,7 @@ function Binding_ManageOwner(){
             else{
             
 
-              bindingTableData +='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+tmb_Id+'" ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
+              bindingTableData +='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+obj2+'" ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
 
             
             }
