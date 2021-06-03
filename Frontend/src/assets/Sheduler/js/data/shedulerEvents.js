@@ -736,6 +736,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                     // ...................  
                         var obj = Object();
+
+                        obj.Check_Status = 3;
                         
                         obj.TotalDay_Count = Temp_Date_dateDiff;
                         obj.WeekEnd_Count = Temp_Date_weekenddays;
@@ -947,7 +949,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     const Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
 
                      // ...................  
-                    var obj = Object();
+                    var obj = Object();                 
 
                     obj.Check_Status = nextBookingDay;
 
