@@ -44,12 +44,30 @@
            <div class="col-md-7">   
               <div class="form-row">
 <div class="form-group col-md-6">
-<label for="BoatType">Select boat type</label>
+
+
+
+
+  <label>Select boat type</label> 
+  <ng-multiselect-dropdown
+  [placeholder]="'Select'" 
+  
+  [(ngModel)]="dropdownBoatType"
+  [ngModelOptions]="{standalone: true}" 
+    [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boattype_id.errors }"
+  [settings]="dropdownSettings"
+  [data]="boatTypes"                                    
+  (onSelect)="getBoatTypeId($event)"
+  class="singleselect_drop"
+ >
+ </ng-multiselect-dropdown>
+
+<!-- <label for="BoatType">Select boat type</label>
 <select class="form-control" formControlName="Boattype_id" (change)="getBoatTypeId($event.target.value)" [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boattype_id.errors }">
   <option value="" selected disabled>-- Select --</option>
   <option   *ngFor="let type of boatTypes; let i = index;" value="{{type._id}}">{{type.Boat_Type}}</option>
  
-  </select>    
+  </select>     -->
 </div>
 <div class="form-group col-md-6">
 <label>Boat Name</label>

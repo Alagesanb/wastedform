@@ -53,21 +53,21 @@
             <div class="card col-md-4" *ngFor="let boat of listBoat  let i = index;">
                <div class="profile-pic">
 
-                <a href="boat-details.html"><img class="card-img-top"  *ngIf="!boat.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
-                <a href="boat-details.html"><img class="card-img-top"  *ngIf="boat.BoatDetails[0].Boat_Image[0]" src="{{imgUrl+boat.BoatDetails[0].Boat_Image[0]}}" alt="boat image"></a>
+                <a ><img class="card-img-top"  *ngIf="!boat.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
+                <a ><img class="card-img-top"  *ngIf="boat.BoatDetails[0].Boat_Image[0]" src="{{imgUrl+boat.BoatDetails[0].Boat_Image[0]}}" alt="boat image"></a>
 
                  <ul class="edit">
-                   <li>  <a href="boat-details.html"><i class="far fa-eye"></i></a></li>
+                   <li>  <a ><i class="far fa-eye"></i></a></li>
                    
                    </ul>
                   </div>
                    
 <div class="card-body">
-<a href="#" class="card-link"><i class="fas fa-map-marker-alt"></i> {{boat.BoatDetails[0].Location_Name}}</a>
-<a href="#" class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a>
+<a  class="card-link"><i class="fas fa-map-marker-alt"></i> {{boat.BoatDetails[0].Location_Name}}</a>
+<a  class="card-link f-right"><i class="far fa-calendar-alt"></i> </a>
 </div>                    
 <div class="card-header">
-<a href="boat-details.html"> {{boat.Boat_Name}}</a>
+<a > {{boat.Boat_Name}}</a>
 </div>
 
 <div class="card-body row">                    

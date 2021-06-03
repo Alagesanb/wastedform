@@ -3,7 +3,7 @@
     <div class="contents-page">
         <app-header></app-header>
         <div class="headingz">
-            <h4><a href="ownership.html"><i class="far fa-arrow-alt-circle-left"></i> </a>Ownership Duration</h4>
+            <h4><a  routerLink="/all-owner/"><i class="far fa-arrow-alt-circle-left"></i> </a>Ownership Duration</h4>
         </div>
         
         
@@ -17,6 +17,7 @@
 
             <div class="form-group col-md-6">
               <label>Owner Name</label> 
+           
             <ng-multiselect-dropdown 
             [placeholder]="'Select'"
             [(ngModel)]="dropdownOwn"
@@ -25,6 +26,8 @@
             [data]="dropdownOwnerList_filted"                                    
             (onSelect)="onItemOwnerSelect($event)"
             (onSelectAll)="onOwnerSelectAll($event)"
+            class="singleselect_drop"
+
             >
             </ng-multiselect-dropdown>
             

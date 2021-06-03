@@ -163,7 +163,7 @@
                                     <div class="info">
                                         <h4>{{book.BoatDetails[0].Boat_Name}}</h4>
                                         <!-- <h5># 1001</h5> -->
-                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{book.start_NoTime}}</h5>
+                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{book.start_NoTime| date :'short'}}</h5>
                                         <div *ngIf="book.OwnerDetails[0]">
                                             <h5><span><i class="far fa-user"></i>  </span> {{book.OwnerDetails[0].First_Name}}</h5>
                                             <h5><span><i class="fas fa-parking"></i>  </span> {{book.OwnerDetails[0].Parking_Ability}}</h5>
@@ -172,7 +172,7 @@
         <h5><span><i class="far fa-user"></i>  </span>Admin</h5>
         <h5><span><i class="fas fa-parking"></i>  </span> -</h5>
     </div>
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{book.end_NoTime}}</h5>
+                                        <h5><span><i class="fas fa-history"></i>  </span>{{book.end_NoTime| date :'short'}}</h5>
                                     </div>
                                     </a>
                                 </div>  
@@ -201,7 +201,7 @@
                                     <div class="info">
                                         <h4>{{book.BoatDetails[0].Boat_Name}}</h4>
                                         <!-- <h5># 1001</h5> -->
-                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{book.start_NoTime}}</h5>
+                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{book.start_NoTime| date :'short'}}</h5>
 <div *ngIf="book.OwnerDetails[0]">
                                         <h5><span><i class="far fa-user"></i>  </span> {{book.OwnerDetails[0].First_Name}}</h5>
                                         <h5><span><i class="fas fa-parking"></i>  </span> {{book.OwnerDetails[0].Parking_Ability}}</h5>
@@ -210,7 +210,7 @@
     <h5><span><i class="far fa-user"></i>  </span>Admin</h5>
     <h5><span><i class="fas fa-parking"></i>  </span> -</h5>
 </div>
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{book.end_NoTime}}</h5>
+                                        <h5><span><i class="fas fa-history"></i>  </span>{{book.end_NoTime| date :'short'}}</h5>
                                     </div>
                                     </a>
                                 </div>
@@ -240,7 +240,7 @@
                                     <div class="info">
                                         <h4>{{cancel.BoatDetails[0].Boat_Name}}</h4>
                                         <!-- <h5># 1001</h5> -->
-                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start_NoTime}}</h5>
+                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start_NoTime| date :'short'}}</h5>
                                         <div *ngIf="cancel.OwnerDetails[0]" >
                                         <h5><span><i class="far fa-user"></i>  </span> {{cancel.OwnerDetails[0].First_Name}}</h5>
                                         <h5><span><i class="fas fa-parking"></i>  </span> {{cancel.OwnerDetails[0].Parking_Ability}}</h5>
@@ -249,7 +249,7 @@
                                             <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
                                             <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
                                             </div>
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end_NoTime}}</h5>
+                                        <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end_NoTime| date :'short'}}</h5>
                                     </div>
                                     </a>
                                 </div>

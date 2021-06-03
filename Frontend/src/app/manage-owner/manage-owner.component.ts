@@ -163,7 +163,7 @@ $(document).on("click",".cls-delete-single",function() {
 //var callAngular;
 
  $(document).on("click",".cls-manage-owner-Edit",function() {
-  //debugger;
+
   var getdeleteid = $(this).attr('id');
   var temp_Arry = public_OwnerDetails_manageOwner.find(x => x._id == getdeleteid);
   sessionStorage.setItem("set_manageOwner_Edit",JSON.stringify(temp_Arry));
@@ -195,7 +195,7 @@ function Binding_ManageOwner(){
 
           $.each(data.response , function(index, val) { 
 
-            var obj2 = val
+            // var obj2 = val
 
             var tmb_Id = val._id;
             var boatDetails = val.BoatDetails[0];
@@ -225,7 +225,7 @@ function Binding_ManageOwner(){
 
             if(firstChek == 0){              
               
-              bindingTableData ='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+obj2+'"><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
+              bindingTableData ='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+tmb_Id+'"><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
 
               firstChek = 1;
 
@@ -233,7 +233,7 @@ function Binding_ManageOwner(){
             else{
             
 
-              bindingTableData +='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+obj2+'" ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
+              bindingTableData +='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+tmb_Id+'" ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
 
             
             }
@@ -340,7 +340,6 @@ function Binding_ManageOwner(){
 
   editManageOwner_new(obj){
 
-    debugger;
     
     this.scrollToTop();
     this.addBtnFlag= false

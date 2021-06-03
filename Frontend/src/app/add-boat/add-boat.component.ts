@@ -5,6 +5,7 @@ import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { from } from 'rxjs';
 import { formatDate } from '@angular/common';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 declare var $: any;
 declare var jQuery: any; 
@@ -72,6 +73,8 @@ export class AddBoatComponent implements OnInit {
   fwD: string;
   fwd: string;
   adminlogin: any;
+  dropdownSettings : IDropdownSettings ;
+
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,private SpinnerService: NgxSpinnerService) { 
     this.createForm();
     this.createBoatForm();
@@ -87,6 +90,19 @@ ngOnInit(): void {
   if(this.adminlogin==false){
     this.router.navigate(['']);
   }
+  this.dropdownSettings = {
+    singleSelection: true,
+    idField: '_id',
+    textField: 'Boat_Type',
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    itemsShowLimit: 3,
+    allowSearchFilter: true,
+    closeDropDownOnSelection : true,
+    noDataAvailablePlaceholderText : "No data available" 
+    //maxHeight : 100        
+   
+  };
   this.sidemenuloder();
   this.boatform.get('Boat_Status').setValue("Enable");
 
@@ -399,7 +415,10 @@ onFileChange_old(event, imageFor){
 }
 
 
-
+onboatSelect(items: any) { 
+   
+  
+}
 onFileChange(event, imageFor){
 
  
@@ -511,7 +530,7 @@ onFileChange_old_15_April_2021(event, imageFor){
 
 
   addBoat(){ 
-    
+    console.log(this.boatform.value)
  
     
     this.boatSubmitted = true;
@@ -788,11 +807,10 @@ onFileChange_old_15_April_2021(event, imageFor){
 
 
   getBoatTypeId(id){   
-    for (let i = 0; i < this.boatTypes.length; i++) {
-     if(this.boatTypes[i]._id == id){     
-this.boatTypeName = this.boatTypes[i].Boat_Type
-     }
-    } 
+   console.log(id)
+   this.boatform.get('Boattype_id').setValue(id._id);
+   this.boatform.get('Boattype_Name').setValue(id.Boat_Type);
+
   }
   goToViewPage(){
     this.router.navigate(['/all-boat/']);

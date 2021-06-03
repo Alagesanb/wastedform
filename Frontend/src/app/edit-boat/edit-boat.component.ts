@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -38,7 +40,10 @@ export class EditBoatComponent implements OnInit {
   currentboatdetails:any;
   CurrentMultipleImage:any;
   Boat_Handbook_Name:any;
-
+  dropdownSettings : IDropdownSettings ;
+  Boattype_Name: any;
+  dropdownBoat: any;
+  dropdownBoatType: any;
   public_SingleImageName: any;
   handBook: File;
   public_MultipleImageName: any = [];
@@ -62,6 +67,19 @@ export class EditBoatComponent implements OnInit {
     if(this.adminlogin==false){
       this.router.navigate(['']);
     }
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: '_id',
+      textField: 'Boat_Type',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true,
+      closeDropDownOnSelection : true,
+      noDataAvailablePlaceholderText : "No data available" 
+      //maxHeight : 100        
+     
+    };
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
@@ -544,14 +562,11 @@ createBoatForm() {
 
   }
   getBoatTypeId(id){   
-    for (let i = 0; i < this.boatTypes.length; i++) {
-     if(this.boatTypes[i]._id == id){     
-      this.boatform.get('Boattype_Name').setValue(this.boatTypes[i].Boat_Type)
-this.boatform.get('Boattype_id').setValue(this.boatTypes[i]._id)
-
-     }
-    } 
-  }
+    console.log(id)
+    this.boatform.get('Boattype_id').setValue(id._id);
+    this.boatform.get('Boattype_Name').setValue(id.Boat_Type);
+ 
+   }
   getLoctionTypeId(id){   
     for (let i = 0; i < this.loctions.length; i++) {
      if(this.loctions[i]._id == id){     
@@ -622,6 +637,7 @@ var winterE = new Date(this.data.WinterSeason_EDate);
 this.winterE = (winterE.getMonth()+1)+'/' + (winterE.getDate()) + '/'+winterE.getFullYear();
 
 }
+this.dropdownBoatType = this.data.Boattype_Name
 this.boatform.get('Boattype_Name').setValue(this.data.Boattype_Name);
 
 if(this.data.BoattypeDetails ){
@@ -665,7 +681,7 @@ this.multiMg = this.data.Boat_Image
 
   }
 
-
+ 
   singleImage(event, imageFor)
   {
   
@@ -682,6 +698,7 @@ this.multiMg = this.data.Boat_Image
 
 
   editBoat(){
+    console.log(this.boatform.value)
     this.boatSubmitted = true;
 
     if (this.boatform.invalid) {

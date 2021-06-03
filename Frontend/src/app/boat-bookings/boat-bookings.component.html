@@ -93,7 +93,12 @@
             <div class="row boat-listing" >
             <div class="col-md-4 boat-list-1" *ngFor="let booking of bookingInfo | filter: searchLoction  let i = index;">
                     <a href="#">
-                    <div class="boat-img"><img src={{imagePath}}{{booking.BoatDetails[0].Boat_Image[0]}} alt="boat"></div>
+                    <div class="boat-img">
+                        <img *ngIf="!booking.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat-1.jpg" alt="boat">
+                        <img *ngIf="booking.BoatDetails[0].Boat_Image[0]" src={{imagePath}}{{booking.BoatDetails[0].Boat_Image[0]}} alt="boat">
+
+                    </div>
+
                     <div class="info">
                         <h4>{{booking.BoatDetails[0].Boat_Name}}</h4>
                         <!-- <h5>#{{i+1001}}</h5> -->
