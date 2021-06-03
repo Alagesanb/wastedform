@@ -54,10 +54,14 @@ export class ManageOwnerComponent implements OnInit {
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router, private scroll: ViewportScroller) { 
     this.manageOwnerForm();
+    
+   
   }
 
   ngOnInit(): void {
+    var public_OwnerDetails_manageOwner = [];
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
+    this.startTimer_set_manageOwner_Edit();
     if(this.adminlogin==false){
       this.router.navigate(['']);
     }
@@ -156,17 +160,13 @@ $(document).on("click",".cls-delete-single",function() {
 
  });
 
+//var callAngular;
+
  $(document).on("click",".cls-manage-owner-Edit",function() {
-  
+  //debugger;
   var getdeleteid = $(this).attr('id');
-
-  alert(JSON.stringify(getdeleteid));
-
-  //singleselect_drop
-
-  //alert($('.singleselect_drop :selected').text());
-
-  //$("#"+getdeleteid).css("color", "black");
+  var temp_Arry = public_OwnerDetails_manageOwner.find(x => x._id == getdeleteid);
+  sessionStorage.setItem("set_manageOwner_Edit",JSON.stringify(temp_Arry));
   
 
  });
@@ -174,7 +174,6 @@ $(document).on("click",".cls-delete-single",function() {
 
 Binding_ManageOwner();
 function Binding_ManageOwner(){
-
   
 
   $.ajax({
@@ -191,8 +190,8 @@ function Binding_ManageOwner(){
           var bindingNumber = 1;
           var firstChek = 0;
 
-
-
+          public_OwnerDetails_manageOwner = data.response;
+           //sessionStorage.setItem("OwnerDetails_manageOwner",JSON.stringify(data.response));
 
           $.each(data.response , function(index, val) { 
 
@@ -323,6 +322,77 @@ function Binding_ManageOwner(){
     this.getAllManageOwners()
     this.ifEditValue()
   }
+
+  startTimer_set_manageOwner_Edit() {
+     setInterval(() => {
+      //sessionStorage.setItem("set_manageOwner_Edit",JSON.stringify(temp_Arry));
+      var temp_data = sessionStorage.getItem("set_manageOwner_Edit");
+      if(typeof temp_data !== "undefined" && temp_data != null)
+      {
+        sessionStorage.removeItem("set_manageOwner_Edit");
+        var obj = JSON.parse(temp_data);
+        this.editManageOwner_new(obj);
+      }     
+      
+    },1000)
+  }
+
+
+  editManageOwner_new(obj){
+
+    debugger;
+    
+    this.scrollToTop();
+    this.addBtnFlag= false
+    this.editBtnFlag= true
+ 
+this.managerOwnerId = obj._id
+this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
+this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
+this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
+this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
+this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
+this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
+this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
+
+// this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
+$("#project1").attr('disabled', 'disabled');
+$("#project2").attr('disabled', 'disabled');
+$("#project3").attr('disabled', 'disabled');
+
+
+  }
+
+
+
+  editManageOwner(obj){
+
+        
+    this.scrollToTop();
+    this.addBtnFlag= false
+    this.editBtnFlag= true
+ 
+this.managerOwnerId = obj._id
+this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
+this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
+this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
+this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
+this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
+this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
+this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
+
+// this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
+$("#project1").attr('disabled', 'disabled');
+$("#project2").attr('disabled', 'disabled');
+$("#project3").attr('disabled', 'disabled');
+
+
+  }
+  
+  // function callAngular() {
+  //   alert("ddddd");
+  //  // throw new Error('Function not implemented.');
+  // }
 
   sidemenuloder(){    
     $("#a-menu-Owners-main").attr("aria-expanded","true");        
@@ -572,27 +642,7 @@ this.manageOwnerForms.get('Owner_Name').setValue(this.ownerName);
      }, err => {
      })
     }
-    editManageOwner(obj){
-      this.scrollToTop();
-      this.addBtnFlag= false
-      this.editBtnFlag= true
    
-this.managerOwnerId = obj._id
-this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
-this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
-this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
-this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
-this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
-this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
-this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
-
-// this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
-$("#project1").attr('disabled', 'disabled');
-$("#project2").attr('disabled', 'disabled');
-$("#project3").attr('disabled', 'disabled');
-
-
-    }
     edit(){
       this.manageOwnerSubmitted = true;
       
@@ -650,3 +700,5 @@ $("#project3").attr('disabled', 'disabled');
       location.reload();
     }
 }
+
+
