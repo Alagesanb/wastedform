@@ -107,7 +107,7 @@ import { OwnerHeaderComponent } from './owner-header/owner-header.component';
 
   ],
   imports: [
-    JwPaginationModule,
+    // JwPaginationModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
