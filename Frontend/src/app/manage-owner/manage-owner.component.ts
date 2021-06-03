@@ -135,7 +135,41 @@ $(document).on("click",".cls-delete-single",function() {
 
  });
 
+ //class="cls-manage-owner-Edit" id="'+tmb_Id+'"
 
+ $(document).on("mouseover",".cls-manage-owner-Edit",function() {
+ 
+  var getdeleteid = $(this).attr('id');
+
+  $("#"+getdeleteid).css("color", "red");
+  $("#"+getdeleteid).css('cursor','pointer');
+  
+
+ });
+
+ $(document).on("mouseout",".cls-manage-owner-Edit",function() {
+  
+  var getdeleteid = $(this).attr('id');
+
+  $("#"+getdeleteid).css("color", "black");
+  
+
+ });
+
+ $(document).on("click",".cls-manage-owner-Edit",function() {
+  
+  var getdeleteid = $(this).attr('id');
+
+  //alert(getdeleteid);
+
+  //singleselect_drop
+
+  //alert($('.singleselect_drop :selected').text());
+
+  //$("#"+getdeleteid).css("color", "black");
+  
+
+ });
 
 
 Binding_ManageOwner();
@@ -163,7 +197,7 @@ function Binding_ManageOwner(){
           $.each(data.response , function(index, val) { 
 
            
-
+            var tmb_Id = val._id;
             var boatDetails = val.BoatDetails[0];
             var tmb_Owner_Name = val.Owner_Name;
             var tmb_ShareAllocation = val.ShareAllocation;
@@ -191,7 +225,7 @@ function Binding_ManageOwner(){
 
             if(firstChek == 0){              
               
-              bindingTableData ='<tr><td>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
+              bindingTableData ='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+tmb_Id+'"><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
 
               firstChek = 1;
 
@@ -199,7 +233,7 @@ function Binding_ManageOwner(){
             else{
             
 
-              bindingTableData +='<tr><td>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
+              bindingTableData +='<tr><td (click)= reloadPage()>'+tmb_Owner_Name+'</td><td>'+tmb_Boat_Name+'</td><td>'+tmb_Summer_WeekEndDays+'</td><td>'+tmb_Summer_WeekDays+'</td><td>'+tmb_Winter_WeekEndDays+'</td><td>'+tmb_Winter_WeekDays+'</td><td>'+tmb_Total_Days+'</td><td><ul class="table-action"><li><a class="cls-manage-owner-Edit" id="'+tmb_Id+'" ><i class="far fa-edit" aria-hidden="true"></i></a></li></ul></td></tr>';
 
             
             }
@@ -233,6 +267,7 @@ function Binding_ManageOwner(){
 //End sibi.........................................
       
     $("input[type='number']").inputSpinner()
+  /*
     $('#example').DataTable( {
         responsive: {
             details: {
@@ -248,6 +283,8 @@ function Binding_ManageOwner(){
             }
         }
     } );
+
+    */
     jQuery(document).ready(function() {
       // executes when HTML-Document is loaded and DOM is ready
        
