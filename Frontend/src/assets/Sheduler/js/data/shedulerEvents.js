@@ -2,7 +2,19 @@
 
 var public_URL = "http://65.2.28.16/api/Schedule/";
 
+var public_Day_URL = "http://65.2.28.16/api/Days/";
 
+var public_shedulDataId = 0;
+
+function getFormattedDate_WithOut_Zero_Time(dateVal) {
+    var newDate = new Date(dateVal);
+
+    var sMonth = padValue(newDate.getMonth() + 1);
+    var sDay = padValue(newDate.getDate());
+    var sYear = newDate.getFullYear();  
+    
+    return sDay + "-" + sMonth + "-" + sYear;
+}
 
 function generateNames() {
     var names = [];
@@ -15,7 +27,6 @@ function generateNames() {
 
     return names;
 }
-
 
  function getFormattedDate(dateVal) {
     var newDate = new Date(dateVal);
@@ -45,8 +56,6 @@ function generateNames() {
 function padValue(value) {
     return (value < 10) ? "0" + value : value;
 }
-
-
 
 function generateRandomSchedule(val){
     
@@ -459,7 +468,6 @@ function generateRandomSchedule(val){
 
 }
 
-
 function generateSchedule_old() {   
     
     ScheduleList = [];
@@ -477,8 +485,6 @@ var renderEnd = new Date("Sat May 10 2021 00:00:00 GMT+0530 (India Standard Time
 
 
     generateRandomSchedule(calendar, renderStart, renderEnd);  
-    
-    console.log(ScheduleList);
     
 
 }
@@ -550,7 +556,7 @@ function generateRandomSchedule_old(calendar, renderStart, renderEnd) {
 }
 
 function ConvertUTCTimeToLocalTime(UTCDateString)
-    {
+{
         var convertdLocalTime = new Date(UTCDateString);
 
         var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
@@ -558,13 +564,11 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
 
         return convertdLocalTime;
-    }
+}
 
     
     //data-schedule-id
-    var public_shedulDataId = 0;
-
-    
+       
     $(document).on("click",".tui-full-calendar-weekday-schedule",function() {
         
        var currentId = $(this).attr('data-schedule-id');
@@ -635,12 +639,137 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     });
 
-    //tui-full-calendar-popup-delete
+    function getAllDates(startDate, stopDate) {          
+        var dateArray =[];
+        var currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(currentDate);
+            var ddd = new Date(currentDate);
+            var currentDate = new Date(ddd.setDate(ddd.getDate() + 1)); 
+        }
+        return dateArray;
+    }
+
+  function GetAllUnAvailableDays_settings(obj){
+
+    $.ajax({
+        url: public_Day_URL+"GetAllUnAvailableDays",
+        type: 'GET',
+        dataType: 'json',            
+        success: function(datas) {
+            if(datas.status == true)
+            {
+            var startDate = new Date(obj.start);
+            var stopDate = new Date(obj.end);
+            var temp_res = datas.response[0];            
+            var temp_unAvilable = [];            
+            
+            $.each(temp_res.UnAvailableDates, function(index, val) {                
+                var str_tmp = new Date(val);
+                temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+            }); 
+            
+            
+
+            var allDate =  getAllDates(startDate, stopDate);
+            var FirstChek = 0;
+            var Confirm_StartDate = null;
+            var ConFirm_EndDate = null;            
+            $.each(allDate, function(index, val) {               
+                if(FirstChek == 0)
+                {
+                    var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                       
+                    if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {  
+                         //console.log("is in array");                        
+                        alert("This date ( "+tmp_values+" ) is unavilable");
+                        return false;
+                    } else {
+                        //console.log("is NOT in array");
+                        Confirm_StartDate = val; 
+                    }                   
+                    
+                    FirstChek = 1;
+                }
+                else{
+
+                    var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                        
+                    if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {
+                        //console.log("is in array");
+                        alert("This date ( "+tmp_values+" ) is unavilable");
+                        return false;
+                    } else {
+                        //console.log("is NOT in array");
+                        ConFirm_EndDate = val; 
+                    }                      
+
+                }               
+
+            });
+
+                if(Confirm_StartDate != null && ConFirm_EndDate != null)
+                {
+                    obj.start = Confirm_StartDate;
+                    obj.end = ConFirm_EndDate;
+                    AddSchedule_ApiCalling(obj)
+
+                }           
+            }
+            else if(datas.status == false){
+                
+                AddSchedule_ApiCalling(obj)                                
+
+            }
+            
+        
+
+        },
+        error: function (error) { 
+            //return 0;         
+                       
+        }
+    });
+      
+     }
+
+    function AddSchedule_ApiCalling(obj){
+
+        $.ajax({
+            url: public_URL+"AddSchedule",
+            type: 'POST',
+            dataType: 'json', 
+            data: obj,
+            success: function(datas) {
+               
+                if(datas.status == true)
+                {
+
+                    alert(datas.message);
+                    location.reload();
+    
+                }
+                else if(datas.status == false)
+                {
+                    
+                    alert(datas.message);
+                    //location.reload();
+    
+                }
+            
+    
+            },
+            error: function (error) {          
+                           
+            }
+        });
+
+    }
+
 
     function calculate_NextBookingDays(datas,tmb_Obj)
     {
 
-        debugger;
         var temp_data = JSON.parse(datas);
          /*
             tmb_Obj.Start_Date;
@@ -948,7 +1077,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     const Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
                     const Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
 
-                     // ...................  
+                     // ................... 
+                                          
                     var obj = Object();                 
 
                     obj.Check_Status = nextBookingDay;
@@ -989,38 +1119,10 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     obj.raw ="";
                     obj.state ="";
                     obj.Status = "Enable";
-                    obj.IsActive = true;                   
-                
-                    $.ajax({
-                        url: public_URL+"AddSchedule",
-                        type: 'POST',
-                        dataType: 'json', 
-                        data: obj,
-                        success: function(datas) {
-                           
-                            if(datas.status == true)
-                            {
-
-                                alert(datas.message);
-                                location.reload();
-                
-                            }
-                            else if(datas.status == false)
-                            {
-                                
-                                alert(datas.message);
-                                //location.reload();
-                
-                            }
-                        
-                
-                        },
-                        error: function (error) {          
-                                       
-                        }
-                    });
-
-            
+                    obj.IsActive = true;
+                    
+                     GetAllUnAvailableDays_settings(obj);                                  
+                              
             
                 }
                 else if(checkController == "Update"){
