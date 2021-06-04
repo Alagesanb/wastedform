@@ -19,6 +19,7 @@ export class BookForOwnerComponent implements OnInit {
    url = "http://65.2.28.16/api/Schedule/";
    url_Owner = "http://65.2.28.16/api/Owner/";
    url_Days = "http://65.2.28.16/api/Days/";
+   //public_Day_URL = "http://65.2.28.16/api/Days/";
    dropdownList = [];
    SelectOwner_dropdownList = [];
    dropdownList_filted = [];
@@ -34,40 +35,18 @@ export class BookForOwnerComponent implements OnInit {
 
   ngOnInit(): void {
 
+    //var 
     
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
 
     ReloadPages_book_for_owner();
+    //GetAllUnAvailableDays();
  
      sessionStorage.removeItem('AdminSelectBoat');
      sessionStorage.removeItem('Owner_SelectOwner');
      sessionStorage.setItem("pageIdentiFiction","book-for-owner");
-
-     //cls-Boat-name
-     //cls-Boat-Owner
-     //$(".cls-Boat-Owner").change(function() {
-      //$(document).on("click",".cls-Boat-Owner",function() {
-        //debugger;
-          //alert("test");
-        //    $(".cls-Boat-name").empty();
-      //var eddd =  $(this).children('span').first().text();
-     // var getdatasId = $(this).children('.multiselect-dropdown > span').eq(1);
-        //$('.cls-Boat-Owner').find('div').each(function(){
-         // debugger;
-         //console.log(getdatasId);
-         //alert(getdatasId);
-          //var getdatasId = $(this).attr('span');
-        //  if(typeof getdatasId !== "undefined"){
-
-           // debugger;
-           // alert(getdatasId);
-         // }
-
-
-       // });
-
-     // });
+        
 
        function ReloadPages_book_for_owner(){
            
@@ -171,13 +150,18 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     var obj = Object();
         obj.Boat_Id = Boat_Id;
         //url_Days = "http://65.2.28.16/api/Days/GetNextBookingDaysByBoatId"
-      this.http.post<any>(`${this.url_Days}GetNextBookingDaysByBoatId`, obj).subscribe(results => { 
-        //debugger;       
+      this.http.post<any>(`${this.url_Days}GetNextBookingDaysByBoatId`, obj).subscribe(results => {           
         if(results.status == true)
         {
           var temp_resp = results.response;
           if (typeof temp_resp  !== 'undefined' && temp_resp.length > 0) {
             sessionStorage.setItem("SettNextBookingDays_boat",JSON.stringify(temp_resp[0]));
+          }
+          else
+          {
+            alert("Next Booking Days unAvilable");
+            location.reload();
+
           }
            
         }
@@ -203,12 +187,59 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
             tempArry.push(obj2);
 
       });
-      this.dropdownList_filted_Owner = tempArry;           
+      this.dropdownList_filted_Owner = tempArry;
+      
+      this.GetAllUnAvailableDays();
     
       }, err => {
         console.log(err);
       })
 }
+
+ GetAllUnAvailableDays(){
+
+
+  this.http.get<any>(`${this.url_Days}GetAllUnAvailableDays`).subscribe(data => { 
+   
+
+    sessionStorage.setItem("GetAllUnAvailableDays_Owners",JSON.stringify(data));             
+
+
+    this.http.get<any>(`${this.url_Days}GetUnAvailabeDaysOfBoats`).subscribe(datas => { 
+   
+      if(datas.status == true){
+    
+        var tmp_1 = datas.response;
+        var tmp_arry_1 = [];
+
+        $.each(datas.response, function(index, val) {        
+
+          var obj = Object();
+          obj.Boat_Id =  val.Boat_Id[0];//a1.toString();
+          obj.Boat_Name = val.Boat_Name[0];//a2.toString();
+          obj.UnAvailableDates = val.UnAvailableDates;
+          obj._id = val._id;
+          tmp_arry_1.push(obj);
+
+        });
+        sessionStorage.setItem("GetUnAvailabeDaysOfBoats_Owners",JSON.stringify(tmp_arry_1));
+         
+       }    
+  
+    }, err => {
+      console.log(err);
+    })
+
+  
+    }, err => {
+      console.log(err);
+    })
+
+    
+   }
+
+   
+
 
   Fun_getallDropDownDatas(owner_drp_Id){ 
     

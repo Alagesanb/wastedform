@@ -651,115 +651,233 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     }
 
   function GetAllUnAvailableDays_settings(obj){
+        var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));         
+            //
+        if (typeof datas !== "undefined" && datas != null) 
+        {
 
-    $.ajax({
-        url: public_Day_URL+"GetAllUnAvailableDays",
-        type: 'GET',
-        dataType: 'json',            
-        success: function(datas) {
             if(datas.status == true)
             {
             var startDate = new Date(obj.start);
             var stopDate = new Date(obj.end);
             var temp_res = datas.response[0];            
-            var temp_unAvilable = [];            
+            var temp_unAvilable = []; 
             
-            $.each(temp_res.UnAvailableDates, function(index, val) {                
-                var str_tmp = new Date(val);
-                temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
-            }); 
-            
-            
-
-            var allDate =  getAllDates(startDate, stopDate);
-            var FirstChek = 0;
-            var Confirm_StartDate = null;
-            var ConFirm_EndDate = null;            
-            $.each(allDate, function(index, val) {               
-                if(FirstChek == 0)
-                {
-                    var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
-                                       
-                    if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {  
-                         //console.log("is in array");                        
-                        alert("This date ( "+tmp_values+" ) is unavilable");
-                        return false;
-                    } else {
-                        //console.log("is NOT in array");
-                        Confirm_StartDate = val; 
-                    }                   
-                    
-                    FirstChek = 1;
-                }
-                else{
-
-                    var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
-                                                        
-                    if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {
-                        //console.log("is in array");
-                        alert("This date ( "+tmp_values+" ) is unavilable");
-                        return false;
-                    } else {
-                        //console.log("is NOT in array");
-                        ConFirm_EndDate = val; 
-                    }                      
-
-                }               
-
-            });
-
-                if(Confirm_StartDate != null && ConFirm_EndDate != null)
-                {
-                    obj.start = Confirm_StartDate;
-                    obj.end = ConFirm_EndDate;
-                    AddSchedule_ApiCalling(obj)
-
-                }           
-            }
-            else if(datas.status == false){
+            if (typeof temp_res !== "undefined" && temp_res != null) 
+            {
+                $.each(temp_res.UnAvailableDates, function(index, val) {                
+                    var str_tmp = new Date(val);
+                    temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+                }); 
                 
-                AddSchedule_ApiCalling(obj)                                
+                
+    
+                var allDate =  getAllDates(startDate, stopDate);
+                var FirstChek = 0;
+                var Confirm_StartDate = null;
+                var ConFirm_EndDate = null;            
+                $.each(allDate, function(index, val) {               
+                    if(FirstChek == 0)
+                    {
+                        var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                           
+                        if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {  
+                             //console.log("is in array");                        
+                            alert("This date ( "+tmp_values+" ) is unavilable");
+                            return false;
+                        } else {
+                            //console.log("is NOT in array");
+                            Confirm_StartDate = val; 
+                        }                   
+                        
+                        FirstChek = 1;
+                    }
+                    else{
+    
+                        var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                            
+                        if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {
+                            //console.log("is in array");
+                            alert("This date ( "+tmp_values+" ) is unavilable");
+                            return false;
+                        } else {
+                            //console.log("is NOT in array");
+                            ConFirm_EndDate = val; 
+                        }                      
+    
+                    }               
+    
+                });
+    
+    
+                    if(Confirm_StartDate != null && ConFirm_EndDate != null)
+                    {
+                       
+                        obj.start = Confirm_StartDate;
+                        obj.end = ConFirm_EndDate;
+                        //AddSchedule_ApiCalling(obj); 
+                       // GetUnAvailabeDaysOfBoats_Owner(obj);                   
+                       var datas_2 = JSON.parse(sessionStorage.getItem("GetUnAvailabeDaysOfBoats_Owners"));         
+                       var data_2_boat = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));                        
+                            if ((typeof datas_2 !== "undefined" && datas_2 != null) && 
+                                (typeof data_2_boat !== "undefined" && data_2_boat != null) ) 
+                                {
+                                
+                                 var temp_unAvilable_Boats = [];                             
+                                 var tmp_Unavilable = datas_2.find(x => x.Boat_Id == data_2_boat._id);
+    
+                                 if(typeof tmp_Unavilable !== "undefined" && tmp_Unavilable != null){
+    
+                                    $.each(tmp_Unavilable.UnAvailableDates, function(index, val2) {                              
+                                        var str_tmp = new Date(val2);
+                                        temp_unAvilable_Boats.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+                                     });                              
+                                     //var aaa = temp_unAvilable_Boats;
+        
+                                     var allDate =  getAllDates(obj.start, obj.end);
+                                    var FirstChek = 0;
+                                    var Confirm_StartDate = null;
+                                    var ConFirm_EndDate = null;            
+                                    $.each(allDate, function(index, val) {               
+                                        if(FirstChek == 0)
+                                        {
+                                            var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                            
+                                            if(jQuery.inArray(tmp_values, temp_unAvilable_Boats) !== -1) {  
+                                                //console.log("is in array");                        
+                                                alert("This date ( "+tmp_values+" ) is unavilable");
+                                                return false;
+                                            } else {
+                                                //console.log("is NOT in array");
+                                                Confirm_StartDate = val; 
+                                            }                   
+                                            
+                                            FirstChek = 1;
+                                        }
+                                        else{
+        
+                                            var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                                                
+                                            if(jQuery.inArray(tmp_values, temp_unAvilable_Boats) !== -1) {
+                                                //console.log("is in array");
+                                                alert("This date ( "+tmp_values+" ) is unavilable");
+                                                return false;
+                                            } else {
+                                                //console.log("is NOT in array");
+                                                ConFirm_EndDate = val; 
+                                            }                      
+        
+                                        }               
+        
+                                    });
+                                   
+                                    obj.start = Confirm_StartDate;
+                                    obj.end = ConFirm_EndDate;
+        
+                                    AddSchedule_ApiCalling(obj);
+    
+                                 }
+                                 else{
+    
+                                    AddSchedule_ApiCalling(obj);
+    
+                                 }
+                                 
+                                
+    
+                               
+    
+                            }
+                            else{
+    
+                                AddSchedule_ApiCalling(obj); 
+    
+                            }
+    
+                        
+                    } 
+                    else{
+                        alert("Error..");
+                    }          
+            }
+            else{
+
+                AddSchedule_ApiCalling(obj); 
+
+            }
+           
+
+            }
+            else{
+
+                AddSchedule_ApiCalling(obj); 
 
             }
             
-        
-
-        },
-        error: function (error) { 
-            //return 0;         
-                       
+           
         }
-    });
-      
+        else{
+            alert("Error......001")
+        }           
+     
      }
 
-    function AddSchedule_ApiCalling(obj){
+
+     function GetUnAvailabeDaysOfBoats_Owner(obj){
+
+        var datas = JSON.parse(sessionStorage.getItem("GetUnAvailabeDaysOfBoats_Owners"));         
+            //
+        if (typeof datas !== "undefined" && datas != null) 
+        {
+            // var temp_unAvilable = [];  
+            // $.each(temp_res.UnAvailableDates, function(index, val) {                
+            //     var str_tmp = new Date(val);
+            //     temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+            // }); 
+            
+            // var aaa = temp_unAvilable;
+
+
+            //AddSchedule_ApiCalling(obj);
+
+        }
+        else{
+
+            AddSchedule_ApiCalling(obj); 
+
+        }
+
+     }
+
+
+    function AddSchedule_ApiCalling(obj){ 
+        
+      
 
         $.ajax({
             url: public_URL+"AddSchedule",
             type: 'POST',
             dataType: 'json', 
             data: obj,
-            success: function(datas) {
+            success: function(datas) {               
                
                 if(datas.status == true)
                 {
-
                     alert(datas.message);
-                    location.reload();
-    
+                    location.reload();    
                 }
                 else if(datas.status == false)
-                {
-                    
+                {                    
                     alert(datas.message);
-                    //location.reload();
-    
+                    //location.reload();    
                 }
             
     
             },
-            error: function (error) {          
+            error: function (error) { 
+                
+                alert(error);
+                console.log(error);
                            
             }
         });
@@ -769,6 +887,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     function calculate_NextBookingDays(datas,tmb_Obj)
     {
+       
 
         var temp_data = JSON.parse(datas);
          /*
