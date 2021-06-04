@@ -798,7 +798,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                         
                     } 
                     else{
-                        alert("Error..");
+                        //alert("Error..");
+                        AddSchedule_ApiCalling(obj); 
                     }          
             }
             else{
