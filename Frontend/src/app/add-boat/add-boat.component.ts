@@ -530,21 +530,24 @@ onFileChange_old_15_April_2021(event, imageFor){
 
 
   addBoat(){ 
+    this.boatform.get('Block').setValue(true);
+    this.boatform.get('IsActive').setValue(true);       
     console.log(this.boatform.value)
- 
+ console.log(this.handBook)
     
     this.boatSubmitted = true;
-    this.boatform.get('Boattype_Name').setValue(this.boatTypeName);
+    // this.boatform.get('Boattype_Name').setValue(this.boatTypeName);
     this.boatform.get('Location_Name').setValue(this.loctionName);
     // this.boatform.get('Launch_Date').setValue(this.launchDate);
     // this.boatform.get('PreLaunch_Date').setValue(this.previousDate);
-        if (this.boatform.invalid) 
-        {
+        // if (this.boatform.invalid) 
+        // {
         
-          return;
-        }
+        //   return;
+        // }
     
-    
+    console.log("kkkk")
+
     if(this.handBook){
       const fd = new FormData();  
       fd.append("file",this.handBook);     
@@ -819,7 +822,9 @@ onFileChange_old_15_April_2021(event, imageFor){
   getLoctionTypeId(id){   
     for (let i = 0; i < this.loctions.length; i++) {
      if(this.loctions[i]._id == id){     
-this.loctionName = this.loctions[i].Boat_Location
+// this.loctionName = this.loctions[i].Boat_Location
+this.boatform.get('Location_Name').setValue(this.loctions[i].Boat_Location);
+
      }
     } 
   }
