@@ -159,7 +159,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
           }
           else
           {
-            alert("Next Booking Days unAvilable");
+            alert("Next Booking Days are not assigned to this boat. Please go to settings and unlock the next booking days.");
             location.reload();
 
           }

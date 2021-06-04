@@ -651,6 +651,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     }
 
   function GetAllUnAvailableDays_settings(obj){
+      
         var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));         
             //
         if (typeof datas !== "undefined" && datas != null) 
@@ -817,7 +818,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
            
         }
         else{
-            alert("Error......001")
+            alert("You cannot book on these days since the date of booking selection is before pre-launch date.")
         }           
      
      }
@@ -852,7 +853,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     function AddSchedule_ApiCalling(obj){ 
         
-      
+     
 
         $.ajax({
             url: public_URL+"AddSchedule",
@@ -888,7 +889,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     function calculate_NextBookingDays(datas,tmb_Obj)
     {
        
-
+      
         var temp_data = JSON.parse(datas);
          /*
             tmb_Obj.Start_Date;
@@ -935,6 +936,13 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                 return 3;
 
                // alert("current day after the launch date");
+            }
+            else
+            {
+                alert("You are trying to book this boat before its pre-launch date. This boat is not open for booking now. Please try after its pre-launch date.");
+                //location.reload();
+               
+
             }
 
 
@@ -1171,7 +1179,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                 var end_str = enddate_date.toString();    
                 var AdminId_get = sessionStorage.getItem("UserId");
 
-
+                  
                 //this to start
                 var Next_Booking_Days_check = sessionStorage.getItem("SettNextBookingDays_boat");
                 var nextBookingDay = 0;
