@@ -18,12 +18,17 @@ export class EditOwnerProfileComponent implements OnInit {
   submitted = false;
   handBook: File;
   data:any;
+  ownerlogin: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
 
  
    ngOnInit(): void {
+    this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
+    if(this.ownerlogin==false){
+      this.router.navigate(['/owner-login/']);
+    }
     sessionStorage.setItem("relodePg_book-for-owner","1");
     sessionStorage.setItem("Adminbooking-relodePg","1");
      sessionStorage.setItem("boat-maintenance-reload","1");

@@ -25,4 +25,8 @@ export class OwnerHeaderComponent implements OnInit {
      });
 
   }
+  logout(){
+    sessionStorage.setItem('userlogin', JSON.stringify(false));   // if it's object
+
+  }
 }

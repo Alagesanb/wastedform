@@ -55,6 +55,7 @@ ownerLogin(){
     }
     else if(data.status==true){
       sessionStorage.setItem('userToken', JSON.stringify(data.token));
+      sessionStorage.setItem('userlogin', JSON.stringify(true));
       sessionStorage.setItem('Ownerlogin', JSON.stringify(data.data));   // if it's object
       console.log(data.data);
       // sessionStorage.setItem('Email', JSON.stringify(data.Email));

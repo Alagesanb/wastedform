@@ -25,6 +25,8 @@ export class AllBoatComponent implements OnInit {
   boatId: any;
   getResponce: any;
   adminlogin: any;
+  pageOfItems: Array<any>;
+
   constructor(private httpClient: HttpClient,private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute,private ps: GetServiceService ,public sanitizer: DomSanitizer) {
       this.createForm();
@@ -101,7 +103,10 @@ $('#datepiker-all-boat-to-date').Zebra_DatePicker({
     this.getLoction()
   }
 
-  
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
   sidemenuloder(){
     $("#a-menu-boat-main").attr("aria-expanded","true");        
     $("#a-menu-boat-main").removeClass("collapsed");

@@ -133,7 +133,7 @@
              <div class="row boat-list">
 
 
-              <div class="card col-md-4" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
+              <div class="card col-md-4" *ngFor="let boat of pageOfItems | filter: searchText  let i = index;">
                <div class="profile-pic">
                   <a ><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
                   <a ><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
@@ -178,9 +178,26 @@
 </div>
 </div>
 
-<!-- <jw-pagination [items]="allBoats" (changePage)="onChangePage($event)"></jw-pagination> -->
 
 
+
+
+ <!-- --------- -->
+
+
+
+            </div>
+            <jw-pagination [items]="allBoats" (changePage)="onChangePage($event)"></jw-pagination>
+
+            </div>
+         </div>
+         
+    </div>
+</div>
+<div class="dash-footer">
+  <app-footer-adminsession></app-footer-adminsession>
+<!-- <small>© Copyright SMART Boating 2021. All Rights Reserved.</small> -->
+</div>
 <!-- --------- -->
 <button style="display:none" type="button" id="removeBoat" class="btn btn-info btn-lg" data-toggle="modal" data-target="#removeBoats">Open Modal</button>
 
@@ -226,18 +243,4 @@
     </div>
 
   </div>
-</div>
-
- <!-- --------- -->
-
-
-
-            </div>
-            </div>
-         </div>
-    </div>
-</div>
-<div class="dash-footer">
-  <app-footer-adminsession></app-footer-adminsession>
-<!-- <small>© Copyright SMART Boating 2021. All Rights Reserved.</small> -->
 </div>

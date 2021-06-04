@@ -339,7 +339,7 @@ function Binding_ManageOwner(){
 
 
   editManageOwner_new(obj){
-
+console.log(obj)
     
     this.scrollToTop();
     this.addBtnFlag= false
@@ -347,46 +347,51 @@ function Binding_ManageOwner(){
  
 this.managerOwnerId = obj._id
 this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
-this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
-this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
+this.manageOwnerForms.get('Owner_Id').setValue(obj._id);
+this.manageOwnerForms.get('Boat_Id').setValue(obj.BoatDetails[0]._id);
 this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
-this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
-this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
-this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
+this.manageOwnerForms.get('Owners_Allowed').setValue(obj.BoatDetails[0].Owners_Allowed);
+
+this.manageOwnerForms.get('No_of_SummerWeekDays').setValue(obj.BoatDetails[0].Summer_WeekDays);
+this.manageOwnerForms.get('No_of_SummerWeekEndDays').setValue(obj.BoatDetails[0].Summer_WeekEndDays);
+this.manageOwnerForms.get('No_of_WinterWeekDays').setValue(obj.BoatDetails[0].Winter_WeekDays);
+this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.BoatDetails[0].Winter_WeekEndDays);
+
+
 
 // this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
 $("#project1").attr('disabled', 'disabled');
 $("#project2").attr('disabled', 'disabled');
 $("#project3").attr('disabled', 'disabled');
+console.log(this.manageOwnerForms.value)
 
 
   }
 
 
 
-  editManageOwner(obj){
+//   editManageOwner(obj){
 
         
-    this.scrollToTop();
-    this.addBtnFlag= false
-    this.editBtnFlag= true
+//     this.scrollToTop();
+//     this.addBtnFlag= false
+//     this.editBtnFlag= true
  
-this.managerOwnerId = obj._id
-this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
-this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
-this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
-this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
-this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
-this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
-this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
+// this.managerOwnerId = obj._id
+// this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
+// this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
+// this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
+// this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
+// this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
+// this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
+// this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
 
-// this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
-$("#project1").attr('disabled', 'disabled');
-$("#project2").attr('disabled', 'disabled');
-$("#project3").attr('disabled', 'disabled');
+// // this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
+// $("#project1").attr('disabled', 'disabled');
+// $("#project2").attr('disabled', 'disabled');
+// $("#project3").attr('disabled', 'disabled');
 
-
-  }
+//   }
   
   // function callAngular() {
   //   alert("ddddd");

@@ -21,6 +21,7 @@ export class AllOwnersComponent implements OnInit {
   allboatdata: any=[];
   imgUrl = "http://65.2.28.16/api/uploads/"
   adminlogin: any;
+  pageOfItems: Array<any>;
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
    }
@@ -42,6 +43,10 @@ export class AllOwnersComponent implements OnInit {
     });
     this.getBoats()
   }
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
+}
   sidemenuloder(){    
     $("#a-menu-Owners-main").attr("aria-expanded","true");        
     $("#a-menu-Owners-main").removeClass("collapsed");

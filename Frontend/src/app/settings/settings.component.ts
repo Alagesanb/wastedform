@@ -267,7 +267,6 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
                   
                   if(Related_datas.status == true)
                   {
-                    alert(Related_datas.message);
                     
 
                   }
@@ -341,7 +340,6 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
             if(Related_datas.status == true)
             {
-              alert(Related_datas.message);
               
 
             }
@@ -551,7 +549,6 @@ function Binding_OwnerDuration(){
         
       }
       else if(data.status == false){
-          alert(data.message)
       }
         }, err => {
           console.log(err);
@@ -577,7 +574,6 @@ function Binding_OwnerDuration(){
         
       }
       else if(data.Status == false){
-          alert(data.message)
       }
         }, err => {
           console.log(err);
@@ -691,7 +687,6 @@ if(data.status == true){
   this.getAllBoatTYpes()  
 }
 else if(data.status == false){
-alert(data.message)
 }
       }, err => {
         console.log(err);
@@ -720,7 +715,6 @@ if(data.status == true){
   this.getAllBoatTYpes()  
 }
 else if(data.status == false){
-alert(data.message)
 }
     }, err => {
       console.log(err);
@@ -809,7 +803,6 @@ addShare(){
 
   }
   else if(data.status == false){
-  alert(data.message)
   }
         }, err => {
           console.log(err);
@@ -839,7 +832,6 @@ addShare(){
 
     }
     else if(data.status == false){
-    alert(data.message)
     }
           }, err => {
             console.log(err);
@@ -880,7 +872,6 @@ addShare(){
 
     }
     else if(data.status == false){
-    alert(data.message)
     }
           }, err => {
             console.log(err);
@@ -926,7 +917,6 @@ addShare(){
   
     }
     else if(data.status == false){
-    alert(data.message)
     }
           }, err => {
             console.log(err);
@@ -956,7 +946,6 @@ addShare(){
   
     }
     else if(data.status == false){
-    alert(data.message)
     }
           }, err => {
             console.log(err);
