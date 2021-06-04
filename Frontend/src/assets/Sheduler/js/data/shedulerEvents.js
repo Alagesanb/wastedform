@@ -2,7 +2,19 @@
 
 var public_URL = "http://65.2.28.16/api/Schedule/";
 
+var public_Day_URL = "http://65.2.28.16/api/Days/";
 
+var public_shedulDataId = 0;
+
+function getFormattedDate_WithOut_Zero_Time(dateVal) {
+    var newDate = new Date(dateVal);
+
+    var sMonth = padValue(newDate.getMonth() + 1);
+    var sDay = padValue(newDate.getDate());
+    var sYear = newDate.getFullYear();  
+    
+    return sDay + "-" + sMonth + "-" + sYear;
+}
 
 function generateNames() {
     var names = [];
@@ -15,7 +27,6 @@ function generateNames() {
 
     return names;
 }
-
 
  function getFormattedDate(dateVal) {
     var newDate = new Date(dateVal);
@@ -45,8 +56,6 @@ function generateNames() {
 function padValue(value) {
     return (value < 10) ? "0" + value : value;
 }
-
-
 
 function generateRandomSchedule(val){
     
@@ -459,7 +468,6 @@ function generateRandomSchedule(val){
 
 }
 
-
 function generateSchedule_old() {   
     
     ScheduleList = [];
@@ -477,8 +485,6 @@ var renderEnd = new Date("Sat May 10 2021 00:00:00 GMT+0530 (India Standard Time
 
 
     generateRandomSchedule(calendar, renderStart, renderEnd);  
-    
-    console.log(ScheduleList);
     
 
 }
@@ -550,7 +556,7 @@ function generateRandomSchedule_old(calendar, renderStart, renderEnd) {
 }
 
 function ConvertUTCTimeToLocalTime(UTCDateString)
-    {
+{
         var convertdLocalTime = new Date(UTCDateString);
 
         var hourOffset = convertdLocalTime.getTimezoneOffset() / 60;
@@ -558,13 +564,11 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         convertdLocalTime.setHours( convertdLocalTime.getHours() + hourOffset ); 
 
         return convertdLocalTime;
-    }
+}
 
     
     //data-schedule-id
-    var public_shedulDataId = 0;
-
-    
+       
     $(document).on("click",".tui-full-calendar-weekday-schedule",function() {
         
        var currentId = $(this).attr('data-schedule-id');
@@ -635,12 +639,258 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     });
 
-    //tui-full-calendar-popup-delete
+    function getAllDates(startDate, stopDate) {          
+        var dateArray =[];
+        var currentDate = startDate;
+        while (currentDate <= stopDate) {
+            dateArray.push(currentDate);
+            var ddd = new Date(currentDate);
+            var currentDate = new Date(ddd.setDate(ddd.getDate() + 1)); 
+        }
+        return dateArray;
+    }
+
+  function GetAllUnAvailableDays_settings(obj){
+      
+        var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));         
+            //
+        if (typeof datas !== "undefined" && datas != null) 
+        {
+
+            if(datas.status == true)
+            {
+            var startDate = new Date(obj.start);
+            var stopDate = new Date(obj.end);
+            var temp_res = datas.response[0];            
+            var temp_unAvilable = []; 
+            
+            if (typeof temp_res !== "undefined" && temp_res != null) 
+            {
+                $.each(temp_res.UnAvailableDates, function(index, val) {                
+                    var str_tmp = new Date(val);
+                    temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+                }); 
+                
+                
+    
+                var allDate =  getAllDates(startDate, stopDate);
+                var FirstChek = 0;
+                var Confirm_StartDate = null;
+                var ConFirm_EndDate = null;            
+                $.each(allDate, function(index, val) {               
+                    if(FirstChek == 0)
+                    {
+                        var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                           
+                        if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {  
+                             //console.log("is in array");                        
+                            alert("This date ( "+tmp_values+" ) is unavilable");
+                            return false;
+                        } else {
+                            //console.log("is NOT in array");
+                            Confirm_StartDate = val; 
+                        }                   
+                        
+                        FirstChek = 1;
+                    }
+                    else{
+    
+                        var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                            
+                        if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {
+                            //console.log("is in array");
+                            alert("This date ( "+tmp_values+" ) is unavilable");
+                            return false;
+                        } else {
+                            //console.log("is NOT in array");
+                            ConFirm_EndDate = val; 
+                        }                      
+    
+                    }               
+    
+                });
+    
+    
+                    if(Confirm_StartDate != null && ConFirm_EndDate != null)
+                    {
+                       
+                        obj.start = Confirm_StartDate;
+                        obj.end = ConFirm_EndDate;
+                        //AddSchedule_ApiCalling(obj); 
+                       // GetUnAvailabeDaysOfBoats_Owner(obj);                   
+                       var datas_2 = JSON.parse(sessionStorage.getItem("GetUnAvailabeDaysOfBoats_Owners"));         
+                       var data_2_boat = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));                        
+                            if ((typeof datas_2 !== "undefined" && datas_2 != null) && 
+                                (typeof data_2_boat !== "undefined" && data_2_boat != null) ) 
+                                {
+                                
+                                 var temp_unAvilable_Boats = [];                             
+                                 var tmp_Unavilable = datas_2.find(x => x.Boat_Id == data_2_boat._id);
+    
+                                 if(typeof tmp_Unavilable !== "undefined" && tmp_Unavilable != null){
+    
+                                    $.each(tmp_Unavilable.UnAvailableDates, function(index, val2) {                              
+                                        var str_tmp = new Date(val2);
+                                        temp_unAvilable_Boats.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+                                     });                              
+                                     //var aaa = temp_unAvilable_Boats;
+        
+                                     var allDate =  getAllDates(obj.start, obj.end);
+                                    var FirstChek = 0;
+                                    var Confirm_StartDate = null;
+                                    var ConFirm_EndDate = null;            
+                                    $.each(allDate, function(index, val) {               
+                                        if(FirstChek == 0)
+                                        {
+                                            var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                            
+                                            if(jQuery.inArray(tmp_values, temp_unAvilable_Boats) !== -1) {  
+                                                //console.log("is in array");                        
+                                                alert("This date ( "+tmp_values+" ) is unavilable");
+                                                return false;
+                                            } else {
+                                                //console.log("is NOT in array");
+                                                Confirm_StartDate = val; 
+                                            }                   
+                                            
+                                            FirstChek = 1;
+                                        }
+                                        else{
+        
+                                            var tmp_values = getFormattedDate_WithOut_Zero_Time(val);
+                                                                                
+                                            if(jQuery.inArray(tmp_values, temp_unAvilable_Boats) !== -1) {
+                                                //console.log("is in array");
+                                                alert("This date ( "+tmp_values+" ) is unavilable");
+                                                return false;
+                                            } else {
+                                                //console.log("is NOT in array");
+                                                ConFirm_EndDate = val; 
+                                            }                      
+        
+                                        }               
+        
+                                    });
+                                   
+                                    obj.start = Confirm_StartDate;
+                                    obj.end = ConFirm_EndDate;
+        
+                                    AddSchedule_ApiCalling(obj);
+    
+                                 }
+                                 else{
+    
+                                    AddSchedule_ApiCalling(obj);
+    
+                                 }
+                                 
+                                
+    
+                               
+    
+                            }
+                            else{
+    
+                                AddSchedule_ApiCalling(obj); 
+    
+                            }
+    
+                        
+                    } 
+                    else{
+                        //alert("Error..");
+                        AddSchedule_ApiCalling(obj); 
+                    }          
+            }
+            else{
+
+                AddSchedule_ApiCalling(obj); 
+
+            }
+           
+
+            }
+            else{
+
+                AddSchedule_ApiCalling(obj); 
+
+            }
+            
+           
+        }
+        else{
+            alert("You cannot book on these days since the date of booking selection is before pre-launch date.")
+        }           
+     
+     }
+
+
+     function GetUnAvailabeDaysOfBoats_Owner(obj){
+
+        var datas = JSON.parse(sessionStorage.getItem("GetUnAvailabeDaysOfBoats_Owners"));         
+            //
+        if (typeof datas !== "undefined" && datas != null) 
+        {
+            // var temp_unAvilable = [];  
+            // $.each(temp_res.UnAvailableDates, function(index, val) {                
+            //     var str_tmp = new Date(val);
+            //     temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+            // }); 
+            
+            // var aaa = temp_unAvilable;
+
+
+            //AddSchedule_ApiCalling(obj);
+
+        }
+        else{
+
+            AddSchedule_ApiCalling(obj); 
+
+        }
+
+     }
+
+
+    function AddSchedule_ApiCalling(obj){ 
+        
+     
+
+        $.ajax({
+            url: public_URL+"AddSchedule",
+            type: 'POST',
+            dataType: 'json', 
+            data: obj,
+            success: function(datas) {               
+               
+                if(datas.status == true)
+                {
+                    alert(datas.message);
+                    location.reload();    
+                }
+                else if(datas.status == false)
+                {                    
+                    alert(datas.message);
+                    //location.reload();    
+                }
+            
+    
+            },
+            error: function (error) { 
+                
+                alert(error);
+                console.log(error);
+                           
+            }
+        });
+
+    }
+
 
     function calculate_NextBookingDays(datas,tmb_Obj)
     {
-
-        debugger;
+       
+      
         var temp_data = JSON.parse(datas);
          /*
             tmb_Obj.Start_Date;
@@ -687,6 +937,13 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                 return 3;
 
                // alert("current day after the launch date");
+            }
+            else
+            {
+                alert("You are trying to book this boat before its pre-launch date. This boat is not open for booking now. Please try after its pre-launch date.");
+                //location.reload();
+               
+
             }
 
 
@@ -923,7 +1180,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                 var end_str = enddate_date.toString();    
                 var AdminId_get = sessionStorage.getItem("UserId");
 
-
+                  
                 //this to start
                 var Next_Booking_Days_check = sessionStorage.getItem("SettNextBookingDays_boat");
                 var nextBookingDay = 0;
@@ -948,7 +1205,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     const Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
                     const Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
 
-                     // ...................  
+                     // ................... 
+                                          
                     var obj = Object();                 
 
                     obj.Check_Status = nextBookingDay;
@@ -989,38 +1247,10 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     obj.raw ="";
                     obj.state ="";
                     obj.Status = "Enable";
-                    obj.IsActive = true;                   
-                
-                    $.ajax({
-                        url: public_URL+"AddSchedule",
-                        type: 'POST',
-                        dataType: 'json', 
-                        data: obj,
-                        success: function(datas) {
-                           
-                            if(datas.status == true)
-                            {
-
-                                alert(datas.message);
-                                location.reload();
-                
-                            }
-                            else if(datas.status == false)
-                            {
-                                
-                                alert(datas.message);
-                                //location.reload();
-                
-                            }
-                        
-                
-                        },
-                        error: function (error) {          
-                                       
-                        }
-                    });
-
-            
+                    obj.IsActive = true;
+                    
+                     GetAllUnAvailableDays_settings(obj);                                  
+                              
             
                 }
                 else if(checkController == "Update"){
