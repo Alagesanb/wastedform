@@ -457,7 +457,7 @@ function Binding_OwnerDuration(){
       var sriptTemp = '<script>$(document).ready(function(){$("#example1").DataTable({"ordering": false,responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
       var bindingTabledataFirst = '<table id="example1" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">\
-      <thead><tr><th>BOAT NAME</th><th>NO:OF SHARES</th><th>NO:OF SUMMER WEEKDAYS</th><th>NO:OF SUMMER WEEKENDS</th><th>NO:OF WINTER WEEKDAYS</th><th>NO:OF WINTER WEEKENDS</th></tr></thead>\
+      <thead><tr><th>BOAT <br> NAME</th><th>NO:OF <br> SHARES</th><th>NO:OF <br> SUMMER <br> WEEKDAYS</th><th>NO:OF <br>SUMMER <br>WEEKENDS</th><th>NO:OF <br>WINTER <br>WEEKDAYS</th><th>NO:OF <br>WINTER <br>WEEKENDS</th></tr></thead>\
       <tbody>'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
       $("#id-table-databinding").html("");
