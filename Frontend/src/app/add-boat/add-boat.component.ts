@@ -530,21 +530,23 @@ onFileChange_old_15_April_2021(event, imageFor){
 
 
   addBoat(){ 
+    
     this.boatform.get('Block').setValue(true);
     this.boatform.get('IsActive').setValue(true);       
-    console.log(this.boatform.value)
  console.log(this.handBook)
     
     this.boatSubmitted = true;
     // this.boatform.get('Boattype_Name').setValue(this.boatTypeName);
-    this.boatform.get('Location_Name').setValue(this.loctionName);
+    // this.boatform.get('Location_Name').setValue(this.loctionName);
     // this.boatform.get('Launch_Date').setValue(this.launchDate);
     // this.boatform.get('PreLaunch_Date').setValue(this.previousDate);
-        // if (this.boatform.invalid) 
-        // {
+    console.log(this.boatform.value)
+
+        if (this.boatform.invalid) 
+        {
         
-        //   return;
-        // }
+          return;
+        }
     
     console.log("kkkk")
 
@@ -620,11 +622,11 @@ onFileChange_old_15_April_2021(event, imageFor){
                     console.log(this.boatform.value);
 
                       
-                    this.SpinnerService.show();
+                    // this.SpinnerService.show();
                       this.http.post<any>(`${this.url}/AddNewBoat`,  this.boatform.value   ).subscribe(data => {
                         if(data.status == true){
                           $('#myModal').modal({backdrop: 'static', keyboard: false});
-                          this.SpinnerService.hide();  
+                          // this.SpinnerService.hide();  
                         } 
                         
                           if(data.status==false){
@@ -777,28 +779,28 @@ onFileChange_old_15_April_2021(event, imageFor){
   }
   createBoatForm() {
     this.boatform = this.fb.group({
-      Boattype_id: new FormControl('', [Validators.required,]),
-      Boattype_Name: new FormControl('', [Validators.required,]),
-      Location_Name: new FormControl('', [Validators.required,]),
-      Boat_Name: new FormControl('', [Validators.required,]),
-      Boat_Description: new FormControl('', []),
-      Owners_Allowed: new FormControl('', [Validators.required,]),
-      Location_Id: new FormControl('', [Validators.required,]), 
-      Boat_Facility: new FormControl('', [Validators.required,]),
-      Launch_Date: new FormControl('', [Validators.required,]),
-      PreLaunch_Date: new FormControl('', [Validators.required,]),
-      Boat_Status: new FormControl('', [Validators.required,]),
-      SummerSeason_SDate: new FormControl('', [Validators.required,]),
-      SummerSeason_EDate: new FormControl('', [Validators.required,]),
-      WinterSeason_SDate: new FormControl('', [Validators.required,]),
-      WinterSeason_EDate: new FormControl('', [Validators.required,]),
+      Boattype_id: new FormControl('', [Validators.required,]),//
+      Boattype_Name: new FormControl('', [Validators.required,]),//
+      Location_Name: new FormControl('', [Validators.required,]),//
+      Boat_Name: new FormControl('', [Validators.required,]),//
+      Boat_Description: new FormControl('', []),//
+      Owners_Allowed: new FormControl('', [Validators.required,]),//
+      Location_Id: new FormControl('', [Validators.required,]), //
+      Boat_Facility: new FormControl('', [Validators.required,]),//
+      Launch_Date: new FormControl('', [Validators.required,]),//
+      PreLaunch_Date: new FormControl('', [Validators.required,]),//
+      Boat_Status: new FormControl('', [Validators.required,]),//
+      SummerSeason_SDate: new FormControl('', [Validators.required,]),//
+      SummerSeason_EDate: new FormControl('', [Validators.required,]),//
+      WinterSeason_SDate: new FormControl('', [Validators.required,]),//
+      WinterSeason_EDate: new FormControl('', [Validators.required,]),//
 
       Boat_Image: new FormControl('', []),
       Boat_HandBook: new FormControl('', []),
       Block: new FormControl('', []),
       IsActive: new FormControl('', []),
 
-      Boat_originalhandBook: new FormControl('', []),
+      Boat_originalhandBook: new FormControl('', [])
 
     });
   }
