@@ -1,3 +1,5 @@
+// Create Component for owner report //Done By Alagesan on 25.05.2021	
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -23,3 +25,4 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   }
 
 }
+// Create Component for owner report //Done By Alagesan on 25.05.2021	

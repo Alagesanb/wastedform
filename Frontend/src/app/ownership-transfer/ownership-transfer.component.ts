@@ -1,3 +1,5 @@
+  // CreateComponent for ownership transfer//Done By Alagesan on 20.05.2021
+
 import { Component, OnInit } from '@angular/core';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { HttpClient } from '@angular/common/http';
@@ -30,6 +32,9 @@ export class OwnershipTransferComponent implements OnInit {
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router, private scroll: ViewportScroller) { 
   }
+
+  // CreateComponent for ownership transfer//Done By Alagesan on 20.05.2021
+
   ngOnInit(): void {
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){

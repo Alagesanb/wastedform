@@ -11,6 +11,7 @@ declare var jQuery: any;
   templateUrl: './book-for-owner.component.html',
   styleUrls: ['./book-for-owner.component.css']
 })
+// Create Component for book for owner //Done By Alagesan on 21.05.2021	
 export class BookForOwnerComponent implements OnInit {
 
   moment:any;
@@ -32,6 +33,8 @@ export class BookForOwnerComponent implements OnInit {
    public_selectBoatId :any;
 
   constructor(private fb: FormBuilder,private http: HttpClient) { }
+
+// Create Component for book for owner //Done By Alagesan on 21.05.2021	
 
   ngOnInit(): void {
 

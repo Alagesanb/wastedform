@@ -11,6 +11,8 @@ declare var jQuery: any;
   templateUrl: './owner-duration.component.html',
   styleUrls: ['./owner-duration.component.css']
 })
+// Create Component for owner duration //Done By Alagesan on 24.05.2021
+
 export class OwnerDurationComponent implements OnInit {
   url = "http://65.2.28.16/api/Boat"
   OwnerUrl = "http://65.2.28.16/api/Owner"
@@ -417,3 +419,5 @@ console.log(this.getToDate)
 
 
 }
+
+// Create Component for owner duration //Done By Alagesan on 24.05.2021

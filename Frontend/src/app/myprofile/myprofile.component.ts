@@ -9,6 +9,7 @@ declare var jQuery: any;
   templateUrl: './myprofile.component.html',
   styleUrls: ['./myprofile.component.css']
 })
+// Create Component for myprofile //Done By Alagesan on 17.05.2021
 export class MyprofileComponent implements OnInit {
   data: any=[];
   url = "http://65.2.28.16/api/Owner"
@@ -18,6 +19,7 @@ export class MyprofileComponent implements OnInit {
   ownerlogin: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
   }
+  // Create Component for myprofile //Done By Alagesan on 17.05.2021
   ngOnInit(): void {
     this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
     if(this.ownerlogin==false){

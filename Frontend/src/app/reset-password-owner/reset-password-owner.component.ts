@@ -1,3 +1,5 @@
+// Create Component for reset password owner //Done By Alagesan 
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -76,3 +78,5 @@ this.confirmPwd()
   }
 
 }
+
+// Create Component for reset password owner //Done By Alagesan 

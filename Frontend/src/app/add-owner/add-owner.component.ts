@@ -105,11 +105,13 @@ export class AddOwnerComponent implements OnInit {
     this.form.get('IsActive').setValue(true);
     this.form.get('Profile_Image').setValue(this.singleFileDetails);
     this.http.post<any>(`${this.url}/AddOwner`,  this.form.value   ).subscribe(data => {
-
+      
+      // Modal popup for add Owner//Done By Alagesan
       if(data.status == true){
         $('#myModal').modal({backdrop: 'static', keyboard: false});
       }
 
+      // profile pic for add Owner//Done By Alagesan
       if(data.status==true){
         $('.profile-pic').attr('src', '/assets/images/dummy-owner-img.jpg');
       }
@@ -121,6 +123,7 @@ export class AddOwnerComponent implements OnInit {
           this.submitted = false;
           $('#error-disp-btns').trigger('click');
           this.form.reset()
+          // clear Validators for add Owner//Done By Alagesan
           this.form.get('First_Name').clearValidators();
           this.form.get('First_Name').updateValueAndValidity(); 
           this.form.get('Last_Name').clearValidators();

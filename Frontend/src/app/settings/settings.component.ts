@@ -366,7 +366,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
        $(document).ready(function() {
 
-        
+        // Update unavailable dates for settings //Done By Alagesan 
+
         var max_default_fields      = 10000; //maximum input boxes allowed
         var default_wrapper   		= $(".add-date-default"); //Fields wrapper
         var add_default_button      = $(".add_field_default_button"); //Add button ID
@@ -429,7 +430,7 @@ function Binding_OwnerDuration(){
       var firstChek = 0;
       var bindingTableData;
       $.each(data.response, function(index, val) { 
-
+      // Update data table heading for settings //Done By Alagesan on 05.06.2021	
        var _id = val._id;
        var No_of_Shares = val.No_of_Shares;
        var Boat_Name = val.Boat_Name;

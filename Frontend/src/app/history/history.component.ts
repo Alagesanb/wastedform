@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css']
 })
+// Create Component for history //Done By Alagesan on 17.05.2021
 export class HistoryComponent implements OnInit {
   ownerlogin: any;
 
@@ -22,3 +23,5 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   }
 
 }
+
+// Create Component for history //Done By Alagesan on 17.05.2021

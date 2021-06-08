@@ -9,6 +9,8 @@ declare var jQuery: any;
   templateUrl: './cancellation.component.html',
   styleUrls: ['./cancellation.component.css']
 })
+// Create Component for cancellation//Done By Alagesan on 20.05.2021	
+
 export class CancellationComponent implements OnInit {
 
   cancellationUrl = "http://65.2.28.16/api/Schedule"  
@@ -18,6 +20,8 @@ export class CancellationComponent implements OnInit {
   adminlogin: any;
 
   constructor(private http: HttpClient, private router: Router,) { }
+  
+// Create Component for cancellation//Done By Alagesan on 20.05.2021	
 
   ngOnInit(): void {
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));

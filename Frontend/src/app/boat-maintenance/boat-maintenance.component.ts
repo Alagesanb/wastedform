@@ -12,6 +12,7 @@ declare var jQuery: any;
   templateUrl: './boat-maintenance.component.html',
   styleUrls: ['./boat-maintenance.component.css']
 })
+// CreateComponent for boat maintenance //Done By Alagesan on 20.05.2021
 export class BoatMaintenanceComponent implements OnInit {
 
   moment:any;
@@ -28,6 +29,7 @@ export class BoatMaintenanceComponent implements OnInit {
 
   constructor(private fb: FormBuilder,private http: HttpClient, private router: Router,) { }
 
+// CreateComponent for boat maintenance //Done By Alagesan on 20.05.2021
   ngOnInit(): void {
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){

@@ -10,6 +10,8 @@ declare var jQuery: any;
   templateUrl: './archive-boat.component.html',
   styleUrls: ['./archive-boat.component.css']
 })
+// CreateComponent for archive boat//Done By Alagesan on 20.05.2021
+
 export class ArchiveBoatComponent implements OnInit {
   url = "http://65.2.28.16/api/Boat"
   allBoats: any=[];
@@ -23,6 +25,7 @@ export class ArchiveBoatComponent implements OnInit {
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,private SpinnerService: NgxSpinnerService) { 
    
   }
+  // CreateComponent for archive boat//Done By Alagesan on 20.05.2021
   ngOnInit(): void {
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){

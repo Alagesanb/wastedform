@@ -10,6 +10,7 @@ declare var jQuery: any;
   templateUrl: './boat-bookings.component.html',
   styleUrls: ['./boat-bookings.component.css']
 })
+// Create Component for boat bookings//Done By Alagesan on 20.05.2021
 export class BoatBookingsComponent implements OnInit {
 
   BookingUrl = "http://65.2.28.16/api/Schedule";
@@ -34,6 +35,7 @@ export class BoatBookingsComponent implements OnInit {
 
   constructor(private http: HttpClient, private fb: FormBuilder, private router: Router,) { }
 
+// Create Component for boat bookings//Done By Alagesan on 20.05.2021
   ngOnInit(): void {
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){

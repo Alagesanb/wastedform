@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './owner-sidemenu.component.html',
   styleUrls: ['./owner-sidemenu.component.css']
 })
+// Create Component for owner sidemenu //Done By Alagesan
+
 export class OwnerSidemenuComponent implements OnInit {
 
   constructor() { }
@@ -13,3 +15,6 @@ export class OwnerSidemenuComponent implements OnInit {
   }
 
 }
+
+// Create Component for owner sidemenu //Done By Alagesan
+

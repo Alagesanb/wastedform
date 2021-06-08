@@ -9,6 +9,7 @@ declare var jQuery: any;
   templateUrl: './forgot-password-owner.component.html',
   styleUrls: ['./forgot-password-owner.component.css']
 })
+// Create Component for forgot password owner //Done By Alagesan
 export class ForgotPasswordOwnerComponent implements OnInit {
 
   form: FormGroup;
@@ -18,7 +19,7 @@ export class ForgotPasswordOwnerComponent implements OnInit {
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) {
     this.createForm();
    }
-
+// Create Component for forgot password owner //Done By Alagesan
   ngOnInit(): void {
   }
   createForm() {

@@ -6,10 +6,14 @@ import { Router } from '@angular/router';
   templateUrl: './owner-dashboard.component.html',
   styleUrls: ['./owner-dashboard.component.css']
 })
+// Create Component for owner dashboard //Done By Alagesan on 17.05.2021
+
 export class OwnerDashboardComponent implements OnInit {
   ownerlogin: boolean;
 
   constructor(private router: Router,) { }
+
+// Create Component for owner dashboard //Done By Alagesan on 17.05.2021
 
   ngOnInit(): void {
     this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
@@ -19,3 +23,5 @@ export class OwnerDashboardComponent implements OnInit {
   }
 
 }
+
+// Create Component for owner dashboard //Done By Alagesan on 17.05.2021
