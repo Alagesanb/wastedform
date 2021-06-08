@@ -395,6 +395,25 @@ $(document).on("click",".multiselect-dropdown",function() {
     }
         
   }
+  else if(pageIdentiFiction == "owner-dashboard-Reservation"){
+
+    sorted_ShedulList = ScheduleList;    
+    var datas = JSON.parse(sessionStorage.getItem("Owner_pg_boatListed"));        
+    if (typeof datas !== "undefined" && datas != null)
+    {
+      cal.clear();     
+      sorted_ShedulList = sorted_ShedulList.filter(x => x.Boat_Id == datas._id);
+      cal.createSchedules(sorted_ShedulList);     
+    
+    }
+    else
+    {
+      cal.clear();    
+      cal.createSchedules(ScheduleList);
+  
+    }
+
+  }
 
   
    

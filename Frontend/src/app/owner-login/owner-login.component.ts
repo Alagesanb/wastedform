@@ -24,6 +24,7 @@ export class OwnerLoginComponent implements OnInit {
   
   ngOnInit(): void {
     this.rememberMe = false;
+    sessionStorage.setItem("owner-dashboard-relodePg","1");
   }
   get f() { return this.form.controls; }
 

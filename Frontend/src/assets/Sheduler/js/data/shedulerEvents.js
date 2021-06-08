@@ -609,6 +609,205 @@ function generateRandomSchedule(val){
        
 
     }
+    else if(pageIdentiFication == "owner-dashboard-Reservation"){
+
+        var owner_drp_Id = JSON.parse(sessionStorage.getItem("Ownerlogin"));
+        var owner_boats_OwnerLog = JSON.parse(sessionStorage.getItem("Owner_pg_boatListed"));
+
+        if((typeof owner_drp_Id !== "undefined" && owner_drp_Id != null) && 
+           (typeof owner_boats_OwnerLog !== "undefined" && owner_boats_OwnerLog != null))
+        {
+            var conditionChek = owner_boats_OwnerLog.find(x => x._id == val.Boat_Id);
+            if(typeof conditionChek !== "undefined" && conditionChek != null)
+            {
+                var schedule = new ScheduleInfo();
+                if(val.User_RoleType == "Owner")
+                {
+                    if(owner_drp_Id._id == val.User_Id)
+                    {
+                        schedule.id = val._id;//chance.guid();
+                        //schedule.calendarId = calendar.id;
+                        schedule.title = val.title +" "+ getFormattedDate(val.start)+ " to " + getFormattedDate(val.end);
+                        schedule.body = "";//val.body; 
+                        schedule.isReadOnly = val.isReadOnly;
+                    
+                        schedule.isAllday = val.isAllday;
+                        schedule.category = val.category;
+                    
+                        schedule.start = val.start;
+                        schedule.end = val.end;    
+                    
+                        schedule.isAllday  = val.isAllday;
+                        schedule.isFocused = val.isFocused;
+                        schedule.isPending = val.isPending;
+                        schedule.isVisible = val.isVisible;
+                    
+                        schedule.dueDateClass = val.dueDateClass;  
+                        
+                        schedule.isPrivate = val.isPrivate;
+                        
+                        schedule.location = val.location;
+                        //var attendees_arry = generateNames();
+                    
+                        schedule.attendees = val.attendees; 
+                        schedule.recurrenceRule = val.recurrenceRule;
+                        schedule.state = val.state;
+                        schedule.color = "#ffffff";
+                        schedule.bgColor = "#047b0f";
+                        schedule.dragBgColor = "#047b0f";
+                        schedule.borderColor = "#047b0f";
+    
+                        schedule.Boat_Id = val.Boat_Id;
+                        schedule.Boat_Name = val.Boat_Name;
+    
+                        schedule.Owner_Id = val.User_Id;           
+    
+                        ScheduleList.push(schedule);
+
+                    }
+                    else
+                    {
+                        schedule.id = val._id;//chance.guid();
+                        //schedule.calendarId = calendar.id;
+                        schedule.title = "";
+                        schedule.body = "";//val.body; 
+                        schedule.isReadOnly = val.isReadOnly;
+                    
+                        schedule.isAllday = val.isAllday;
+                        schedule.category = val.category;
+                    
+                        schedule.start = val.start;
+                        schedule.end = val.end;    
+                    
+                        schedule.isAllday  = val.isAllday;
+                        schedule.isFocused = val.isFocused;
+                        schedule.isPending = val.isPending;
+                        schedule.isVisible = val.isVisible;
+                    
+                        schedule.dueDateClass = val.dueDateClass;  
+                        
+                        schedule.isPrivate = val.isPrivate;
+                        
+                        schedule.location = val.location;
+                        //var attendees_arry = generateNames();
+                    
+                        schedule.attendees = val.attendees; 
+                        schedule.recurrenceRule = val.recurrenceRule;
+                        schedule.state = val.state;
+                        schedule.color = "#ffffff";
+                        schedule.bgColor = "#D50000";
+                        schedule.dragBgColor = "#D50000";
+                        schedule.borderColor = "#D50000";
+    
+                        schedule.Boat_Id = val.Boat_Id;
+                        schedule.Boat_Name = val.Boat_Name;
+    
+                        schedule.Owner_Id = val.User_Id;           
+    
+                        ScheduleList.push(schedule);
+
+                    }
+
+                   
+
+                }
+                else if(val.User_RoleType == "Admin")
+                {
+                
+                    schedule.id = val._id;//chance.guid();
+                    //schedule.calendarId = calendar.id;
+                    schedule.title = "";
+                    schedule.body = "";//val.body; 
+                    schedule.isReadOnly = val.isReadOnly;
+                
+                    schedule.isAllday = val.isAllday;
+                    schedule.category = val.category;
+                
+                    schedule.start = val.start;
+                    schedule.end = val.end;    
+                
+                    schedule.isAllday  = val.isAllday;
+                    schedule.isFocused = val.isFocused;
+                    schedule.isPending = val.isPending;
+                    schedule.isVisible = val.isVisible;
+                
+                    schedule.dueDateClass = val.dueDateClass;  
+                    
+                    schedule.isPrivate = val.isPrivate;
+                    
+                    schedule.location = val.location;
+                    //var attendees_arry = generateNames();
+                
+                    schedule.attendees = val.attendees; 
+                    schedule.recurrenceRule = val.recurrenceRule;
+                    schedule.state = val.state;
+                    schedule.color = "#ffffff";
+                    schedule.bgColor = "#D50000";
+                    schedule.dragBgColor = "#D50000";
+                    schedule.borderColor = "#D50000";
+
+                    schedule.Boat_Id = val.Boat_Id;
+                    schedule.Boat_Name = val.Boat_Name;
+
+                    schedule.Owner_Id = val.User_Id;  
+
+                    ScheduleList.push(schedule);
+
+                }
+                else if(val.User_RoleType == "Maintenance")
+                {
+
+                    schedule.id = val._id;//chance.guid();
+                    //schedule.calendarId = calendar.id;
+                    schedule.title = "";
+                    schedule.body = "";//val.body; 
+                    schedule.isReadOnly = val.isReadOnly;
+                
+                    schedule.isAllday = val.isAllday;
+                    schedule.category = val.category;
+                
+                    schedule.start = val.start;
+                    schedule.end = val.end;    
+                
+                    schedule.isAllday  = val.isAllday;
+                    schedule.isFocused = val.isFocused;
+                    schedule.isPending = val.isPending;
+                    schedule.isVisible = val.isVisible;
+                
+                    schedule.dueDateClass = val.dueDateClass;  
+                    
+                    schedule.isPrivate = val.isPrivate;
+                    
+                    schedule.location = val.location;
+                    //var attendees_arry = generateNames();
+                
+                    schedule.attendees = val.attendees; 
+                    schedule.recurrenceRule = val.recurrenceRule;
+                    schedule.state = val.state;
+                    schedule.color = "#ffffff";
+                    schedule.bgColor = "#D50000";
+                    schedule.dragBgColor = "#D50000";
+                    schedule.borderColor = "#D50000";
+
+                    schedule.Boat_Id = val.Boat_Id;
+                    schedule.Boat_Name = val.Boat_Name;
+
+                    schedule.Owner_Id = val.User_Id;  
+
+                    ScheduleList.push(schedule);
+                }
+            }
+
+        }
+        else{
+            alert("Owner details empty or Boat Empty");
+        }
+
+        
+
+    }
+
+
 
 
    
