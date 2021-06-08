@@ -462,6 +462,153 @@ function generateRandomSchedule(val){
         }
 
     }
+    else if(pageIdentiFication == "view-boat"){
+
+        var boatdats = JSON.parse(sessionStorage.getItem("boatData"));
+        if (typeof boatdats !== "undefined" && boatdats != null) {
+
+            if(val.Boat_Id == boatdats._id){
+
+                var schedule = new ScheduleInfo();
+                if(val.User_RoleType == "Owner")
+                {
+        
+                    schedule.id = val._id;//chance.guid();
+                    //schedule.calendarId = calendar.id;
+                    schedule.title = val.title +" "+ getFormattedDate(val.start)+ " to " + getFormattedDate(val.end);
+                    schedule.body = "";//val.body; 
+                    schedule.isReadOnly = val.isReadOnly;
+                
+                    schedule.isAllday = val.isAllday;
+                    schedule.category = val.category;
+                
+                    schedule.start = val.start;
+                    schedule.end = val.end;    
+                
+                    schedule.isAllday  = val.isAllday;
+                    schedule.isFocused = val.isFocused;
+                    schedule.isPending = val.isPending;
+                    schedule.isVisible = val.isVisible;
+                
+                    schedule.dueDateClass = val.dueDateClass;  
+                    
+                    schedule.isPrivate = val.isPrivate;
+                    
+                    schedule.location = val.location;
+                    //var attendees_arry = generateNames();
+                
+                    schedule.attendees = val.attendees; 
+                    schedule.recurrenceRule = val.recurrenceRule;
+                    schedule.state = val.state;
+                    schedule.color = "#ffffff";
+                    schedule.bgColor = "#047b0f";
+                    schedule.dragBgColor = "#047b0f";
+                    schedule.borderColor = "#047b0f";
+        
+                    schedule.Boat_Id = val.Boat_Id;
+                    schedule.Boat_Name = val.Boat_Name;
+        
+                    schedule.Owner_Id = val.User_Id;           
+        
+                    ScheduleList.push(schedule);
+        
+                }
+                else if(val.User_RoleType == "Admin")
+                {
+                
+                    schedule.id = val._id;//chance.guid();
+                    //schedule.calendarId = calendar.id;
+                    schedule.title = val.title +" "+ getFormattedDate(val.start)+ " to " + getFormattedDate(val.end);
+                    schedule.body = "";//val.body; 
+                    schedule.isReadOnly = val.isReadOnly;
+                
+                    schedule.isAllday = val.isAllday;
+                    schedule.category = val.category;
+                
+                    schedule.start = val.start;
+                    schedule.end = val.end;    
+                
+                    schedule.isAllday  = val.isAllday;
+                    schedule.isFocused = val.isFocused;
+                    schedule.isPending = val.isPending;
+                    schedule.isVisible = val.isVisible;
+                
+                    schedule.dueDateClass = val.dueDateClass;  
+                    
+                    schedule.isPrivate = val.isPrivate;
+                    
+                    schedule.location = val.location;
+                    //var attendees_arry = generateNames();
+                
+                    schedule.attendees = val.attendees; 
+                    schedule.recurrenceRule = val.recurrenceRule;
+                    schedule.state = val.state;
+                    schedule.color = "#ffffff";
+                    schedule.bgColor = "#D50000";
+                    schedule.dragBgColor = "#D50000";
+                    schedule.borderColor = "#D50000";
+        
+                    schedule.Boat_Id = val.Boat_Id;
+                    schedule.Boat_Name = val.Boat_Name;
+        
+                    schedule.Owner_Id = val.User_Id;  
+        
+                    ScheduleList.push(schedule);
+        
+                }
+                else if(val.User_RoleType == "Maintenance")
+                {
+        
+                    schedule.id = val._id;//chance.guid();
+                    //schedule.calendarId = calendar.id;
+                    schedule.title = val.title +" "+ getFormattedDate(val.start)+ " to " + getFormattedDate(val.end);
+                    schedule.body = "";//val.body; 
+                    schedule.isReadOnly = val.isReadOnly;
+                
+                    schedule.isAllday = val.isAllday;
+                    schedule.category = val.category;
+                
+                    schedule.start = val.start;
+                    schedule.end = val.end;    
+                
+                    schedule.isAllday  = val.isAllday;
+                    schedule.isFocused = val.isFocused;
+                    schedule.isPending = val.isPending;
+                    schedule.isVisible = val.isVisible;
+                
+                    schedule.dueDateClass = val.dueDateClass;  
+                    
+                    schedule.isPrivate = val.isPrivate;
+                    
+                    schedule.location = val.location;
+                    //var attendees_arry = generateNames();
+                
+                    schedule.attendees = val.attendees; 
+                    schedule.recurrenceRule = val.recurrenceRule;
+                    schedule.state = val.state;
+                    schedule.color = "#ffffff";
+                    schedule.bgColor = "#2c46f8";
+                    schedule.dragBgColor = "#2c46f8";
+                    schedule.borderColor = "#2c46f8";
+        
+                    schedule.Boat_Id = val.Boat_Id;
+                    schedule.Boat_Name = val.Boat_Name;
+        
+                    schedule.Owner_Id = val.User_Id;  
+        
+                    ScheduleList.push(schedule);
+                }
+
+            }
+            
+        }
+        else{
+            alert("Empty_Boat......");
+        }
+
+       
+
+    }
 
 
    

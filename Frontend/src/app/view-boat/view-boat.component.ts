@@ -35,6 +35,12 @@ export class ViewBoatComponent implements OnInit {
 	manageOwnerId: any;
 	getResponce: any;
 	adminlogin: any;
+
+	TotalDaysAssigned_Summer_WeekDays :any;
+	TotalDaysAssigned_Summer_WeekEndDays :any;
+	TotalDaysAssigned_Winter_WeekDays :any;
+	TotalDaysAssigned_Winter_WeekEndDays :any;
+
 	constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
 	
 	  }
@@ -49,6 +55,8 @@ export class ViewBoatComponent implements OnInit {
 	sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
+
+ sessionStorage.setItem("pageIdentiFiction","view-boat");
  
  ReloadPages();
  function ReloadPages(){
@@ -76,7 +84,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 }
 	
 	 this.data = JSON.parse(sessionStorage.getItem('boatData')); 
-     console.log(this.data)
+     this.GetTotalDaysAssigned();
 	 ////////////
 	 var Launch_Date = new Date(this.data.Launch_Date);
 	 this.Launch_Dates = (Launch_Date.getDate()-1)+'-' + (Launch_Date.getMonth()+1) + '-'+Launch_Date.getFullYear();
@@ -289,6 +297,27 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   }
 
 
+  GetTotalDaysAssigned(){
+
+	var boatdats = JSON.parse(sessionStorage.getItem("boatData"));
+
+	var obj={
+		Boat_id :boatdats._id
+	}	
+	this.http.post<any>(`${this.OwnerUrl}/GetTotalDaysAssigned`, obj   ).subscribe(data => {
+		debugger;
+		var resu = data.Response;
+
+		this.TotalDaysAssigned_Summer_WeekDays = resu[0].Summer_WeekDays;
+	    this.TotalDaysAssigned_Summer_WeekEndDays = resu[1].Summer_WeekEndDays;
+	    this.TotalDaysAssigned_Winter_WeekDays = resu[2].Winter_WeekDays;
+	    this.TotalDaysAssigned_Winter_WeekEndDays = resu[3].Winter_WeekEndDays;
+		
+		  
+		  }, err => {
+			console.log(err);
+		  })
+}
 
 
 getOwnersByBoatId(){
@@ -301,7 +330,7 @@ getOwnersByBoatId(){
 		
 		console.log(data.Data)
 	    this.boatOwners = data.Data
-		  console.log("test...." + this.boatOwners)
+		  
 		  }, err => {
 			console.log(err);
 		  })
