@@ -42,7 +42,7 @@ export class BookForOwnerComponent implements OnInit {
     
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
-
+ sessionStorage.setItem("view-boat-reload","1");
     ReloadPages_book_for_owner();
     //GetAllUnAvailableDays();
  

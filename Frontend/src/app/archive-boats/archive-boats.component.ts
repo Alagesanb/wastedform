@@ -13,6 +13,7 @@ export class ArchiveBoatsComponent implements OnInit {
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
+ sessionStorage.setItem("view-boat-reload","1");
   }
 
 }
