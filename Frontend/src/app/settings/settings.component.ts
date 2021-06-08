@@ -267,7 +267,15 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
                   
                   if(Related_datas.status == true)
                   {
-                    
+                    $("#myModalUpdatemsg").find(".modal-body").append("<p>"+Related_datas.message+ "</p>");
+
+                    $("#myModalUpdatemsg").find(".modal-header .close").on("click", function(){
+                      $(".modal-body").html("<p></p>");
+                    });
+
+                    $("#myModalUpdatemsg").find(".modal-footer .btn-default").on("click", function(){
+                      $(".modal-body").html("<p></p>");
+                    });
 
                   }
                   else if(Related_datas.status == false)
@@ -280,8 +288,15 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
               });
           }
           else{
+            $("#myModalUpdatemsg").find(".modal-body").append("<p>Empty Date</p>");
+            $("#myModalUpdatemsg").find(".modal-header .close").on("click", function(){
+              $(".modal-body").html("<p></p>");
+            });
 
-            alert("Empty date");
+            $("#myModalUpdatemsg").find(".modal-footer .btn-default").on("click", function(){
+              $(".modal-body").html("<p></p>");
+            });
+            //alert("Empty date");
 
           }
 
