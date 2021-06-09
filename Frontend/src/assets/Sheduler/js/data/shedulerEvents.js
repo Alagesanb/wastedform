@@ -58,7 +58,8 @@ function padValue(value) {
 }
 
 function generateRandomSchedule(val){
-    
+
+       
     var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction");
     if(pageIdentiFication == "AdminBooking"){
 
@@ -1300,6 +1301,19 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     }
 
+    function getFormattedDate_Sat_Sun_only(dateVal) {       
+        var newDate = new Date(dateVal);
+        var days = ['Sun','Mon','Tues','Wed','Thrus','Fri','Sat'];
+        var currentDay = days[newDate.getDay()];  
+        if(currentDay == 'Sun' || currentDay == 'Sat'){
+            return true;
+        }
+        else{
+            return false;
+        }  
+       
+    }
+
 
 $(document).on("click",".tui-full-calendar-popup-save",function() { 
         
@@ -1503,7 +1517,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
             }
     }
     else if(pageIdentiFication == "book-for-owner"){
-
+        
         var checkController = $('.tui-full-calendar-popup-save').children('span').first().text();
             
         var dataGet_AdminSelectBoat = sessionStorage.getItem("AdminSelectBoat");
@@ -1548,10 +1562,41 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     var Temp_Date_dateDiff= Math.round((Temp_Date_end - Temp_Date_start)/(1000*60*60*24));
                     var Temp_Date_Winter_dateDiff = Temp_Date_dateDiff+1;
                     const Temp_Date_sundays = Math.floor((Temp_Date_Winter_dateDiff + (Temp_Date_start.getDay() + 6) % 7) / 7);
-                    const Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
-                    const Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
+                    var Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
+                    var Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
 
                      // ................... 
+
+                     ///Stand By Booking... start...
+                     var currentDates = getFormattedDate_WithOut_Zero_Time( new Date());
+                     var startDateConvertDate = getFormattedDate_WithOut_Zero_Time(start_str); 
+                     if(currentDates == startDateConvertDate)
+                     {
+                         if(2 <= Temp_Date_dateDiff){
+
+                            Temp_Date_dateDiff = Temp_Date_dateDiff - 2;
+                         }                     
+
+                         if(2 <= Temp_Date_weekdays){
+
+                            Temp_Date_weekdays = Temp_Date_weekdays - 2;
+                         }
+
+                         var chek_Sun_satar = getFormattedDate_Sat_Sun_only(start_str);
+                            if(chek_Sun_satar == true){
+                                if(2 <= Temp_Date_weekenddays)
+                                {
+                                    Temp_Date_weekenddays = Temp_Date_weekenddays - 2;
+                                }
+
+                            }
+
+                     }
+                       
+                       
+
+
+                    ///
                                           
                     var obj = Object();                 
 
@@ -1883,6 +1928,226 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
              alert("select BOAT NAME");
          }
  
+
+    }
+    else if(pageIdentiFication == "owner-dashboard-Reservation"){
+
+        
+        var checkController = $('.tui-full-calendar-popup-save').children('span').first().text();
+            
+        var dataGet_AdminSelectBoat = sessionStorage.getItem("Owner_pg_boatListed");
+        var dataSelected_OwnerDropDown = sessionStorage.getItem("Ownerlogin");
+        if ((typeof dataGet_AdminSelectBoat !== "undefined" && dataGet_AdminSelectBoat != null) 
+           &&(typeof dataSelected_OwnerDropDown !== "undefined" && dataSelected_OwnerDropDown != null) )
+        {
+           
+            dataSelected_OwnerDropDown = JSON.parse(dataSelected_OwnerDropDown);
+            dataGet_AdminSelectBoat = JSON.parse(dataGet_AdminSelectBoat);
+            var setTitle = dataSelected_OwnerDropDown.First_Name  + "(" + dataGet_AdminSelectBoat.Boat_Name+")";
+            var user_id_owner = dataSelected_OwnerDropDown._id;
+                       
+
+                if(checkController == "Save"){    
+
+                var startdate_date = new Date($("#tui-full-calendar-schedule-start-date").val());
+                var enddate_date = new Date( $("#tui-full-calendar-schedule-end-date").val());
+                var start_str =startdate_date.toString();
+                var end_str = enddate_date.toString();    
+                var AdminId_get = sessionStorage.getItem("UserId");
+
+                  
+                //this to start
+                var Next_Booking_Days_check = sessionStorage.getItem("SettNextBookingDays_boat");
+                var nextBookingDay = 0;
+                if(typeof Next_Booking_Days_check !== "undefined" && Next_Booking_Days_check != null)
+                {
+                    ////sumthinggggg
+                    var tmb_Obj = Object()
+                    tmb_Obj.Start_Date = startdate_date;
+                    tmb_Obj.End_Date = enddate_date;
+
+                    nextBookingDay = calculate_NextBookingDays(Next_Booking_Days_check,tmb_Obj);
+
+                }
+                    
+                
+                    // day calculations.....
+                    const Temp_Date_start = new Date(startdate_date);                        
+                    const Temp_Date_end = new Date(enddate_date);
+                    var Temp_Date_dateDiff= Math.round((Temp_Date_end - Temp_Date_start)/(1000*60*60*24));
+                    var Temp_Date_Winter_dateDiff = Temp_Date_dateDiff+1;
+                    const Temp_Date_sundays = Math.floor((Temp_Date_Winter_dateDiff + (Temp_Date_start.getDay() + 6) % 7) / 7);
+                    var Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
+                    var Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
+
+                     // ...................                     
+                     ///Stand By Booking... start...                                      
+                     var currentDates = getFormattedDate_WithOut_Zero_Time( new Date());
+                     var startDateConvertDate = getFormattedDate_WithOut_Zero_Time(start_str); 
+                     if(currentDates == startDateConvertDate)
+                     {
+                         if(2 <= Temp_Date_dateDiff){
+
+                            Temp_Date_dateDiff = Temp_Date_dateDiff - 2;
+                         }                     
+
+                         if(2 <= Temp_Date_weekdays){
+
+                            Temp_Date_weekdays = Temp_Date_weekdays - 2;
+                         }
+
+                            var chek_Sun_satar = getFormattedDate_Sat_Sun_only(start_str);
+                            if(chek_Sun_satar == true){
+                                if(2 <= Temp_Date_weekenddays)
+                                {
+                                    Temp_Date_weekenddays = Temp_Date_weekenddays - 2;
+                                }
+
+                            }
+
+                     }
+                       
+                       
+
+
+                    ///
+                                          
+                    var obj = Object();                   
+                    
+                    obj.Check_Status = nextBookingDay;
+
+                    obj.TotalDay_Count = Temp_Date_dateDiff;
+                    obj.WeekEnd_Count = Temp_Date_weekenddays;
+                    obj.WeekDay_Count = Temp_Date_weekdays;
+                
+                    obj.User_RoleType = "Owner";
+                    obj.User_Id = user_id_owner;
+                    obj.Admin_Id = AdminId_get;
+
+                    obj.Boat_Id = dataGet_AdminSelectBoat._id;
+                    obj.Boat_Name = dataGet_AdminSelectBoat.Boat_Name;
+                
+                    obj.title = setTitle;
+                    obj.body = true;
+                    obj.start = start_str;
+                    obj.end = end_str;
+                    obj.goingDuration ="";
+                    obj.comingDuration ="";
+                    obj.isAllDay = true;
+                    obj.category = "allday";
+                    obj.dueDateClass = "morning";
+                    obj.location = "";                     
+                    obj.recurrenceRule = ""; //string..
+                    obj.isPending = false;
+                    obj.isFocused = false;
+                    obj.isVisible = true;
+                    obj.isReadOnly = false;
+                    obj.isPrivate = true;
+                    obj.color = "#ffffff";
+                    obj.bgColor = "#D50000";
+                    obj.dragBgColor = "#D50000";
+                    obj.borderColor = "#D50000";
+                    obj.customStyle ="";
+                    obj.raw ="";
+                    obj.state ="";
+                    obj.Status = "Enable";
+                    obj.IsActive = true;
+                    
+                     GetAllUnAvailableDays_settings(obj);                                  
+                              
+            
+                }
+                else if(checkController == "Update"){
+
+                    var startdate_date = new Date($("#tui-full-calendar-schedule-start-date").val());
+                    var enddate_date = new Date( $("#tui-full-calendar-schedule-end-date").val());
+                    var start_str =startdate_date .toString();
+                    var end_str = enddate_date.toString();    
+                    var AdminId_get = sessionStorage.getItem("UserId");
+                    
+                    // day calculations.....
+                    const Temp_Date_start = new Date(startdate_date);                        
+                    const Temp_Date_end = new Date(enddate_date);
+                    var Temp_Date_dateDiff= Math.round((Temp_Date_end - Temp_Date_start)/(1000*60*60*24));
+                    var Temp_Date_Winter_dateDiff = Temp_Date_dateDiff+1;
+                    const Temp_Date_sundays = Math.floor((Temp_Date_Winter_dateDiff + (Temp_Date_start.getDay() + 6) % 7) / 7);
+                    const Temp_Date_weekenddays = 2 * Temp_Date_sundays + (Temp_Date_end.getDay()==6) - (Temp_Date_start.getDay()==0);                        
+                    const Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
+
+                   
+                // ...................  
+                    var obj = Object();
+
+                    obj.TotalDay_Count = Temp_Date_dateDiff;
+                    obj.WeekEnd_Count = Temp_Date_weekenddays;
+                    obj.WeekDay_Count = Temp_Date_weekdays;
+                    
+                    obj._id = public_shedulDataId;
+                    obj.User_RoleType = "Owner";
+                    obj.User_Id = user_id_owner;
+                    obj.Admin_Id = AdminId_get;
+
+                    obj.Boat_Id = dataGet_AdminSelectBoat._id;
+                    obj.Boat_Name = dataGet_AdminSelectBoat.Boat_Name;
+                
+                    obj.title = setTitle;
+                    obj.body = true;
+                    obj.start = start_str;
+                    obj.end = end_str;
+                    obj.goingDuration ="";
+                    obj.comingDuration ="";
+                    obj.isAllDay = true;
+                    obj.category = "allday";
+                    obj.dueDateClass = "morning";
+                    obj.location = ""; 
+                    //obj.attendees = "false"; // this is string arry..
+                    obj.recurrenceRule = ""; //string..
+                    obj.isPending = false;
+                    obj.isFocused = false;
+                    obj.isVisible = true;
+                    obj.isReadOnly = false;
+                    obj.isPrivate = true;
+                    obj.color = "#ffffff";
+                    obj.bgColor = "#047b0f";
+                    obj.dragBgColor = "#047b0f";
+                    obj.borderColor = "#047b0f";
+                    obj.customStyle ="";
+                    obj.raw ="";
+                    obj.state ="";
+                    obj.Status = "Enable";
+                    obj.IsActive = true;
+                    $.ajax({
+                        url: public_URL+"EditSchedule",
+                        type: 'POST',
+                        dataType: 'json', 
+                        data: obj,
+                        success: function(datas) {
+                            if(datas.status == true)
+                            {
+                                alert(datas.message);
+                                location.reload();
+
+                            }
+                            else if(datas.status == false){
+                                    
+                                alert(datas.message);                                   
+                
+                            }
+                        
+
+                        },
+                        error: function (error) {          
+                                    
+                        }
+                    });
+
+                
+                }
+
+        }
+        else{
+            alert("select BOAT NAME");
+        }
 
     }
 

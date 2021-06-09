@@ -10,32 +10,7 @@
             <h4><a routerLink="/all-boat/"><i class="far fa-arrow-alt-circle-left"></i> </a> Boat Details</h4>
         </div>
         
-        <div class="col-lg-12">
-          <div class="calender-custom">
-
-
-                <div class="code-html">
-                  <div id="menu">
-                      <span id="menu-navi">
-                          <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
-                          <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
-                              <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
-                          </button>
-                          <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
-                              <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
-                          </button>
-                      </span>
-                      <span id="renderRange" class="render-range"></span>
-                  </div>
-
-                  <div id="calendar"></div>
-              </div>  
-
-      
-
-          </div>
-
-      </div>
+        
         
         <div class="page contents">
             
@@ -45,106 +20,62 @@
 <!-- boat Item Heading -->
 <h4>{{data.Boat_Name}} </h4>
 
-<!-- boat Item Row -->
 <div class="row">
 
-<!-- Temp........Start....... -->
+  <div class="col-lg-12">
+    <div class="calender-custom">
 
-<!-- <div class="col-md-7 boat-image-slider">
 
-<div>
-<div *ngFor="let data of multiImge     let index = index"  class="mySlides active">
-<div class="numbertext">{{index +1}} / {{multiImge.length}}</div>
-<img  src="{{imgUrl+data}}" style="width:100%">
+          <div class="code-html">
+            <div id="menu">
+                <span id="menu-navi">
+                    <button type="button" class="btn btn-default btn-sm move-today" data-action="move-today">Today</button>
+                    <button type="button" class="btn btn-default btn-sm move-day" data-action="move-prev">
+                        <i class="calendar-icon ic-arrow-line-left" data-action="move-prev"></i>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm move-day" data-action="move-next">
+                        <i class="calendar-icon ic-arrow-line-right" data-action="move-next"></i>
+                    </button>
+                </span>
+                <span id="renderRange" class="render-range"></span>
+            </div>
+
+            <div id="calendar"></div>
+        </div>  
+
+
+
+    </div>
+
 </div>
-</div>
-
-
-<a class="prev" (click)="plusSlides(-1)">&#10094;</a>
-<a class="next" (click)="plusSlides(1)">&#10095;</a>
-
-
-<div class="caption-container">
-<p id="caption"></p>
-</div>
-
-
-<div class="row" style="padding: 0 15px;">
-<div class="column" *ngFor="let data of multiImge     let index = index">
-<img class="demo cursor" src="{{imgUrl+data}}" style="width:100%" (click)="currentSlide(index+2)" alt="SAILBOAT DELPHIA YACHTS">
-</div>
 
 </div>
-</div> -->
 
 
 
-<!-- <div class="col-md-5">
-  <div class="calendar-area">
-      <div class="calendar-block" style="padding: 5px; border: none;">
-          <div id="pb-calendar" class="pb-calendar"></div>
-      </div>
-                        
-   <div class="col-md-12 schedule-indicators" style="padding: 0;">
-      
-     <ul class="book_main">
-          <li class="left"><span class="green"> </span>Bookings</li>
-          <li class="right"><span class="blue"> </span> Maintenance</li>
-
-      </ul>   
-        
-  </div>
-                
-              
-     </div>  
-</div> -->
-
-
-
-<!-- temp......End -->
+<!-- boat Item Row -->
+<div class="row">
 
 
 <!-- New Edit............ -->
 
 <div class="col-md-7 boat-image-slider">
  
-  <div class="container" id="id-sliderbinding-First">
-
-
- 
-  
+  <div class="container" id="id-sliderbinding-First"> 
 
     <div class="container">
-
       
-    <div class="row" id="id-sliderbinding-Second">
-
-
-      
-     
-
-
-
-    
-
+    <div class="row" id="id-sliderbinding-Second"> 
 
     </div>
 
-
     </div>
-
-
-
-
 
   </div>
-
-
-
     
 </div>
   
-      <div class="col-md-5">
+      <!-- <div class="col-md-5">
       <div class="calendar-area">
         <div class="calendar-block" style="padding: 5px; border: none;"> 
           <div id="pb-calendar" class="pb-calendar"></div>
@@ -158,11 +89,11 @@
     
               </ul>   
                 
-      </div>
+      </div> 
               
                 
              </div>  
-      </div>
+      </div> -->
   
 
 

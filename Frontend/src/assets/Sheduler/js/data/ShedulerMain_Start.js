@@ -301,7 +301,7 @@ function generateSchedule(){
         dataType: 'json',        
         success: function(datas) {
             var respon =  datas.response;
-                       
+                      
             $.each(respon, function (key, val) {                
                 generateRandomSchedule(val);                 
             });

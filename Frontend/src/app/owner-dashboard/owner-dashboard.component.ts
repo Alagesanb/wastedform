@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';//'ng-multiselect-dropdown';
 
+declare var $: any;
+declare var jQuery: any;
 
 @Component({
   selector: 'app-owner-dashboard',
@@ -15,6 +17,7 @@ export class OwnerDashboardComponent implements OnInit {
   ownerlogin: boolean;
   dropdownSettings : IDropdownSettings ;
   url_Owner = "http://65.2.28.16/api/Owner/";
+  url_Days = "http://65.2.28.16/api/Days/";
 
   dropdownList_filted = [];
   dropdownList = [];
@@ -29,9 +32,7 @@ export class OwnerDashboardComponent implements OnInit {
       this.router.navigate(['/owner-login/']);
     }
 
-    ReloadPages();
-
-   
+    ReloadPages();   
 
     function ReloadPages(){
            
@@ -55,6 +56,7 @@ export class OwnerDashboardComponent implements OnInit {
 
   }
 
+  sessionStorage.removeItem('SettNextBookingDays_boat');
     sessionStorage.setItem("pageIdentiFiction","owner-dashboard-Reservation");
 
     this.dropdownSettings = {
@@ -85,11 +87,47 @@ export class OwnerDashboardComponent implements OnInit {
 
    //var sorte this.dropdownList_filted = tempArry; 
    sessionStorage.setItem("Owner_pg_boatListed",JSON.stringify(Filterboat));
+   this.GetNextBookingDaysByBoatId(item.item_id)
     
     
     //this.Fun_getallDropDownDatas(this.public_selectBoatId);
    
   }
+
+
+  GetNextBookingDaysByBoatId(Boat_Id){
+
+    sessionStorage.removeItem('SettNextBookingDays_boat');
+
+    var obj = Object();
+        obj.Boat_Id = Boat_Id;        
+      this.http.post<any>(`${this.url_Days}GetNextBookingDaysByBoatId`, obj).subscribe(results => {           
+        if(results.status == true)
+        {
+          var temp_resp = results.response;
+          if (typeof temp_resp  !== 'undefined' && temp_resp.length > 0) {
+            sessionStorage.setItem("SettNextBookingDays_boat",JSON.stringify(temp_resp[0]));
+          }
+          else
+          {
+            alert("Next Booking Days are not assigned to this boat. Please contact Admin.");
+            location.reload();
+
+          }
+           
+        }
+                
+      
+        }, err => {
+          console.log(err);
+        })
+
+  }
+
+
+
+
+
 
   onDeSelect_boat(items: any) {
     //sessionStorage.removeItem('AdminSelectBoat');
