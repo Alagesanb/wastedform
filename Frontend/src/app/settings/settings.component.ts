@@ -131,8 +131,6 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         contentType: 'application/json',
         success: function (data) {
 
-          //console.log(data);
-
             if(data.status == true)
             {
               var bindingTableData;
@@ -257,8 +255,6 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
                   var obj = Object();
                   obj.UnAvailableDates = unique(temp_data1);
 
-                  console.log(obj);
-
               $.ajax({
                 url: public_url_days + "AddUnavailabledaysForAll",
                 type: 'POST',
@@ -344,7 +340,6 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
             obj.Boat_Name = temp_boatName;
             obj.UnAvailableDates = unique(temp_data_datte);;
 
-            console.log(obj);
 
         $.ajax({
           url: public_url_days + "AddUnavailabledaysSingle",
@@ -568,7 +563,7 @@ function Binding_OwnerDuration(){
       else if(data.status == false){
       }
         }, err => {
-          console.log(err);
+         
         })
   }
 
@@ -587,13 +582,12 @@ function Binding_OwnerDuration(){
         this.Consecutiveform.get('Summer_ConsecutiveDays').setValue(data.Data.Summer_ConsecutiveDays);
         this.Consecutiveform.get('Winter_ConsecutiveDays').setValue(data.Data.Winter_ConsecutiveDays);
 
-        //console.log(this.SUMMER_CONSECUTIVE_DAYS_ALLOWED +"--"+ this.WINTER_CONSECUTIVE_DAYS_ALLOWED);
         
       }
       else if(data.Status == false){
       }
         }, err => {
-          console.log(err);
+        
         })
   }
 
@@ -621,8 +615,6 @@ function Binding_OwnerDuration(){
 
   onItemSelect(item: any) {
  
-    // var finddate = this.dropdownList.find(x => x._id == item.item_id);
-   console.log(item)
    this.Shareform.get('Boat_Name').setValue(item.item_text);
    this.Shareform.get('Boat_Id').setValue(item.item_id);
 if(item.item_id){
@@ -630,10 +622,10 @@ if(item.item_id){
     boatid:item.item_id
   }
    this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
-    console.log(data)
+   
 if(data.Status == true){
   this.getBoat = data.Data
-  console.log(this.getBoat[0].Owners_Allowed)
+ 
   this.Shareform.get('No_of_Shares').setValue(this.getBoat[0].Owners_Allowed);
   this.Shareform.get('No_of_SummerWeekDays').setValue(this.getBoat[0].Summer_WeekDays);
   this.Shareform.get('No_of_SummerWeekEndDays').setValue(this.getBoat[0].Summer_WeekEndDays);
@@ -643,7 +635,7 @@ if(data.Status == true){
 else if(data.Status == false){
 }
       }, err => {
-        console.log(err);
+       
       })
     }
   }
@@ -653,9 +645,9 @@ else if(data.Status == false){
 
   getAllBoatTYpes(){
     this.http.get<any>(`${this.url}/GetallBoatTypeDetails`).subscribe(data => {
-      //console.log(data)
+     
    this.allBoatsType = data['response']
-   // console.log(this.boatTypes)
+   
     }, err => {
     })
    
@@ -663,10 +655,9 @@ else if(data.Status == false){
 
   getAllshare(){
     this.http.get<any>(`${this.allShareUrl}/ViewAllShares`).subscribe(data => {
-      console.log(data)
+     
    this.shareAllocation = data['response']
-   console.log(this.shareAllocation)
-   console.log("hi")
+  
     }, err => {
     })
   }
@@ -683,7 +674,7 @@ else if(data.Status == false){
     this.form.get('_id').setValue(data._id);
     this.form.get('Boat_Type').setValue(data.Boat_Type);
     this.form.get('Type_Description').setValue(data.Type_Description);
-    console.log(data)
+   
     $('#error-disp-btns').trigger('click');
   }
 updateBoattype(){
@@ -693,9 +684,9 @@ updateBoattype(){
     return;
   }
 
-  console.log(this.form.value)
+ 
   this.http.post<any>(`${this.url}/EditBoatType`,  this.form.value   ).subscribe(data => {
-    console.log(data)
+   
 if(data.status == true){
   this.getResponce = data.message
   $("#pop-up-btn").trigger('click')
@@ -706,7 +697,7 @@ if(data.status == true){
 else if(data.status == false){
 }
       }, err => {
-        console.log(err);
+       
       })
 
 }  
@@ -717,12 +708,12 @@ get bf() { return this.Bookingform.controls; }
 
 
 deleteBoat(){
-// console.log(id._id)
+
 var obj={
   _id : this.boatTypeId
 }
 this.http.post<any>(`${this.url}/DeleteBoatType`,  obj  ).subscribe(data => {
-  console.log(data)
+ 
 if(data.status == true){
  
   this.getResponce = data.message
@@ -734,13 +725,13 @@ if(data.status == true){
 else if(data.status == false){
 }
     }, err => {
-      console.log(err);
+     
     })
 
 
 }
 addShare(){
-  console.log("kkkkk")
+ 
   $('#addshare').trigger('click');
 
 }
@@ -797,8 +788,7 @@ addShare(){
   }
 
   saveShare(){
-    console.log(this.Shareform.value)
-
+  
     this.shareSubmitted = true;
   if (this.Shareform.invalid) {
     return;
@@ -807,9 +797,9 @@ addShare(){
   this.Shareform.get('Status').setValue("Enable");
   this.Shareform.get('Block').setValue(true);
 
-    console.log(this.Shareform.value)
+    
     this.http.post<any>(`${this.shareUrl}/AddNewShares`,  this.Shareform.value   ).subscribe(data => {
-      console.log(data)
+    
   if(data.status == true){
     this.modelTitle = "Share Allocation"
     this.getResponce = data.message
@@ -822,7 +812,7 @@ addShare(){
   else if(data.status == false){
   }
         }, err => {
-          console.log(err);
+        
         })
 
 
@@ -836,9 +826,9 @@ addShare(){
     this.Bookingform.get('Status').setValue("Enable");
     this.Bookingform.get('Block').setValue(true);
   
-      console.log(this.Bookingform.value)
+     
       this.http.post<any>(`${this.shareUrl}/AddNextBookings`,  this.Bookingform.value   ).subscribe(data => {
-        console.log(data)
+      
     if(data.status == true){
       this.getResponce = data.message
       this.Bookingform.reset()
@@ -851,7 +841,7 @@ addShare(){
     else if(data.status == false){
     }
           }, err => {
-            console.log(err);
+          
           })
   
   }
@@ -861,7 +851,7 @@ addShare(){
     this.Bookingform.get('IsActive').setValue(true);
     this.Bookingform.get('Status').setValue("Enable");
     this.Bookingform.get('Block').setValue(true);
-    console.log(this.Bookingform.value)
+   
     this.BookingSubmitted = true;
     if (this.Bookingform.invalid) {
       return;
@@ -875,9 +865,9 @@ addShare(){
     this.Bookingform.get('Boat_Id').setValue(NEXT_BOOKING_DAY_selected_Boat["_id"]);
 
   
-      console.log(this.Bookingform.value)
+     
       this.http.post<any>(`${this.shareUrl}/AddNextBookings`,  this.Bookingform.value   ).subscribe(data => {
-        console.log(data)
+      
     if(data.status == true){
       this.getResponce = data.message
       this.Bookingform.reset()
@@ -891,7 +881,7 @@ addShare(){
     else if(data.status == false){
     }
           }, err => {
-            console.log(err);
+           
           })
   
   }
@@ -902,7 +892,7 @@ addShare(){
     this.Consecutiveform.get('Status').setValue("Enable");
     this.Consecutiveform.get('Block').setValue(true);
     this.shareSubmitted = true;
-    console.log(this.Consecutiveform.value)
+   
 
     if (this.Consecutiveform.invalid) {
       return;
@@ -921,9 +911,9 @@ addShare(){
     this.Consecutiveform.get('Boat_Id').setValue(temp_boat_id);
    
   
-      console.log(this.Consecutiveform.value)
+     
       this.http.post<any>(`${this.shareUrl}/AddConsecutiveDays`,  this.Consecutiveform.value   ).subscribe(data => {
-        console.log(data)
+      
     if(data.status == true){
       this.getResponce = data.message
       this.Consecutiveform.reset()
@@ -936,7 +926,7 @@ addShare(){
     else if(data.status == false){
     }
           }, err => {
-            console.log(err);
+           
           })
   
   
@@ -951,9 +941,9 @@ addShare(){
     this.Consecutiveform.get('Status').setValue("Enable");
     this.Consecutiveform.get('Block').setValue(true);
   
-      console.log(this.Consecutiveform.value)
+     
       this.http.post<any>(`${this.shareUrl}/AddConsecutivDays`,  this.Consecutiveform.value   ).subscribe(data => {
-        console.log(data)
+       
     if(data.status == true){
       this.getResponce = data.message
       this.Consecutiveform.reset()
@@ -965,13 +955,13 @@ addShare(){
     else if(data.status == false){
     }
           }, err => {
-            console.log(err);
+          
           })
   
   
   }
   deleteBoatModel(id){
-    console.log(id._id)
+   
     this.boatTypeId = id._id
     $('#removeBoat').trigger('click');
 
