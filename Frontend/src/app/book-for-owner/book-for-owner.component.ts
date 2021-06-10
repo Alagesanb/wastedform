@@ -246,7 +246,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
   Fun_getallDropDownDatas(owner_drp_Id){ 
     
-        
+     
     this.dropdownList = [];       
     this.set_BoatType = "";
       var obj = Object();
@@ -260,6 +260,9 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         data.response.forEach(element => {
 
           element.BoatDetails.forEach(element2 => {
+            if(element2.IsActive == true){
+
+            
             var obj2 = Object();
               obj2.item_id = element2._id,
               obj2.item_text = element2.Boat_Name
@@ -269,14 +272,16 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
               obj3._id = element2._id,
               obj3.Boattype_Name = element2.Boattype_Name,
               obj3.Boat_Name = element2.Boat_Name
-              tempArry2.push(obj3)
+              tempArry2.push(obj3);
+            }
 
           });
               
 
         });
         this.dropdownList_filted = tempArry; 
-        this.dropdownList = tempArry2;          
+        this.dropdownList = tempArry2;  
+        
       
         }, err => {
           console.log(err);

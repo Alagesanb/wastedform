@@ -19,6 +19,12 @@ export class DashboardComponent implements OnInit {
   Cancels: any=[];
   adminlogin: any;
 
+  New_Booking_Count:any = 0;
+  Todays_Booking_Count:any = 0;
+  Cancellations_Count:any = 0;
+  Stand_by_Booking_Count:any = 0;
+
+
   constructor(private httpClient: HttpClient,private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute) {
      }
@@ -107,6 +113,9 @@ if(updatedates  == todaysDates ){
  }
 
 });
+
+this.New_Booking_Count = this.newBooking.length;
+this.Todays_Booking_Count = this.todaysBooking.length;
 console.log(this.todaysBooking)
 console.log(this.newBooking)
 
@@ -138,6 +147,10 @@ console.log(this.newBooking)
 
 
   });
+
+
+this.Cancellations_Count = this.Cancels.length;
+
   console.log(this.Cancels)
    }, err => {
    })

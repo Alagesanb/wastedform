@@ -18,7 +18,7 @@
   <label>Select boat</label> 
  <ng-multiselect-dropdown
  [placeholder]="'Select'"
- [(ngModel)]="dropdownOwn"
+ [(ngModel)]="dropdownOwn_Boat_selected"
  [ngModelOptions]="{standalone: true}" 
  [settings]="dropdownSettings"
  [data]="dropdownList_filted"                                    
@@ -44,7 +44,7 @@
       <label>Owner Name</label> 
      <ng-multiselect-dropdown
      [placeholder]="'Select'"
-     [(ngModel)]="dropdownBoat"
+     [(ngModel)]="dropdownBoat_Owner_selected"
      [ngModelOptions]="{standalone: true}" 
      [settings]="dropdownOwnerSettings"
      [data]="dropdownOwnerList_filted"                                    
@@ -58,7 +58,7 @@
     <!-- <div class="form-row"> -->
       <div class="form-group col-md-6">
         <label>No:Of Summer Weekdays Per Owner</label>
-        <input type="text" class="form-control"formControlName="No_of_SummerWeekDays" [ngClass]="{ 'is-invalid': manageOwnerSubmitted && mof.No_of_SummerWeekDays.errors }" >
+        <input type="text" class="form-control" formControlName="No_of_SummerWeekDays" [ngClass]="{ 'is-invalid': manageOwnerSubmitted && mof.No_of_SummerWeekDays.errors }" >
         </div> 
         <div class="form-group col-md-6">
           <label>No:Of Summer Weekends Per Owner</label>
@@ -69,7 +69,7 @@
       <!-- <div class="form-row"> -->
         <div class="form-group col-md-6">
           <label>No:Of Winter Weekdays Per Owner</label>
-          <input type="text" class="form-control"formControlName="No_of_WinterWeekDays" [ngClass]="{ 'is-invalid': manageOwnerSubmitted && mof.No_of_WinterWeekDays.errors }" >
+          <input type="text" class="form-control" formControlName="No_of_WinterWeekDays" [ngClass]="{ 'is-invalid': manageOwnerSubmitted && mof.No_of_WinterWeekDays.errors }" >
           </div> 
         <div class="form-group col-md-6">
           <label>No:Of Winter Weekends Per Owner</label>

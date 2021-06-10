@@ -48,6 +48,8 @@ export class ManageOwnerComponent implements OnInit {
   dropdownOwnerSettings : IDropdownSettings ;
   dropdownOwn: any;
   dropdownBoat: any;
+  dropdownOwn_Boat_selected = [];
+  dropdownBoat_Owner_selected = [];
 
   public_Owner_Name : any = null;
   public_Owner_Id : any = null;
@@ -105,7 +107,7 @@ export class ManageOwnerComponent implements OnInit {
 var Owner_url = 'http://65.2.28.16/api/Owner/';
 
 
-
+this. startTimer_set_manageOwner_Edit();
 
 $(document).on("click",".cls-delete-single",function() {
   //alert("click bound to document listening for #test-element");
@@ -339,7 +341,15 @@ function Binding_ManageOwner(){
 
 
   editManageOwner_new(obj){
-console.log(obj)
+    //debugger;
+
+    this.dropdownOwn_Boat_selected = [];
+    this.dropdownOwn_Boat_selected.push({item_id : obj.BoatDetails[0]._id, item_text: obj.Boat_Name});
+
+    this.dropdownBoat_Owner_selected = [];
+    this.dropdownBoat_Owner_selected.push({item_id : obj._id, item_text: obj.Owner_Name})
+
+    
     
     this.scrollToTop();
     this.addBtnFlag= false
@@ -352,51 +362,18 @@ this.manageOwnerForms.get('Boat_Id').setValue(obj.BoatDetails[0]._id);
 this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
 this.manageOwnerForms.get('Owners_Allowed').setValue(obj.BoatDetails[0].Owners_Allowed);
 
-this.manageOwnerForms.get('No_of_SummerWeekDays').setValue(obj.BoatDetails[0].Summer_WeekDays);
-this.manageOwnerForms.get('No_of_SummerWeekEndDays').setValue(obj.BoatDetails[0].Summer_WeekEndDays);
-this.manageOwnerForms.get('No_of_WinterWeekDays').setValue(obj.BoatDetails[0].Winter_WeekDays);
-this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.BoatDetails[0].Winter_WeekEndDays);
+this.manageOwnerForms.get('No_of_SummerWeekDays').setValue(obj.Summer_WeekDays);
+this.manageOwnerForms.get('No_of_SummerWeekEndDays').setValue(obj.Summer_WeekEndDays);
+this.manageOwnerForms.get('No_of_WinterWeekDays').setValue(obj.Winter_WeekDays);
+this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEndDays);
 
 
-
-// this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
-$("#project1").attr('disabled', 'disabled');
-$("#project2").attr('disabled', 'disabled');
-$("#project3").attr('disabled', 'disabled');
-console.log(this.manageOwnerForms.value)
-
+//$("#project1").attr('disabled', 'disabled');
+//$("#project2").attr('disabled', 'disabled');
+//$("#project3").attr('disabled', 'disabled');
 
   }
 
-
-
-//   editManageOwner(obj){
-
-        
-//     this.scrollToTop();
-//     this.addBtnFlag= false
-//     this.editBtnFlag= true
- 
-// this.managerOwnerId = obj._id
-// this.manageOwnerForms.get('Owner_Name').setValue(obj.Owner_Name);
-// this.manageOwnerForms.get('Owner_Id').setValue(obj.Owner_Id);
-// this.manageOwnerForms.get('Boat_Id').setValue(obj.Boat_Id);
-// this.manageOwnerForms.get('Boat_Name').setValue(obj.Boat_Name);
-// this.manageOwnerForms.get('ShareAllocation').setValue(obj.ShareAllocation);
-// this.manageOwnerForms.get('Owners_Allowed').setValue(obj.Owners_Allowed);
-// this.manageOwnerForms.get('Boat_Type').setValue(obj.Boat_Type);
-
-// // this.manageOwnerForms.get('Owner_Name').setValue(obj._id);
-// $("#project1").attr('disabled', 'disabled');
-// $("#project2").attr('disabled', 'disabled');
-// $("#project3").attr('disabled', 'disabled');
-
-//   }
-  
-  // function callAngular() {
-  //   alert("ddddd");
-  //  // throw new Error('Function not implemented.');
-  // }
 
   sidemenuloder(){    
     $("#a-menu-Owners-main").attr("aria-expanded","true");        
@@ -467,6 +444,7 @@ console.log(this.manageOwnerForms.value)
  
              });
              this.dropdownList_filted = tempArray;  
+           
   
    }, err => {
    })
@@ -481,11 +459,13 @@ console.log(this.manageOwnerForms.value)
       No_of_SummerWeekEndDays: new FormControl('', [Validators.required, ]),
       No_of_WinterWeekDays: new FormControl('', [Validators.required, ]),
       No_of_WinterWeekEndDays: new FormControl('', [Validators.required, ]),
-      Boat_Type: new FormControl('', [Validators.required,]),
+      Boat_Type: new FormControl('', ),
       Owner_Name: new FormControl('', [Validators.required,]),
       Owner_Id: new FormControl('', [Validators.required,]),
       Owners_Allowed: new FormControl('', [Validators.required,]),
       ShareAllocation: new FormControl('', [Validators.required,]),
+      id :  new FormControl('', ),
+
      
     });
   }
@@ -648,18 +628,25 @@ this.manageOwnerForms.get('Owner_Name').setValue(this.ownerName);
     }
    
     edit(){
+
+      
+
       this.manageOwnerSubmitted = true;
       
-      if (this.manageOwnerForms.invalid) {
-        return;
-    }
+      // if (this.manageOwnerForms.invalid) {
+      //   return;
+      // }
       var objs={
         id:this.managerOwnerId,
-        ShareAllocation:this.manageOwnerForms.controls.ShareAllocation.value
+        ShareAllocation: this.manageOwnerForms.value//this.manageOwnerForms.controls.ShareAllocation.value
       }
-     
-      this.http.post<any>(`${this.OwnerUrl}/UpdateManageOwnerById`,objs  ).subscribe(data => {  
-        
+
+      this.manageOwnerForms.get('id').setValue(this.managerOwnerId);
+
+    
+           
+      this.http.post<any>(`${this.OwnerUrl}/UpdateManageOwnerById`,this.manageOwnerForms.value  ).subscribe(data => {  
+       
         this.getResponce = data.message   
         this.manageOwnerForms.reset()
         this.manageOwnerSubmitted = false;
