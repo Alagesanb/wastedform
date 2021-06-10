@@ -39,7 +39,7 @@ import { ReportOwnershipComponent }from './report-ownership/report-ownership.com
 import { ReportOwnerComponent } from './report-owner/report-owner.component';
 import { ReportBoatComponent } from './report-boat/report-boat.component';
 import { ReportBookingComponent } from './report-booking/report-booking.component';
-
+import { BookingDetailsComponent} from './booking-details/booking-details.component';
 
 
 const routes: Routes = [
@@ -81,6 +81,7 @@ const routes: Routes = [
   { path: 'report-owner', component: ReportOwnerComponent },
   { path: 'report-boat', component: ReportBoatComponent },
   { path: 'report-booking', component: ReportBookingComponent },
+  { path: 'booking-details', component: BookingDetailsComponent },
 
 ];
 

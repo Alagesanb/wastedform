@@ -917,7 +917,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     //data-schedule-id
        
     $(document).on("click",".tui-full-calendar-weekday-schedule",function() {
-        
+        document.location.href="/booking-details/";
        var currentId = $(this).attr('data-schedule-id');
        public_shedulDataId = currentId;
 
