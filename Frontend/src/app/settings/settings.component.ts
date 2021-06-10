@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import {GetServiceService} from 'src/app/get-service.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+
 declare var $: any;
 declare var jQuery: any;
 @Component({
@@ -48,6 +49,7 @@ export class SettingsComponent implements OnInit {
   dropdownOwn: any;
   bookdropdownOwn: any;
   adminlogin: any;
+  GetBoatDetailsByBoatId_AllocatedDays: any;
 
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,
@@ -622,15 +624,17 @@ if(item.item_id){
     boatid:item.item_id
   }
    this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
-   
+  
 if(data.Status == true){
-  this.getBoat = data.Data
+  this.getBoat = data.Data;
+  this.getBoat = this.getBoat.response;
+  this.GetBoatDetailsByBoatId_AllocatedDays =  data.Data;
  
-  this.Shareform.get('No_of_Shares').setValue(this.getBoat[0].Owners_Allowed);
-  this.Shareform.get('No_of_SummerWeekDays').setValue(this.getBoat[0].Summer_WeekDays);
-  this.Shareform.get('No_of_SummerWeekEndDays').setValue(this.getBoat[0].Summer_WeekEndDays);
-  this.Shareform.get('No_of_WinterWeekDays').setValue(this.getBoat[0].Winter_WeekDays);
-  this.Shareform.get('No_of_WinterWeekEndDays').setValue(this.getBoat[0].Winter_WeekEndDays);
+  this.Shareform.get('No_of_Shares').setValue(this.getBoat.Owners_Allowed);
+  this.Shareform.get('No_of_SummerWeekDays').setValue(this.getBoat.Summer_WeekDays);
+  this.Shareform.get('No_of_SummerWeekEndDays').setValue(this.getBoat.Summer_WeekEndDays);
+  this.Shareform.get('No_of_WinterWeekDays').setValue(this.getBoat.Winter_WeekDays);
+  this.Shareform.get('No_of_WinterWeekEndDays').setValue(this.getBoat.Winter_WeekEndDays);
 }
 else if(data.Status == false){
 }
@@ -793,6 +797,31 @@ addShare(){
   if (this.Shareform.invalid) {
     return;
   }
+
+  
+  var Shareform_val = this.Shareform.value;
+  var AllocatedDays = this.GetBoatDetailsByBoatId_AllocatedDays.AllocatedDays;
+  
+  var total_summer = parseInt(Shareform_val.No_of_SummerWeekDays) + parseInt(Shareform_val.No_of_SummerWeekEndDays);
+  var total_winder = parseInt(Shareform_val.No_of_WinterWeekDays) + parseInt(Shareform_val.No_of_WinterWeekEndDays);
+
+
+
+  if(AllocatedDays[0].Summer_Days < total_summer)
+  {
+    alert("Summer Allocated Days "+ AllocatedDays[0].Summer_Days);
+    return;
+  }
+
+  if(AllocatedDays[0].Winter_Days < total_winder)
+  {
+    alert("winter Allocated Days "+ AllocatedDays[0].Winter_Days);
+    return;
+  }
+
+
+
+
   this.Shareform.get('IsActive').setValue(true);
   this.Shareform.get('Status').setValue("Enable");
   this.Shareform.get('Block').setValue(true);
