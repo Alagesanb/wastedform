@@ -917,7 +917,13 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     //data-schedule-id
        
     $(document).on("click",".tui-full-calendar-weekday-schedule",function() {
+
+       // document.location.href="/booking-details/";
+
+        document.location.href="/booking-details/";
+
        
+
        var currentId = $(this).attr('data-schedule-id');
          // Click label redirect page //Done By Alagesan on 10.06.2021	
         // document.location.href="/booking-details/";
@@ -1202,10 +1208,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
      }
 
 
-    function AddSchedule_ApiCalling(obj){ 
-        
-     
-
+    function AddSchedule_ApiCalling(obj){         
+    
         $.ajax({
             url: public_URL+"AddSchedule",
             type: 'POST',
@@ -1322,7 +1326,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
         
     //var ssss = public_shedulDataId;
   
-    var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction");
+    var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction");    
+
     if(pageIdentiFication == "AdminBooking")
     {
 
@@ -1571,6 +1576,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                      // ................... 
 
                      ///Stand By Booking... start...
+                     var Is_StandByBooking = JSON.parse("false");
                      var currentDates = getFormattedDate_WithOut_Zero_Time( new Date());
                      var startDateConvertDate = getFormattedDate_WithOut_Zero_Time(start_str); 
                      if(currentDates == startDateConvertDate)
@@ -1594,6 +1600,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                             }
 
+                            Is_StandByBooking = JSON.parse("true");
+
                      }
                        
                        
@@ -1604,6 +1612,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     var obj = Object();                 
 
                     obj.Check_Status = nextBookingDay;
+                    obj.Is_StandByBooking = Is_StandByBooking;
 
                     obj.TotalDay_Count = Temp_Date_dateDiff;
                     obj.WeekEnd_Count = Temp_Date_weekenddays;
@@ -1984,7 +1993,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     var Temp_Date_weekdays = Temp_Date_Winter_dateDiff - Temp_Date_weekenddays;
 
                      // ...................                     
-                     ///Stand By Booking... start...                                      
+                     ///Stand By Booking... start... 
+                                                        
                      var currentDates = getFormattedDate_WithOut_Zero_Time( new Date());
                      var startDateConvertDate = getFormattedDate_WithOut_Zero_Time(start_str); 
                      if(currentDates == startDateConvertDate)
@@ -2008,6 +2018,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                             }
 
+                            Is_StandByBooking = true;
+
                      }
                        
                        
@@ -2018,6 +2030,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     var obj = Object();                   
                     
                     obj.Check_Status = nextBookingDay;
+                    obj.Is_StandByBooking = Is_StandByBooking;
 
                     obj.TotalDay_Count = Temp_Date_dateDiff;
                     obj.WeekEnd_Count = Temp_Date_weekenddays;
