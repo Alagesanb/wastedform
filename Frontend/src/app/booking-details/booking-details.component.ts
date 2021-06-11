@@ -1,3 +1,5 @@
+// Create Component for booking details //Done By Alagesan on 09.06.2021	
+
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -12,9 +14,12 @@ declare var jQuery: any;
 export class BookingDetailsComponent implements OnInit {
   form: FormGroup;
   url = "http://65.2.28.16/api/Owner";
+  Scheduleurl = "http://65.2.28.16/api/Schedule/";
   pathImage = "http://65.2.28.16/api/uploads/";
   allOwners: any=[];
   allBoats: any=[];
+  allBookingDetails: any=[];
+  allBookingDetailsFilter: any=[];
   imgUrl = "http://65.2.28.16/api/uploads/"
   Boaturl = "http://65.2.28.16/api/Boat"
  
@@ -25,6 +30,7 @@ export class BookingDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllOwners();
     this.getAllBoat();
+    this.getAllBookingDetailsWithBoatAndOwner();
   }
 
   getAllOwners(){
@@ -46,4 +52,31 @@ export class BookingDetailsComponent implements OnInit {
    })
   }
 
+  getAllBookingDetailsWithBoatAndOwner(){
+    this.http.get<any>(`${this.Scheduleurl}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
+      
+  this.allBookingDetails = data['response']
+  var datas = sessionStorage.getItem("view-Booking-id");
+  console.log(datas);
+    if (typeof datas !== "undefined" && datas != null)
+    {
+ 
+    this.allBookingDetailsFilter = this.allBookingDetails.filter(x => x._id == datas);
+  
+    
+    }
+  console.log(this.allBookingDetailsFilter);
+   console.log(this.allBookingDetails)
+   }, err => {
+   })
+  }
+
+  viewAdminBooking(){
+    sessionStorage.setItem('view-Booking-id', '');
+
+    this.router.navigate(['AdminBooking/']);
+  }
+
 }
+
+// Create Component for booking details //Done By Alagesan on 09.06.2021	

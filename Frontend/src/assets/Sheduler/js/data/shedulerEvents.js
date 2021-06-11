@@ -917,8 +917,11 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     //data-schedule-id
        
     $(document).on("click",".tui-full-calendar-weekday-schedule",function() {
-        document.location.href="/booking-details/";
+       
        var currentId = $(this).attr('data-schedule-id');
+         // Click label redirect page //Done By Alagesan on 10.06.2021	
+        // document.location.href="/booking-details/";
+        sessionStorage.setItem("view-Booking-id",currentId);
        public_shedulDataId = currentId;
 
     });

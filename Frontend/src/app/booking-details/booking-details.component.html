@@ -1,12 +1,58 @@
+<!--Create Component for booking details Done By Alagesan on 09.06.2021	-->
+
 <div class="main-page">
     <app-sidemenu></app-sidemenu>
     <div class="contents-page col-lg-9">
         <app-header></app-header>
         <div class="headingz">
-            <h4>Booking Details</h4>
+            <h4><a (click)=viewAdminBooking()><i class="far fa-arrow-alt-circle-left"></i> </a>Booking Details</h4>
         </div>
         <div class="page contents">
-            <div class="row"></div>
+            <!--Update for booking details Done By Alagesan on 10.06.2021	-->
+
+            <div class="row">
+                <div class="col-md-5 mr-2 boat-list-1" *ngFor="let owner of allBookingDetailsFilter  let i = index;">
+                    <a href="#">
+                    <div class="boat-img">
+                        <img *ngIf="!owner.OwnerDetails[0].Profile_Image" src="/assets/images/boat-1.jpg" alt="boat">
+                        <img *ngIf="owner.OwnerDetails[0].Profile_Image" src="{{imgUrl+owner.OwnerDetails[0].Profile_Image}}" alt="owner">
+
+                    </div>
+                    <div class="info">
+                        <div *ngIf="owner.OwnerDetails[0]" >
+                        <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].First_Name}}{{owner.OwnerDetails[0].Last_Name}}</h5>
+                        <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].Home_Address}}</h5>
+                        <h5><span><i class="fas fa-parking"></i>  </span> {{owner.OwnerDetails[0].Email}}</h5>
+                        <h5><span><i class="fas fa-parking"></i>  </span> {{owner.OwnerDetails[0].Mobile}}</h5>
+                        <h5><span><i class="fas fa-parking"></i>  </span> {{owner.OwnerDetails[0].Family_Name}}</h5>
+                        <h5><span><i class="fas fa-parking"></i>  </span> {{owner.OwnerDetails[0].Parking_Ability}}</h5>
+                        </div>
+                        <div *ngIf="!owner.OwnerDetails[0]">
+                            <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].Sailing_Ability}}</h5>
+                            <h5><span><i class="fas fa-parking"></i>  </span>{{owner.OwnerDetails[0].Emergency_Contact_Mobile}}</h5>
+
+                            <h5><span><i class="fas fa-parking"></i>  </span>{{owner.OwnerDetails[0].Emergency_Contact_Name}}</h5>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-md-6 mr-2 boat-list-1" *ngFor="let boats of allBookingDetailsFilter  let i = index;">
+                    <a href="#">
+                    <div class="boat-img">
+                        <img *ngIf="!boats.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat-1.jpg" alt="boat">
+                        <img *ngIf="boats.BoatDetails[0].Boat_Image[0]" src="{{imgUrl+boats.BoatDetails[0].Boat_Image[0]}}" alt="boat">
+
+                    </div>
+                    <div class="info">
+                        <h4>{{boats.BoatDetails[0].Boat_Name}}</h4>
+                        <div *ngIf="boats.BoatDetails[0]" >
+                        <h5><span><i class="far fa-user"></i>  </span> {{boats.BoatDetails[0].Boat_Facility}}</h5>
+                        <h5><span><i class="fas fa-parking"></i>  </span> {{boats.BoatDetails[0].Location_Name}}</h5>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -14,3 +60,5 @@
 <!-- <small>© Copyright SMART Boating 2021. All Rights Reserved.</small>   -->
 <app-footer-adminsession></app-footer-adminsession>  
 </div>
+
+<!--Create Component for booking details Done By Alagesan on 09.06.2021	-->

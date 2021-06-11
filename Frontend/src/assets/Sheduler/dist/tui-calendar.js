@@ -8850,6 +8850,8 @@ var mmin = Math.min;
  * @property {function} [popupDetailState] - The schedule state(busy or free) text information's template function on the default detail popup
  * @property {function} [popupDetailRepeat] - The schedule repeat information's template function on the default detail popup
  * @property {function} [popupDetailBody] - The schedule body text information's template function on the default detail popup
+ * // Add popup view function //Done By Alagesan on 11.06.2021	 
+ * @property {function} [popupView] - The 'View' button text template function on the default detail popup
  * @property {function} [popupEdit] - The 'Edit' button text template function on the default detail popup
  * @property {function} [popupDelete] - The 'Delete' button text template function on the default detail popup
  * @example
@@ -21882,6 +21884,11 @@ var helpers = {
     },
     'popupDetailBody-tmpl': function(schedule) {
         return schedule.body;
+    }
+    ,
+    // Add popup view function //Done By Alagesan on 11.06.2021	 
+    'popupView-tmpl': function() {
+        return 'View';
     },
     'popupEdit-tmpl': function() {
         return 'Edit';
@@ -23321,6 +23328,23 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     };
 
   return "    <div class=\""
+  // Add popup view function //Done By Alagesan on 11.06.2021	
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":22,"column":16},"end":{"line":22,"column":30}}}) : helper)))
+    + "section-button\">\n      <button class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":23,"column":21},"end":{"line":23,"column":35}}}) : helper)))
+    + "popup-eye\"><span class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":23,"column":60},"end":{"line":23,"column":74}}}) : helper)))
+    + "icon "
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":23,"column":79},"end":{"line":23,"column":93}}}) : helper)))
+    + "ic-eye\"></span><span class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":23,"column":122},"end":{"line":23,"column":136}}}) : helper)))
+    + "content\">"
+    + ((stack1 = ((helper = (helper = lookupProperty(helpers,"popupView-tmpl") || (depth0 != null ? lookupProperty(depth0,"popupView-tmpl") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"popupView-tmpl","hash":{},"data":data,"loc":{"start":{"line":23,"column":145},"end":{"line":23,"column":165}}}) : helper))) != null ? stack1 : "")
+    + "</span></button>\n      <div class=\""
+    + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":24,"column":18},"end":{"line":24,"column":32}}}) : helper)))
+    + "popup-vertical-line\"></div>\n"
+    // Add popup view function //Done By Alagesan on 11.06.2021	 
+
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":22,"column":16},"end":{"line":22,"column":30}}}) : helper)))
     + "section-button\">\n      <button class=\""
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":23,"column":21},"end":{"line":23,"column":35}}}) : helper)))
