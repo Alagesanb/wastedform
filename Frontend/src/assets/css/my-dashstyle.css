@@ -1814,7 +1814,7 @@ button.close {
 
 /* Changes Done By Alagesan on 10.06.2021 */
 .mySlides img {
-    width: 455px !important;
+   /* width: 455px !important; */
     height: 396px !important;
 }
 

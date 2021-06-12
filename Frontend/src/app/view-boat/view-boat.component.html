@@ -59,7 +59,7 @@
 
 <!-- New Edit............ -->
 
-<div class="col-md-7 boat-image-slider">
+<div class="col-md-6 boat-image-slider">
  
   <div class="container" id="id-sliderbinding-First"> 
 
@@ -72,7 +72,66 @@
     </div>
 
   </div>
-    
+  <!--Updated for view boat Done By Alagesan  on 12.06.2021 -->
+
+  <div class="row">
+      
+    <ul class="col-md-6">
+      <h4 class="summer_Duration mt-3" style="width:417px;padding-top: 10px;">Seasons Duration</h4> 
+      <li><h6 style="min-width: 120px;">Summer From </h6> <span>{{Summer_From}}</span> </li> 
+      <li><h6 style="min-width: 115px;">Summer To </h6> <span>{{Summer_To}}</span></li>
+      <!-- <li><h6>Winter From </h6> <span>{{Winter_From}}</span></li>
+      <li><h6>Winter To </h6> <span>{{Winter_To}}</span></li> -->
+    </ul>
+    <ul class="col-md-6">
+      <h4 class="summer_Duration mt-3" style="visibility: hidden;">Seasons Duration</h4> 
+      <li><h6 style="min-width: 115px;">Winter From </h6> <span>{{Winter_From}}</span></li>
+      <li><h6 style="min-width: 110px;">Winter To </h6> <span>{{Winter_To}}</span></li>
+    </ul>
+   </div>
+</div>
+<div class="col-md-6">
+  <h3 class="boat_title" style="margin-left: 15px;">HandBook : <a href={{HandBookUrl}} target="_blank">download</a></h3> 
+    <h3 class="boat_title" style="margin-left: 15px;">Boat Details</h3>
+    <ul class="col-md-12">
+    <div *ngIf="data.Boattype_Name">
+        <li><h6 >Boat Type </h6> <span>{{data.Boattype_Name}}</span></li>
+        </div>
+        <div *ngIf="!data.Boattype_Name">
+          <li><h6>Boat Type </h6> <span>{{data.BoattypeDetails[0].Boat_Type}}</span></li>
+          </div>
+  <li><h6>Owners Allowed </h6> <span>{{data.Owners_Allowed}}</span></li>
+  <div *ngIf="data.Location_Name">
+    <li><h6>Location </h6> <span>{{data.Location_Name}}</span></li>
+    </div>
+    <div *ngIf="!data.Location_Name">
+      <li><h6>Location </h6> <span>{{data.locationDetails[0].Boat_Location}}</span></li>
+      </div>
+        <li><h6>Launch Date </h6> <span>{{Launch_Dates}}</span></li>
+  <li><h6>Pre-Launch Date </h6> <span>{{preDates}}</span></li>
+  <li><h6>Status </h6> <span>{{data.Boat_Status}}</span></li>
+  <li><h6 class="pt-2">Facilities </h6>
+    <span><textarea class="facilities" rows="3" placeholder="Enter Here Text">{{data.Boat_Facility}}
+    </textarea></span>
+  </li> 
+  <li>
+    <h6 class="descr-title mt-2">Description </h6>
+    <textarea class="form-add-boat" rows="5"  placeholder="Enter Here Text">{{data.Boat_Description}}
+    </textarea>
+  </li>
+  </ul>
+</div>
+<div class="row">
+  <div class="col-md-12">
+      <ul class="col-md-6 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
+      <li><h6 class="sum-title">SUMMER WEEKDAYS </h6> <span class="sum-second">{{TotalDaysAssigned_Summer_WeekDays}}</span></li>
+      <li><h6 class="sum-title">SUMMER WEEKENDS </h6> <span class="sum-second">{{TotalDaysAssigned_Summer_WeekEndDays}}</span></li>
+      </ul>
+      <ul class="col-md-6 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
+      <li><h6 class="sum-title">WINTER WEEKDAYS </h6> <span class="sum-second">{{TotalDaysAssigned_Winter_WeekDays}}</span></li>
+      <li><h6 class="sum-title">WINTER WEEKENDS </h6> <span class="sum-second">{{TotalDaysAssigned_Winter_WeekEndDays}}</span></li>
+      </ul>
+  </div>
 </div>
   
       <!-- <div class="col-md-5">
@@ -105,89 +164,9 @@
 
 
 
-<div class="row">
 
-  <div class="col-md-12" style="margin-top: 20px;margin-left:20px;">
+
   
-  
-  
-  <h3 class="boat_title">Boat Details</h3>
-  <div class="row">
-  <ul class="col-md-5 newtitle_design">
-    <div *ngIf="data.Boattype_Name">
-        <li><h6 >Boat Type </h6> <span>{{data.Boattype_Name}}</span></li>
-        </div>
-        <div *ngIf="!data.Boattype_Name">
-          <li><h6>Boat Type </h6> <span>{{data.BoattypeDetails[0].Boat_Type}}</span></li>
-          </div>
-  <li><h6>Owners Allowed </h6> <span>{{data.Owners_Allowed}}</span></li>
-  <div *ngIf="data.Location_Name">
-    <li><h6>Location </h6> <span>{{data.Location_Name}}</span></li>
-    </div>
-    <div *ngIf="!data.Location_Name">
-      <li><h6>Location </h6> <span>{{data.locationDetails[0].Boat_Location}}</span></li>
-      </div>
-        <li><h6>Launch Date </h6> <span>{{Launch_Dates}}</span></li>
-  <li><h6>Pre-Launch Date </h6> <span>{{preDates}}</span></li>
-  <li><h6>Status </h6> <span>{{data.Boat_Status}}</span></li>
-  <li><h6 class="pt-4">Facilities </h6>
-    <span><textarea class="facilities" rows="3" placeholder="Enter Here Text">{{data.Boat_Facility}}
-    </textarea></span>
-  </li> 
-  
-  </ul>
-  <div class="col-lg-7 col-md-8 col-sm-12 col-xs-12">
-    <ul class="col-md-12 col-lg-12">
-    <h6 class="descr-title">Description </h6>
-    <textarea class="form-add-boat" rows="5"  placeholder="Enter Here Text">{{data.Boat_Description}}
-    </textarea>
-    </ul>
-
-    <!-- .................... -->
-
-
-   <div class="row pl-3">
-      
-    <ul class="col-md-6">
-      <h4 class="summer_Duration mt-3">Seasons Duration</h4> 
-      <li><h6>Summer From </h6> <span>{{Summer_From}}</span> </li> 
-      <li><h6>Summer To </h6> <span>{{Summer_To}}</span></li>
-      <!-- <li><h6>Winter From </h6> <span>{{Winter_From}}</span></li>
-      <li><h6>Winter To </h6> <span>{{Winter_To}}</span></li> -->
-    </ul>
-    <ul class="col-md-6">
-      <h4 class="summer_Duration mt-3" style="visibility: hidden;">Seasons Duration</h4> 
-      <li><h6>Winter From </h6> <span>{{Winter_From}}</span></li>
-      <li><h6>Winter To </h6> <span>{{Winter_To}}</span></li>
-    </ul>
-   </div>
-<!-- <span><h6>Winter From </h6> <span>{{Winter_From}}</span></span> -->
-
-
-
-
-    <!-- .................... -->
-
-
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0px;">
-    <div class="col-md-12" style="padding: 0px;">
-    <ul class="col-md-6 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
-    <li><h6 class="sum-title">SUMMER WEEKDAYS </h6> <span class="sum-second">{{TotalDaysAssigned_Summer_WeekDays}}</span></li>
-    <li><h6 class="sum-title">SUMMER WEEKENDS </h6> <span class="sum-second">{{TotalDaysAssigned_Summer_WeekEndDays}}</span></li>
-    </ul>
-    <ul class="col-md-6 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
-    <li><h6 class="sum-title">WINTER WEEKDAYS </h6> <span class="sum-second">{{TotalDaysAssigned_Winter_WeekDays}}</span></li>
-    <li><h6 class="sum-title">WINTER WEEKENDS </h6> <span class="sum-second">{{TotalDaysAssigned_Winter_WeekEndDays}}</span></li>
-    </ul>
-    </div>
-    </div>
-    </div>
-  </div>
-  </div>
-  
-  </div>
-
-  <h3 class="boat_title" style="margin-top: -100px;">HandBook : <a href={{HandBookUrl}} target="_blank">download</a></h3> 
                   
 <div class="row profile-page margin-top"> 
   <div class="col-md-12" style="margin-top: 20px; margin-bottom: 20px;">
@@ -201,8 +180,9 @@
           <div class="body">
               <div class="row">
                  <div class="col-lg-3 col-md-3 col-12">
-                      <div class="profile-image float-md-right"> <img src="/assets/images/owner-img-1.jpg" alt="owner-img"> </div>
-                  </div>
+                      <div class="profile-image float-md-right"> <img *ngIf="!datas.Profile_Image" src="/assets/images/owner-img-1.jpg" alt="owner-img"> </div>
+                      <div class="profile-image float-md-right"> <img *ngIf="datas.Profile_Image" src="{{imgUrl+datas.Profile_Image}}" alt="owner-img"> </div>
+                    </div>
                   <div class="col-lg-7 col-md-9 col-12">
                       <h4 class="m-t-0 m-b-0"><strong>{{datas.First_Name}}</strong> {{datas.Last_Name}}</h4>
                       <span class="email"><i class="far fa-envelope"></i>{{datas.Email}}</span> <br>
@@ -218,19 +198,19 @@
                           <li><a href="owner-details.html"><button><i class="far fa-eye"></i> </button></a></li>
                       </ul>    
                   </div>
-                  
+                  <!--Updated owners for view boat Done By Alagesan  on 12.06.2021 -->
                   <div class="col-md-6 owner-datas">
                       <ul>
                   <li><h6>TOTAL DAYS BOOKED </h6> <span>0</span></li>
-                  <li><h6>SUMMER WEEKENDS </h6> <span>{{data.Winter_WeekEndDays}}</span></li>
-                  <li><h6>WINTER WEEKENDS </h6> <span>{{data.Summer_WeekEndDays}}</span></li>
+                  <li><h6>SUMMER WEEKENDS </h6> <span>{{datas.Winter_WeekEndDays}}</span></li>
+                  <li><h6>WINTER WEEKENDS </h6> <span>{{datas.Summer_WeekEndDays}}</span></li>
                       </ul>
                   </div>  
                   
                     <div class="col-md-6 owner-datas">
                       <ul>
-                  <li><h6>SUMMER WEEKDAYS </h6> <span>{{data.Summer_WeekDays}}</span></li>
-                  <li><h6>WINTER WEEKDAYS </h6> <span>{{data.Winter_WeekDays}}</span></li>
+                  <li><h6>SUMMER WEEKDAYS </h6> <span>{{datas.Summer_WeekDays}}</span></li>
+                  <li><h6>WINTER WEEKDAYS </h6> <span>{{datas.Winter_WeekDays}}</span></li>
                       </ul>
                   </div>  
                   
