@@ -240,8 +240,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-    console.log(this.Stand_by_Booking);
-
+    
 
     this.Cancellations = data['Cancelledresponse']
     this.Cancellations.forEach(element => {
@@ -288,12 +287,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
     });
   
-  this.Cancellations_Count = this.Cancels.length;
-  
-
-
+    this.Cancellations_Count = this.Cancels.length;
     this.New_Booking_Count = this.newBooking.length;
     this.Todays_Booking_Count = this.todaysBooking.length;
+    this.Stand_by_Booking_Count = this.Stand_by_Booking.length;
 
    }, err => {
    })
@@ -336,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
   this.public_baotType_Single_id = loc._id;
 
     this.newBooking = [];
-
+    this.Stand_by_Booking = [];
     this.todaysBooking = [];
     
     this.http.get<any>(`${this.url}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
@@ -426,7 +423,37 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     
-  
+    if(element.Is_StandByBooking == true){
+
+      var obj_s = Object();
+
+      if(element.BoatDetails.length !== 0){
+
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+      this.Stand_by_Booking.push(obj_s);
+
+
+      }      
+
+
+    }
   
   
   
@@ -485,6 +512,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.newBooking = this.newBooking.filter(x => x.Boat_Id == loc._id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Boat_Id == loc._id);
     this.Cancels = this.Cancels.filter(x => x.Boat_Id == loc._id);
+    this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Boat_Id == loc._id);
   }
   else
   {
@@ -492,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.newBooking = this.newBooking.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
     this.Cancels = this.Cancels.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
-
+    this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
 
 
   }
@@ -500,6 +528,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.New_Booking_Count = this.newBooking.length;
     this.Todays_Booking_Count = this.todaysBooking.length;
     this.Cancellations_Count = this.Cancels.length;
+    this.Stand_by_Booking_Count = this.Stand_by_Booking.length;
 
    }, err => {
    });
@@ -513,7 +542,7 @@ document.addEventListener('DOMContentLoaded', function() {
    
    
     this.newBooking = [];
-
+    this.Stand_by_Booking = [];
     this.todaysBooking = [];
     
     this.http.get<any>(`${this.url}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
@@ -571,35 +600,67 @@ document.addEventListener('DOMContentLoaded', function() {
   
         }
     
-    if(updatedates  == todaysDates ){      
-      var obj_s = Object();
+      if(updatedates  == todaysDates ){      
+        var obj_s = Object();
 
-      if(element.BoatDetails.length !== 0){
+        if(element.BoatDetails.length !== 0){
 
-      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
-      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
-      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
-      obj_s.start = element.start;
-      obj_s.Boat_Id =  element.BoatDetails[0]._id;
-      obj_s.end = element.end;
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
 
-      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
-      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
 
-      if(element.OwnerDetails.length !== 0){
+        if(element.OwnerDetails.length !== 0){
 
-        obj_s.First_Name = element.OwnerDetails[0].First_Name;
-        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
-        obj_s.OwnerDetails = element.OwnerDetails[0];
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
 
-      } 
-      this.newBooking.push(obj_s);
+        } 
+        this.newBooking.push(obj_s);
 
-      }      
+        }      
 
-      
+        
 
-    }
+      }
+
+      if(element.Is_StandByBooking == true){
+
+        var obj_s = Object();
+  
+        if(element.BoatDetails.length !== 0){
+  
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
+  
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+  
+        if(element.OwnerDetails.length !== 0){
+  
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
+  
+        } 
+  
+        this.Stand_by_Booking.push(obj_s);
+  
+  
+        }      
+  
+  
+      }
 
     });
 
@@ -659,6 +720,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.newBooking = this.newBooking.filter(x => x.Location_Id == loc._id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Location_Id == loc._id);
     this.Cancels = this.Cancels.filter(x => x.Location_Id == loc._id);
+    this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Location_Id == loc._id);
 
   }
   else
@@ -667,7 +729,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.newBooking = this.newBooking.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
     this.Cancels = this.Cancels.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
-    
+    this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
 
 
   }   
@@ -675,6 +737,7 @@ document.addEventListener('DOMContentLoaded', function() {
     this.New_Booking_Count = this.newBooking.length;
     this.Todays_Booking_Count = this.todaysBooking.length;
     this.Cancellations_Count = this.Cancels.length;
+    this.Stand_by_Booking_Count = this.Stand_by_Booking.length;
 
 
 
