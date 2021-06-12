@@ -67,7 +67,6 @@
   popupEdit: function () {
       return 'Edit';
   },
-
   // Changed function label name //Done By Alagesan on 11.06.2021	
 
   popupDelete: function () {

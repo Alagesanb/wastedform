@@ -1,5 +1,4 @@
 
-
 var public_URL = "http://65.2.28.16/api/Schedule/";
 
 var public_Day_URL = "http://65.2.28.16/api/Days/";
@@ -912,25 +911,23 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
         return convertdLocalTime;
 }
-
-    
-    //data-schedule-id
-       
+   
     $(document).on("click",".tui-full-calendar-weekday-schedule",function() {
-
-       // document.location.href="/booking-details/";
-
-        document.location.href="/booking-details/";
-
        
-
-       var currentId = $(this).attr('data-schedule-id');
-         // Click label redirect page //Done By Alagesan on 10.06.2021	
-        // document.location.href="/booking-details/";
+       var currentId = $(this).attr('data-schedule-id');         
         sessionStorage.setItem("view-Booking-id",currentId);
        public_shedulDataId = currentId;
 
     });
+
+    $(document).on("click",".tui-full-calendar-popup-eye",function() {
+
+         document.location.href="/booking-details/"; 
+         var currentId = $(this).attr('data-schedule-id');          
+         sessionStorage.setItem("view-Booking-id",currentId);
+         public_shedulDataId = currentId;
+ 
+     });
 
     $(document).on("click",".tui-full-calendar-popup-delete",function() {
        

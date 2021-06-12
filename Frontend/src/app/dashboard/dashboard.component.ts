@@ -33,10 +33,11 @@ export class DashboardComponent implements OnInit {
   Boat_Name_dropDown :any = "Select Boat";
   allBoats: any;
   dropdown_Boat_List: any = [];
+  Stand_by_Booking :any = [];
 
   public_LocationType_id :any = null;
   public_baotType_Single_id :any = null;
-
+  searchText: any = '';
 
   constructor(private httpClient: HttpClient,private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute) {
@@ -88,6 +89,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
   }
+
+   getFormattedDate_WithOut_Zero_Time(dateVal) {
+    var newDate = new Date(dateVal);
+
+    var sMonth = this.padValue(newDate.getMonth() + 1);
+    var sDay = this.padValue(newDate.getDate());
+    var sYear = newDate.getFullYear();  
+    
+    return sDay + "-" + sMonth + "-" + sYear;
+}
+
+ padValue(value) {
+  return (value < 10) ? "0" + value : value;
+}
+
+
+
+
   getBooking(){
     this.http.get<any>(`${this.url}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
      
@@ -95,17 +114,26 @@ document.addEventListener('DOMContentLoaded', function() {
       this.Booking = data['response']
       this.Booking.forEach(element => {
         
-        var obj2 = Object();
-        var obj3 = Object();
+       
       var date = new Date(element.Current_Time);
       var upadtedate = new Date(element.Updated_time);
+       
 
       var dates = date.getDate()
       var todaysDate = new Date();
 
-      var updatedates = upadtedate.getDate()
-      var todaysDates = todaysDate.getDate()
-    if(dates  == todaysDates ){
+      var updatedates = upadtedate.getDate();
+      var todaysDates = todaysDate.getDate();
+
+      var to_date = new Date();
+      var to_date_only = this.getFormattedDate_WithOut_Zero_Time(to_date);// to_date.getDay();
+
+      var start_Date = new Date(element.start);
+      var start_Date_only = this.getFormattedDate_WithOut_Zero_Time(start_Date); //start_Date.getDay();
+
+      
+
+    if(to_date_only  == start_Date_only ){
 
       var obj_s = Object();
 
@@ -172,7 +200,47 @@ document.addEventListener('DOMContentLoaded', function() {
       
     }
 
+    if(element.Is_StandByBooking == true){
+
+      var obj_s = Object();
+
+      if(element.BoatDetails.length !== 0){
+
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+      this.Stand_by_Booking.push(obj_s);
+
+
+      }      
+
+
+    }
+
+    //this to start..................
+
+
+
+
+
     });
+
+    console.log(this.Stand_by_Booking);
 
 
     this.Cancellations = data['Cancelledresponse']
@@ -286,7 +354,17 @@ document.addEventListener('DOMContentLoaded', function() {
       var updatedates = upadtedate.getDate();
       var todaysDates = todaysDate.getDate();
 
-      if(dates  == todaysDates ){
+
+      var to_date = new Date();
+      var to_date_only = this.getFormattedDate_WithOut_Zero_Time(to_date);// to_date.getDay();
+
+      var start_Date = new Date(element.start);
+      var start_Date_only = this.getFormattedDate_WithOut_Zero_Time(start_Date); //start_Date.getDay();
+
+
+
+
+      if(to_date_only  == start_Date_only ){
 
         var obj_s = Object();
   
@@ -453,7 +531,15 @@ document.addEventListener('DOMContentLoaded', function() {
       var updatedates = upadtedate.getDate();
       var todaysDates = todaysDate.getDate();
 
-      if(dates  == todaysDates ){
+      var to_date = new Date();
+      var to_date_only = this.getFormattedDate_WithOut_Zero_Time(to_date);// to_date.getDay();
+
+      var start_Date = new Date(element.start);
+      var start_Date_only = this.getFormattedDate_WithOut_Zero_Time(start_Date); //start_Date.getDay();
+
+
+
+      if(to_date_only  == start_Date_only ){
 
         var obj_s = Object();
   
