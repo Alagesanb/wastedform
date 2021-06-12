@@ -8,8 +8,8 @@
         <div class="page contents">
             <div class="row">
 
-                <div class="col-md-12 dash-filter">   
-                    <div class="dropdown" style="float: right;">  
+                
+                <div class="col-md-4">  
 
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">{{Location_Name_dropDown}}
                         <span><i class="fas fa-filter"></i></span></button>
@@ -22,9 +22,17 @@
                         
                     </ul>
                 </div>
+
+                <div class="col-md-4">
+                  <div class="input-group mb-3">
+                      <input type="text" class="form-control" style="height: 36px;" [(ngModel)]="searchText" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                   
+                  </div>
+               </div>
+  
                           
-                <div class="dropdown" style="float: right;">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{Boat_Name_dropDown}}
+                <div class="col-md-4" style="float: right;" >
+                    <button class="btn btn-primary dropdown-toggle btn-BoatName-dropdown"  type="button" data-toggle="dropdown">{{Boat_Name_dropDown}}
                     <span><i class="fas fa-filter" aria-hidden="true"></i></span></button>
                     <ul class="dropdown-menu">
                         <input class="form-control" id="myInput" type="text" placeholder="Search.." [(ngModel)]="searchLoction_Boat">
@@ -36,25 +44,12 @@
                 </div>
                           
                           
-                         </div>
+                         
 
             
            </div>
 
-           <div class="row">
-
-            <div class="col-md-4 boat-search">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" style="height: 36px;" [(ngModel)]="searchText" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <!-- <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" style="height: 36px;" type="button"><i class="fas fa-search"></i></button>
-                    </div> -->
-                </div>
-             </div>
-
-
-           </div>
-           
+                     
            
            <div class="row">
                <div class="boxings">
@@ -101,16 +96,12 @@
                                                     <table class="">
                                                        <thead>
                                                           <tr>
-                                                            <button type="button" class="fc-prev-button fc-button fc-button-primary" aria-label="prev" >
-                                                              <span class="fa fa-angle-left"></span>
-                                                            </button>
-                                                            <button type="button" class="fc-next-button fc-button fc-button-primary" aria-label="next">
-                                                              <span class="fa fa-angle-right"></span>
-                                                            </button>
+                                                            <button class="btn-primary btn"> <span class="fa fa-angle-left"></span></button>
+                                         <button class="btn-primary btn"> <span class="fa fa-angle-right"></span></button>
                                                              <th class="fc-day-header fc-widget-header fc-sun">
                                                                <h3 style="margin: -25px 0px 0px 0px;">June 11, 2021</h3>
                                                              </th>
-                                                              <button type="button" class="fc-dayGridMonth-button fc-button fc-button-primary fc-button-active">month</button>
+                                                              <button type="button" class="btn-primary btn cls-month-btn">month</button>
                                                                 </tr>
                      
                                                        </thead>

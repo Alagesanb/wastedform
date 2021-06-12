@@ -218,3 +218,24 @@ border-color: #393f4b;
 
 }
 
+.btn-previous{
+  background-color:#393f4b;
+  color: white;
+  width:20px;
+  height: 20px;
+
+}
+
+.btn-next {
+    background-color:#393f4b;
+  color: white;
+  width:20px;
+  height: 20px;
+}
+.cls-month-btn{
+  float: right;
+}
+.btn-BoatName-dropdown{
+  width: 100%;
+}
+
