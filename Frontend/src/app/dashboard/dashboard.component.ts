@@ -43,6 +43,12 @@ export class DashboardComponent implements OnInit {
     private route: ActivatedRoute) {
      }
   ngOnInit(): void {
+
+    var public_URL_Schedule = "http://65.2.28.16/api/Schedule/";
+     
+      var ScheduleList = null;
+
+
       this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
       if(this.adminlogin==false){
         this.router.navigate(['']);
@@ -51,53 +57,25 @@ export class DashboardComponent implements OnInit {
         //this.getCancellations();
         this.getLoction();
         this.getAllBoat();
-
+        var getallBoats;     
+        
         sessionStorage.setItem("relodePg_book-for-owner","1");
         sessionStorage.setItem("Adminbooking-relodePg","1");
         sessionStorage.setItem("boat-maintenance-reload","1");
         sessionStorage.setItem("view-boat-reload","1");
 
-        // function selectDate(date) 
-        // {
-        //       $('.calendar-wrapper').updateCalendarOptions({
-        //         date: date
-        //         });
-              
-        //       var defaultConfig = {
-        //         weekDayLength: 1,
-        //         date: new Date(),
-        //         onClickDate: selectDate,
-        //         showYearDropdown: true,
-        //       };
-
-        //       $('.calendar-wrapper').calendar(defaultConfig);
-
-        //       $(document).ready(function(){
-        //         $("#myInput").on("keyup", function() {
-        //           var value = $(this).val().toLowerCase();
-        //           $(".dropdown-menu li").filter(function() {
-        //             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-        //           });
-        //         });
-        //       });
-
-
-        //       document.addEventListener('DOMContentLoaded', function() {
-        //         var calendarEl = document.getElementById('calendar');
-
-                
-        //       });
-
-        // }
-
+       
         ///////////......................Resource Timeline ..Start...........
 
         var public_CurruntSet_Date_Month;
         var public_CurruntSet_Date_Year;
+        var public_sheduler_totaldaysbased = [];
         
-        Resource_Timeline();
+        ViewAllSchedule();
+        
         function Resource_Timeline(){
 
+          
           var currnt_Month = Month_Genarator(new Date() );
           var currnt_Year = Year_Genarator(new Date());
           $(".cls-span-Month").text(currnt_Month);
@@ -134,90 +112,172 @@ export class DashboardComponent implements OnInit {
 
         });
 
-      function Days_Genarator(){
-        
-       // var tmp_mon = dateVal.getMonth();
+      function Days_Genarator(){        
+       
         var result = [];
         var days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+        var monthNames = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ];
+        var monthNames_Number = [ "1", "2", "3", "4", "5", "6",
+            "7", "8", "9", "10", "11", "12" ];
 
         var r = getDaysInMonth();
         
         $.each(r, function(k, v)
-        {          
-             var formatted = v.getDate() +" "+ days[v.getDay()] ;
-          result.push(formatted);
+        { 
+          
+          var obj = Object();
+          obj.Day_week = v.getDate() +" "+ days[v.getDay()] ;
+          obj.day = v.getDate();
+          obj.month = monthNames[v.getMonth()];
+          obj.month_Number = monthNames_Number[v.getMonth()];
+          obj.year = v.getFullYear();       
+          
+          result.push(obj);
         });
 
         Binding_TR_Resource_Timeline(result);
 
-        //this to start.......
-
-       // console.log(result);
       } 
       
       function Binding_TR_Resource_Timeline(values)
-      {
-        
-        $("#dtHorizontalVerticalExample").html("");
-        var tmp_Bind_TH = '<td style="width:270px; font-weight: 500;">Boats</td>';
-        var tmp_Bind_TR , tmp_Bind_TD;
-        $.each(values, function(key, val)
-        {
-            
-          tmp_Bind_TH += '<td style="width:70px; font-weight: 500;">'+val+'</td>'; 
-             
-        });
+      {        
+        if(typeof getallBoats !== "undefined" && getallBoats != null)
+        {         
+         
+          $("#dtHorizontalVerticalExample").html("");
+          var tmp_Bind_TH = '<td style="width:270px; font-weight: 500;">Boats</td>';
+          var tmp_Bind_TR , tmp_Bind_TD;
+          $.each(values, function(key, val)
+          {
+              
+            tmp_Bind_TH += '<td style="width:40px; font-weight: 500;">'+val.Day_week+'</td>'; 
+               
+          });
+  
+          var tmp1 = 0;          
+          $.each(getallBoats, function(key, val)
+          {
+                   
+              tmp_Bind_TD = '<td id="'+val._id+'">'+val.Boat_Name+'</td>';
+              var temp_SheduleList = ScheduleList;
+              temp_SheduleList = public_sheduler_totaldaysbased.filter(x => x.Boat_Id == val._id)
+              
+              $.each(values, function(key2, val2)
+              {                  
 
-        var tmp1 = 0;
-        var tmp_count = 1;
-        $.each(values, function(key, val)
-        {
+                var tmp_sort = temp_SheduleList.find(x => x.day == val2.day &&
+                  x.month_Number == val2.month_Number && x.year == val2.year
+                  );                                
 
-            var tmp2 = 0;
-            $.each(values, function(key2, val)
-            {
-              if(tmp2 == 0)
-              {
-                tmp_Bind_TD = '<td>Boats name '+tmp_count+'</td>';
-                tmp2 =1;
+                 if(typeof tmp_sort !== "undefined" && tmp_sort != null)
+                 {
+                  tmp_Bind_TD += '<td style="background-color: '+tmp_sort.borderColor+';"></td>'; 
+                 }
+                 else
+                 {
+                  tmp_Bind_TD += '<td></td>';
+
+                 }                   
+  
+              });
+  
+              if(tmp1 == 0)
+              {                
+                tmp_Bind_TR = '<tr>'+tmp_Bind_TD+'</tr>';
+                tmp1 = 1;
               }
               else
-              {
-                tmp_Bind_TD += '<td></td>'; 
-
-              }
-              
-              
-              
-            });
-
-            if(tmp1 == 0)
-            {
-              tmp_Bind_TD += '<td></td>';
-              tmp_Bind_TR = '<tr>'+tmp_Bind_TD+'</tr>';
-              tmp1 = 1;
-            }
-            else
-            {
-              tmp_Bind_TD += '<td></td>';
-              tmp_Bind_TR += '<tr>'+tmp_Bind_TD+'</tr>';
-
-            }
-            
-            tmp_count = tmp_count + 1;
+              {                
+                tmp_Bind_TR += '<tr>'+tmp_Bind_TD+'</tr>';
+  
+              }              
+               
+          });
+         
           
-             
-        });
-        debugger;
+          tmp_Bind_TH = '<tr>'+tmp_Bind_TH+'</tr>';
+  
+          $("#dtHorizontalVerticalExample").html(tmp_Bind_TH + tmp_Bind_TR);
+
+        }        
+     
+        else
+        {
+          alert("Boat data is not loaded please refresh the page.");
+          
+        }
+    }
+
+
+    function getDaysInMonth_Sheduler(datas_Arry){
+
+    
+        var monthNames = [ "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December" ];
+        var monthNames_Number = [ "1", "2", "3", "4", "5", "6",
+            "7", "8", "9", "10", "11", "12" ];
+      
+      $.each(datas_Arry, function(key, val){
+
+        var tmp1 = val;
+        var tmp1_StartDate = new Date(tmp1.start);
+        var tmp2_EndDate = new Date(tmp1.end);
+  
+  
+        var tmp_month = tmp1_StartDate.getMonth();
+        var tmp_year = tmp1_StartDate.getFullYear();
+        var tmp_Date = tmp1_StartDate.getDate();
+  
+        var date = new Date(tmp_year, tmp_month, tmp_Date);        
         
-        tmp_Bind_TH = '<tr>'+tmp_Bind_TH+'</tr>';
+        do
+        {
+          
+           var obj = Object();
+          var tmp_dt = new Date(date);
+          obj.fullofTheDate = tmp_dt;
+          obj.day = tmp_dt.getDate();
+          obj.month = monthNames[tmp_dt.getMonth()];
+          obj.month_Number = monthNames_Number[tmp_dt.getMonth()];
+          obj.year = tmp_dt.getFullYear(); 
+          
+           obj.User_RoleType = val.User_RoleType;
+           obj.id = val.id;
+            
+           obj.title = val.title;
+          
+        
+           obj.start = val.start;
+           obj.end = val.end;    
+        
+         
+            obj.color = val.color;
+            obj.bgColor = val.bgColor;
+            obj.dragBgColor = val.dragBgColor;
+            obj.borderColor = val.borderColor;
 
-        $("#dtHorizontalVerticalExample").html(tmp_Bind_TH + tmp_Bind_TR);
+            obj.Boat_Id = val.Boat_Id;
+            obj.Boat_Name = val.Boat_Name;
 
-      }
+          public_sheduler_totaldaysbased.push(obj);         
+           date.setDate(date.getDate() + 1);
+           var tmp_Add_Date = new Date(date);
+  
+        }while(tmp_Add_Date <= tmp2_EndDate)
+       
+
+      });
+       
+     
 
 
-      function getDaysInMonth(){
+
+     
+    };
+
+
+    function getDaysInMonth(){
        
         var tmp_month = public_CurruntSet_Date_Month.getMonth();
         var tmp_year = public_CurruntSet_Date_Year.getFullYear();
@@ -230,8 +290,6 @@ export class DashboardComponent implements OnInit {
         }
         return days;
     };
-
-
 
       function Month_Genarator(dateVal) {
           var newDate = new Date(dateVal);
@@ -276,25 +334,225 @@ export class DashboardComponent implements OnInit {
         return date;
     }
 
-  function addyear(date, year) 
-  { 
-    var tmp_mon = public_CurruntSet_Date_Month.getFullYear(); 
-    var tmp_year =  public_CurruntSet_Date_Year.getFullYear();
+    function addyear(date, year) 
+    { 
+      var tmp_mon = public_CurruntSet_Date_Month.getFullYear(); 
+      var tmp_year =  public_CurruntSet_Date_Year.getFullYear();
 
-    if(tmp_mon != tmp_year)
-    {   
-      var d = date.getMonth();    
-      date.setFullYear(date.getFullYear() + +year);
-      if (date.getMonth() != d) {
-        date.setDate(0);
+      if(tmp_mon != tmp_year)
+      {   
+        var d = date.getMonth();    
+        date.setFullYear(date.getFullYear() + +year);
+        if (date.getMonth() != d) {
+          date.setDate(0);
+        }
       }
+      return date;
     }
-    return date;
-  }
+
+
+    function ViewAllSchedule()
+    {      
+      ScheduleList = [];   
+
+      $.ajax({
+          url: public_URL_Schedule+"ViewAllSchedule",
+          type: 'GET',
+          dataType: 'json',        
+          success: function(datas) {
+              var respon =  datas.response;
+                        
+              $.each(respon, function (key, val) {                
+                  generateRandomSchedule(val);                 
+              });
+
+              getDaysInMonth_Sheduler(ScheduleList);
+              getallBoats_Func();
+
+              
+
+          },
+          error: function (error) {          
+              //$("#responceDiv").html(error.responseText);            
+            }
+      });
+      
+    }
+
+    function getallBoats_Func(){
+
+      var obj = Object();      
+        obj.alphabet = ""; 
+
+      $.ajax({
+        url: public_URL_Schedule+"GetBoatNames",
+        type: 'POST',
+        dataType: 'json', 
+        data: obj,
+        success: function(datas) {
+          
+          getallBoats = datas.response;
+          Resource_Timeline();          
+            
+        },
+        error: function (error) { 
+            
+            alert(error);
+            console.log(error);
+                       
+        }
+    });
+
+    }
+
+  function generateRandomSchedule(val){
+    
+        var schedule = Object();
+
+        if(val.User_RoleType == "Admin")
+        {
+            schedule.User_RoleType = "Admin"
+            schedule.id = val._id;
+            
+            schedule.title = val.title;
+            schedule.body = "";
+            schedule.isReadOnly = val.isReadOnly;
+        
+            schedule.isAllday = val.isAllday;
+            schedule.category = val.category;
+        
+            schedule.start = val.start;
+            schedule.end = val.end;    
+        
+            schedule.isAllday  = val.isAllday;
+            schedule.isFocused = val.isFocused;
+            schedule.isPending = val.isPending;
+            schedule.isVisible = val.isVisible;
+        
+            schedule.dueDateClass = val.dueDateClass;  
+            
+            schedule.isPrivate = val.isPrivate;
+            
+            schedule.location = val.location;
+            //var attendees_arry = generateNames();
+        
+            schedule.attendees = val.attendees; 
+            schedule.recurrenceRule = val.recurrenceRule;
+            schedule.state = val.state;
+            schedule.color = "#ffffff";
+            schedule.bgColor = "#047b0f";
+            schedule.dragBgColor = "#047b0f";
+            schedule.borderColor = "#047b0f";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
+            schedule.Owner_Id = val.User_Id;  
+
+            ScheduleList.push(schedule);
+
+
+        }
+        else if(val.User_RoleType == "Owner")
+        {
+
+          schedule.User_RoleType = "Owner"
+        
+            schedule.id = val._id;//chance.guid();
+            //schedule.calendarId = calendar.id;
+            schedule.title = val.title;// +" "+ getFormattedDate(val.start)+ " to " + getFormattedDate(val.end);;
+            schedule.body = "";//val.body; 
+            schedule.isReadOnly = val.isReadOnly;
+        
+            schedule.isAllday = val.isAllday;
+            schedule.category = val.category;
+        
+            schedule.start = val.start;
+            schedule.end = val.end;    
+        
+            schedule.isAllday  = val.isAllday;
+            schedule.isFocused = val.isFocused;
+            schedule.isPending = val.isPending;
+            schedule.isVisible = val.isVisible;
+        
+            schedule.dueDateClass = val.dueDateClass;  
+            
+            schedule.isPrivate = val.isPrivate;
+            
+            schedule.location = val.location;
+            //var attendees_arry = generateNames();
+        
+            schedule.attendees = val.attendees; 
+            schedule.recurrenceRule = val.recurrenceRule;
+            schedule.state = val.state;
+            schedule.color = "#ffffff";
+            schedule.bgColor = "#D50000";
+            schedule.dragBgColor = "#D50000";
+            schedule.borderColor = "#D50000";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
+            schedule.Owner_Id = val.User_Id;  
+
+            ScheduleList.push(schedule);
+
+        }
+        else if(val.User_RoleType == "Maintenance")
+        {
+
+          schedule.User_RoleType = "Maintenance"
+            schedule.id = val._id;//chance.guid();
+            //schedule.calendarId = calendar.id;
+            schedule.title = val.title;// +" "+ getFormattedDate(val.start)+ " to " + getFormattedDate(val.end);;
+            schedule.body = "";//val.body; 
+            schedule.isReadOnly = val.isReadOnly;
+        
+            schedule.isAllday = val.isAllday;
+            schedule.category = val.category;
+        
+            schedule.start = val.start;
+            schedule.end = val.end;    
+        
+            schedule.isAllday  = val.isAllday;
+            schedule.isFocused = val.isFocused;
+            schedule.isPending = val.isPending;
+            schedule.isVisible = val.isVisible;
+        
+            schedule.dueDateClass = val.dueDateClass;  
+            
+            schedule.isPrivate = val.isPrivate;
+            
+            schedule.location = val.location;
+            //var attendees_arry = generateNames();
+        
+            schedule.attendees = val.attendees; 
+            schedule.recurrenceRule = val.recurrenceRule;
+            schedule.state = val.state;
+            schedule.color = "#ffffff";
+            schedule.bgColor = "#2c46f8";
+            schedule.dragBgColor = "#2c46f8";
+            schedule.borderColor = "#2c46f8";
+
+            schedule.Boat_Id = val.Boat_Id;
+            schedule.Boat_Name = val.Boat_Name;
+
+            schedule.Owner_Id = val.User_Id;  
+
+            ScheduleList.push(schedule);
+        }
+
+        
+
+    
+
+
+
 
 
   
 
+  }
 
 ///////...................Resource Timeline end...............
   }
@@ -502,15 +760,6 @@ export class DashboardComponent implements OnInit {
   }
   
 
-  // getCancellations(){
-  //   this.http.get<any>(`${this.url}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
-     
-
-  
-  //  }, err => {
-  //  })
-  // }
-
   getLoction(){
     this.http.get<any>(`${this.url_Boat}/GetLocation`).subscribe(data => {    
      
@@ -525,7 +774,8 @@ export class DashboardComponent implements OnInit {
     var obj = Object();
              obj.alphabet = "";
            this.http.post<any>(`${this.url_Boat_Shedule}/GetBoatNames`, obj).subscribe(data => { 
-             this.dropdown_Boat_List = data.response;                   
+             this.dropdown_Boat_List = data.response;                          
+                               
                      
              }, err => {
                console.log(err);
