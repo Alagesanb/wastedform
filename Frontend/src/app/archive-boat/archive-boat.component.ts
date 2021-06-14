@@ -21,6 +21,8 @@ export class ArchiveBoatComponent implements OnInit {
   loctions: any=[];
   searchLoction: any = '';
   adminlogin: any;
+  boatId: any;
+  getResponce: any;
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,private SpinnerService: NgxSpinnerService) { 
    
@@ -67,6 +69,25 @@ getArchiveBoat(){
         console.log(err);
       })
 }
+
+deleteBoat(){
+  var boadtId = {
+    _id : this.boatId
+  }
+  this.http.post<any>(`${this.url}/DeleteBoat`,  boadtId   ).subscribe(data => {
+      if(data.status==false){
+      alert(data.message)
+      }
+      else if(data.status==true){
+        this.getResponce = data.message
+        $('#removeBoat').trigger('click');  
+        $('#pop-up-btn').trigger('click');
+      } 
+      }, err => {
+        console.log(err);
+      })
+}
+
 getLoction(){
   this.http.get<any>(`${this.url}/GetLocation`).subscribe(data => {
    
@@ -92,4 +113,21 @@ getLoctionTypeId(id){
      })
 
   }
+
+  viewBoat(boat){
+    sessionStorage.setItem('boatData', JSON.stringify(boat));   // if it's object
+
+    this.router.navigate(['view-boat/']);
+  }
+  editBoat(boat){
+    sessionStorage.setItem('boatData', JSON.stringify(boat));   // if it's object
+    this.router.navigate(['edit-boat/']);
+  }
+
+  deleteBoatModel(id){
+    this.boatId = id
+    $('#removeBoat').trigger('click');
+
+  }
+
 }

@@ -46,30 +46,39 @@
                 
              <div class="card col-md-4" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
              <!--Update view boat redirect for archive boat Done By Alagesan  on 13.06.2021 -->
+                <div class="profile-pic">
+                    <a ><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
+                    <a ><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
+                    <ul class="edit">
+                        <li>  <a (click)=editBoat(boat)><i class="far fa-edit"></i></a></li>
+                      <li>  <a (click)=viewBoat(boat)><i class="far fa-eye"></i></a></li>
+                      <li>  <a (click)=deleteBoatModel(boat._id)><i class="far fa-trash-alt"></i></a></li>
+   
+   
+                      </ul>
+                </div>
+                 
+                <div class="card-body">
+                <a href="#" class="card-link"><i class="fas fa-map-marker-alt"></i>  {{boat.locationDetails[0].Boat_Location}}</a>
+                <!-- <a href="#" class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a> -->
+                </div>                    
+                <div class="card-header">
+                <a href="#"> {{boat.Boat_Name}}</a>
+                </div>
 
-                 <a ><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
-                 <a ><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
-<div class="card-body">
-<a href="#" class="card-link"><i class="fas fa-map-marker-alt"></i>  {{boat.locationDetails[0].Boat_Location}}</a>
-<!-- <a href="#" class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a> -->
-</div>                    
-<div class="card-header">
-<a href="#"> {{boat.Boat_Name}}</a>
-</div>
+                <div class="card-body row">                    
+                <!-- <div class="booking-days col-md-6">
+                <h6>100/300 Days </h6>
+                </div> -->
+                
+                <!-- <div class="owner-nos col-md-6">
+                    <h6>0/ {{boat.Total_Days}} Days </h6> -->
 
-<div class="card-body row">                    
-<!-- <div class="booking-days col-md-6">
-<h6>100/300 Days </h6>
- </div> -->
- 
- <!-- <div class="owner-nos col-md-6">
-    <h6>0/ {{boat.Total_Days}} Days </h6> -->
-
-    <!-- <h6>100/ {{boat.Total_Days}} Days </h6> -->
-<!-- </div> -->
- 
-</div>                   
-</div>
+                    <!-- <h6>100/ {{boat.Total_Days}} Days </h6> -->
+                <!-- </div> -->
+                
+                </div>                   
+                </div>
           
             </div>  
          </div>
@@ -79,3 +88,53 @@
 <small>© Copyright SMART Boating 2021. All Rights Reserved.</small>    
 </div>
 <!--Create Component for archive boat Done By Alagesan  on 20.05.2021 -->
+
+
+<!-- --------- -->
+<!--Update Delete modal for archive boat Done By Alagesan  on 14.06.2021 -->
+
+<button style="display:none" type="button" id="removeBoat" class="btn btn-info btn-lg" data-toggle="modal" data-target="#removeBoats">Open Modal</button>
+
+<!-- Modal -->
+<!--Update boat modal  for all boat Done By Alagesan  on 14.06.2021 -->
+<div class="modal fade" id="removeBoats" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content" style="width:600px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Boat</h4>
+      </div>
+      <div class="modal-body">
+     <span class="red">ARE YOU SURE ?</span>
+        <p>The boat has upcoming booking so it cannot be deleted</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  data-dismiss="modal">OK</button>
+       </div>
+    </div>
+
+  </div>
+</div>
+<button style="display:none" type="button" id="pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Boat </h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getResponce}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+
+  </div>
+</div>
