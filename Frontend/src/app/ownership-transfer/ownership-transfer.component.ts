@@ -26,7 +26,9 @@ export class OwnershipTransferComponent implements OnInit {
   boats: any=[];
   dropdownList = [];
   dropdownList_filted = [];
+  dropdownNewBoat: any;
   dropdownOwn: any;
+
   adminlogin: any;
 
 
@@ -42,7 +44,7 @@ export class OwnershipTransferComponent implements OnInit {
     }
     this.sidemenuloder();
     this.getOwners()
-    this.getBoats()
+    // this.getBoats()
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
@@ -73,6 +75,8 @@ this.dropdownOwnerSettings = {
   //maxHeight : 100        
  
 };
+
+
   }
   getOwners(){
    
@@ -92,31 +96,73 @@ this.dropdownOwnerSettings = {
    }, err => {
    })
   }
-  onItemOwnerSelect(item: any) {
+  onItemNewOwnerSelect(item: any) {
    
+  }
+  onItemOwnerSelect(item: any) {
+    console.log(item.item_id)
+    this.Fun_getallDropDownDatas(item.item_id)
   }
   onOwnerSelectAll(items: any) {
     
   }
-  getBoats(){
-    var obj = Object();
-    obj.alphabet = "";
-    this.http.get<any>(`${this.OwnerUrl}/GetBoat`).subscribe(data => {
-  this.boats = data['response'];
-  this.dropdownList = data.response;                    
-             var tempArray = [];
-             data.response.forEach(element => {
-                   var obj2 = Object();
-                   obj2.item_id = element._id,
-                   obj2.item_text = element.Boat_Name
-                   tempArray.push(obj2);
- 
-             });
-             this.dropdownList_filted = tempArray;  
-  
-   }, err => {
-   })
+
+  Fun_getallDropDownDatas(owner_drp_Id){ 
+    
+     
+    this.dropdownList = [];       
+      var obj = Object();
+        obj.owner_id = owner_drp_Id;
+      this.http.post<any>(`${this.OwnerUrl}/GetBoatNameByOwnerId`, obj).subscribe(data => { 
+        
+                            
+        var tempArry = [];
+        var tempArry2 = [];
+               
+        data.response.forEach(element => {
+
+          element.BoatDetails.forEach(element2 => {
+            if(element2.IsActive == true){
+
+            
+            var obj2 = Object();
+              obj2.item_id = element2._id,
+              obj2.item_text = element2.Boat_Name
+              tempArry.push(obj2);
+
+            }
+
+          });
+              
+
+        });
+        this.dropdownList_filted = tempArry; 
+        
+      
+        }, err => {
+          console.log(err);
+        })
   }
+
+  // getBoats(){
+  //   var obj = Object();
+  //   obj.alphabet = "";
+  //   this.http.get<any>(`${this.OwnerUrl}/GetBoat`).subscribe(data => {
+  // this.boats = data['response'];
+  // this.dropdownList = data.response;                    
+  //            var tempArray = [];
+  //            data.response.forEach(element => {
+  //                  var obj2 = Object();
+  //                  obj2.item_id = element._id,
+  //                  obj2.item_text = element.Boat_Name
+  //                  tempArray.push(obj2);
+ 
+  //            });
+  //            this.dropdownList_filted = tempArray;  
+  
+  //  }, err => {
+  //  })
+  // }
   onboatSelect(items: any) { 
  
   }

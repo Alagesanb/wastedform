@@ -63,11 +63,11 @@
     <label>New Owner </label> 
     <ng-multiselect-dropdown
     [placeholder]="'Select'"
-    [(ngModel)]="dropdownBoat"
+    [(ngModel)]="dropdownNewBoat"
     [ngModelOptions]="{standalone: true}" 
     [settings]="dropdownOwnerSettings"
     [data]="dropdownOwnerList_filted"                                    
-    (onSelect)="onItemOwnerSelect($event)"
+    (onSelect)="onItemNewOwnerSelect($event)"
     (onSelectAll)="onOwnerSelectAll($event)"
     class="singleselect_drop"
    >
