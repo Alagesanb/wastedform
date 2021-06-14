@@ -40,6 +40,7 @@ export class ViewBoatComponent implements OnInit {
 	TotalDaysAssigned_Summer_WeekEndDays :any;
 	TotalDaysAssigned_Winter_WeekDays :any;
 	TotalDaysAssigned_Winter_WeekEndDays :any;
+	boatStatus: string;
 
 	constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
 	
@@ -86,10 +87,17 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 	 this.data = JSON.parse(sessionStorage.getItem('boatData')); 
      this.GetTotalDaysAssigned();
 	 ////////////
+
+	 if(this.data.Boat_Status=="1"){
+this.boatStatus = "Enable"
+	 }else if(this.data.Boat_Status=="0"){
+		this.boatStatus = "Disable"
+
+	 }
 	 var Launch_Date = new Date(this.data.Launch_Date);
-	 this.Launch_Dates = (Launch_Date.getDate()-1)+'-' + (Launch_Date.getMonth()+1) + '-'+Launch_Date.getFullYear();
+	 this.Launch_Dates = (Launch_Date.getDate())+'-' + (Launch_Date.getMonth()+1) + '-'+Launch_Date.getFullYear();
 	 var preDate = new Date(this.data.PreLaunch_Date);
-	 this.preDates = (preDate.getDate()-1)+'-' + (preDate.getMonth()+1) + '-'+preDate.getFullYear();
+	 this.preDates = (preDate.getDate())+'-' + (preDate.getMonth()+1) + '-'+preDate.getFullYear();
 
 	 var summer_From_Date = new Date(this.data.SummerSeason_SDate);
 	 this.Summer_From = (summer_From_Date.getDate())+'-' + (summer_From_Date.getMonth()+1) + '-'+summer_From_Date.getFullYear();
@@ -305,7 +313,6 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 		Boat_id :boatdats._id
 	}	
 	this.http.post<any>(`${this.OwnerUrl}/GetTotalDaysAssigned`, obj   ).subscribe(data => {
-		debugger;
 		var resu = data.Response;
 
 		this.TotalDaysAssigned_Summer_WeekDays = resu[0].Summer_WeekDays;

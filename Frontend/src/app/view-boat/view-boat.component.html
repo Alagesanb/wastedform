@@ -109,14 +109,14 @@
       </div>
         <li><h6>Launch Date </h6> <span>{{Launch_Dates}}</span></li>
   <li><h6>Pre-Launch Date </h6> <span>{{preDates}}</span></li>
-  <li><h6>Status </h6> <span>{{data.Boat_Status}}</span></li>
+  <li><h6>Status </h6> <span>{{boatStatus}}</span></li>
   <li><h6 class="pt-2">Facilities </h6>
-    <span><textarea class="facilities" rows="3" placeholder="Enter Here Text">{{data.Boat_Facility}}
+    <span><textarea class="facilities" readonly rows="3" placeholder="Enter Here Text">{{data.Boat_Facility}}
     </textarea></span>
   </li> 
   <li>
     <h6 class="descr-title mt-2">Description </h6>
-    <textarea class="form-add-boat" rows="5"  placeholder="Enter Here Text">{{data.Boat_Description}}
+    <textarea class="form-add-boat" rows="5" readonly placeholder="Enter Here Text">{{data.Boat_Description}}
     </textarea>
   </li>
   </ul>
