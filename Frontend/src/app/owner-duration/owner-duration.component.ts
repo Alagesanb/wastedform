@@ -232,7 +232,7 @@ function Binding_OwnerDuration(){
       // } );
  
     this.getOwners();
-    this.getBoats()
+    // this.getBoats()
 this.getDuration()
   }
   sidemenuloder(){    
@@ -353,8 +353,8 @@ this.form.reset()
         console.log(data)
     if(data.Status == true){
       this.getBoat = data.Data
-      console.log(this.getBoat[0].Owners_Allowed)
-      this.form.get('Boat_Type').setValue(this.getBoat[0].Boattype_Name);
+      console.log(this.getBoat.response.Boattype_Name)
+      this.form.get('Boat_Type').setValue(this.getBoat.response.Boattype_Name);
     
     }
     else if(data.Status == false){
@@ -375,8 +375,47 @@ this.form.reset()
 
     
     this.setOwnerBoatType = findOwnerList.First_Name;
-   
+   this.Fun_getallDropDownDatas(item.item_id)
   }
+
+  Fun_getallDropDownDatas(owner_drp_Id){ 
+    
+     
+    this.dropdownList = [];       
+      var obj = Object();
+        obj.owner_id = owner_drp_Id;
+      this.http.post<any>(`${this.OwnerUrl}/GetBoatNameByOwnerId`, obj).subscribe(data => { 
+        
+                            
+        var tempArry = [];
+        var tempArry2 = [];
+               
+        data.response.forEach(element => {
+
+          element.BoatDetails.forEach(element2 => {
+            if(element2.IsActive == true){
+
+            
+            var obj2 = Object();
+              obj2.item_id = element2._id,
+              obj2.item_text = element2.Boat_Name
+              tempArry.push(obj2);
+
+            }
+
+          });
+              
+
+        });
+        this.dropdownList_filted = tempArry; 
+        
+      
+        }, err => {
+          console.log(err);
+        })
+  }
+
+
   fromdateChange($event){
     var fromdates = $event.target.value;
     var fromdate = new Date( fromdates);

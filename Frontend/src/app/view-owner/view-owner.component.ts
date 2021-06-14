@@ -15,6 +15,7 @@ export class ViewOwnerComponent implements OnInit {
   listBoat: any=[];
   imgUrl = "http://65.2.28.16/api/uploads/"
   adminlogin: any;
+  listBoats: any=[];
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
    }
@@ -34,8 +35,25 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       owner_id:this.data._id
     }
     this.http.post<any>(`${this.url}/GetBoatDetailsByOwner`,obj  ).subscribe(data => {  
-      this.listBoat = data['response']
-      console.log(this.listBoat) 
+      this.listBoats = data['response']
+
+var response = this.listBoats.map(function(el){
+            el.BoatDetails = el.BoatDetails.filter(function(x){ return x.IsActive ==true; });
+            return el;
+        });
+        console.log(response)
+
+
+        response.forEach(element => {         
+          if(element.BoatDetails.length==0){
+
+          }else{
+            console.log(element.BoatDetails)
+             this.listBoat.push(element);
+
+          }
+
+        });
 
         }, err => {
         console.log(err);

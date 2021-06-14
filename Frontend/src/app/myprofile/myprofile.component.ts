@@ -17,6 +17,7 @@ export class MyprofileComponent implements OnInit {
 
   listBoat: any=[];
   ownerlogin: any;
+  listBoats: any=[];
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
   }
   // Create Component for myprofile //Done By Alagesan on 17.05.2021
@@ -38,8 +39,28 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       owner_id:this.data._id
     }
     this.http.post<any>(`${this.url}/GetBoatDetailsByOwner`,obj  ).subscribe(data => {  
-      this.listBoat = data['response']
+      this.listBoats = data['response']
       console.log(this.listBoat) 
+
+      var response = this.listBoats.map(function(el){
+        el.BoatDetails = el.BoatDetails.filter(function(x){ return x.IsActive ==true; });
+        return el;
+    });
+    console.log(response)
+
+
+    response.forEach(element => {         
+      if(element.BoatDetails.length==0){
+
+      }else{
+        console.log(element.BoatDetails)
+         this.listBoat.push(element);
+
+      }
+
+    });
+
+
 
         }, err => {
         console.log(err);
