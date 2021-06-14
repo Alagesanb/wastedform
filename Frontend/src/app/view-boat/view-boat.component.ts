@@ -350,6 +350,13 @@ deleteManageOwner(id){
     this.router.navigate(['manage-owner/']);
   }
 
+    // View manage owner changes for view boat page //Done By Alagesan on 13.06.2021	
+  viewManageOwner(owner){
+	console.log(owner)
+	sessionStorage.setItem('ownerData', JSON.stringify(owner));
+    this.router.navigate(['view-owner/']);
+  }
+
   delete(){
 	var obj={
 	  id:this.manageOwnerId

@@ -410,7 +410,9 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Share</h4>
       </div>
-      <form [formGroup]="Shareform">
+       <!-- Clear the multiselect dropdown changes for settings  Done By Alagesan on 13.06.2021	-->
+      
+       <form [formGroup]="Shareform">
         <div class="form-group col-md-8">
           <label>Select boat</label> 
          <ng-multiselect-dropdown 
@@ -418,6 +420,7 @@
          [settings]="dropdownSettings"
          [data]="dropdownList_filted"                                    
          (onSelect)="onItemSelect($event)"
+         (onDeSelect)="onItemDeSelect($event)"
          (onSelectAll)="onSelectAll($event)"
          class="singleselect_drop"
         >

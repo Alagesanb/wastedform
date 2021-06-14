@@ -922,7 +922,9 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     $(document).on("click",".tui-full-calendar-popup-eye",function() {
 
-         document.location.href="/booking-details/"; 
+         // document.location.href="/booking-details/"; 
+         // Booking page open new tab for sheduler page //Done By Alagesan on 14.06.2021	
+         window.open("/booking-details/");
          var currentId = $(this).attr('data-schedule-id');          
          sessionStorage.setItem("view-Booking-id",currentId);
          public_shedulDataId = currentId;

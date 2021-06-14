@@ -45,9 +45,10 @@
              <div class="row boat-list">
                 
              <div class="card col-md-4" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
+             <!--Update view boat redirect for archive boat Done By Alagesan  on 13.06.2021 -->
 
-                 <a href="boat-details.html"><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
-                 <a href="boat-details.html"><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
+                 <a ><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
+                 <a ><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
 <div class="card-body">
 <a href="#" class="card-link"><i class="fas fa-map-marker-alt"></i>  {{boat.locationDetails[0].Boat_Location}}</a>
 <!-- <a href="#" class="card-link f-right"><i class="far fa-calendar-alt"></i> Calendar</a> -->
