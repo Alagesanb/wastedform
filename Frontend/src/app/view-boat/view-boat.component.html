@@ -185,7 +185,7 @@
                     </div>
                   <div class="col-lg-7 col-md-9 col-12">
                       <h4 class="m-t-0 m-b-0"><strong>{{datas.First_Name}}</strong> {{datas.Last_Name}}</h4>
-                      <span class="email"><i class="far fa-envelope"></i>{{datas.Email}}</span> <br>
+                      <span class="email"><i class="fa fa-envelope"></i>{{datas.Email}}</span> <br>
                       <span class="phone"><i class="fas fa-mobile-alt"></i> {{datas.Mobile}}</span> <br>
                       <span class="phone"><i class="fas fa-house-user"></i> {{datas.Family_Name}}</span><br>
                       <span class="phone"><i class="fas fa-ship"></i> {{datas.Home_Address}}</span>
@@ -195,7 +195,8 @@
                       <ul>
                           <li><button><i class="far fa-trash-alt" (click)=deleteManageOwner(datas)></i> </button></li>
                           <li><button><i class="far fa-edit" (click)=editManageOwner(datas)></i> </button></li>
-                          <li><a href="owner-details.html"><button><i class="far fa-eye"></i> </button></a></li>
+                                      <!--View owner details for view boat page Done By Alagesan  on 13.06.2021 -->
+                          <li><a (click)=viewManageOwner(datas)><button><i class="far fa-eye"></i> </button></a></li>
                       </ul>    
                   </div>
                   <!--Updated owners for view boat Done By Alagesan  on 12.06.2021 -->

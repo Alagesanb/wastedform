@@ -121,6 +121,16 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    $(document).on("click","#test-element",function() {
     alert("click bound to document listening for #test-element");
    });
+
+  // Updated multiselect dropdown for settings //Done By Alagesan on 13.06.2021	
+   $(document).on("click",".selected-item a",function() {
+    console.log( this.getBoat);
+      // this.Shareform.get('No_of_Shares').setValue("");
+      // this.Shareform.get('No_of_SummerWeekDays').setValue("");
+      // this.Shareform.get('No_of_SummerWeekEndDays').setValue("");
+      // this.Shareform.get('No_of_WinterWeekDays').setValue("");
+      // this.Shareform.get('No_of_WinterWeekEndDays').setValue("");
+   });
    
 
    binding_Boat();
@@ -643,6 +653,19 @@ else if(data.Status == false){
       })
     }
   }
+  
+  // Clear the multiselect dropdown changes for settings //Done By Alagesan on 13.06.2021	
+
+  onItemDeSelect(item: any) {
+
+    this.Shareform.get('No_of_Shares').setValue("");
+    this.Shareform.get('No_of_SummerWeekDays').setValue("");
+    this.Shareform.get('No_of_SummerWeekEndDays').setValue("");
+    this.Shareform.get('No_of_WinterWeekDays').setValue("");
+    this.Shareform.get('No_of_WinterWeekEndDays').setValue("");
+  
+  }
+
   onSelectAll(items: any) {
     
   }
