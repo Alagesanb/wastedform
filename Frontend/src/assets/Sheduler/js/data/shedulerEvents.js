@@ -1573,7 +1573,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                      // ................... 
 
                      ///Stand By Booking... start...
-                     var Is_StandByBooking = JSON.parse("false");
+                     var Is_StandByBooking; //= JSON.parse("false");
                      var currentDates = getFormattedDate_WithOut_Zero_Time( new Date());
                      var startDateConvertDate = getFormattedDate_WithOut_Zero_Time(start_str); 
                      if(currentDates == startDateConvertDate)
@@ -1991,7 +1991,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                      // ...................                     
                      ///Stand By Booking... start... 
-                                                        
+                     var Is_StandByBooking;                                
                      var currentDates = getFormattedDate_WithOut_Zero_Time( new Date());
                      var startDateConvertDate = getFormattedDate_WithOut_Zero_Time(start_str); 
                      if(currentDates == startDateConvertDate)
