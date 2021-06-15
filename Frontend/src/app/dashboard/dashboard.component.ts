@@ -37,6 +37,8 @@ export class DashboardComponent implements OnInit {
   allBoats: any;
   dropdown_Boat_List: any = [];
   Stand_by_Booking :any = [];
+  dropdown_Boat_List_static: any = [];
+
 
   public_LocationType_id :any = null;
   public_baotType_Single_id :any = null;
@@ -779,7 +781,7 @@ export class DashboardComponent implements OnInit {
              obj.alphabet = "";
            this.http.post<any>(`${this.url_Boat_Shedule}/GetBoatNames`, obj).subscribe(data => { 
              this.dropdown_Boat_List = data.response;                          
-                               
+              this.dropdown_Boat_List_static = data.response;                
                      
              }, err => {
                console.log(err);
@@ -996,10 +998,13 @@ export class DashboardComponent implements OnInit {
 
   getLoctionTypeId(loc){
 
+//this to start............
+this.dropdown_Boat_List =  this.dropdown_Boat_List_static.filter(x => x.Location_Id == loc._id);
+console.log(this.dropdown_Boat_List);
+//........
+
+
   this.public_LocationType_id = loc._id;
- 
-   
-   
     this.newBooking = [];
     this.Stand_by_Booking = [];
     this.todaysBooking = [];
