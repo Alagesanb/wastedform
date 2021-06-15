@@ -50,8 +50,12 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     var public_URL_Schedule = "http://65.2.28.16/api/Schedule/";
+    var public_URL_Days      = "http://65.2.28.16/api/Days/";
      
       var ScheduleList = null;
+      var GetAllUnAvailableDays = null;
+      var GetAllUnAvailableDays_Boats = null;
+
 
 
       this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
@@ -77,6 +81,10 @@ export class DashboardComponent implements OnInit {
         var public_sheduler_totaldaysbased = [];
         
         ViewAllSchedule();
+
+        $(document).ready(function(){
+          $('[data-toggle="tooltip"]').tooltip();   
+        });
         
         function Resource_Timeline(){
 
@@ -166,7 +174,7 @@ export class DashboardComponent implements OnInit {
                    
               tmp_Bind_TD = '<td id="'+val._id+'">'+val.Boat_Name+'</td>';
               var temp_SheduleList = ScheduleList;
-              temp_SheduleList = public_sheduler_totaldaysbased.filter(x => x.Boat_Id == val._id)
+              temp_SheduleList = public_sheduler_totaldaysbased.filter(x => x.Boat_Id == val._id || x.User_RoleType == "UnAvailableDays")
               
               $.each(values, function(key2, val2)
               {                  
@@ -177,7 +185,7 @@ export class DashboardComponent implements OnInit {
 
                  if(typeof tmp_sort !== "undefined" && tmp_sort != null)
                  {
-                  tmp_Bind_TD += '<td style="background-color: '+tmp_sort.borderColor+';"></td>'; 
+                  tmp_Bind_TD += '<td style="background-color: '+tmp_sort.borderColor+'; border-color: '+tmp_sort.borderColor+';" data-toggle="tooltip" title="'+tmp_sort.title+'"></td>'; 
                  }
                  else
                  {
@@ -215,7 +223,7 @@ export class DashboardComponent implements OnInit {
     }
 
 
-    function getDaysInMonth_Sheduler(datas_Arry){
+    function getDaysInMonth_Sheduler(datas_Arry,data_UnAvailableDays,data_UnAvailableDays_Boats){
 
     
         var monthNames = [ "January", "February", "March", "April", "May", "June",
@@ -275,6 +283,96 @@ export class DashboardComponent implements OnInit {
       });
        
      
+      $.each(data_UnAvailableDays, function(key, val){
+
+        var tmp1 = val;
+        var tmp1_StartDate = new Date(tmp1);
+        var tmp2_EndDate = new Date(tmp1);
+  
+  
+        var tmp_month = tmp1_StartDate.getMonth();
+        var tmp_year = tmp1_StartDate.getFullYear();
+        var tmp_Date = tmp1_StartDate.getDate();
+  
+        var date = new Date(tmp_year, tmp_month, tmp_Date);        
+        
+        do
+        {
+          
+           var obj = Object();
+          var tmp_dt = new Date(date);
+          obj.fullofTheDate = tmp_dt;
+          obj.day = tmp_dt.getDate();
+          obj.month = monthNames[tmp_dt.getMonth()];
+          obj.month_Number = monthNames_Number[tmp_dt.getMonth()];
+          obj.year = tmp_dt.getFullYear(); 
+          
+           obj.User_RoleType = "UnAvailableDays";
+           
+            
+           obj.title = "UnAvailable Days";
+                            
+            obj.bgColor = "#3f4240";
+            obj.dragBgColor = "#3f4240";
+            obj.borderColor = "#3f4240";
+            
+
+          public_sheduler_totaldaysbased.push(obj);         
+           date.setDate(date.getDate() + 1);
+           var tmp_Add_Date = new Date(date);
+  
+        }while(tmp_Add_Date <= tmp2_EndDate)
+       
+
+      });
+
+
+      $.each(data_UnAvailableDays_Boats, function(key, val){
+
+        var tmp1 = val;
+        var tmp1_StartDate = new Date(tmp1.start);
+        var tmp2_EndDate = new Date(tmp1.start);
+  
+  
+        var tmp_month = tmp1_StartDate.getMonth();
+        var tmp_year = tmp1_StartDate.getFullYear();
+        var tmp_Date = tmp1_StartDate.getDate();
+  
+        var date = new Date(tmp_year, tmp_month, tmp_Date);        
+        
+        do
+        {
+          
+           var obj = Object();
+          var tmp_dt = new Date(date);
+          obj.fullofTheDate = tmp_dt;
+          obj.day = tmp_dt.getDate();
+          obj.month = monthNames[tmp_dt.getMonth()];
+          obj.month_Number = monthNames_Number[tmp_dt.getMonth()];
+          obj.year = tmp_dt.getFullYear(); 
+          
+           obj.User_RoleType = "UnAvailableDays_Boats";
+           //obj.id = val.id;
+            
+           obj.title = "UnAvailable Days for Boats";
+          
+            obj.color = "#878a89";
+            obj.bgColor = "#878a89";
+            obj.dragBgColor = "#878a89";
+            obj.borderColor = "#878a89";
+
+            obj.Boat_Id = val.Boat_Id;
+            
+
+          public_sheduler_totaldaysbased.push(obj);         
+           date.setDate(date.getDate() + 1);
+           var tmp_Add_Date = new Date(date);
+  
+        }while(tmp_Add_Date <= tmp2_EndDate)
+       
+
+      });
+       
 
 
 
@@ -358,7 +456,9 @@ export class DashboardComponent implements OnInit {
 
     function ViewAllSchedule()
     {      
-      ScheduleList = [];   
+      ScheduleList = [];
+      GetAllUnAvailableDays = [];
+      GetAllUnAvailableDays_Boats = [];   
 
       $.ajax({
           url: public_URL_Schedule+"ViewAllSchedule",
@@ -371,14 +471,97 @@ export class DashboardComponent implements OnInit {
                   generateRandomSchedule(val);                 
               });
 
-              getDaysInMonth_Sheduler(ScheduleList);
-              getallBoats_Func();
+              ///////
+
+              $.ajax({
+                url: public_URL_Days+"GetAllUnAvailableDays",
+                type: 'GET',
+                dataType: 'json',        
+                success: function(GetAllUnAvailableDays_datas) {
+                    
+                  if(GetAllUnAvailableDays_datas.status == true)
+                  {
+                    var tmp1_dt = GetAllUnAvailableDays_datas.response;
+                      if(tmp1_dt != null)
+                      {
+                        GetAllUnAvailableDays = tmp1_dt[0].UnAvailableDates;
+                      }
+                  } 
+
+                  ///////////////
+
+                        $.ajax({
+                          url: public_URL_Days+"GetUnAvailabeDaysOfBoats",
+                          type: 'GET',
+                          dataType: 'json',        
+                          success: function(GetUnAvailabeDaysOfBoats_datas) {
+                            debugger;
+                            if(GetUnAvailabeDaysOfBoats_datas.status == true)
+                            {
+                              var tmp1_dt2 = GetUnAvailabeDaysOfBoats_datas.response;
+                              $.each(tmp1_dt2, function(key, val2){
+
+                                $.each(val2.Boat_Id, function(key, val3){
+
+                                  $.each(val2.UnAvailableDates, function(key, val4){
+                                           var obj = Object();
+                                           obj.Boat_Id = val3;
+                                           obj.start = val4;
+                                           GetAllUnAvailableDays_Boats.push(obj);
+
+                                  });
+
+
+
+                                });                                
+
+                              });
+                              
+                            } 
+
+                            
+
+                            getDaysInMonth_Sheduler(ScheduleList,GetAllUnAvailableDays,GetAllUnAvailableDays_Boats);
+                            getallBoats_Func();
+          
+                            
+                
+                          },
+                          error: function (error) {          
+                              alert(error.responseText);           
+                            }
+                      });
+
+                  ////////////
+      
+                },
+                error: function (error) {          
+                    alert(error.responseText);           
+                  }
+            });
+
+
+
+
+
+
+
+
+
+
+              /////
+
+
+
+
+
+             
 
               
 
           },
           error: function (error) {          
-              //$("#responceDiv").html(error.responseText);            
+              alert(error.responseText);           
             }
       });
       
@@ -1267,7 +1450,9 @@ console.log(this.dropdown_Boat_List);
 
   }
 
-
+  pageRefresh(){
+    location.reload();
+  }
 
 
 }

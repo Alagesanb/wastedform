@@ -1028,7 +1028,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     }
 
   function GetAllUnAvailableDays_settings(obj){
-      
+
+         
         var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));         
             //
         if (typeof datas !== "undefined" && datas != null) 
@@ -1229,15 +1230,15 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
      }
 
 
-    function AddSchedule_ApiCalling(obj){         
-    
+    function AddSchedule_ApiCalling(obj){      
+       
         $.ajax({
             url: public_URL+"AddSchedule",
             type: 'POST',
             dataType: 'json', 
             data: obj,
-            success: function(datas) {               
-               
+            success: function(datas) { 
+                              
                 if(datas.status == true)
                 {
                     alert(datas.message);
@@ -1251,10 +1252,9 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
             
     
             },
-            error: function (error) { 
+            error: function (error) {               
                 
-                alert(error);
-                console.log(error);
+                console.log(error.responseText);
                            
             }
         });
@@ -1547,6 +1547,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
             }
     }
     else if(pageIdentiFication == "book-for-owner"){
+        
         
         var checkController = $('.tui-full-calendar-popup-save').children('span').first().text();
             

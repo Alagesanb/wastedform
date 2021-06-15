@@ -19,6 +19,7 @@
                         <li *ngFor="let loc of loctions | filter: searchLoction let i = index;">
                         <a style="cursor:pointer;"  (click)="getLoctionTypeId(loc)">{{loc.Boat_Location}}</a>
                         </li>
+                        <li><input type="button" class="btn btn-primary" (click)="pageRefresh()" style="text-align: center;" value="Cleare"></li>
                         
                     </ul>
                 </div>
@@ -39,6 +40,8 @@
                         <li *ngFor="let loc of dropdown_Boat_List | filter: searchLoction_Boat let i = index;">
                         <a style="cursor:pointer;"  (click)="getLoctionTypeId_Boat(loc)">{{loc.Boat_Name}}</a>
                     </li>
+                    <li><input type="button" class="btn btn-primary" (click)="pageRefresh()" style="text-align: center;" value="Cleare"></li>
+
                        
                     </ul>
                 </div>

@@ -359,15 +359,16 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
           dataType: 'json', 
           data: obj,
           success: function(Related_datas) {
-           
-
+                       
             if(Related_datas.status == true)
             {
-              
+             alert(Related_datas.message);
+             location.reload();
 
             }
             else if(Related_datas.status == false)
             {
+              alert(Related_datas.message);
               
             }
 
