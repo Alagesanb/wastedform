@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 declare var $: any;
 declare var jQuery: any;
+declare var Swal: any;
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -673,6 +676,7 @@ export class DashboardComponent implements OnInit {
 
       if(element.BoatDetails.length !== 0){
 
+        obj_s._Id = element._id;
       obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
       obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
@@ -883,7 +887,7 @@ export class DashboardComponent implements OnInit {
       var obj_s = Object();
 
       if(element.BoatDetails.length !== 0){
-
+        obj_s._Id = element._id;
       obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
       obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
@@ -1090,7 +1094,7 @@ export class DashboardComponent implements OnInit {
         var obj_s = Object();
   
         if(element.BoatDetails.length !== 0){
-  
+          obj_s._Id = element._id;
         obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
         obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
         obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
@@ -1200,6 +1204,62 @@ export class DashboardComponent implements OnInit {
    });
  
  
+  }
+
+  Stand_by_Booking_Accept(datas){    
+
+    var obj = Object();
+    obj._id = datas._Id;       
+
+    this.http.post<any>(`${this.url}/StandByBooking_AcceptReject`,  obj  ).subscribe(data => {
+    
+      if(data.status == true)
+      {
+        alert("Booking is Accepted");      
+        
+      }
+      else if(data.status == false)
+      {
+        alert("No responce");
+
+      }
+        }, err => {
+
+          alert(err.message);
+         
+        })
+
+
+  }
+
+ 
+  Stand_by_Booking_Reject(datas){
+    
+    var obj = Object();
+    obj._id = datas._Id;       
+
+    this.http.post<any>(`${this.url}/StandByBooking_AcceptReject`,  obj  ).subscribe(data => {
+    
+      if(data.status == true)
+      {
+        alert("Booking is Reject");
+        location.reload();      
+        
+      }
+      else if(data.status == false)
+      {
+        alert("No responce");
+
+      }
+        }, err => {
+
+          alert(err.message);
+         
+        })
+
+
+
+
   }
 
 

@@ -931,6 +931,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
  
      });
 
+     ////delete........sheduler......
     $(document).on("click",".tui-full-calendar-popup-delete",function() {
        
         
@@ -993,6 +994,27 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         
 
     });
+
+    $(document).on("click",".tui-full-calendar-popup-delete",function() {
+
+        // Not accessing Id ...Pending work...
+
+        alert("sorry delete not allowed (popup) only for  display calendar items");
+
+    });
+
+
+    //tui-full-calendar-month-more-schedule tui-full-calendar-month-more-allday tui-full-calendar-weekday-schedule-title
+//public_shedulDataId
+
+    //delete.....End
+
+
+
+
+
+
+
 
     function getAllDates(startDate, stopDate) {          
         var dateArray =[];
@@ -1330,6 +1352,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
     if(pageIdentiFication == "AdminBooking")
     {
 
+       
             var checkController = $('.tui-full-calendar-popup-save').children('span').first().text();
             
             var dataGet_AdminSelectBoat = sessionStorage.getItem("AdminSelectBoat");
