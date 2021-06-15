@@ -375,12 +375,12 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
                           
           }
         });
-    }
-    else{
+          }
+          else{
 
-      alert("Empty date");
+            alert("Empty date");
 
-    }
+          }
 
 
        });
