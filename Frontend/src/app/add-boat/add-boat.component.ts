@@ -22,6 +22,7 @@ export class AddBoatComponent implements OnInit {
   manageOwnerForms: FormGroup;
   previousDate: any;
   launchDate: any;
+  imageResponse = "";
   boarText = ""
   url = "http://65.2.28.16/api/Boat"
   OwnerUrl = "http://65.2.28.16/api/Owner"
@@ -122,7 +123,11 @@ export class AddBoatComponent implements OnInit {
       if (this.files) $.each(this.files, readAndPreview);
 
       function readAndPreview(i, file) {
-
+        //Upload boat image max size exceeded message for add boat Done By Alagesan  on 15.06.2021
+        var maxSizeKB = 70; 
+        var maxSize = maxSizeKB * 1024;
+        var current_size = file.size;
+        if (current_size < maxSize) {
         var filename = file.name;
         filename = filename.replace(/\s+/g, '');
 
@@ -149,7 +154,7 @@ export class AddBoatComponent implements OnInit {
 
 
         reader.readAsDataURL(file);
-
+        }
 
       }
 
@@ -470,10 +475,20 @@ export class AddBoatComponent implements OnInit {
         }
         else {
 
+          //Upload boat image max size exceeded message for add boat Done By Alagesan  on 15.06.2021 
+          var maxSizeKB = 70;
+          var maxSize = maxSizeKB * 1024;
+          var current_size = event.target.files[i].size;
+          if (current_size > maxSize) {
+            // alert("Max size exceeded");
+            this.imageResponse = "Max size 80 KB but the image Max size exceeded"
+            $('#imageBoatModel').trigger('click');
+          }
+          if (current_size < maxSize) {
           this.multiImg.push(event.target.files[i]);
           //this.multiImg_Angular.push(event.target.files[i].name);
           this.multiImg_Angular.push(current_Name);
-
+          }
 
 
         }
