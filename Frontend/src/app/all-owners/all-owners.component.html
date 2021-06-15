@@ -48,7 +48,7 @@
             <div class="container profile-page">
 <div class="row">
   
-  <div class="col-xl-6 col-lg-12 col-md-6" *ngFor="let owner of pageOfItems | filter: searchLoction let i = index;" >
+  <div class="col-xl-6 col-lg-12 col-md-6" *ngFor="let owner of allOwners | filter: searchLoction let i = index;" >
       <div class="card profile-header">
           <div class="body">
               <div class="row">
@@ -113,7 +113,7 @@
   </div>  
   
 </div>
-<jw-pagination [items]="allOwners" (changePage)="onChangePage($event)"></jw-pagination>
+<!-- <jw-pagination [items]="allOwners" (changePage)="onChangePage($event)"></jw-pagination> -->
 
 
 </div>   

@@ -1197,10 +1197,10 @@ button.close {
 } */
 .profile-page .profile-header .profile-image img {
     border-radius: 50%;
-    width: 80px;
+    width: 75px;
     border: 3px solid #fff;
     box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
-    height: 90px;
+    height: 80px;
 }
 .profile-page .profile-header .social-icon a {
     margin: 0 5px
@@ -1585,7 +1585,8 @@ button.close {
 .boat-list .card-body a{
    text-transform:uppercase;
    font-size:14px;
-   color:#333
+   color:#333;
+   margin: 0px 0px 0px 5px;
 }
 .boat-list .card-body a i{
     color:#121e73;
@@ -1596,6 +1597,7 @@ button.close {
   padding:10px;
   font-weight:500;
   text-transform:uppercase;
+  margin: -20px 0px 0px 0px;
 }
 .boat-list .card-header a{
     color: #333;
@@ -1620,11 +1622,14 @@ button.close {
 
 .booking-days h6{
     font-size: 14px;
+    margin: -16px 0px 0px 7px;
 }
 
 .owner-nos h6{
     font-size: 13px;
     color: #29368f;
+    margin: -16px;
+    float: right;
 }
 
 .dash-filter .dropdown-menu.show {
@@ -1749,7 +1754,7 @@ button.close {
     
 }
 .boat-detail h4{
-    font-size: 20px;
+    font-size: 16px;
     margin: 0 0 20px 0;
     width: 520px;
 }
@@ -2196,6 +2201,7 @@ ul.top-btn li {
     display: block;
     text-align: center;
     margin-bottom: 3px;
+    cursor: pointer;
 }
 
 .owner-datas{

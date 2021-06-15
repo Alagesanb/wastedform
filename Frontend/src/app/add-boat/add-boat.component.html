@@ -135,7 +135,12 @@
 </div>
 
 </div>  
-                  
+<div class="form-row">                         
+  <div class="form-group col-md-12">
+      <label>Boat Number</label>
+      <input type="text" class="form-control" formControlName="Boat_Number" [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boat_Number.errors }">
+      </div>
+  </div>
                   
 <div class="form-row">                         
 <div class="form-group col-md-12">

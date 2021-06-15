@@ -508,6 +508,7 @@ createBoatForm() {
     Boattype_Name: new FormControl('', [Validators.required,]),
     Location_Name: new FormControl('', [Validators.required,]),
     Boat_Name: new FormControl('', [Validators.required,]),
+    Boat_Number: new FormControl('', [Validators.required,]),//
     Boat_Description: new FormControl('', []),
     Owners_Allowed: new FormControl('', [Validators.required,]),
     Location_Id: new FormControl('', [Validators.required,]), 
@@ -650,6 +651,8 @@ this.boatform.get('Location_Name').setValue(this.data.locationDetails[0].Boat_Lo
 this.boatform.get('Boat_id').setValue(this.data._id);
 this.boatform.get('Boattype_id').setValue(this.data.Boattype_id);
 this.boatform.get('Boat_Name').setValue(this.data.Boat_Name);
+this.boatform.get('Boat_Number').setValue(this.data.Boat_Number);
+
 this.boatform.get('Boat_Description').setValue(this.data.Boat_Description);
 this.boatform.get('Owners_Allowed').setValue(this.data.Owners_Allowed);
 //this.boatform.get('Owners_Allowed').setValue(3);
