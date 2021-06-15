@@ -481,7 +481,7 @@ export class AddBoatComponent implements OnInit {
           var current_size = event.target.files[i].size;
           if (current_size > maxSize) {
             // alert("Max size exceeded");
-            this.imageResponse = "Max size 80 KB but the image Max size exceeded"
+            this.imageResponse = "Boat image maximum size is exceeded"
             $('#imageBoatModel').trigger('click');
           }
           if (current_size < maxSize) {
