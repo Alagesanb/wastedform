@@ -5,14 +5,14 @@
     <div class="contents-page col-lg-9">
         <app-header></app-header>
         <div class="headingz">
-            <h4><a (click)=viewAdminBooking()><i class="far fa-arrow-alt-circle-left"></i> </a>Booking Details</h4>
+            <h4>Booking Details</h4>
         </div>
         <div class="page contents">
             <!--Update for booking details Done By Alagesan on 10.06.2021	-->
 
             <div class="row">
                 <div class="col-md-5 mr-2 boat-list-1" *ngFor="let owner of allBookingDetailsFilter  let i = index;">
-                    <a href="#">
+                    <a >
                     <div class="boat-img">
                         <img *ngIf="!owner.OwnerDetails[0].Profile_Image" src="/assets/images/boat-1.jpg" alt="boat">
                         <img *ngIf="owner.OwnerDetails[0].Profile_Image" src="{{imgUrl+owner.OwnerDetails[0].Profile_Image}}" alt="owner">
@@ -37,7 +37,7 @@
                     </a>
                 </div>
                 <div class="col-md-6 mr-2 boat-list-1" *ngFor="let boats of allBookingDetailsFilter  let i = index;">
-                    <a href="#">
+                    <a >
                     <div class="boat-img">
                         <img *ngIf="!boats.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat-1.jpg" alt="boat">
                         <img *ngIf="boats.BoatDetails[0].Boat_Image[0]" src="{{imgUrl+boats.BoatDetails[0].Boat_Image[0]}}" alt="boat">

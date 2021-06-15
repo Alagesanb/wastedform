@@ -322,6 +322,11 @@
    
 <script>
 
+$(document).ajaxStop(function(data) {
+  //alert();
+  console.log(data);
+});
+
 $(document).ready(function(){
 
    $(".mobile-menu-icon").click(function(){

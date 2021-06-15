@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 declare var $: any;
 declare var jQuery: any;
+declare var Swal: any;
 
 @Component({
   selector: 'app-sidemenu',

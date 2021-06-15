@@ -1034,8 +1034,10 @@ label{
        MARGIN-BOTTOM: 10PX;
 }
 
+/* Hand symbol changes Done by Alagesan on 15-06-2021 */
 ul.edit li a {
     color: #fff !important;
+    cursor:pointer
 }
 
 .sbg-form{

@@ -85,7 +85,7 @@ $(document).on("click",".cls-OwnerDuration",function() {
 
   sessionStorage.setItem("OwnerDuration_current",getdeleteid);
 
-  alert(getdeleteid);  
+  //alert(getdeleteid);  
 
  });
 
