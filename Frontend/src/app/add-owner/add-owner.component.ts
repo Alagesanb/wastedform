@@ -18,6 +18,7 @@ export class AddOwnerComponent implements OnInit {
   handBook: File;
   singleFileDetails : any;
   adminlogin: any;
+  profilePicResponse= "";
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
@@ -34,7 +35,10 @@ export class AddOwnerComponent implements OnInit {
      sessionStorage.setItem("view-boat-reload","1");
      
     var readURL = function(input) {
-      if (input.files && input.files[0]) {
+      //Upload profile image max size exceeded message for add owner Done By Alagesan  on 16.06.2021
+      var maxSize = 2097152;
+      var current_size = input.files[0].size; 
+      if (input.files && input.files[0] && current_size < maxSize) {
           var reader = new FileReader();
 
           reader.onload = function (e) {
@@ -144,8 +148,17 @@ export class AddOwnerComponent implements OnInit {
         })
   }
   singleImage(event, imageFor){
+    //Upload profile image max size exceeded message for add owner Done By Alagesan  on 16.06.2021
+    var maxSize = 2097152;
+    var current_size = event.target.files[0].size;
+    if (current_size > maxSize) {
+    this.profilePicResponse = "Profile image maximum size is exceeded"
+      $('#profileImageModel').trigger('click');
+    }
+    if (current_size < maxSize) {
       this.handBook = <File>event.target.files[0];
     this.singleUploadImage(imageFor);
+     }
   
   }
 

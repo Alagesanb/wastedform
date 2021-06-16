@@ -124,8 +124,7 @@ export class AddBoatComponent implements OnInit {
 
       function readAndPreview(i, file) {
         //Upload boat image max size exceeded message for add boat Done By Alagesan  on 15.06.2021
-        var maxSizeKB = 70; 
-        var maxSize = maxSizeKB * 1024;
+        var maxSize = 2097152;
         var current_size = file.size;
         if (current_size < maxSize) {
         var filename = file.name;
@@ -476,9 +475,10 @@ export class AddBoatComponent implements OnInit {
         else {
 
           //Upload boat image max size exceeded message for add boat Done By Alagesan  on 15.06.2021 
-          var maxSizeKB = 70;
-          var maxSize = maxSizeKB * 1024;
+          var maxSize = 2097152;
           var current_size = event.target.files[i].size;
+          var current_type = event.target.files[i];
+          console.log(current_type);
           if (current_size > maxSize) {
             // alert("Max size exceeded");
             this.imageResponse = "Boat image maximum size is exceeded"
