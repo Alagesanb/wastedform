@@ -41,6 +41,7 @@ export class ViewBoatComponent implements OnInit {
 	TotalDaysAssigned_Winter_WeekDays :any;
 	TotalDaysAssigned_Winter_WeekEndDays :any;
 	boatStatus: string;
+	allboatdata: any=[];
 
 	constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
 	
@@ -338,6 +339,36 @@ getOwnersByBoatId(){
 		console.log(data.Data)
 	    this.boatOwners = data.Data
 		  
+
+			this.http.get<any>(`${this.OwnerUrl}/GetAllOwnerssWithBoatDetails`).subscribe(data => {
+			  console.log(data)
+		  this.allboatdata = data['result'] 
+		if(this.boatOwners){
+		  console.log(this.boatOwners)
+		  this.boatOwners.forEach(owner => {
+			var obj2 = Object();
+			this.allboatdata.forEach(boat => {
+			if(owner._id == boat.Owner_Id){
+			  owner.boatName = boat.BoatDetails[0][0].Boat_Name
+			  owner.Summer_WeekDays = boat.BoatDetails[0][0].Summer_WeekDays
+			  owner.Summer_WeekEndDays = boat.BoatDetails[0][0].Summer_WeekEndDays
+			  owner.Total_Days = boat.BoatDetails[0][0].Total_Days
+			  owner.Winter_WeekDays = boat.BoatDetails[0][0].Winter_WeekDays
+			  owner.Winter_WeekEndDays = boat.BoatDetails[0][0].Winter_WeekEndDays
+		
+			}
+		  });
+		  });
+		  
+		}
+		console.log(this.boatOwners)
+		  // console.log(this.boatTypes)
+		   }, err => {
+		   })
+		  
+
+
+
 		  }, err => {
 			console.log(err);
 		  })

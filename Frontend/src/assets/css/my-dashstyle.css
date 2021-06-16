@@ -35,8 +35,9 @@ span.season-text {
     margin: 0px 0px 0px -10px;
 }
 img.card-img-top {
-    height: 100%;
+     height: 180px;
     width: 100%;
+    object-fit: cover;
 }
 
 .logo-section {
@@ -1199,7 +1200,7 @@ button.close {
 } */
 .profile-page .profile-header .profile-image img {
     border-radius: 50%;
-    width: 75px;
+    width: 80px;
     border: 3px solid #fff;
     box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
     height: 80px;
@@ -2426,7 +2427,9 @@ ul.top-btn li {
     padding: 0;
 }
 
-.profile-pic {height: 180px;}
+.profile-pic {
+    /* height: 180px; */
+}
 
 .date-add-field .col-md-7{
         max-width: 56%;

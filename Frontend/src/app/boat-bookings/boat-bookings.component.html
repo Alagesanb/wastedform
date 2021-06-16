@@ -12,13 +12,12 @@
             <div class="row" style="margin-bottom: 25px;">
                 
          <div class="col-md-6 dash-filter">   
-         
+<!--          
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">Location
                     <span><i class="fas fa-filter"></i></span></button>
 
-                <!-- <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Location
-                <span><i class="fas fa-filter" aria-hidden="true"></i></span></button> -->
+            
                 <ul class="dropdown-menu" style="width: 94%;">
                 <input class="form-control" id="myInput" type="text" placeholder="Search..">
                 <li><a href="#">A</a></li>
@@ -26,8 +25,21 @@
                 <li><a href="#">C</a></li>
                 <li><a href="#">D</a></li>
                 </ul>
-            </div>
-             
+            </div> -->
+            <div class="dropdown">
+
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"
+                  style="width: 100%;">{{Location_Name_dropDown}}
+                  <span><i class="fas fa-filter"></i></span></button>
+    
+                <ul class="dropdown-menu">
+                  <input class="form-control" id="myInput" type="text" placeholder="Search.." [(ngModel)]="searchLoctions">
+                  <li *ngFor="let loc of loctions | filter: searchLoctions let i = index;">
+                    <a style="cursor:pointer;" (click)="getLoctionTypeId(loc)">{{loc.Boat_Location}}</a>
+                  </li>
+    
+                </ul>
+              </div>
                </div>        
                <div class="col-md-6 boat-search">
                 <div class="input-group mb-3">
@@ -44,29 +56,29 @@
                 <div class="dropdown">
 
 
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">Launch Date
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">{{Launch_Date_DropDown}}
                         <span><i class="fas fa-filter"></i></span></button>
         
         <!-- 
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Launch Date
                     <span><i class="fas fa-filter" aria-hidden="true"></i></span></button> -->
                     <ul class="dropdown-menu">
-                    <li><a (click)="setLanDates($event)"  value="swdf">Launch Date</a></li>
-                    <li><a (click)="setLanDates($event)"  value="sadf">Pre-Launch Date</a></li>
+                    <li><a (click)="setLanDates('Launch_Date')"  value="Launch_Date">Launch Date</a></li>
+                    <li><a (click)="setLanDates('Pre_Launch_Date')"  value="PreLaunch_Date">Pre-Launch Date</a></li>
                     </ul>
                   </div>
                 </div>
 
             <div class="form-group col-md-3">
             <label>From Date </label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker" type="text" formControlName="From_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;" (focusout)="fromDate($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker" type="text" formControlName="Launch_Date1"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;" (focusout)="fromDate($event)">
                 <!-- <button type="button" class="Zebra_DatePicker_Icon" style="top: 11px; right: 12px;">Pick a date</button> -->
             </span>
             </div>
 
             <div class="form-group col-md-3">
             <label>To Date </label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-2" type="text" formControlName="To_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;" (focusout)="toDate($event)" (change)="lunchdateChange($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-2" type="text" formControlName="Launch_Date2"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;" (focusout)="toDate($event)" (change)="lunchdateChange($event)">
                 <!-- <button type="button" class="Zebra_DatePicker_Icon" style="top: 11px; right: 12px;">Pick a date</button> -->
             </span>
             </div>

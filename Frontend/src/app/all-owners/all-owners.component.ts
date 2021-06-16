@@ -80,7 +80,7 @@ console.log(boat)
   getAllBoatdata(){
     this.http.get<any>(`${this.url}/GetAllOwnerssWithBoatDetails`).subscribe(data => {
       console.log(data)
-  this.allboatdata = data['result']
+  this.allboatdata = data['result'] 
 if(this.allOwners){
   console.log(this.allOwners)
   this.allOwners.forEach(owner => {
