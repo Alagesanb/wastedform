@@ -160,7 +160,6 @@ var date1 =  new Date($event.target.value)
       
   this.allBoats = data['response']
   console.log(this.allBoats);
-   console.log(this.allBoats)
    }, err => {
    })
   }

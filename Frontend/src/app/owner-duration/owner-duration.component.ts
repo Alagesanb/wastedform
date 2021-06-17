@@ -339,7 +339,8 @@ this.form.reset()
   }
   onItemSelect(item: any) {
     console.log(item)
-    var finddate = this.dropdownList.find(x => x._id == item.item_id);
+    console.log(this.dropdownList_filted)
+    var finddate = this.dropdownList_filted.find(x => x._id == item.item_id);
     console.log(finddate)
     this.form.get('Boat_name').setValue(finddate.Boat_Name);
     this.form.get('Boat_Id').setValue(finddate._id);

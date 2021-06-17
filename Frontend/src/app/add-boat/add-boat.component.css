@@ -8,4 +8,17 @@
         margin: 0px;
         padding: 6px;
         }
-        
+        /* .testboarder {
+            border: 1px solid #f30a0a;
+            } */
+
+
+
+            
+
+
+            :host /deep/ .boat-search .multiselect-dropdown {
+               
+                border: 1px solid #f30a0a !important; 
+         
+            }

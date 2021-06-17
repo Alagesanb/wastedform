@@ -54,7 +54,7 @@
   
   [(ngModel)]="dropdownBoatType"
   [ngModelOptions]="{standalone: true}" 
-    [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boattype_id.errors }"
+  [ngClass]="{ 'boat-search': boatSubmitted && bf.Boattype_id.errors }"
   [settings]="dropdownSettings"
   [data]="boatTypes"                                    
   (onSelect)="getBoatTypeId($event)"

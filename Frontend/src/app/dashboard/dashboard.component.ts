@@ -495,7 +495,6 @@ export class DashboardComponent implements OnInit {
                           type: 'GET',
                           dataType: 'json',        
                           success: function(GetUnAvailabeDaysOfBoats_datas) {
-                            debugger;
                             if(GetUnAvailabeDaysOfBoats_datas.status == true)
                             {
                               var tmp1_dt2 = GetUnAvailabeDaysOfBoats_datas.response;
@@ -800,6 +799,7 @@ export class DashboardComponent implements OnInit {
       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
       obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
       obj_s._id = element._id;
+      obj_s.Booking_ID = element.Booking_ID;
 
       obj_s.start = element.start;
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
@@ -838,6 +838,8 @@ export class DashboardComponent implements OnInit {
       obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
       obj_s.start = element.start;
+      obj_s.Booking_ID = element.Booking_ID;
+
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
       obj_s.end = element.end;
       obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
@@ -856,7 +858,6 @@ export class DashboardComponent implements OnInit {
 
 
       }      
-
       
     }
 
@@ -871,6 +872,8 @@ export class DashboardComponent implements OnInit {
       obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
       obj_s.start = element.start;
+      obj_s.Booking_ID = element.Booking_ID;
+
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
       obj_s.end = element.end;
       obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
@@ -918,6 +921,8 @@ export class DashboardComponent implements OnInit {
         obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
         obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
         obj_s.start = element.start;
+        obj_s.Booking_ID = element.Booking_ID;
+
         obj_s.Boat_Id =  element.BoatDetails[0]._id;
         obj_s.end = element.end;
         obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
@@ -1024,6 +1029,7 @@ export class DashboardComponent implements OnInit {
         obj_s.start = element.start;
         obj_s.Boat_Id =  element.BoatDetails[0]._id;
         obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
 
         obj_s.Location_Name = element.BoatDetails[0].Location_Name;
         obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -1054,6 +1060,7 @@ export class DashboardComponent implements OnInit {
       obj_s.start = element.start;
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
       obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
 
       obj_s.Location_Name = element.BoatDetails[0].Location_Name;
       obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -1086,6 +1093,7 @@ export class DashboardComponent implements OnInit {
       obj_s.start = element.start;
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
       obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
 
       obj_s.Location_Name = element.BoatDetails[0].Location_Name;
       obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -1133,6 +1141,7 @@ export class DashboardComponent implements OnInit {
       obj_s.start = element.start;
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
       obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
 
       obj_s.Location_Name = element.BoatDetails[0].Location_Name;
       obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -1234,6 +1243,7 @@ console.log(this.dropdown_Boat_List);
         obj_s.start = element.start;
         obj_s.Boat_Id =  element.BoatDetails[0]._id;
         obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
 
         obj_s.Location_Name = element.BoatDetails[0].Location_Name;
         obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -1265,6 +1275,7 @@ console.log(this.dropdown_Boat_List);
         obj_s.start = element.start;
         obj_s.Boat_Id =  element.BoatDetails[0]._id;
         obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
 
         obj_s.Location_Name = element.BoatDetails[0].Location_Name;
         obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -1296,7 +1307,8 @@ console.log(this.dropdown_Boat_List);
         obj_s.start = element.start;
         obj_s.Boat_Id =  element.BoatDetails[0]._id;
         obj_s.end = element.end;
-  
+        obj_s.Booking_ID = element.Booking_ID;
+
         obj_s.Location_Name = element.BoatDetails[0].Location_Name;
         obj_s.Location_Id = element.BoatDetails[0].Location_Id;
   
@@ -1342,6 +1354,7 @@ console.log(this.dropdown_Boat_List);
       obj_s.start = element.start;
       obj_s.Boat_Id =  element.BoatDetails[0]._id;
       obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
 
       obj_s.Location_Name = element.BoatDetails[0].Location_Name;
       obj_s.Location_Id = element.BoatDetails[0].Location_Id;

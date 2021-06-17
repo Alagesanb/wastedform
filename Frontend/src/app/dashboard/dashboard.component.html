@@ -207,7 +207,7 @@
                                                                 </div>
                             <div class="info">
                                 <h4>{{book.Boat_Name}}</h4>
-                                <h4>{{book.Boat_Number}}/{{book._id}}</h4>
+                                <h4>{{book.Boat_Number}}/{{book.Booking_ID}}</h4>
 
                                 <h5><span><i class="far fa-calendar-check" ></i>  </span> {{ book.start| date :'short'}}</h5>
                                 <div *ngIf="book.OwnerDetails">
@@ -246,7 +246,7 @@
                                     </div>
                                     <div class="info">
                                         <h4>{{book.Boat_Name}}</h4>
-                                        <h4>{{book.Boat_Number}}/{{book._id}}</h4>
+                                        <h4>{{book.Boat_Number}}/{{book.Booking_ID}}</h4>
 
                                         <!-- <h5># 1001</h5> -->
                                         <h5><span><i class="far fa-calendar-check"></i>  </span> {{book.start| date :'short'}}</h5>
@@ -287,7 +287,7 @@
                                     </div>
                                     <div class="info">
                                         <h4>{{cancel.Boat_Name}}</h4>
-                                        <h4>{{cancel.Boat_Number}}/{{cancel._id}}</h4>
+                                        <h4>{{cancel.Boat_Number}}/{{cancel.Booking_ID}}</h4>
 
                                         <!-- <h5># 1001</h5> -->
                                         <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start| date :'short'}}</h5>
@@ -330,7 +330,7 @@
                                     </div> 
                                     <div class="info">
                                         <h4>{{StandbyBooking.Boat_Name}}</h4>
-                                        <h4>{{StandbyBooking.Boat_Number}}/{{StandbyBooking._id}}</h4>
+                                        <h4>{{StandbyBooking.Boat_Number}}/{{StandbyBooking.Booking_ID}}</h4>
 
                                          <h5><span><i class="far fa-calendar-check"></i>  </span> {{StandbyBooking.start| date :'short'}} </h5>
                                         
