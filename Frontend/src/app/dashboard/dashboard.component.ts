@@ -1436,7 +1436,9 @@ console.log(this.dropdown_Boat_List);
     
       if(data.status == true)
       {
-        alert("Booking is Accepted");      
+        alert("Booking is Accepted");
+        location.reload(); 
+            
         
       }
       else if(data.status == false)
