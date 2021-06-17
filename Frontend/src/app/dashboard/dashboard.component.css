@@ -200,11 +200,43 @@ border-color: #393f4b;
 
 .fc-row .fc-widget-header
 {
-  border-right-width: 1px;
+   border-right-width: 1px;
    margin-right: 16px;
 
 }
-
+.custom-tabs .fc-head-container.fc-widget-header{
+  padding: 0 12px !important;
+}
+.fc-dayGridMonth-view .Cls-btn-left, .fc-dayGridMonth-view .Cls-btn-right{
+  margin: 0 5px 0 0;
+  float: left;
+  border-radius: 3px;
+  outline: 0;
+  border: 0;
+}
+.drpList button.btn.btn-primary.dropdown-toggle{
+  border: 0;
+  outline: 0;
+  border-radius: 3px;
+  padding: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  box-shadow: inherit;
+}
+.drpList .form-control{
+    border-radius: 3px;
+    margin:  0px 0;
+}
+.btn.btn-clear{
+  background-color: #666;
+    color: #FFF;
+    border-radius: 5px;
+    padding: 3px 15px;
+    line-height: inherit;
+    font-size: 14px;
+    margin: 0 auto;
+    display: flex;
+}
 .fc-prev-button .fc-button .fc-button-primary{
   width: 2%; height: 28px;
 }
@@ -214,8 +246,13 @@ border-color: #393f4b;
 }
 .fc-table-start-div{
 
-  overflow:scroll; height:400px;
+   overflow-x:scroll; /*height:400px; */
 
+}
+.btn-month.btn{
+  margin: 10px 0px 0;
+  float: right;
+  font-weight: 500;
 }
 
 .btn-previous{

@@ -59,6 +59,7 @@ import { ReportBoatComponent } from './report-boat/report-boat.component';
 import { ReportBookingComponent } from './report-booking/report-booking.component';
 import { OwnerHeaderComponent } from './owner-header/owner-header.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
+import { TestTestComponent } from './test-test/test-test.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { BookingDetailsComponent } from './booking-details/booking-details.compo
     ReportBookingComponent,
     OwnerHeaderComponent,
     BookingDetailsComponent,
+    TestTestComponent,
 
   ],
   imports: [

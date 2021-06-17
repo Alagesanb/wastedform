@@ -171,7 +171,7 @@ export class DashboardComponent implements OnInit {
           var tmp1 = 0;          
           $.each(getallBoats, function(key, val)
           {
-                   
+                 
               tmp_Bind_TD = '<td id="'+val._id+'">'+val.Boat_Name+'</td>';
               var temp_SheduleList = ScheduleList;
               temp_SheduleList = public_sheduler_totaldaysbased.filter(x => x.Boat_Id == val._id || x.User_RoleType == "UnAvailableDays")
@@ -495,7 +495,7 @@ export class DashboardComponent implements OnInit {
                           type: 'GET',
                           dataType: 'json',        
                           success: function(GetUnAvailabeDaysOfBoats_datas) {
-                            debugger;
+                           
                             if(GetUnAvailabeDaysOfBoats_datas.status == true)
                             {
                               var tmp1_dt2 = GetUnAvailabeDaysOfBoats_datas.response;
