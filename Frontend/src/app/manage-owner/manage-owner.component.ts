@@ -18,7 +18,6 @@ export class ManageOwnerComponent implements OnInit {
   pageYoffset = 0;
   boatId: any;
   adminlogin: any;
-  owner: any=[];
   @HostListener('window:scroll', ['$event']) onScroll(event){
     this.pageYoffset = window.pageYOffset;
   }
@@ -186,7 +185,7 @@ function Binding_ManageOwner(){
     //data: JSON.stringify(person),
     contentType: 'application/json',
     success: function (data) {
-console.log(data.BookedDays)
+
         if(data.status == true)
         {
           var bindingTableData;
@@ -198,7 +197,8 @@ console.log(data.BookedDays)
 
           $.each(data.response , function(index, val) { 
 
-console.log(val)
+            // var obj2 = val
+
             var tmb_Id = val._id;
             var boatDetails = val.BoatDetails[0];
             var tmb_Owner_Name = val.Owner_Name;
@@ -212,15 +212,6 @@ console.log(val)
             var tmb_Winter_WeekDays = "0"//boatDetails.Winter_WeekDays;
 
             var tmb_Total_Days ="0";
-            $.each(data.BookedDays , function(index, book) { 
-if(boatDetails._id== book.Boat_Id && val.Owner_Id==book.Owner_Id){
-  console.log(book)
-tmb_Total_Days = book.Summer_WeekDays+book.Summer_WeekEndDays+book.Winter_WeekDays+book.Winter_WeekEndDays;//boatDetails.Total_Days;
-console.log(tmb_Total_Days)
-
-}
-
-            });
 
             if(boatDetails != null){
 
@@ -228,6 +219,7 @@ console.log(tmb_Total_Days)
              tmb_Summer_WeekDays =val.Summer_WeekDays;
              tmb_Winter_WeekEndDays = val.Winter_WeekEndDays;
              tmb_Winter_WeekDays = val.Winter_WeekDays;
+             tmb_Total_Days = boatDetails.Total_Days;
 
             }
                         
@@ -351,7 +343,7 @@ console.log(tmb_Total_Days)
   editManageOwner_new(obj){
     //debugger;
 
-    this.dropdownOwn_Boat_selected = []; 
+    this.dropdownOwn_Boat_selected = [];
     this.dropdownOwn_Boat_selected.push({item_id : obj.BoatDetails[0]._id, item_text: obj.Boat_Name});
 
     this.dropdownBoat_Owner_selected = [];
@@ -492,6 +484,8 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
               }
              
       this.http.post<any>(`${this.OwnerUrl}/GetSeasonDetailsById`, obj  ).subscribe(data => {
+              //debugger;
+                      
               var math = data.Data[0].Owners_Allowed
               var maths = 100/math
 
@@ -518,53 +512,22 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
 
 
   getOwners(){
-    this.http.get<any>(`${this.OwnerUrl}/GetAllOwnerDetails`).subscribe(data => {
-      this.allManageData = data['response']
-if(data.status== true){
+   
     this.http.get<any>(`${this.OwnerUrl}/GetOwners`).subscribe(data => {
   this.owners = data['response']
-  this.owner = data['response']
-
+ 
   this.dropdownOwnerList = data.response;                    
              var ownerArray = [];
-             this.allManageData.forEach(ele => {
-
-             this.owner.forEach(element => {
-
+             data.response.forEach(element => {
                    var obj2 = Object();
-                   if(element._id==ele.Owner_Id ){
-
-                    this.owners.splice(this.owners.indexOf(element), 1);
-
-
-
-                    // obj2.item_id = element._id,
-                    // obj2.item_text = element.First_Name
-                    // ownerArray.push(obj2);
-                   }
+                   obj2.item_id = element._id,
+                   obj2.item_text = element.First_Name
+                   ownerArray.push(obj2);
+ 
              });
-            });
-// var response = responses.map(function(el){
-//             el.BoatDetails = el.BoatDetails.filter(function(x){ return x.IsActive ==true; });
-//             return el;
-//         });
-
-this.owners.forEach(element => {
-
-  var obj2 = Object();
-
-   obj2.item_id = element._id,
-   obj2.item_text = element.First_Name
-   ownerArray.push(obj2);
-  
-});
-
              this.dropdownOwnerList_filted = ownerArray;  
    }, err => {
    })
-  }
-  }, err => {
-  })
   }
   getOwnerId(id){   
     for (let i = 0; i < this.owners.length; i++) {

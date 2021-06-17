@@ -80,8 +80,7 @@
   <label>Select boat type</label> 
   <ng-multiselect-dropdown
   [placeholder]="'Select'" 
-  class="testboarder"
-  [ngClass]="{ 'boat-search': boatSubmitted && bf.Boattype_id.errors }"
+  [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boattype_id.errors }"
   [settings]="dropdownSettings"
   [data]="boatTypes"                                    
   (onSelect)="getBoatTypeId($event)"

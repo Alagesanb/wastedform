@@ -638,22 +638,18 @@ var winterE = new Date(this.data.WinterSeason_EDate);
 this.winterE = (winterE.getMonth()+1)+'/' + (winterE.getDate()) + '/'+winterE.getFullYear();
 
 }
-// this.dropdownBoatType = this.data.Boattype_Name
-
-
-this.dropdownBoatType = []; 
-this.dropdownBoatType.push({_id :this.data.Boattype_id._id, Boat_Type: this.data.BoattypeDetails[0].Boat_Type});
+this.dropdownBoatType = this.data.Boattype_Name
 this.boatform.get('Boattype_Name').setValue(this.data.Boattype_Name);
 
 if(this.data.BoattypeDetails ){
-// this.boatform.get('Boattype_Name').setValue(this.data.BoattypeDetails[0].Boat_Type);
+this.boatform.get('Boattype_Name').setValue(this.data.BoattypeDetails[0].Boat_Type);
 }
 this.boatform.get('Location_Name').setValue(this.data.Location_Name);
 if(this.data.locationDetails){
 this.boatform.get('Location_Name').setValue(this.data.locationDetails[0].Boat_Location);
 }
 this.boatform.get('Boat_id').setValue(this.data._id);
-// this.boatform.get('Boattype_id').setValue(this.data.Boattype_id);
+this.boatform.get('Boattype_id').setValue(this.data.Boattype_id);
 this.boatform.get('Boat_Name').setValue(this.data.Boat_Name);
 this.boatform.get('Boat_Number').setValue(this.data.Boat_Number);
 

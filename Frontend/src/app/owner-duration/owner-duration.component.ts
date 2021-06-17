@@ -338,22 +338,23 @@ this.form.reset()
    })
   }
   onItemSelect(item: any) {
-    // Change boat type  for owner duration //Done By Alagesan on 17.06.2021
+    console.log(item)
     var finddate = this.dropdownList.find(x => x._id == item.item_id);
     console.log(finddate)
-    this.form.get('Boat_name').setValue(item.item_text);
-    this.form.get('Boat_Id').setValue(item.item_id);
+    this.form.get('Boat_name').setValue(finddate.Boat_Name);
+    this.form.get('Boat_Id').setValue(finddate._id);
 
-    // this.setBoatType = finddate.Boattype_Name;
-    if(item.item_id){
+    this.setBoatType = finddate.Boattype_Name;
+    if(finddate._id){
       var obj ={
-        boatid:item.item_id
+        boatid:finddate._id
       }
-       this.http.post<any>(`${this.OwnerUrl}/GetSeasonDetailsById`,  obj  ).subscribe(data => {
+       this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
         console.log(data)
     if(data.Status == true){
-      var boatResponse = data.Data
-      this.form.get('Boat_Type').setValue(boatResponse[0].Boattype_Name);
+      this.getBoat = data.Data
+      console.log(this.getBoat.response.Boattype_Name)
+      this.form.get('Boat_Type').setValue(this.getBoat.response.Boattype_Name);
     
     }
     else if(data.Status == false){
