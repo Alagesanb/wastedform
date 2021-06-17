@@ -138,43 +138,48 @@
       <div class="boat-image">
         <h4 class="content-title">Boats</h4>
 
-        <div class="row boat-list">
+        <div class="row boat-list rowPads">
+
+          <div class="col-sm-6 col-md-4 padspace5" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
+            <div class="card" style="max-width: 100%;margin: 5px 0 10px;" >
+              <div class="profile-pic">
+                <a><img class="card-img-top" *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg"
+                    alt="boat image"></a>
+                <a><img class="card-img-top" *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}"
+                    alt="boat image"></a>
+                <!-- <iframe class="card-img-top"  *ngIf="boat.Boat_HandBook" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgUrl+boat.Boat_HandBook)" ></iframe> -->
+
+                <ul class="edit">
+                  <li> <a (click)=editBoat(boat)><i class="far fa-edit"></i></a></li>
+                  <li> <a (click)=viewBoat(boat)><i class="far fa-eye"></i></a></li>
+                  <!-- <li>  <a (click)=deleteBoat(boat._id)><i class="far fa-trash-alt"></i></a></li> -->
+                  <li> <a (click)=deleteBoatModel(boat._id)><i class="far fa-trash-alt"></i></a></li>
 
 
-          <div class="card col-md-4" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
-            <div class="profile-pic">
-              <a><img class="card-img-top" *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg"
-                  alt="boat image"></a>
-              <a><img class="card-img-top" *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}"
-                  alt="boat image"></a>
-              <!-- <iframe class="card-img-top"  *ngIf="boat.Boat_HandBook" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgUrl+boat.Boat_HandBook)" ></iframe> -->
-
-              <ul class="edit">
-                <li> <a (click)=editBoat(boat)><i class="far fa-edit"></i></a></li>
-                <li> <a (click)=viewBoat(boat)><i class="far fa-eye"></i></a></li>
-                <!-- <li>  <a (click)=deleteBoat(boat._id)><i class="far fa-trash-alt"></i></a></li> -->
-                <li> <a (click)=deleteBoatModel(boat._id)><i class="far fa-trash-alt"></i></a></li>
-
-
-              </ul>
-            </div>
-
-            <div class="card-body">
-              <div *ngIf="boat.Location_Name">
-                <a class="card-link"><i class="fas fa-map-marker-alt"></i> {{boat.Location_Name}}</a>
-                <a class="card-link f-right"><i style="margin: 5px 0px 0px 0px;right: 15px;position: absolute;"
-                    class="far fa-calendar-alt" (click)=viewBoat(boat)></i> </a>
-              </div>
-              <div *ngIf="!boat.Location_Name">
-                <a class="card-link"><i class="fas fa-map-marker-alt"></i> {{boat.locationDetails[0].Boat_Location}}</a>
-                <a class="card-link f-right"><i style="margin: 5px 0px 0px 0px;right: 15px;position: absolute; cursor: pointer;"
-                    class="far fa-calendar-alt" (click)=viewBoat(boat)></i> </a>
+                </ul>
               </div>
 
-            </div>
-            <div class="card-header">
-              <a> {{boat.Boat_Name}}</a>
-            </div>
+              <div class="card-body">
+                <div *ngIf="boat.Location_Name">
+                  <a class="card-link"><i class="fas fa-map-marker-alt"></i> {{boat.Location_Name}}</a>
+                  <a class="card-link f-right"><i style="margin: 5px 0px 0px 0px;right: 15px;position: absolute;"
+                      class="far fa-calendar-alt" (click)=viewBoat(boat)></i> </a>
+                </div>
+                <div *ngIf="!boat.Location_Name">
+                  <a class="card-link"><i class="fas fa-map-marker-alt"></i> {{boat.locationDetails[0].Boat_Location}}</a>
+                  <a class="card-link f-right"><i style="margin: 5px 0px 0px 0px;right: 15px;position: absolute; cursor: pointer;"
+                      class="far fa-calendar-alt" (click)=viewBoat(boat)></i> </a>
+                </div>
+
+              </div>
+              <div class="card-header">
+                <a> {{boat.Boat_Name}}</a>
+              </div>
+
+              <div class="card-body row">
+                <div class="booking-days col-md-6">
+                  <!-- <h6>100/300 Days </h6> -->
+                  <h6>0/ {{boat.Total_Days}} Days </h6>
 
             <div class="card-body row">
               <div class="booking-days col-md-6">
@@ -183,12 +188,11 @@
 
                 <h6 *ngIf="boat.Total_Days">0/ {{boat.Total_Days}} Days </h6>
 
-              </div>
+                <div class="owner-nos col-md-6">
+                  <h6>{{boat.Owners_Allowed}} Super Owners </h6>
+                </div>
 
-              <div class="owner-nos col-md-6">
-                <h6>{{boat.Owners_Allowed}} Super Owners </h6>
               </div>
-
             </div>
           </div>
 

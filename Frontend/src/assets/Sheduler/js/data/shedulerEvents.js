@@ -999,7 +999,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
         // Not accessing Id ...Pending work...
 
-        alert("sorry delete not allowed (popup) only for  display calendar items");
+        //alert("sorry delete not allowed (popup) only for  display calendar items");
 
     });
 

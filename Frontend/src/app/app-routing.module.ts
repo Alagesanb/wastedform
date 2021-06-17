@@ -40,7 +40,7 @@ import { ReportOwnerComponent } from './report-owner/report-owner.component';
 import { ReportBoatComponent } from './report-boat/report-boat.component';
 import { ReportBookingComponent } from './report-booking/report-booking.component';
 import { BookingDetailsComponent} from './booking-details/booking-details.component';
-
+import { TestTestComponent } from './test-test/test-test.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -82,6 +82,7 @@ const routes: Routes = [
   { path: 'report-boat', component: ReportBoatComponent },
   { path: 'report-booking', component: ReportBookingComponent },
   { path: 'booking-details', component: BookingDetailsComponent },
+  {path : 'testsooraj',component : TestTestComponent}
 
 ];
 
