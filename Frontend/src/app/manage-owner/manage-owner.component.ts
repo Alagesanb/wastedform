@@ -219,7 +219,7 @@ function Binding_ManageOwner(){
              tmb_Summer_WeekDays =val.Summer_WeekDays;
              tmb_Winter_WeekEndDays = val.Winter_WeekEndDays;
              tmb_Winter_WeekDays = val.Winter_WeekDays;
-             tmb_Total_Days = "0";//boatDetails.Total_Days;
+             tmb_Total_Days = boatDetails.Total_Days;
 
             }
                         
