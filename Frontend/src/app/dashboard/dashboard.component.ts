@@ -7,6 +7,7 @@ declare var jQuery: any;
 declare var Swal: any;
 
 
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -222,6 +223,31 @@ export class DashboardComponent implements OnInit {
         }
     }
 
+    function getFormattedDate_second(dateVal) {
+      var newDate = new Date(dateVal);
+  
+      var sMonth = padValue(newDate.getMonth() + 1);
+      var sDay = padValue(newDate.getDate());
+      var sYear = newDate.getFullYear();
+      var sHour = newDate.getHours();
+      var sMinute = padValue(newDate.getMinutes());
+      var sAMPM = "AM";
+  
+      var iHourCheck = Number(sHour);
+  
+      if (iHourCheck > 12) {
+          sAMPM = "PM";
+          sHour = iHourCheck - 12;
+      }
+      else if (iHourCheck === 0) {
+          sHour = 12;
+      }
+  
+      sHour = padValue(sHour);
+  
+      return sDay + "-" + sMonth + "-" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+  }
+
 
     function getDaysInMonth_Sheduler(datas_Arry,data_UnAvailableDays,data_UnAvailableDays_Boats){
 
@@ -258,7 +284,7 @@ export class DashboardComponent implements OnInit {
            obj.User_RoleType = val.User_RoleType;
            obj.id = val.id;
             
-           obj.title = val.title;
+           obj.title = val.title +" "+ getFormattedDate_second(val.start)+ " to " + getFormattedDate_second(val.end);;
           
         
            obj.start = val.start;
@@ -1410,7 +1436,9 @@ console.log(this.dropdown_Boat_List);
     
       if(data.status == true)
       {
-        alert("Booking is Accepted");      
+        alert("Booking is Accepted");
+        location.reload(); 
+            
         
       }
       else if(data.status == false)

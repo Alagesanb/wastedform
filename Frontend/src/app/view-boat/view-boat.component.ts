@@ -160,6 +160,18 @@ this.boatStatus = "Enable"
 		
 
 		$.each( dataImages, function(index, val) {
+			
+			//
+				//var sss =val;
+				if(typeof val === "undefined" || val == null || val == ""){
+				   val ="boat1.jpg";
+				   urlImg = "/assets/images/";
+				   loopfirstlength = 1;
+				   dataImageLength = 1;
+
+				}
+
+			//
 
 			if(rongImageRemoveArray == 0){
 
@@ -195,6 +207,14 @@ this.boatStatus = "Enable"
 	  $('#id-sliderbinding-First').html(data_First + div_Binding_one + div_Binding_two);
 
 	  $.each(dataImages , function(index, val) {
+
+		if(typeof val === "undefined" || val == null || val == ""){
+			val ="boat1.jpg";
+			urlImg = "/assets/images/";
+			loopSecondlength = 1;
+			
+
+		 }
 		  
 		
 		if(rongImageRemoveArray_Secon == 0){
