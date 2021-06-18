@@ -546,9 +546,7 @@ header, footer, section, .wraper{ float:left; width:100%; }
  border-radius:4px;
  }
 
-.notification-img{
-   
-}
+
 .notification-img img{
    border-radius: 50%;
 }
@@ -566,9 +564,7 @@ app-sidemenu {
     margin-right: 20px;
 }
 
-element.style {
-    height: 150%;
-}
+
 .side-menu {
     /* width: 290px; */
     height: 100vh !important;
@@ -1781,9 +1777,7 @@ button.close {
     border-radius: 0;
 }
 
-.container{
-    /* padding: 0; */
-}
+
 
 
 /*---Photo upload--*/
@@ -1847,9 +1841,7 @@ button.close {
   font-size:18px;
 }
 
-.boat-detail{
-    
-}
+
 .boat-detail h4{
     font-size: 16px;
     margin: 0 0 20px 0;
@@ -2027,6 +2019,36 @@ ul.top-btn li {
     button#renew {
         font-size: 12px;
     }
+
+
+
+
+.boat-detail .calender-custom #calendar {
+    width: 100%;
+    max-width: 100%;
+    margin: 0px auto;
+    margin-bottom: 35px;
+}
+.boat-detail .calender-custom #menu {
+    padding: 15px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*------------------------------------------------------------------------------------------------------------------------------ */
                                                         /* MEDIA QUERY START*/
@@ -2521,9 +2543,7 @@ ul.top-btn li {
     padding: 0;
 }
 
-.profile-pic {
-    /* height: 180px; */
-}
+
 
 .date-add-field .col-md-7{
         max-width: 56%;
