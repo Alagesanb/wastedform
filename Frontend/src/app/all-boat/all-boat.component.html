@@ -211,12 +211,37 @@
   <!-- <small>© Copyright SMART Boating 2021. All Rights Reserved.</small> -->
 </div>
 <!-- --------- -->
+<!--Update boat modal  for all boat Done By Alagesan  on 18.06.2021 -->
 <button style="display:none" type="button" id="removeBoat" class="btn btn-info btn-lg" data-toggle="modal"
   data-target="#removeBoats">Open Modal</button>
 
 <!-- Modal -->
-<!--Update boat modal  for all boat Done By Alagesan  on 14.06.2021 -->
+
 <div class="modal fade" id="removeBoats" role="dialog">
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Boat</h4>
+      </div>
+      <div class="modal-body">
+     <span class="red">ARE YOU SURE ?</span>
+        <p>You Want To Delete Boat!!!.</p>
+      </div>
+      <div class="modal-footer">
+    <span a href="#" (click)=deleteBoat() class="confirm-bttn">CONFIRM</span>
+    <span a href="#" data-dismiss="modal" class="cancel-bttn">CANCEL</span>
+       </div>
+    </div>
+
+  </div>
+</div>
+
+<!--Update boat modal  for all boat Done By Alagesan  on 18.06.2021 -->
+<button style="display:none" type="button" id="removeBookedBoat" class="btn btn-info btn-lg" data-toggle="modal" data-target="#removeBookedBoats">Open Modal</button>
+
+<div class="modal fade" id="removeBookedBoats" role="dialog">
   <div class="modal-dialog">
 
     <div class="modal-content" style="width:600px">
@@ -235,6 +260,8 @@
 
   </div>
 </div>
+
+<!--Update boat modal  for all boat Done By Alagesan  on 18.06.2021 -->
 <button style="display:none" type="button" id="pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal"
   data-target="#myModal">Open Modal</button>
 

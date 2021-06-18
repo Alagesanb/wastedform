@@ -213,18 +213,21 @@ var date1 =  new Date($event.target.value)
 
    }
     
-  
+  // Delete boat modal popup for all boat page //Done By Alagesan on 18.06.2021	
+
   deleteBoat(){
     var boadtId = {
       _id : this.boatId
     }
     this.http.post<any>(`${this.url}/DeleteBoat`,  boadtId   ).subscribe(data => {
+      console.log(data);
         if(data.status==false){
-        alert(data.message)
+          $('#removeBoat').trigger('click');
+          $('#removeBookedBoat').trigger('click');  
         }
-        else if(data.status==true){
+        if(data.status==true){
           this.getResponce = data.message
-          $('#removeBoat').trigger('click');  
+          $('#removeBoat').trigger('click');
           $('#pop-up-btn').trigger('click');
           this.getAllBoat()
         } 
@@ -271,6 +274,9 @@ var date1 =  new Date($event.target.value)
         })
 
   }
+
+  // Delete boat modal popup for all boat page //Done By Alagesan on 18.06.2021	
+
   deleteBoatModel(id){
     this.boatId = id
     $('#removeBoat').trigger('click');
