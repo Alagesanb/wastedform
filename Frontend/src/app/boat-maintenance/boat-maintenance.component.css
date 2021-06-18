@@ -1,6 +1,13 @@
 .col-md-12.schedule-indicators {
     margin-bottom: 38px;
 }
-/* .main-page {
-    margin: 0px 0px 0px -30px;
-} */
+
+
+.calender-custom #calendar{
+    width: 100% !important;
+    max-width: 100%;
+    margin: 25px 0;
+}
+.calender-custom #menu {
+    padding: 16px 0 0;
+}
