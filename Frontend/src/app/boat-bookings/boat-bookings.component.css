@@ -1,3 +1,37 @@
-/* .main-page {
-    margin: 0px 0px 0px -30px;
-} */
+.boat-listing .col-md-4{
+
+    margin: 0;
+}
+.btn.btn-danger{ color: #FFF; }
+
+.booking-tabs .nav-item {
+    width: auto;
+}
+.booking-tabs.nav-tabs .nav-link {
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #eeeeeeb3;
+}
+.dash-filter .dropdown {
+    padding: 14px 0;
+}
+
+.Zebra_DatePicker_Icon_Wrapper input#datepicker{
+    padding-right: 25px !important;
+}
+
+.Zebra_DatePicker_Icon{ right: 8px !important; }
+
+
+.boat-listing.rowPads{ margin: 0 -15px; }
+
+.boat-list-1 .info .btn-primary, .boat-list-1 .info .btn-danger {
+    font-size: 13px;
+    padding: 5px 10px;
+    line-height: 20px;
+    min-height: 32px;
+    margin-right: 4px;
+}
+.boat-list-1 {
+    margin-bottom: 0px;
+}

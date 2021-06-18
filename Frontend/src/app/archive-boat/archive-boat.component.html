@@ -42,10 +42,11 @@
             
           <h4 class="content-title">Boats</h4>   
             
-             <div class="row boat-list">
+             <div class="row boat-list rowPads">
                 
-             <div class="card col-md-4" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
-             <!--Update view boat redirect for archive boat Done By Alagesan  on 13.06.2021 -->
+             <div class="col-sm-6 col-md-4 padspace5" *ngFor="let boat of allBoats | filter: searchText  let i = index;">
+              <div class="card" style="max-width: 100%;margin: 5px 0 10px;" >
+              <!--Update view boat redirect for archive boat Done By Alagesan  on 13.06.2021 -->
                 <div class="profile-pic">
                     <a ><img class="card-img-top"  *ngIf="!boat.Boat_Image[0]" src="/assets/images/boat1.jpg" alt="boat image"></a>
                     <a ><img class="card-img-top"  *ngIf="boat.Boat_Image[0]" src="{{imgUrl+boat.Boat_Image[0]}}" alt="boat image"></a>
@@ -79,6 +80,7 @@
                 
                 </div>                   
                 </div>
+              </div>
           
             </div>  
          </div>

@@ -61,7 +61,7 @@
 
 <div class="col-md-6 boat-image-slider">
  
-  <div class="container" id="id-sliderbinding-First"> 
+  <div class="container" id="id-sliderbinding-First" style="padding: 0;"> 
 
     <div class="container">
       
@@ -91,35 +91,37 @@
    </div>
 </div>
 <div class="col-md-6">
-  <h3 class="boat_title" style="margin-left: 15px;">HandBook : <a href={{HandBookUrl}} target="_blank">download</a></h3> 
-    <h3 class="boat_title" style="margin-left: 15px;">Boat Details</h3>
+  <h3 class="boat_title">HandBook : <a href={{HandBookUrl}} target="_blank">download</a></h3> 
+    <h3 class="boat_title">Boat Details</h3>
+    <div class="row">
     <ul class="col-md-12">
-    <div *ngIf="data.Boattype_Name">
+      <div *ngIf="data.Boattype_Name">
         <li><h6 >Boat Type </h6> <span>{{data.Boattype_Name}}</span></li>
         </div>
         <div *ngIf="!data.Boattype_Name">
           <li><h6>Boat Type </h6> <span>{{data.BoattypeDetails[0].Boat_Type}}</span></li>
           </div>
-  <li><h6>Owners Allowed </h6> <span>{{data.Owners_Allowed}}</span></li>
-  <div *ngIf="data.Location_Name">
-    <li><h6>Location </h6> <span>{{data.Location_Name}}</span></li>
+          <li><h6>Owners Allowed </h6> <span>{{data.Owners_Allowed}}</span></li>
+          <div *ngIf="data.Location_Name">
+            <li><h6>Location </h6> <span>{{data.Location_Name}}</span></li>
+            </div>
+            <div *ngIf="!data.Location_Name">
+              <li><h6>Location </h6> <span>{{data.locationDetails[0].Boat_Location}}</span></li>
+              </div>
+                <li><h6>Launch Date </h6> <span>{{Launch_Dates}}</span></li>
+          <li><h6>Pre-Launch Date </h6> <span>{{preDates}}</span></li>
+          <li><h6>Status </h6> <span>{{boatStatus}}</span></li>
+          <li><h6 class="pt-2">Facilities </h6>
+            <span><textarea class="facilities" readonly rows="3" placeholder="Enter Here Text">{{data.Boat_Facility}}
+            </textarea></span>
+          </li> 
+          <li>
+            <h6 class="descr-title mt-2">Description </h6>
+            <textarea class="form-add-boat" rows="5" readonly placeholder="Enter Here Text">{{data.Boat_Description}}
+            </textarea>
+          </li>
+    </ul>
     </div>
-    <div *ngIf="!data.Location_Name">
-      <li><h6>Location </h6> <span>{{data.locationDetails[0].Boat_Location}}</span></li>
-      </div>
-        <li><h6>Launch Date </h6> <span>{{Launch_Dates}}</span></li>
-  <li><h6>Pre-Launch Date </h6> <span>{{preDates}}</span></li>
-  <li><h6>Status </h6> <span>{{boatStatus}}</span></li>
-  <li><h6 class="pt-2">Facilities </h6>
-    <span><textarea class="facilities" readonly rows="3" placeholder="Enter Here Text">{{data.Boat_Facility}}
-    </textarea></span>
-  </li> 
-  <li>
-    <h6 class="descr-title mt-2">Description </h6>
-    <textarea class="form-add-boat" rows="5" readonly placeholder="Enter Here Text">{{data.Boat_Description}}
-    </textarea>
-  </li>
-  </ul>
 </div>
 <div class="row">
   <div class="col-md-12">

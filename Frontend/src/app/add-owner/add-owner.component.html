@@ -11,7 +11,7 @@
         <div class="page contents">
             
             <div class="row">
-             <div class="col-md-8">
+             <div class="col-md-8 col-lg-9">
             <div class="sbg-form row">
              <div class="col-md-12">   
                 <form [formGroup]="form"  novalidate>
@@ -188,30 +188,28 @@
              </div>
                 </div>
                 
-                   <div class="col-md-4 owner-img-upload">
+                   <div class="col-md-4 col-lg-3 owner-img-upload">
                       <div class="col-md-12">  
                         <h4>Choose Owner Photo</h4>
                           <p>Choose minimum 130x130 resolution</p>
                         </div>   
                        
-                    <div class="row img-upload">
-                       
-                        
-<div class="small-12 medium-2 large-2 columns">
-<div class="circle">
- <!-- User Profile Image -->
-<img class="profile-pic" src="/assets/images/dummy-owner-img.jpg">
+                    <div class="img-upload">
+                      <div class="small-12 medium-2 large-2 columns">
+                      <div class="circle">
+                      <!-- User Profile Image -->
+                      <img class="profile-pic" src="/assets/images/dummy-owner-img.jpg">
 
 
-</div>
-<div class="p-image">
- <i class="fa fa-camera upload-button"></i>
- <!-- <input type="file" class="custom-file-input form-control" id="customFile" name="filename" (focusout)="singleImage($event, 'BACK')"> -->
+                      </div>
+                      <div class="p-image">
+                      <i class="fa fa-camera upload-button"></i>
+                      <!-- <input type="file" class="custom-file-input form-control" id="customFile" name="filename" (focusout)="singleImage($event, 'BACK')"> -->
 
-  <input class="file-upload" type="file"  (change)="singleImage($event, 'BACK')"/>
-</div>
-</div>
-</div>   
+                        <input class="file-upload" type="file"  (change)="singleImage($event, 'BACK')"/>
+                      </div>
+                      </div>
+                    </div>   
                        
                        
                        

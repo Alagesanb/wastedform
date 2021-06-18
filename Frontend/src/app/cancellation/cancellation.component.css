@@ -1,3 +1,11 @@
-/* .main-page {
-    margin: 0px 0px 0px -30px;
-} */
+
+.boat-info button.btn.btn-info.btn-lg{
+    border: 0;
+    font-weight: 500;
+    border-radius: 0;
+    margin-left: 5px;
+}
+
+.dash-filter .dropdown{
+    padding: 5px 10px 14px 0px;
+}
