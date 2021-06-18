@@ -824,7 +824,12 @@ console.log(this.handBook)
   get mof() { return this.manageOwnerForms.controls; }
 
 
+  onDeSelect(id) {
+    console.log(id)
+    this.boatform.get('Boattype_id').setValue('');
+    this.boatform.get('Boattype_Name').setValue('');
 
+  }
 
   getBoatTypeId(id) {
     console.log(id)

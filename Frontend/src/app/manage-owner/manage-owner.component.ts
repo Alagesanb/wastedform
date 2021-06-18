@@ -19,6 +19,7 @@ export class ManageOwnerComponent implements OnInit {
   boatId: any;
   adminlogin: any;
   owner: any=[];
+  selectedBoat: any;
   @HostListener('window:scroll', ['$event']) onScroll(event){
     this.pageYoffset = window.pageYOffset;
   }
@@ -35,6 +36,7 @@ export class ManageOwnerComponent implements OnInit {
   managerOwnerId: any;
   editBtnFlag= false
   addBtnFlag = true
+  checkCurrent = true
   manageOwnerId: any;
   data: any;
   set_BoatType = "";
@@ -216,9 +218,7 @@ function Binding_ManageOwner(){
 
             $.each(data.BookedDays , function(index, book) { 
               if(boatDetails._id== book.Boat_Id && val.Owner_Id==book.Owner_Id){
-                console.log(book)
               tmb_Total_Days = book.Summer_WeekDays+book.Summer_WeekEndDays+book.Winter_WeekDays+book.Winter_WeekEndDays;//boatDetails.Total_Days;
-              console.log(tmb_Total_Days)
               
               }
               
@@ -400,10 +400,13 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
     this.set_BoatType = finddate.Boattype_Name;
    
   }
+ 
   onboatSelect(items: any) { 
-   
+    this.checkCurrent = false
+   this.selectedBoat = items
     this.boatId = items.item_id
     this.getBoatId(this.boatId)
+    this.getOwners()
   }
   onboatAll(items: any) { 
    
@@ -530,29 +533,24 @@ if(data.status== true){
   this.owners = data['response']
   this.owner = data['response']
 
-  this.dropdownOwnerList = data.response;                    
+  this.dropdownOwnerList = data.response;   
+  console.log(this.selectedBoat)     
+  console.log(this.allManageData)            
              var ownerArray = [];
              this.allManageData.forEach(ele => {
 
              this.owner.forEach(element => {
 
                    var obj2 = Object();
-                   if(element._id==ele.Owner_Id ){
-
+                   if(element._id==ele.Owner_Id && this.selectedBoat.item_id == ele.BoatDetails[0]._id){
+console.log(element)
                     this.owners.splice(this.owners.indexOf(element), 1);
 
-
-
-                    // obj2.item_id = element._id,
-                    // obj2.item_text = element.First_Name
-                    // ownerArray.push(obj2);
                    }
              });
+    
             });
-// var response = responses.map(function(el){
-//             el.BoatDetails = el.BoatDetails.filter(function(x){ return x.IsActive ==true; });
-//             return el;
-//         });
+
 
 this.owners.forEach(element => {
 
@@ -565,6 +563,7 @@ this.owners.forEach(element => {
 });
 
              this.dropdownOwnerList_filted = ownerArray;  
+             console.log(this.dropdownOwnerList_filted)
    }, err => {
    })
   }

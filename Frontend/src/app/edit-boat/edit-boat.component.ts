@@ -562,6 +562,14 @@ createBoatForm() {
   focusOutLaunch(ss){
 
   }
+
+  onDeSelect(id) {
+    console.log(id)
+    this.boatform.get('Boattype_id').setValue('');
+    this.boatform.get('Boattype_Name').setValue('');
+
+  }
+
   getBoatTypeId(id){   
     console.log(id)
     this.boatform.get('Boattype_id').setValue(id._id);
@@ -601,6 +609,7 @@ createBoatForm() {
   }
   boatData(){
     this.data = JSON.parse(sessionStorage.getItem('boatData')); //forgot to close
+    console.log(this.data)
 if(this.data){
 
 
@@ -639,11 +648,24 @@ this.winterE = (winterE.getMonth()+1)+'/' + (winterE.getDate()) + '/'+winterE.ge
 
 }
 this.dropdownBoatType = []; 
-this.dropdownBoatType.push({_id :this.data.Boattype_id._id, Boat_Type: this.data.BoattypeDetails[0].Boat_Type});
+
+
 this.boatform.get('Boattype_Name').setValue(this.data.Boattype_Name);
+this.boatform.get('Boattype_id').setValue(this.data.Boattype_id);
+
 if(this.data.BoattypeDetails ){
 // this.boatform.get('Boattype_Name').setValue(this.data.BoattypeDetails[0].Boat_Type);
+this.boatform.get('Boattype_Name').setValue(this.data.BoattypeDetails[0].Boat_Type);
+
+this.dropdownBoatType.push({_id :this.data.Boattype_id, Boat_Type: this.data.BoattypeDetails[0].Boat_Type});
+}else{
+  this.dropdownBoatType.push({_id :this.data.Boattype_id, Boat_Type: this.data.Boattype_Name});
+
 }
+
+
+console.log(this.dropdownBoatType)
+
 this.boatform.get('Location_Name').setValue(this.data.Location_Name);
 if(this.data.locationDetails){
 this.boatform.get('Location_Name').setValue(this.data.locationDetails[0].Boat_Location);

@@ -44,6 +44,7 @@
       <label>Owner Name</label> 
      <ng-multiselect-dropdown
      [placeholder]="'Select'"
+     [disabled]="checkCurrent"
      [(ngModel)]="dropdownBoat_Owner_selected"
      [ngModelOptions]="{standalone: true}" 
      [settings]="dropdownOwnerSettings"

@@ -82,7 +82,8 @@
   [placeholder]="'Select'" 
   [ngClass]="{ 'boat-search': boatSubmitted && bf.Boattype_id.errors }"
   [settings]="dropdownSettings"
-  [data]="boatTypes"                                    
+  [data]="boatTypes"
+  (onDeSelect)="onDeSelect($event)"                                    
   (onSelect)="getBoatTypeId($event)"
   class="singleselect_drop"
  >
