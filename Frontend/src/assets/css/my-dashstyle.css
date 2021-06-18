@@ -767,7 +767,7 @@ ul.menu-list li {
 
 .contents-page {
     flex: 1;
-    padding: 15px 0px 30px;
+    padding: 15px 15px 30px 0;
     max-width: 100%;
 }
 .user {
@@ -885,7 +885,7 @@ table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:
     box-shadow: 2px 1px 8px #ccc;
     min-height: 100vh;
     margin-bottom: 200px;
-    margin-right: 30px;
+    
 
 }
 .headingz {
@@ -1040,14 +1040,15 @@ h6.vendor-name span {
     color: #35439e;
 }
 
-.boat-listing .col-md-4{
+/* .boat-listing .col-md-4{
     max-width: 32%;
     margin: 3px;
-}
+} */
 
 .boat-listing .boat-img img {
     max-width: 100%;
     height: 125px;
+    object-fit: cover;
 }
 
 
@@ -1098,6 +1099,8 @@ h6.vendor-name span {
     /* margin: 0px 0px 0px 15px; */
 }
 
+
+
 .sbg-form .btn-outline-secondary {
     color: #6c757d;
     background-color: #f2f4f4;
@@ -1107,13 +1110,14 @@ h6.vendor-name span {
 
 .btn-primary{
     background: linear-gradient(#4e5dbd, #031060);
-    border: none;
+    border: 0;
+    outline: 0;
     border-radius: 0;
 /*    padding: 5px 10px;*/
 }
-.btn-primary:hover{
+.btn-primary:hover, .btn-primary:focus{
     background: linear-gradient(#031060, #031060);
-    border: none;
+    border: 0 !important;
 }
 label{
        text-transform: uppercase;
@@ -1769,7 +1773,7 @@ button.close {
     margin-top: 20px;
     margin-left: 0;
 }
-.boat-search .btn-outline-secondary{
+.boat-search .btn-outline-secondary, .boat-search .btn-outline-secondary:active, .boat-search .btn-outline-secondary:hover{
     padding: 10px;
     border: 1px solid #233088;
     background: #233088;
@@ -2034,13 +2038,24 @@ ul.top-btn li {
     padding: 15px 0;
 }
 
+.calender-custom #menu button.btn.btn-default.btn-sm.move-day {
+    background: linear-gradient(#4e5dbd, #031060);
+    border: 0;
+    color: #FFF !important;
+    margin: 2px;
+}
+.calender-custom #menu button.btn.btn-default.btn-sm.move-day i{
+    filter: brightness(0) invert(1);
+}
 
+.calender-custom #menu button.btn.btn-default.btn-sm.move-today {
+    margin-right: 10px;
+}
 
-
-
-
-
-
+.calender-custom  #calendar{ max-width: 100% !important;   margin: 25px 0; }
+.calender-custom #menu {
+    padding: 15px 0 5px;
+}
 
 
 
