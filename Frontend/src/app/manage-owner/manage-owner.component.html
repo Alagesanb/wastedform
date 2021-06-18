@@ -18,10 +18,12 @@
   <label>Select boat</label> 
  <ng-multiselect-dropdown
  [placeholder]="'Select'"
+ [ngClass]="{ 'boat-search': manageOwnerSubmitted && mof.Boat_Id.errors }"
  [(ngModel)]="dropdownOwn_Boat_selected"
  [ngModelOptions]="{standalone: true}" 
  [settings]="dropdownSettings"
- [data]="dropdownList_filted"                                    
+ [data]="dropdownList_filted"   
+ (onDeSelect)="onDeSelectBoat($event)"                                                                     
  (onSelect)="onboatSelect($event)"
  (onSelectAll)="onboatAll($event)"
  class="singleselect_drop"
@@ -45,10 +47,13 @@
      <ng-multiselect-dropdown
      [placeholder]="'Select'"
      [disabled]="checkCurrent"
+     [ngClass]="{ 'boat-search': manageOwnerSubmitted && mof.Owner_Id.errors }"
      [(ngModel)]="dropdownBoat_Owner_selected"
      [ngModelOptions]="{standalone: true}" 
      [settings]="dropdownOwnerSettings"
-     [data]="dropdownOwnerList_filted"                                    
+     [data]="dropdownOwnerList_filted"     
+     (onDeSelect)="onDeSelectowner($event)"                                                                     
+                               
      (onSelect)="onItemOwnerSelect($event)"
      (onSelectAll)="onOwnerSelectAll($event)"
      class="singleselect_drop"

@@ -400,7 +400,9 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
     this.set_BoatType = finddate.Boattype_Name;
    
   }
- 
+  onDeSelectBoat(items: any) { 
+   this.manageOwnerForms.reset()
+  }
   onboatSelect(items: any) { 
     this.checkCurrent = false
    this.selectedBoat = items
@@ -411,6 +413,14 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
   onboatAll(items: any) { 
    
   }
+  onDeSelectowner(item: any) {
+ 
+    this.manageOwnerForms.get('Owner_Name').setValue('');
+    this.manageOwnerForms.get('Owner_Id').setValue('');
+
+   
+  }
+
   onItemOwnerSelect(item: any) {
  
     this.public_Owner_Name = item.item_text;
