@@ -5,3 +5,10 @@
     width: 100% !important;
     margin: 19px 0px 0px 0px !important;
 }   
+
+.page.contents.fix-page{
+    padding: 30px;
+}
+#menu {
+    padding: 16px 0;
+}
