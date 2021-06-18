@@ -179,7 +179,8 @@
               <div class="card-body row">
                 <div class="booking-days col-md-6">
                   <!-- <h6>100/300 Days </h6> -->
-                  <h6>0/ {{boat.Total_Days}} Days </h6>
+                  <h6  *ngIf="!boat.Total_Days">0/0 Days </h6>
+                  <h6  *ngIf="boat.Total_Days">0/ {{boat.Total_Days}} Days </h6>
 
                 </div>
 
