@@ -71,14 +71,14 @@
 
             <div class="form-group col-md-3">
             <label>From Date </label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker" type="text" formControlName="Launch_Date1"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;" (focusout)="fromDate($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker" type="text" formControlName="Launch_Date1"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" (focusout)="fromDate($event)">
                 <!-- <button type="button" class="Zebra_DatePicker_Icon" style="top: 11px; right: 12px;">Pick a date</button> -->
             </span>
             </div>
 
             <div class="form-group col-md-3">
             <label>To Date </label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-2" type="text" formControlName="Launch_Date2"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;" (focusout)="toDate($event)" (change)="lunchdateChange($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-2" type="text" formControlName="Launch_Date2"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" (focusout)="toDate($event)" (change)="lunchdateChange($event)">
                 <!-- <button type="button" class="Zebra_DatePicker_Icon" style="top: 11px; right: 12px;">Pick a date</button> -->
             </span>
             </div>
@@ -90,7 +90,7 @@
           </div>      
           
         </form>
-          <div class="container" style="margin: 30px 0px 0px 0px;">
+          <div class="container" style="margin: 30px 0px 0px 0px;padding: 0;">
             <ul id="tabs" class="nav nav-tabs booking-tabs" role="tablist">
             <li class="nav-item">
                 <a id="tab-A" href="#pane-A" class="nav-link active" data-toggle="tab" role="tab">Booking</a>
@@ -104,9 +104,10 @@
 
             <div id="content" class="tab-content" role="tablist">
             <div id="pane-A" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
-            <div class="row boat-listing" >
-            <div class="col-md-4 boat-list-1" *ngFor="let booking of bookingInfo | filter: searchLoction  let i = index;">
-                    <a href="#">
+            <div class="row boat-listing rowPads">
+            <div class="col-sm-6 col-md-4 padspace5" *ngFor="let booking of bookingInfo | filter: searchLoction  let i = index;">
+                <div class="boat-list-1">   
+                <a href="#">
                     <div class="boat-img">
                         <!-- <img *ngIf="!booking.BoatDetails[0]" src="/assets/images/boat-1.jpg" alt="boat"> -->
 
@@ -133,14 +134,16 @@
                         <h5><span><i class="fas fa-history" aria-hidden="true"></i>  </span>{{booking.end | date :'short'}}</h5>
                     </div>
                     </a>
+                </div>    
             </div>  
                                             
         </div>
     </div>
 
                 <div id="pane-B" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-B">
-                    <div class="row boat-listing">
-                        <div class="col-md-4 boat-list-1" *ngFor="let booking of bookingInfo let i = index;">
+                    <div class="row boat-listing rowPads">
+                        <div class="col-sm-6 col-md-4 padspace5" *ngFor="let booking of bookingInfo let i = index;">
+                            <div class="boat-list-1">
                             <a href="#">
                             <div class="boat-img">
                                 <img *ngIf="!booking.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat-1.jpg" alt="boat">
@@ -157,7 +160,8 @@
                                 </a><a  class="btn btn-primary">Accept</a>
                                 <a class="btn btn-danger">Reject</a> 
                             </div>
-                        </div>             
+                        </div> 
+                    </div>             
                     </div>
                 </div>
             </div>
