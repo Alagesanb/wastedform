@@ -38,22 +38,22 @@
                 
                 
             <div class="col-md-8">
-                <ul class="top-btn" style="float: right; margin: 8px 14px;">   
+                <ul class="top-btn" style="float: right; margin: 8px 0px;">   
                  <li ><a   href="#" routerLink="/add-owner/" class="btn btn-primary">ADD OWNER</a></li>
                  <li ><a  href="#" routerLink="/ownership-transfer/" class="btn btn-primary">OWNERSHIP TRANSFER</a></li>
                 </ul>       
             </div>
             </div>
             
-            <div class="container profile-page">
-<div class="row">
+            <div class="container profile-page" style="padding: 0;margin-top: 20px;">
+<div class="row divLargs">
   
   <div class="col-xl-6 col-lg-12 col-md-6" *ngFor="let owner of allOwners | filter: searchLoction let i = index;" >
       <div class="card profile-header">
           <div class="body">
               <div class="row">
-                 <div class="col-lg-3 col-md-3 col-12">
-                      <div class="profile-image float-md-right">
+                 <div class="col-lg-3 col-md-3 col-12 text-center img_divs">
+                      <div class="profile-image" style="margin: 0 auto;    margin-top: 15px;">
                          <!-- <img src="/assets/images/owner-img-1.jpg" alt="owner-img"> -->
                         
                          <img class="img-responsive" *ngIf="!owner.Profile_Image" src="../../assets/images/owner-img-1.jpg" alt="">

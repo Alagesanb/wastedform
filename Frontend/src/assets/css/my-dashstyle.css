@@ -21,7 +21,7 @@ body {
 .padspace5 .owner-nos h6 {
     margin: -16px 0;
 }
-@media only screen and (min-width: 5000px) {
+@media only screen and (max-width: 7000px) and (min-width: 3000px){
     .rowPads .padspace5.col-md-4{
         -webkit-box-flex: 0;
         -ms-flex:0 0 16.6%;
@@ -1265,7 +1265,7 @@ button.close {
     margin-bottom: 30px;
     transition: .5s;
     border: 0;
-    border-radius: 10px;
+    border-radius: 0px;
     display: inline-block;
     position: relative;
     width: 100%;
@@ -1771,9 +1771,10 @@ button.close {
 }
 .boat-search .btn-outline-secondary{
     padding: 10px;
-    border: none;
-    background: #eaeaea;
-    color: #233088;  
+    border: 1px solid #233088;
+    background: #233088;
+    color: #ffffff;
+    line-height: 18px;
     border-radius: 0;
 }
 
