@@ -8,4 +8,8 @@
         margin: 0px;
         padding: 6px;
         }
-        
+        :host /deep/ .boat-search .multiselect-dropdown {
+               
+            border: 1px solid #f30a0a !important; 
+     
+        }

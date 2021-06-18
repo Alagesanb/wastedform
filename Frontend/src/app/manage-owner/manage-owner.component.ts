@@ -18,6 +18,7 @@ export class ManageOwnerComponent implements OnInit {
   pageYoffset = 0;
   boatId: any;
   adminlogin: any;
+  owner: any=[];
   @HostListener('window:scroll', ['$event']) onScroll(event){
     this.pageYoffset = window.pageYOffset;
   }
@@ -213,13 +214,23 @@ function Binding_ManageOwner(){
 
             var tmb_Total_Days ="0";
 
+            $.each(data.BookedDays , function(index, book) { 
+              if(boatDetails._id== book.Boat_Id && val.Owner_Id==book.Owner_Id){
+                console.log(book)
+              tmb_Total_Days = book.Summer_WeekDays+book.Summer_WeekEndDays+book.Winter_WeekDays+book.Winter_WeekEndDays;//boatDetails.Total_Days;
+              console.log(tmb_Total_Days)
+              
+              }
+              
+                          });
+
             if(boatDetails != null){
 
              tmb_Summer_WeekEndDays = val.Summer_WeekEndDays;
              tmb_Summer_WeekDays =val.Summer_WeekDays;
              tmb_Winter_WeekEndDays = val.Winter_WeekEndDays;
              tmb_Winter_WeekDays = val.Winter_WeekDays;
-             tmb_Total_Days = boatDetails.Total_Days;
+            //  tmb_Total_Days = boatDetails.Total_Days;
 
             }
                         
@@ -512,22 +523,53 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
 
 
   getOwners(){
-   
+    this.http.get<any>(`${this.OwnerUrl}/GetAllOwnerDetails`).subscribe(data => {
+      this.allManageData = data['response']
+if(data.status== true){
     this.http.get<any>(`${this.OwnerUrl}/GetOwners`).subscribe(data => {
   this.owners = data['response']
- 
+  this.owner = data['response']
+
   this.dropdownOwnerList = data.response;                    
              var ownerArray = [];
-             data.response.forEach(element => {
+             this.allManageData.forEach(ele => {
+
+             this.owner.forEach(element => {
+
                    var obj2 = Object();
-                   obj2.item_id = element._id,
-                   obj2.item_text = element.First_Name
-                   ownerArray.push(obj2);
- 
+                   if(element._id==ele.Owner_Id ){
+
+                    this.owners.splice(this.owners.indexOf(element), 1);
+
+
+
+                    // obj2.item_id = element._id,
+                    // obj2.item_text = element.First_Name
+                    // ownerArray.push(obj2);
+                   }
              });
+            });
+// var response = responses.map(function(el){
+//             el.BoatDetails = el.BoatDetails.filter(function(x){ return x.IsActive ==true; });
+//             return el;
+//         });
+
+this.owners.forEach(element => {
+
+  var obj2 = Object();
+
+   obj2.item_id = element._id,
+   obj2.item_text = element.First_Name
+   ownerArray.push(obj2);
+  
+});
+
              this.dropdownOwnerList_filted = ownerArray;  
    }, err => {
    })
+  }
+  }, err => {
+  })
   }
   getOwnerId(id){   
     for (let i = 0; i < this.owners.length; i++) {
