@@ -10,8 +10,14 @@ body {
     -o-animation: fadein 1.5s;
     animation: fadein 1.5s;
 }
-
-
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 100% !important;
+}
 .padspace5 .owner-nos h6 {
     margin: -16px 0;
 }
@@ -32,6 +38,10 @@ body {
     .rowPads .boat-list .card-body a {
         font-size: 28px;
     }
+    .side-menu, app-sidemenu {
+        width: 400px;
+    }
+    
 }
 @media only screen and (min-width: 3000px) {
 
@@ -73,6 +83,9 @@ body {
     }
     .rowPads .boat-list .card-body a {
         font-size: 14px;
+    }
+    .side-menu, app-sidemenu {
+        width: 290px;
     }
    
 }
@@ -557,7 +570,7 @@ element.style {
     height: 150%;
 }
 .side-menu {
-    width: 290px;
+    /* width: 290px; */
     height: 100vh !important;
     overflow-y: scroll;
     background: linear-gradient( 
@@ -758,7 +771,8 @@ ul.menu-list li {
 
 .contents-page {
     flex: 1;
-    padding: 30px 0px;
+    padding: 15px 0px 30px;
+    max-width: 100%;
 }
 .user {
     width: 32px;
