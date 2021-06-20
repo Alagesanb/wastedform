@@ -22,7 +22,8 @@
                   
             <div class="col-md-2">
                 <ul class="top-btn">   
-                 <li><a href="#" class="btn btn-primary"><i class="far fa-file-pdf"></i> EXPORT</a></li>
+                <!--Update the Component redirection for ownership report Done By Alagesan on 20.06.2021	-->   
+                <li><a  class="btn btn-primary"><i class="far fa-file-pdf"></i> EXPORT</a></li>
                 </ul>       
             </div>
             </div>  
@@ -32,13 +33,20 @@
                 <form>
                      <div class="form-row">
 <div class="form-group col-md-12">
-<label>Select Owner</label>
-<select class="form-control">
-  <option value="" selected="" disabled="">-- Select --</option>
-  <option value="">A - (aaa@gmail.com)</option>
-  <option value="">B - (bbb@gmail.com)</option>
-  <option value="">C - (ccc@gmail.com)</option>
-  </select>    
+  <!--Update the owner dropdown for ownership report Done By Alagesan on 20.06.2021	-->   
+
+    <label>Owner Name</label> 
+    <ng-multiselect-dropdown
+    [placeholder]="'Select'"
+    [(ngModel)]="dropdownOwner"
+    [ngModelOptions]="{standalone: true}" 
+    [settings]="dropdownOwnerSettings"
+    [data]="dropdownOwnerList_filted"                                    
+    (onSelect)="onItemOwnerSelect($event)"
+    (onSelectAll)="onOwnerSelectAll($event)"
+    class="singleselect_drop"
+   >
+   </ng-multiselect-dropdown>    
 </div>
 </div>
          </form>
