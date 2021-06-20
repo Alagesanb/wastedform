@@ -1514,6 +1514,12 @@ button.close {
     font-size: 14px;
 }
 
+/* 20-06-2021 Add css Done by Alagesan*/
+.login-email{
+    margin-top: 5px;
+    font-size: 11px;
+}
+
  .placeicon {
      font-family: fontawesome
  }

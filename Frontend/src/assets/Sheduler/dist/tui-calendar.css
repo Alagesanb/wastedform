@@ -935,11 +935,13 @@
 .tui-full-calendar-button .round {
   border-radius: 25px;
 }
+/* 20-06-2021 Add css Done by Alagesan*/
+
 .tui-full-calendar-confirm {
   width: 96px;
   height: 36px;
   border-radius: 40px;
-  background-color: #ff6618;
+  background: linear-gradient(#4e5dbd, #031060);;
   font-size: 12px;
   font-weight: bold;
   color: #fff;

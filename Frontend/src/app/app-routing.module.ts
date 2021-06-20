@@ -69,7 +69,8 @@ const routes: Routes = [
   { path: 'AdminBooking',component: AdminBookingComponent},
   { path: 'edit-owner', component: EditOwnerComponent },
   { path: 'edit-owner-profile', component: EditOwnerProfileComponent},
-  { path: 'archive-boats', component: ArchiveBoatComponent},
+  // Update the archived boats url for app routing module //Done By Alagesan on 20.06.2021	
+  { path: 'archived-boats', component: ArchiveBoatComponent},
 
   { path: 'ownership-transfer', component: OwnershipTransferComponent},
   { path: 'boat-bookings', component: BoatBookingsComponent},
