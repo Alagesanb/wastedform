@@ -935,8 +935,6 @@
 .tui-full-calendar-button .round {
   border-radius: 25px;
 }
-/* 20-06-2021 Add css Done by Alagesan*/
-
 .tui-full-calendar-confirm {
   width: 96px;
   height: 36px;
@@ -1080,12 +1078,13 @@ input[type='checkbox'].tui-full-calendar-checkbox-round + span {
   position: relative;
   top: 2px;
 }
+/* 20-06-2021 Add css Done by Alagesan*/
 .tui-full-calendar-popup-eye,
 .tui-full-calendar-popup-edit,
 .tui-full-calendar-popup-delete {
   display: inline-block;
   padding: 7px 9px 11px 9px;
-  width: calc(50% - 1px);
+  width: calc(30% - 1px);
   outline: none;
   background: none;
   border: none;
