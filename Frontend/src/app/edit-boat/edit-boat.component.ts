@@ -84,6 +84,7 @@ export class EditBoatComponent implements OnInit {
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
  sessionStorage.setItem("view-boat-reload","1");
+ debugger;
     //
     this.currentboatdetails = JSON.parse(sessionStorage.getItem("boatData"));
 
@@ -92,6 +93,10 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     this.CurrentMultipleImage = this.currentboatdetails.Boat_Image;
 
     var ImgUrl = this.Public_ImageUrl;
+
+    this.CurrentMultipleImage = jQuery.grep(this.CurrentMultipleImage, function(n, i){
+      return (n !== "" && n != null);
+    });
 
     var boateImagesMultiple = this.CurrentMultipleImage;
 
@@ -134,8 +139,15 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
       //globel Accessing
       $.each(boateImagesMultiple , function(index, val) {
-          val = val.replace(/\"/g, "");          
-          imagenameArry_three.push(val);
+
+        
+          val = val.replace(/\"/g, "");
+          if(val != ""){
+
+            imagenameArry_three.push(val);
+
+          }          
+         
       });
 
 
@@ -148,7 +160,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
       $.each(boateImagesMultiple , function(index, val) {
 
-        
+        debugger;
 
         if(loopcheck == 0){
           var tmp1 = ImgUrl + val;
