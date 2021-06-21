@@ -91,6 +91,7 @@ export class AddBoatComponent implements OnInit {
     if (this.adminlogin == false) {
       this.router.navigate(['']);
     }
+    this.boatform.get('Owners_Allowed').setValue(1);
     this.dropdownSettings = {
       singleSelection: true,
       idField: '_id',
@@ -545,6 +546,8 @@ console.log(this.handBook)
 
 
   addBoat() {
+
+   
 
     this.boatform.get('Block').setValue(true);
     this.boatform.get('IsActive').setValue(true);

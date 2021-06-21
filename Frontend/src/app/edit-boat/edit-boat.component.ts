@@ -84,7 +84,7 @@ export class EditBoatComponent implements OnInit {
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
  sessionStorage.setItem("view-boat-reload","1");
- debugger;
+
     //
     this.currentboatdetails = JSON.parse(sessionStorage.getItem("boatData"));
 
@@ -160,7 +160,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
       $.each(boateImagesMultiple , function(index, val) {
 
-        debugger;
+    
 
         if(loopcheck == 0){
           var tmp1 = ImgUrl + val;
@@ -722,7 +722,7 @@ this.multiMg = this.data.Boat_Image
   singleImage(event, imageFor)
   {
   
-    //debugger;
+  
     this.handBook = <File>event.target.files[0];
     if(this.handBook != null){
 
@@ -800,7 +800,7 @@ this.multiMg = this.data.Boat_Image
 
              }    
              
-             debugger;
+            
 
              //var dddd = this.Boat_Handbook_Name;
              
@@ -818,7 +818,7 @@ this.multiMg = this.data.Boat_Image
                
                   this.http.post<any>(`${this.url}/EditBoat`,  this.boatform.value   ).subscribe(data => {
                     
-                   debugger;
+                 
                       if(data.status == true){
                          this.getRes = data.message
                          $('#saveBoatModel').trigger('click');
