@@ -107,7 +107,9 @@
             <div class="row boat-listing rowPads">
             <div class="col-sm-6 col-md-4 padspace5" *ngFor="let booking of bookingInfo | filter: searchLoction  let i = index;">
                 <div class="boat-list-1">   
-                <a href="#">
+                <!--Update the anchor tag for boat bookings Done By Alagesan on 21.06.2021-->
+
+                <a >
                     <div class="boat-img">
                         <!-- <img *ngIf="!booking.BoatDetails[0]" src="/assets/images/boat-1.jpg" alt="boat"> -->
 
@@ -144,12 +146,13 @@
                     <div class="row boat-listing rowPads">
                         <div class="col-sm-6 col-md-4 padspace5" *ngFor="let booking of bookingInfo let i = index;">
                             <div class="boat-list-1">
-                            <a href="#">
+                            <!--Update the anchor tag for boat bookings Done By Alagesan on 21.06.2021-->
+                            <a >
                             <div class="boat-img">
                                 <img *ngIf="!booking.BoatDetails[0].Boat_Image[0]" src="/assets/images/boat-1.jpg" alt="boat">
                                 <img *ngIf="booking.BoatDetails[0].Boat_Image[0]" src={{imagePath}}{{booking.BoatDetails[0].Boat_Image[0]}} alt="boat">                            </div>
                             </a>
-                            <div class="info"><a href="#">
+                            <div class="info"><a >
                                 <h4>{{booking.BoatDetails[0].Boat_Name}}</h4>
 
                                 <!-- <h4>{{booking.Boat_Name}}</h4> -->

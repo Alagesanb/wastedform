@@ -28,6 +28,15 @@
 <li class="nav-item">
   <a id="tab-E" href="#pane-E" class="nav-link" data-toggle="tab" role="tab">Share Allocation</a>
 </li>
+<!--Add location tab for settings Done By Alagesan on 21.06.2021    -->
+<li class="nav-item">
+  <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Add Location</a>
+</li>
+<!--Add special days tab for settings Done By Alagesan on 21.06.2021    -->
+
+<li class="nav-item">
+  <a id="tab-G" href="#pane-G" class="nav-link" data-toggle="tab" role="tab">Add Special Days</a>
+</li>
 </ul>
 
 
@@ -318,6 +327,141 @@
                 
   </div>
   
+</div>
+  <!--Add location tab for settings Done By Alagesan on 21.06.2021    -->
+<div id="pane-F" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-F">
+  <div class="sbg-form"  style="margin-top: 25px;"> 
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Location Name</label>
+            <input type="text" class="form-control" >
+          </div>  
+        </div>                 
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Location URL</label>
+            <input type="text" class="form-control" >
+          </div>  
+        </div>  
+        
+         <div class="form-row">     
+            <div class="col-md-2">
+            <a  class="btn btn-primary" style="margin-top: 32px;" >SAVE</a>
+            </div>             
+         </div>
+    </form>     
+   </div>  
+</div>
+
+<!--Add special days tab for settings Done By Alagesan on 21.06.2021    -->
+<div id="pane-G" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-G">
+  <div class="sbg-form"  style="margin-top: 25px;"> 
+    <form>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Name</label>
+            <input type="text" class="form-control" >
+          </div>  
+        </div>                 
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>Start Date</label>
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text"   class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;">
+            </span>
+          </div>  
+        </div> 
+        
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label>End Date</label>
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text"   class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;">
+            </span>         
+          </div>  
+        </div> 
+        
+         <div class="form-row">     
+            <div class="col-md-2">
+            <a  class="btn btn-primary" style="margin-top: 32px;" >SAVE</a>
+            </div>             
+         </div>
+    </form>     
+   </div> 
+   <div class="row" style="margin-top: 25px;"> 
+            
+    <div class="col-md-12 reports">
+  
+          <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
+            <thead>
+                <tr>
+                    <th> NAME</th>
+                    <th>START DATE</th>
+                    <th>END DATE</th>
+                    <th>ACTION</th>
+                    </tr>
+            </thead>
+            <tbody>
+                    <tr >
+                        <td>Special Days 1</td>
+                        <td>2021-6-21</td>
+                        <td>2021-6-27</td>
+                        <td>
+                        <ul class="table-action">
+                            <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
+                            <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr >
+                      <td>Special Days 2</td>
+                      <td>2021-6-27</td>
+                      <td>2021-7-04</td>
+                      <td>
+                      <ul class="table-action">
+                          <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
+                          <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
+                          </ul>
+                      </td>
+                  </tr>
+                  <tr >
+                    <td>Special Days 3</td>
+                    <td>2021-7-5</td>
+                    <td>2021-6-12</td>
+                    <td>
+                    <ul class="table-action">
+                        <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
+                        <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr >
+                  <td>Special Days 4</td>
+                  <td>2021-7-13</td>
+                  <td>2021-6-20</td>
+                  <td>
+                  <ul class="table-action">
+                      <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
+                      <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
+                      </ul>
+                  </td>
+              </tr>
+              <tr >
+                <td>Special Days 5</td>
+                <td>2021-7-21</td>
+                <td>2021-7-27</td>
+                <td>
+                <ul class="table-action">
+                    <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
+                    <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+          </table>
+    
+        </div>  
+    
+    </div>    
 </div>
   <button style="display:none" type="button" id="pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
             
