@@ -646,7 +646,18 @@
   font-weight: 2.5;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1);
   clear: both;
+  
 }
+.btn_newst{
+  border: 0;
+  outline: 0;
+  margin: 10px 0 0;
+}
+.calbox_outer, .calbox_outer .tui-full-calendar-popup-container {
+  float: left;
+  clear: both;
+}
+ 
 .tui-full-calendar-popup-container {
   min-width: 474px;
   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.1);
@@ -924,35 +935,35 @@
   cursor: pointer;
   color: #333;
 }
-.tui-full-calendar-button:hover {
+/* .tui-full-calendar-button:hover {
   border-color: #bbb;
   color: #333;
-}
-.tui-full-calendar-button:active {
+} */
+/* .tui-full-calendar-button:active {
   background: #f9f9f9;
   color: #333;
-}
+} */
 .tui-full-calendar-button .round {
   border-radius: 25px;
 }
 .tui-full-calendar-confirm {
   width: 96px;
   height: 36px;
-  border-radius: 40px;
+  /* border-radius: 40px; */
   background: linear-gradient(#4e5dbd, #031060);;
   font-size: 12px;
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #fff;
   border: none;
 }
-.tui-full-calendar-confirm:hover {
+/* .tui-full-calendar-confirm:hover {
   background-color: #e55b15;
   color: #fff;
-}
-.tui-full-calendar-confirm:active {
+} */
+/* .tui-full-calendar-confirm:active {
   background-color: #d95614;
   color: #fff;
-}
+} */
 .tui-full-calendar-icon.tui-full-calendar-right {
   float: right;
   top: 1px;
@@ -1216,3 +1227,24 @@ button#tui-full-calendar-schedule-private {
 .tui-full-calendar-popup-detail-date.tui-full-calendar-content {
   display: none;
 }
+
+
+.new-timer{
+  /* display: flex; */
+  justify-content: space-evenly;
+  margin: 10px 0 5px;
+  padding-left: 18px;
+}
+.new-timer .timer_input{
+  height: 32px;
+  padding: 9px 12px;
+  border: 1px solid #d5d5d5;
+  border-radius: 2px;
+  width: 176px;
+  max-width: 100%;
+}
+.cls-span-Timer{
+  padding-left: 44px;
+}
+
+

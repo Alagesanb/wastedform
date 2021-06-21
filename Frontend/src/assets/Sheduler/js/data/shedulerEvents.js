@@ -1,9 +1,12 @@
 
+
 var public_URL = "http://65.2.28.16/api/Schedule/";
 
 var public_Day_URL = "http://65.2.28.16/api/Days/";
 
 var public_shedulDataId = 0;
+//sheduler-calender-timer1
+//sheduler-calender-timer1
 
 function getFormattedDate_WithOut_Zero_Time(dateVal) {
     var newDate = new Date(dateVal);
@@ -26,6 +29,9 @@ function generateNames() {
 
     return names;
 }
+
+
+
 
  function getFormattedDate(dateVal) {
     var newDate = new Date(dateVal);
@@ -1230,7 +1236,22 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
      }
 
 
-    function AddSchedule_ApiCalling(obj){      
+    function AddSchedule_ApiCalling(obj){               
+        
+        obj.commends = $(".commen-cammends-sheduler").val();
+
+        var timer1 = $("#sheduler-calender-timer1").val();    
+        var timer2 = $("#sheduler-calender-timer2").val();           
+        
+        var start_str = new Date(obj.start); 
+        var end_str   = new Date(obj.end);        
+
+        start_str = new Date(start_str.setHours(conver_Hours(timer1),conver_Minit(timer1),00,0));
+       
+        end_str = new Date(end_str.setHours(conver_Hours(timer2),conver_Minit(timer2),00,0));
+        
+        obj.start = start_str.toString();
+        obj.end   = end_str.toString();     
        
         $.ajax({
             url: public_URL+"AddSchedule",
@@ -1342,11 +1363,32 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
        
     }
 
+    function conver_Hours(dateVal){
+
+        var newDate = new Date("1/1/2013 " + dateVal);        
+        var sHour = newDate.getHours();
+        var iHourCheck = parseInt(sHour);    
+        sHour = padValue(iHourCheck);
+    
+        return sHour;
+  
+        
+    }
+
+    function conver_Minit(dateVal){
+
+        var newDate = new Date("1/1/2013 " + dateVal);         
+        var sMinute = padValue(newDate.getMinutes());
+            
+        return sMinute;
+  
+        
+
+    }
+
 
 $(document).on("click",".tui-full-calendar-popup-save",function() { 
-        
-    //var ssss = public_shedulDataId;
-  
+    
     var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction");    
 
     if(pageIdentiFication == "AdminBooking")
@@ -1423,33 +1465,35 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                         obj.state ="";
                         obj.Status = "Enable";
                         obj.IsActive = true;
+
+                        AddSchedule_ApiCalling(obj);
                     
-                        $.ajax({
-                            url: public_URL+"AddSchedule",
-                            type: 'POST',
-                            dataType: 'json', 
-                            data: obj,
-                            success: function(datas) {
+                        // $.ajax({
+                        //     url: public_URL+"AddSchedule",
+                        //     type: 'POST',
+                        //     dataType: 'json', 
+                        //     data: obj,
+                        //     success: function(datas) {
                                
-                                if(datas.status == true)
-                                {
-                                    alert(datas.message);
-                                    location.reload();
+                        //         if(datas.status == true)
+                        //         {
+                        //             alert(datas.message);
+                        //             location.reload();
                     
-                                }
-                                else if(datas.status == false){
+                        //         }
+                        //         else if(datas.status == false){
                                     
-                                    alert(datas.message);                                   
+                        //             alert(datas.message);                                   
                     
-                                }
+                        //         }
                                 
                             
                     
-                            },
-                            error: function (error) {          
+                        //     },
+                        //     error: function (error) {          
                                            
-                            }
-                        });
+                        //     }
+                        // });
 
                 
                 
@@ -1842,31 +1886,33 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                      obj.state ="";
                      obj.Status = "Enable";
                      obj.IsActive = true;
+
+                     AddSchedule_ApiCalling(obj);
                  
-                     $.ajax({
-                         url: public_URL+"AddSchedule",
-                         type: 'POST',
-                         dataType: 'json', 
-                         data: obj,
-                         success: function(datas) {
-                             if(datas.status == true)
-                             {
-                                 alert(datas.message);
-                                 location.reload();
+                    //  $.ajax({
+                    //      url: public_URL+"AddSchedule",
+                    //      type: 'POST',
+                    //      dataType: 'json', 
+                    //      data: obj,
+                    //      success: function(datas) {
+                    //          if(datas.status == true)
+                    //          {
+                    //              alert(datas.message);
+                    //              location.reload();
                  
-                             }
-                             else if(datas.status == false){
+                    //          }
+                    //          else if(datas.status == false){
                                     
-                                alert(datas.message);                                   
+                    //             alert(datas.message);                                   
                 
-                            }
+                    //         }
                          
                  
-                         },
-                         error: function (error) {          
+                    //      },
+                    //      error: function (error) {          
                                         
-                         }
-                     });
+                    //      }
+                    //  });
  
              
              

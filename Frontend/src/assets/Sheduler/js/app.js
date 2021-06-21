@@ -92,6 +92,7 @@
      * @returns {string}
      */
     function getTimeTemplate(schedule, isAllDay) {
+        
         var html = [];
         var start = moment(schedule.start.toUTCString());
         if (!isAllDay) {
@@ -440,6 +441,7 @@
 
 // set calendars
 (function() {
+    
     var calendarList = document.getElementById('calendarList');
     var html = [];
     CalendarList.forEach(function(calendar) {
@@ -451,4 +453,5 @@
         );
     });
     calendarList.innerHTML = html.join('\n');
+
 })();
