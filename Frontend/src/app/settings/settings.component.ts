@@ -17,6 +17,12 @@ export class SettingsComponent implements OnInit {
   shareUrl = "http://65.2.28.16/api/Days"
   allShareUrl = 'http://65.2.28.16/api/Days';
   OwnerUrl = "http://65.2.28.16/api/Owner"
+  //Add special days for settings page //Done By Alagesan on 23.06.2021
+  specialDaysUrl = "http://65.2.28.16/api/AddSpecialDaysRout"
+  specialDaysform: FormGroup;
+  specialDaysSubmitted = false;
+  startDate: any=[];
+  endDate: any=[];
 
   boats: any=[];
   allBoatsType: any =[];
@@ -58,8 +64,8 @@ export class SettingsComponent implements OnInit {
       this.createShareForm();
       this.createConsecutiveForm();
       this.createBookingForm();
+      this.createSpecialDaysForm() ;
 
-      
      }
 
   ngOnInit(): void {
@@ -497,6 +503,28 @@ function Binding_OwnerDuration(){
 }
 ///////////data table jitheesh////
 
+//Add special days for settings page //Done By Alagesan on 23.06.2021
+setInterval(function() {
+
+     
+     
+  if($("#datepiker-3").val() == "NaN-NaN-NaN"){
+    $("#datepiker-3").val("");      }
+
+  if($("#datepiker-4").val() == "NaN-NaN-NaN"){
+    $("#datepiker-4").val("");
+  }
+
+}, 500);
+
+//Add special days for settings page //Done By Alagesan on 23.06.2021
+$('#datepiker-3').Zebra_DatePicker({
+  pair: $('#datepiker-4')
+});
+
+$('#datepiker-4').Zebra_DatePicker({
+  direction: 1,
+});
 
 
       this.getAllBoatTYpes()  
@@ -814,6 +842,58 @@ addShare(){
 
     });
   }
+
+  //Add special days for settings page //Done By Alagesan on 23.06.2021
+  createSpecialDaysForm() {
+    this.specialDaysform = this.fb.group({
+      Name: new FormControl('', [Validators.required,]),
+      Start_Date: new FormControl('', [Validators.required,]),
+      End_Date: new FormControl('', [Validators.required,]),
+    });
+  }
+
+  //Add special days for settings page //Done By Alagesan on 23.06.2021
+  startDates($event)
+  {
+    var date1 =  new Date($event.target.value)  
+    this.startDate = (date1.getFullYear()+'-' + (date1.getMonth()+1) + '-'+date1.getDate())
+    this.specialDaysform.get('Start_Date').setValue(this.startDate);
+  }
+  endDates($event)
+  {
+    var date2 = new Date($event.target.value);
+    this.endDate = (date2.getFullYear()+'-' + (date2.getMonth()+1) + '-'+date2.getDate())
+    this.specialDaysform.get('End_Date').setValue(this.endDate);
+
+  }
+
+  //Add special days for settings page //Done By Alagesan on 23.06.2021
+  saveSpecialDays(){
+    this.specialDaysSubmitted = true;
+    if (this.specialDaysform.invalid) {
+      return;
+    }
+
+    this.http.post<any>(`${this.specialDaysUrl}/Add_Special_Days_Booking`,  this.specialDaysform.value   ).subscribe(data => {
+        console.log(data);
+      if(data.status == true){
+        this.modelTitle = "Add Special Days"
+        this.getResponce = data.message
+        $('#Special-days-pop-up-btn').trigger('click');
+        this.specialDaysform.reset()
+        this.specialDaysSubmitted = false;
+    
+      }
+      else if(data.status == false){
+      }
+      
+    }, err => {
+    
+    })
+  }
+
+//Add special days for settings page //Done By Alagesan on 23.06.2021
+  get sdf() { return this.specialDaysform.controls; }
 
   saveShare(){
   

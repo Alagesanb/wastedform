@@ -333,21 +333,18 @@
   <div class="sbg-form"  style="margin-top: 25px;"> 
     <form>
         <div class="form-row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label>Location Name</label>
             <input type="text" class="form-control" >
           </div>  
-        </div>                 
-        <div class="form-row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label>Location URL</label>
             <input type="text" class="form-control" >
-          </div>  
-        </div>  
-        
+          </div>
+        </div>                  
          <div class="form-row">     
             <div class="col-md-2">
-            <a  class="btn btn-primary" style="margin-top: 32px;" >SAVE</a>
+            <a  class="btn btn-primary"  >SAVE</a>
             </div>             
          </div>
     </form>     
@@ -355,34 +352,32 @@
 </div>
 
 <!--Add special days tab for settings Done By Alagesan on 21.06.2021    -->
+<!--Add special days data integrations for settings Done By Alagesan on 23.06.2021    -->
 <div id="pane-G" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-G">
   <div class="sbg-form"  style="margin-top: 25px;"> 
-    <form>
+    <form [formGroup]="specialDaysform">
         <div class="form-row">
           <div class="form-group col-md-4">
             <label>Name</label>
-            <input type="text" class="form-control" >
+            <input type="text" formControlName="Name"  placeholder="Name" class="form-control" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Name.errors }">
           </div>  
-        </div>                 
-        <div class="form-row">
+        
           <div class="form-group col-md-4">
             <label>Start Date</label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text"   class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text" formControlName="Start_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Start_Date.errors }" (focusout)="startDates($event)">
             </span>
           </div>  
-        </div> 
         
-        <div class="form-row">
           <div class="form-group col-md-4">
             <label>End Date</label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text"   class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text" formControlName="End_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.End_Date.errors }" (focusout)="endDates($event)">
             </span>         
           </div>  
         </div> 
         
          <div class="form-row">     
             <div class="col-md-2">
-            <a  class="btn btn-primary" style="margin-top: 32px;" >SAVE</a>
+            <a  class="btn btn-primary"  (click)=saveSpecialDays() >SAVE</a>
             </div>             
          </div>
     </form>     
@@ -623,19 +618,32 @@
   </div>
 </div>        
             
+            <!--Add special days data integrations for settings Done By Alagesan on 23.06.2021    -->
+
+
+          <button style="display:none" type="button" id="Special-days-pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#specialDaysModal">Open Modal</button>
+                      
+                        
+          <div class="modal fade" id="specialDaysModal" role="dialog">
+            <div class="modal-dialog">
             
-            
-          
-            
-            
-       
-            
-            
-           
-            
-            
-            
-             
+              
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{modelTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{getResponce}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>  
+                         
         </div>
     </div>
 </div>
