@@ -4,32 +4,13 @@
         <app-header></app-header>
         <div class="headingz">
             <h4>Owners</h4>
-        </div>
-        
-        
-        
-        <div class="page contents">
-            
-            <div class="row">
-                
-                
-                <!-- <div class="col-md-2 dash-filter">   
-            <div class="dropdown">
-<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Boat Name
-<span><i class="fas fa-filter"></i></span></button>
-<ul class="dropdown-menu">
-  <li *ngFor="let loc of boats  let i = index;">
-    <a style="cursor:pointer;"  (click)="getBoatTypeId(loc)">{{loc.Boat_Name}}</a>
-  </li>
-</ul>
-                  </div>
-               </div>  -->
-                
+        </div>        
+        <div class="page contents">            
+            <div class="row">               
+             
                  <div class="col-md-4 boat-search">
                      <div class="input-group mb-3">
                         <input class="form-control" id="myInput" type="text" placeholder="Search.." [(ngModel)]="searchLoction">
-
-<!-- <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" [(ngModel)]="searchLoction" aria-describedby="basic-addon2"> -->
 
 </div>
                   </div> 
@@ -67,8 +48,12 @@
                       <span class="email"><i class="far fa-envelope"></i> {{owner.Email}}</span> <br>
                       <span class="phone"><i class="fas fa-mobile-alt"></i> {{owner.Mobile}}</span> <br>
                       <span class="phone"><i class="fas fa-house-user"></i> {{owner.Family_Name}}</span><br>
-                      <span *ngIf="!owner.boatName" class="phone"><i class="fas fa-ship"></i> No Boats Assigned</span>
-                      <span *ngIf="owner.boatName" class="phone"><i class="fas fa-ship"></i> {{owner.boatName}}</span>
+                      <span *ngIf="owner.Boat_Summer_Details.length == 0" class="phone"><i class="fas fa-ship"></i> No Boats Assigned</span>
+                      <span *ngIf="owner.Boat_Summer_Details.length > 0" class="phone"><i class="fas fa-ship"></i> 
+                        <span style="margin-left: 5px;" *ngFor="let bot_details of owner.Boat_Summer_Details; let index = index" (click)="Boatbase_SummerDetails(owner.Boat_Summer_Details,bot_details)">
+                          <a style="cursor:pointer; color:brown;">{{bot_details.Boat_Name}}, </a>
+                        </span>
+                      </span>
 
                   </div>  
                   
@@ -79,34 +64,42 @@
                           <li><a ><button (click)= viewOwner(owner)><i class="far fa-eye"></i> </button></a></li>
                       </ul>    
                   </div>
-                  <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
-                      <ul>
-                        <li><h6>TOTAL DAYS BOOKED </h6> <span>0/{{owner.Total_Days}}</span></li>
-                        <li><h6>SUMMER WEEKENDS </h6> <span>0/{{owner.Summer_WeekEndDays}}</span></li>
-                        <li><h6>WINTER WEEKENDS </h6> <span>0/{{owner.Winter_WeekEndDays}}</span></li>
+
+                  <div *ngFor="let bot_details of owner.Boat_Summer_Details; let index = index">
+
+                     <div *ngIf="visibleIndices.has(bot_details.dynamicNumber)">
+
+                          <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0">
+                              <ul>
+                                <li><h6>TOTAL DAYS BOOKED </h6> <span>0/{{bot_details.Total_Days}}</span></li>
+                                <li><h6>SUMMER WEEKENDS </h6> <span>0/{{bot_details.Summer_WeekEndDays}}</span></li>
+                                <li><h6>WINTER WEEKENDS </h6> <span>0/{{bot_details.Winter_WeekEndDays}}</span></li>
+                            </ul>
+                         </div>  
+                        
+                          <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0">
+                            <ul>
+                              <li><h6>SUMMER WEEKDAYS </h6> <span>0/{{bot_details.Summer_WeekDays}}</span></li>
+                              <li><h6>WINTER WEEKDAYS </h6> <span>0/{{bot_details.Winter_WeekDays}}</span></li>
+                            </ul>
+                        </div>  
+                        <div class="col-md-6 owner-datas" *ngIf="owner.Boat_Summer_Details.length == 0">
+                            <ul>
+                        <li><h6>TOTAL DAYS BOOKED </h6> <span>0/0</span></li>
+                        <li><h6>SUMMER WEEKENDS </h6> <span>0/0</span></li>
+                        <li><h6>WINTER WEEKENDS </h6> <span>0/0</span></li>
                             </ul>
                         </div>  
                         
-                          <div class="col-md-6 owner-datas"  *ngIf="owner.boatName">
+                          <div class="col-md-6 owner-datas" *ngIf="owner.Boat_Summer_Details.length == 0">
                             <ul>
-                        <li><h6>SUMMER WEEKDAYS </h6> <span>0/{{owner.Summer_WeekDays}}</span></li>
-                        <li><h6>WINTER WEEKDAYS </h6> <span>0/{{owner.Winter_WeekDays}}</span></li>
-                      </ul>
-                  </div>  
-                    <div class="col-md-6 owner-datas" *ngIf="!owner.boatName">
-                        <ul>
-                    <li><h6>TOTAL DAYS BOOKED </h6> <span>0/60</span></li>
-                    <li><h6>SUMMER WEEKENDS </h6> <span>0/15</span></li>
-                    <li><h6>WINTER WEEKENDS </h6> <span>0/15</span></li>
-                        </ul>
-                    </div>  
-                    
-                      <div class="col-md-6 owner-datas" *ngIf="!owner.boatName">
-                        <ul>
-                    <li><h6>SUMMER WEEKDAYS </h6> <span>0/15</span></li>
-                    <li><h6>WINTER WEEKDAYS </h6> <span>0/15</span></li>
-                        </ul>
-                    </div>  
+                        <li><h6>SUMMER WEEKDAYS </h6> <span>0/0</span></li>
+                        <li><h6>WINTER WEEKDAYS </h6> <span>0/0</span></li>
+                            </ul>
+                        </div>
+                       </div>
+                </div>
+                        
                  </div>
           </div>                    
       </div>

@@ -22,7 +22,7 @@
            
             <ng-multiselect-dropdown 
             [placeholder]="'Select'"
-            [(ngModel)]="dropdownOwn"
+            [(ngModel)]="dropdownOwn"           
               [ngModelOptions]="{standalone: true}" 
             [settings]="dropdownOwnerSettings"
             [data]="dropdownOwnerList_filted"                                    
@@ -47,11 +47,14 @@
             [data]="dropdownList_filted"                                    
             (onSelect)="onItemSelect($event)"
             (onSelectAll)="onSelectAll($event)"
+            class="singleselect_drop"
             >
             </ng-multiselect-dropdown>
             </div>
                             
-            </div>   
+            </div>
+            
+           
                
                  <div class="form-row">
                   <div class="form-group col-md-4">
@@ -73,7 +76,8 @@
                   </div>
                                   <div class="form-row">
                   <div class="col-md-12">
-                    <a  class="btn btn-primary" (click)= saveDuration()>SAVE & EXIT</a>
+                    <a  class="btn btn-primary cls-btn-save" (click)= saveDuration()>SAVE</a>
+                    <a style="display: none;"  class="btn btn-primary cls-btn-Edit" (click)= EditDuration()>Edit</a>
                   </div>
                </div>
                          
@@ -146,7 +150,7 @@
 </div>
 
 
-<button style="display:none" type="button" id="Sharepop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myMessageModal">Open Modal</button>
+<button style="display:none" type="button" id="Sharepop-up-btn"  class="btn btn-info btn-lg" data-toggle="modal" data-target="#myMessageModal">Open Modal</button>
             
               
 <div class="modal fade" id="myMessageModal" role="dialog">
@@ -162,7 +166,7 @@
         <p>{{getResponce}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-default" (click)="PageReload()" data-dismiss="modal">OK</button>
       </div>
     </div>
     
