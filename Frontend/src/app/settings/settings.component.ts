@@ -24,6 +24,10 @@ export class SettingsComponent implements OnInit {
   startDate: any=[];
   endDate: any=[];
 
+  //Add boat location for settings page //Done By Alagesan on 24.06.2021
+  addBoatLocationform: FormGroup;
+  boatLocationSubmitted = false;
+
   boats: any=[];
   allBoatsType: any =[];
   searchText: any = '';
@@ -65,6 +69,7 @@ export class SettingsComponent implements OnInit {
       this.createConsecutiveForm();
       this.createBookingForm();
       this.createSpecialDaysForm() ;
+      this.createBoatLocationForm();
 
      }
 
@@ -843,6 +848,38 @@ addShare(){
     });
   }
 
+  //Add boat location for settings page //Done By Alagesan on 24.06.2021
+  createBoatLocationForm() {
+    this.addBoatLocationform = this.fb.group({
+      Boat_Location: new FormControl('', [Validators.required,]),
+      Location_URL: new FormControl('', [Validators.required,]),
+    });
+  }
+
+  saveBoatLocation(){
+    this.boatLocationSubmitted = true;
+    if (this.addBoatLocationform.invalid) {
+      return;
+    }
+
+    this.http.post<any>(`${this.url}/Add_Location`,  this.addBoatLocationform.value   ).subscribe(data => {
+        console.log(data);
+      if(data.status == true){
+        this.modelTitle = "Add Boat Location"
+        this.getResponce = data.message
+        $('#add-boat-location-popup').trigger('click');
+        this.addBoatLocationform.reset()
+        this.boatLocationSubmitted = false;
+    
+      }
+      else if(data.status == false){
+      }
+      
+    }, err => {
+    
+    })
+  }
+  get ablf() { return this.addBoatLocationform.controls; }
   //Add special days for settings page //Done By Alagesan on 23.06.2021
   createSpecialDaysForm() {
     this.specialDaysform = this.fb.group({
@@ -879,7 +916,7 @@ addShare(){
       if(data.status == true){
         this.modelTitle = "Add Special Days"
         this.getResponce = data.message
-        $('#Special-days-pop-up-btn').trigger('click');
+        $('#special-days-pop-up-btn').trigger('click');
         this.specialDaysform.reset()
         this.specialDaysSubmitted = false;
     

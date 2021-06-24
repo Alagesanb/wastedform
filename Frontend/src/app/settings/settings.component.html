@@ -331,20 +331,20 @@
   <!--Add location tab for settings Done By Alagesan on 21.06.2021    -->
 <div id="pane-F" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-F">
   <div class="sbg-form"  style="margin-top: 25px;"> 
-    <form>
+    <form [formGroup]="addBoatLocationform">
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Location Name</label>
-            <input type="text" class="form-control" >
+            <input type="text" formControlName="Boat_Location" class="form-control" [ngClass]="{ 'is-invalid': boatLocationSubmitted && ablf.Boat_Location.errors }">
           </div>  
           <div class="form-group col-md-6">
             <label>Location URL</label>
-            <input type="text" class="form-control" >
+            <input type="text" formControlName="Location_URL" class="form-control" [ngClass]="{ 'is-invalid': boatLocationSubmitted && ablf.Location_URL.errors }">
           </div>
         </div>                  
          <div class="form-row">     
             <div class="col-md-2">
-            <a  class="btn btn-primary"  >SAVE</a>
+            <a  class="btn btn-primary"  (click)=saveBoatLocation()>SAVE</a>
             </div>             
          </div>
     </form>     
@@ -621,7 +621,7 @@
             <!--Add special days data integrations for settings Done By Alagesan on 23.06.2021    -->
 
 
-          <button style="display:none" type="button" id="Special-days-pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#specialDaysModal">Open Modal</button>
+          <button style="display:none" type="button" id="special-days-pop-up-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#specialDaysModal">Open Modal</button>
                       
                         
           <div class="modal fade" id="specialDaysModal" role="dialog">
@@ -643,6 +643,32 @@
               
             </div>
           </div>  
+
+                      <!--Add boat location data integrations for settings Done By Alagesan on 24.06.2021    -->
+
+
+                      <button style="display:none" type="button" id="add-boat-location-popup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boatLocationModal">Open Modal</button>
+                      
+                        
+                      <div class="modal fade" id="boatLocationModal" role="dialog">
+                        <div class="modal-dialog">
+                        
+                          
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h4 class="modal-title">{{modelTitle}}</h4>
+                            </div>
+                            <div class="modal-body">
+                              <p>{{getResponce}}</p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>  
                          
         </div>
     </div>
