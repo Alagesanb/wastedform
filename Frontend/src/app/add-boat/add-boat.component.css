@@ -13,3 +13,10 @@
             border: 1px solid #f30a0a !important; 
      
         }
+
+        .cls-facility{
+            /* border-color: red !important; */
+            
+             border: 1px solid red !important;
+
+        }

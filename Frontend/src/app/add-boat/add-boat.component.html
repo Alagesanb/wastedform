@@ -248,7 +248,7 @@
                                               
                             <input class="show-for-sr" type="file" id="customFile" name="upload_imgs[]"  (change)="onFileChange($event, 'BACK')" multiple/>
     
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <label class="custom-file-label" for="customFile" formControlName="Boat_Image_span" [ngClass]="{ 'cls-facility': boatSubmitted && bf.Boat_Image_span.errors }">Choose file</label>
                           </div>
 
 
@@ -274,7 +274,7 @@
   
   <div class="custom-file mb-3">
     <input type="file" class="custom-file-input form-control" id="id_singlefile" name="filename" (focusout)="singleImage($event, 'BACK')">
-    <label class="custom-file-label" for="customFile">Choose file</label>
+    <label class="custom-file-label" for="customFile" formControlName="Boat_HandBook_span" [ngClass]="{ 'cls-facility': boatSubmitted && bf.Boat_HandBook_span.errors }">Choose file</label>
   </div>
     <div class="form-row">
 
@@ -297,7 +297,10 @@
                   
 <div class="form-group">
 <label>Facilities</label>
-<textarea class="form-control" rows="4" placeholder="Enter here" formControlName="Boat_Facility" [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boat_Facility.errors }"> </textarea>
+<textarea style="border-color: crimson;" class="form-control" rows="4" placeholder="Enter here" formControlName="Boat_Facility" [ngClass]="{ 'cls-facility': boatSubmitted && bf.Boat_Facility.errors }"> </textarea>
+<!-- <input type="text" class="form-control"  formControlName="Boat_Facility" [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boat_Facility.errors  }"/> -->
+
+
 </div>
 
 </div>

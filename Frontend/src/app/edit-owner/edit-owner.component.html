@@ -45,7 +45,7 @@
 
 <div class="form-group col-md-6">
 <label>Password</label>
-<input type="password" class="form-control" readonly formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }">
+<input type="text" class="form-control" readonly formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }">
 </div>    
 </div>                      
 
@@ -233,7 +233,7 @@
         <h4 class="modal-title">Owner</h4>
       </div>
       <div class="modal-body">
-        <p>Owner Edit Successful!!!.</p>
+        <p id="wner_id_edit"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)=goToViewPage() data-dismiss="modal">OK</button>
