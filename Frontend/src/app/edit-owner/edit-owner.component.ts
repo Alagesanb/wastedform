@@ -88,24 +88,35 @@ export class EditOwnerComponent implements OnInit {
 }
 
 editOwner(){
+
+ 
+
+  var data_owner = JSON.parse(sessionStorage.getItem("ownerData"));
+
+
+  this.form.get('_id').setValue(data_owner.Owner_id);
   this.form.get('Block').setValue(true);
   this.form.get('IsActive').setValue(true);
   console.log()
-  if(this.handBook){
+  if(this.handBook)
+  {
     const fd = new FormData();  
     fd.append("file",this.handBook);
     this.http.post<any>(`${this.url}/FileUploadSingle`, fd).subscribe(data => {
       console.log(data)
       console.log(data.data.filename)
      
-        if(data.status==false){
+        if(data.status==false)
+        {
         }
-        else if(data.status==true){
+        else if(data.status==true)
+        {
 
           this.form.get('Profile_Image').setValue(data.data.filename);
           console.log(this.form.value)
 
           this.http.post<any>(`${this.url}/EditOwner`,  this.form.value).subscribe(data => {
+           
             console.log(data)
            
               if(data.status==false){
@@ -118,10 +129,8 @@ editOwner(){
                 console.log(err);
               })
         } 
-        }, err => {
-          console.log(err);
-        })
-      }else{
+             else
+      {
         console.log(this.form.value)
         this.http.post<any>(`${this.url}/EditOwner`,  this.form.value).subscribe(data => {
           console.log(data)
@@ -135,7 +144,31 @@ editOwner(){
             }, err => {
               console.log(err);
             })
-      }
+          }
+
+    }, err => {
+      console.log(err);
+    });
+  }
+  else
+  {
+
+    console.log(this.form.value);
+    this.http.post<any>(`${this.url}/EditOwner`,  this.form.value).subscribe(data => {
+    
+     
+        if(data.status==false){
+        }
+        else if(data.status==true){
+          $("#wner_id_edit").text(data.message);
+          $('#error-disp-btns').trigger('click');
+
+        } 
+        }, err => {
+          console.log(err);
+        });
+
+  }
 }
 
 
