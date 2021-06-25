@@ -49,7 +49,8 @@ const routes: Routes = [
   { path: 'reset', component: ResetPasswordComponent },
   { path: 'add-boat', component: AddBoatComponent },
   { path: 'season-duration', component: SeasonDurationComponent },
-  { path: 'all-boat', component: AllBoatComponent },
+  //Change all boat url  for app routing module Done By Alagesan on 25.06.2021	
+  { path: 'all-boats', component: AllBoatComponent },
   { path: 'view-boat', component: ViewBoatComponent },
   { path: 'edit-boat', component: EditBoatComponent },
   { path: 'add-owner', component: AddOwnerComponent },

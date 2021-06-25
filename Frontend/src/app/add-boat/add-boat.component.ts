@@ -841,7 +841,10 @@ console.log(this.handBook)
 
   }
   goToViewPage() {
-    this.router.navigate(['/all-boat/']);
+   
+    //Change all boat url  for add boat Done By Alagesan on 25.06.2021	
+    
+    this.router.navigate(['/all-boats/']);
 
   }
   getLoctionTypeId(id) {

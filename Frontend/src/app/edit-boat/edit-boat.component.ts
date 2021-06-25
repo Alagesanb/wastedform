@@ -1031,7 +1031,8 @@ this.multiMg = this.data.Boat_Image
    }
 
   goToViewPage(){
-              this.router.navigate(['/all-boat/']);
+  //Change all boat url  for edit boat Done By Alagesan on 25.06.2021
+              this.router.navigate(['/all-boats/']);
 
   }
 }

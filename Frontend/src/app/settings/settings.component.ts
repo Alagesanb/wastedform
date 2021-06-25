@@ -28,6 +28,10 @@ export class SettingsComponent implements OnInit {
   addBoatLocationform: FormGroup;
   boatLocationSubmitted = false;
 
+  //Add boat type for settings page //Done By Alagesan on 25.06.2021
+  addBoatTypeform: FormGroup;
+  addBoatTypesubmitted = false;
+
   boats: any=[];
   allBoatsType: any =[];
   searchText: any = '';
@@ -70,6 +74,7 @@ export class SettingsComponent implements OnInit {
       this.createBookingForm();
       this.createSpecialDaysForm() ;
       this.createBoatLocationForm();
+      this.createBoatTypeForm();
 
      }
 
@@ -931,6 +936,45 @@ addShare(){
 
 //Add special days for settings page //Done By Alagesan on 23.06.2021
   get sdf() { return this.specialDaysform.controls; }
+
+  createBoatTypeForm() {
+    this.addBoatTypeform = this.fb.group({
+      Boat_Type: new FormControl('', [Validators.required,]),
+      Block: new FormControl('', []),
+      IsActive: new FormControl('', []),
+      Type_Description: new FormControl('', [Validators.required,]),
+    });
+  }
+  get abtf() { return this.addBoatTypeform.controls; }
+
+  addBoatType() {
+    this.addBoatTypesubmitted = true;
+  
+    if (this.addBoatTypeform.invalid) {
+      return;
+    }
+      console.log(this.addBoatTypeform.value);
+    this.addBoatTypeform.get('Block').setValue("true");
+    this.addBoatTypeform.get('IsActive').setValue("true");
+    this.http.post<any>(`${this.url}/AddBoatType`, this.addBoatTypeform.value).subscribe(data => {
+     console.log(data);
+      if (data.status == true) {
+        this.modelTitle = "Add Boat Type"
+        this.getResponce = data.message
+        $('#add-boat-type-popup').trigger('click');
+        this.addBoatTypeform.reset()
+        $("#pop-up-btn").trigger('click');
+        this.addBoatTypesubmitted = false;
+
+      }
+      else if(data.status == false){
+      }
+    }, err => {
+
+
+      console.log(err);
+    })
+  }
 
   saveShare(){
   

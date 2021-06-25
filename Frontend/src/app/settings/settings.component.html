@@ -46,9 +46,57 @@
 <div id="content" class="tab-content" role="tablist">
   <div id="pane-A" class="card tab-pane fade show active" role="tabpanel" aria-labelledby="tab-A">
 
+    <!--Add boat type for settings Done By Alagesan on 25.06.2021    -->
 
+  <div class="row" style="margin-top: 55px;">
+    <div class="col-md-12 add-boat-type" > 
+         
+      <!-- Button boat type modal -->
+  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#boat-type" style="float: right; ">
+   BOAT TYPE 
+  </button>
+  
+  <button type="button" data-toggle="modal" data-target="#boat-type" style="display: none;" id="pop-up-btn" class="addb-rs btn common-btn violet-btn" >Submit</button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="boat-type" tabindex="-1" role="dialog" aria-labelledby="boat-typeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">ADD BOAT TYPE</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <form   [formGroup]="addBoatTypeform"  novalidate>
+      
+      <div class="modal-body">
+      <div class="form-group col-md-12">
+      <label>Boat Type Name</label>
+      <input type="text" class="form-control" formControlName="Boat_Type" [ngClass]="{ 'is-invalid': addBoatTypesubmitted && abtf.Boat_Type.errors }">
+      </div>
+      
+      <div class="form-group col-md-12">
+      <label>Description</label>
+        <textarea class="form-control" rows="3" formControlName="Type_Description" [ngClass]="{ 'is-invalid': addBoatTypesubmitted && abtf.Type_Description.errors }"> </textarea>
+      </div>
+        
+      </div>
+      </form>
+      <div class="modal-footer">
+      <button type="button" (click)=addBoatType() id="id-button-Add-boat" class="btn btn-primary">ADD</button>
+      </div>
+      </div>
+    </div>
+  </div>    
+ </div>   
+     <!--Add boat type for settings Done By Alagesan on 25.06.2021    -->
+ 
+  </div>
 
   <div class="row" style="margin-top: 25px;"> 
+
+    
             
     <div class="col-md-12 reports" id="temp-data-bindings">
               
@@ -112,12 +160,15 @@
                   <div class="form-group col-md-7 ">
                       <label>Unavailable Dates</label>
                       <div class="input_fields_wrap input_fields_wrap_commen">
-                      <div>
-                        <input type="date" name="mytext[]"  class="form-control" data-zdp_readonly_element="false"></div>
+                      <div class="uniqueDates">
+                        <!--Add remove button for settings Done By Alagesan on 25.06.2021    -->
+                        <input type="date" name="mytext[]"  class="form-control" data-zdp_readonly_element="false">
+                        <a  href="#" class="remove_default_field" style="margin-right: -72px; margin-top: -33px;">Remove</a>
+                      </div>
                       </div>
                     </div>
-                    <div class="form-group col-md-2">     
-                      <button class="add_field_default_button">Add</button>
+                    <div class="form-group col-md-2" style="margin-left: 50px;">     
+                      <button class="add_field_default_button" >Add</button>
                     </div>           
                   </div>  
                 </div>  
@@ -165,13 +216,17 @@
 
 <div class="input_fields_wrap input_fields_wrap_single">
 
-<div><input type="date" name="mytext[]"  class="form-control" data-zdp_readonly_element="false"></div>
+<div>
+  <!--Add remove button for settings Done By Alagesan on 25.06.2021    -->
+  <input type="date" name="mytext[]"  class="form-control" data-zdp_readonly_element="false">
+  <a  href="#" class="remove_field"   style="margin-right: -72px; margin-top: -33px;">Remove</a>
+</div>
  
 </div>
 
 </div>
                  
-                 <div class="form-group col-md-2">     
+                 <div class="form-group col-md-2" style="margin-left: 63px;">     
                  
                  <button class="add_field_button">Add</button>
                  
@@ -644,31 +699,57 @@
             </div>
           </div>  
 
-                      <!--Add boat location data integrations for settings Done By Alagesan on 24.06.2021    -->
+          <!--Add boat location data integrations for settings Done By Alagesan on 24.06.2021    -->
 
 
-                      <button style="display:none" type="button" id="add-boat-location-popup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boatLocationModal">Open Modal</button>
-                      
-                        
-                      <div class="modal fade" id="boatLocationModal" role="dialog">
-                        <div class="modal-dialog">
-                        
-                          
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">{{modelTitle}}</h4>
-                            </div>
-                            <div class="modal-body">
-                              <p>{{getResponce}}</p>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-                            </div>
-                          </div>
-                          
-                        </div>
-                      </div>  
+          <button style="display:none" type="button" id="add-boat-location-popup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boatLocationModal">Open Modal</button>
+          
+            
+          <div class="modal fade" id="boatLocationModal" role="dialog">
+            <div class="modal-dialog">
+            
+              
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{modelTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{getResponce}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>  
+
+          <!--Add boat type data integrations for settings Done By Alagesan on 25.06.2021    -->
+
+
+          <button style="display:none" type="button" id="add-boat-type-popup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boatTypeModal">Open Modal</button>
+        
+          
+          <div class="modal fade" id="boatTypeModal" role="dialog">
+            <div class="modal-dialog">
+            
+              
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{modelTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{getResponce}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>  
                          
         </div>
     </div>
