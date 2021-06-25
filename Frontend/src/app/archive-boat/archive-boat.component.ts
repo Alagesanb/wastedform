@@ -130,4 +130,9 @@ getLoctionTypeId(id){
 
   }
 
+  // Location dropdown clear for archive boat page //Done By Alagesan on 25.06.2021	
+  pageRefresh(){
+    location.reload();
+  }
+
 }

@@ -44,6 +44,12 @@
   <div class="sbg-form row" style="margin-top: 50px;">
            <div class="col-md-7">   
               <div class="form-row">
+                          <!-- Swap the form fields  for edit boat Done By Alagesan on 25.06.2021	-->
+                <div class="form-group col-md-6">
+                  <label>Boat Name</label>
+                  <input type="text" class="form-control" formControlName="Boat_Name" [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boat_Name.errors }">
+                  </div>
+
 <div class="form-group col-md-6">
 
 
@@ -71,10 +77,7 @@
  
   </select>     -->
 </div>
-<div class="form-group col-md-6">
-<label>Boat Name</label>
-<input type="text" class="form-control" formControlName="Boat_Name" [ngClass]="{ 'is-invalid': boatSubmitted && bf.Boat_Name.errors }">
-</div>
+
 </div>
 <div class="form-group">
 <label>Description</label>

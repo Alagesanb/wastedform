@@ -1520,6 +1520,18 @@ button.close {
     font-size: 11px;
 }
 
+/* 25-06-2021 Add css Done by Alagesan*/
+.btn.btn-clear{
+    background-color: #666;
+      color: #FFF;
+      border-radius: 5px;
+      padding: 3px 15px;
+      line-height: inherit;
+      font-size: 14px;
+      margin: 0 auto;
+      display: flex;
+  }
+
  .placeicon {
      font-family: fontawesome
  }

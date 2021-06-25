@@ -24,7 +24,8 @@
                 <li *ngFor="let loc of loctions | filter: searchLoction let i = index;">
                   <a style="cursor:pointer;"  (click)="getLoctionTypeId(loc)">{{loc.Boat_Location}}</a>
                 </li>
-                
+                <!--Location dropdown clear for archive boat Done By Alagesan  on 25.05.2021 -->
+              <li><input type="button" class="btn btn-clear" (click)="pageRefresh()" style="text-align: center;" value="Clear"></li>
                 </ul>
                                   </div>
                

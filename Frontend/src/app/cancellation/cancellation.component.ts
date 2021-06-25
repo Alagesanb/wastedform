@@ -83,4 +83,10 @@ this.cancellationInfo = this.bookingPushData
 console.log(this.cancellationInfo)
     // console.log(id)
   }
+
+  // Location dropdown clear for cancellation //Done By Alagesan on 25.06.2021	
+  pageRefresh(){
+    location.reload();
+  }
+
 }

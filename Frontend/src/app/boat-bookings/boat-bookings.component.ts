@@ -209,4 +209,10 @@ console.log(this.bookingInfo)
   }
 
 
+  // Location dropdown clear for boat bookings  //Done By Alagesan on 25.06.2021	
+  pageRefresh(){
+    location.reload();
+  }
+
+
 }

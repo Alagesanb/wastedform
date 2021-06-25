@@ -282,4 +282,9 @@ var date1 =  new Date($event.target.value)
     $('#removeBoat').trigger('click');
 
   }
+
+  // Location dropdown clear for all boat page //Done By Alagesan on 25.06.2021	
+  pageRefresh(){
+    location.reload();
+  }
 }
