@@ -181,12 +181,13 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   Fun_getallDropDownDatas_Owner(){ 
    
     this.http.get<any>(`${this.url_Owner}ViewAllOwners`).subscribe(data => { 
-      this.SelectOwner_dropdownList = data.response;                          
+      this.SelectOwner_dropdownList = data.response;   
+      console.log(data.response);                       
       var tempArry = [];
       data.response.forEach(element => {
             var obj2 = Object();
             obj2.item_id = element._id,
-            obj2.item_text = element.First_Name
+            obj2.item_text = (element.First_Name).concat(" ", element.Last_Name);
             tempArry.push(obj2);
 
       });

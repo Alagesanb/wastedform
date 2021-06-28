@@ -11,7 +11,7 @@
                   
             <div class="row" style="margin-bottom: 25px;">
                 
-         <div class="col-md-6 dash-filter">   
+         <div class="col-md-4 dash-filter">   
 <!--          
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="width: 100%;">Location
@@ -41,14 +41,25 @@
                   <li><input type="button" class="btn btn-clear" (click)="pageRefresh()" style="text-align: center;" value="Clear"></li>
                 </ul>
               </div>
+                
                </div>        
-               <div class="col-md-6 boat-search">
-                <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchLoction">
-                <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
+            <!--Add  button for bookfor owner for boat bookings Done By Alagesan  on 28.06.2021 -->
+               <div class="row col-md-8 boat-search">
+                <div class="col-md-4" style=" padding-top: 14px;">
+                    <ul >   
+                <!-- <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">BOOKING LIST</button></li> -->
+                    <li><a routerLink="/book-for-owner/" class="btn btn-primary">BOOK FOR AN OWNER</a></li>
+                    </ul>       
                 </div>
+                <div class="col-md-8" style=" padding-top: 12px;padding-left: 38px;">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="searchLoction">
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button"><i class="fas fa-search" aria-hidden="true"></i></button>
+                        </div>
+                        </div>
                 </div>
+                
                 </div>   
           </div>
           <form [formGroup]="boatbookingform"  novalidate>

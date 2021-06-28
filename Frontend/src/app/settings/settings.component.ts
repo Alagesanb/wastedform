@@ -1083,7 +1083,10 @@ addShare(){
       this.http.post<any>(`${this.shareUrl}/AddNextBookings`,  this.Bookingform.value   ).subscribe(data => {
       
     if(data.status == true){
-      this.getResponce = data.message
+      //Add booking days  popup message for settings page //Done By Alagesan on 28.06.2021
+      var startStr = "Next Booking Day will be Open after   ";
+      var endStr = "  days to book in advance";
+      this.getResponce = (startStr).concat(this.NEXT_BOOKING_DAYS_ALLOWED, endStr);
       this.Bookingform.reset()
       this.bookdropdownOwn =[]; 
 
