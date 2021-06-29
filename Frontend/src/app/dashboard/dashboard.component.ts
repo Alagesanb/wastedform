@@ -935,7 +935,17 @@ export class DashboardComponent implements OnInit {
     var standByBooking = data['StandbyBooking']
 
     standByBooking.forEach(element => {
-       
+
+      var to_date = new Date();
+      var to_date_only = this.getFormattedDate_WithOut_Zero_Time(to_date);// to_date.getDay();
+
+      var start_Date = new Date(element.start);
+      var start_Date_only = this.getFormattedDate_WithOut_Zero_Time(start_Date); //start_Date.getDay();
+
+
+if(to_date_only == start_Date_only)
+{
+      
     if(element.Is_StandByBooking == true){
 
       var obj_s = Object();
@@ -971,6 +981,8 @@ export class DashboardComponent implements OnInit {
 
 
     }
+
+}
 
     
 
@@ -1202,43 +1214,52 @@ export class DashboardComponent implements OnInit {
    var standByBooking = data['StandbyBooking']
 
    standByBooking.forEach(element => {
+
+    var to_date = new Date();
+      var to_date_only = this.getFormattedDate_WithOut_Zero_Time(to_date);// to_date.getDay();
+
+      var start_Date = new Date(element.start);
+      var start_Date_only = this.getFormattedDate_WithOut_Zero_Time(start_Date); //start_Date.getDay();
+
+      if(to_date_only == start_Date_only)
+      {
       
-   if(element.Is_StandByBooking == true){
+        if(element.Is_StandByBooking == true){
 
-     var obj_s = Object();
+          var obj_s = Object();
 
-     if(element.BoatDetails.length !== 0){
+          if(element.BoatDetails.length !== 0){
 
-       obj_s._Id = element._id;
-     obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
-     obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
-     obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
-     obj_s.start = element.start;
-     obj_s.Boat_Id =  element.BoatDetails[0]._id;
-     obj_s.end = element.end;
-     obj_s.Booking_ID = element.Booking_ID;
+            obj_s._Id = element._id;
+          obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+          obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+          obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+          obj_s.start = element.start;
+          obj_s.Boat_Id =  element.BoatDetails[0]._id;
+          obj_s.end = element.end;
+          obj_s.Booking_ID = element.Booking_ID;
 
-     obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
-     obj_s._id = element._id;
-     obj_s.Location_Name = element.BoatDetails[0].Location_Name;
-     obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+          obj_s._id = element._id;
+          obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+          obj_s.Location_Id = element.BoatDetails[0].Location_Id;
 
-     if(element.OwnerDetails.length !== 0){
+          if(element.OwnerDetails.length !== 0){
 
-       obj_s.First_Name = element.OwnerDetails[0].First_Name;
-       obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
-       obj_s.OwnerDetails = element.OwnerDetails[0];
+            obj_s.First_Name = element.OwnerDetails[0].First_Name;
+            obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+            obj_s.OwnerDetails = element.OwnerDetails[0];
 
-     } 
+          } 
 
-     this.Stand_by_Booking.push(obj_s);
-
-
-     }      
+          this.Stand_by_Booking.push(obj_s);
 
 
-   }
+          }      
 
+
+        }
+      }
    
 
    });
@@ -1466,42 +1487,53 @@ console.log(this.dropdown_Boat_List);
      var standByBooking = data['StandbyBooking']
 
      standByBooking.forEach(element => {
-        
-     if(element.Is_StandByBooking == true){
- 
-       var obj_s = Object();
- 
-       if(element.BoatDetails.length !== 0){
- 
-         obj_s._Id = element._id;
-       obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
-       obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
-       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
-       obj_s.start = element.start;
-       obj_s.Boat_Id =  element.BoatDetails[0]._id;
-       obj_s.end = element.end;
-       obj_s.Booking_ID = element.Booking_ID;
- 
-       obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
-       obj_s._id = element._id;
-       obj_s.Location_Name = element.BoatDetails[0].Location_Name;
-       obj_s.Location_Id = element.BoatDetails[0].Location_Id;
- 
-       if(element.OwnerDetails.length !== 0){
- 
-         obj_s.First_Name = element.OwnerDetails[0].First_Name;
-         obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
-         obj_s.OwnerDetails = element.OwnerDetails[0];
- 
-       } 
- 
-       this.Stand_by_Booking.push(obj_s);
- 
- 
-       }      
- 
- 
-     }
+
+      var to_date = new Date();
+      var to_date_only = this.getFormattedDate_WithOut_Zero_Time(to_date);// to_date.getDay();
+
+      var start_Date = new Date(element.start);
+      var start_Date_only = this.getFormattedDate_WithOut_Zero_Time(start_Date); //start_Date.getDay();
+
+
+      if(to_date_only == start_Date_only)
+      {
+              
+          if(element.Is_StandByBooking == true){
+      
+            var obj_s = Object();
+      
+            if(element.BoatDetails.length !== 0){
+      
+              obj_s._Id = element._id;
+            obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+            obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+            obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+            obj_s.start = element.start;
+            obj_s.Boat_Id =  element.BoatDetails[0]._id;
+            obj_s.end = element.end;
+            obj_s.Booking_ID = element.Booking_ID;
+      
+            obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+            obj_s._id = element._id;
+            obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+            obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+      
+            if(element.OwnerDetails.length !== 0){
+      
+              obj_s.First_Name = element.OwnerDetails[0].First_Name;
+              obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+              obj_s.OwnerDetails = element.OwnerDetails[0];
+      
+            } 
+      
+            this.Stand_by_Booking.push(obj_s);
+      
+      
+            }      
+      
+      
+          }
+      }
  
      
  
