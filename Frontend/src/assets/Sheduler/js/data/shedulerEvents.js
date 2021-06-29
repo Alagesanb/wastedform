@@ -4,9 +4,9 @@ var public_URL = "http://65.2.28.16/api/Schedule/";
 
 var public_Day_URL = "http://65.2.28.16/api/Days/";
 
+var public_StandByBooking = "http://65.2.28.16/api/StandByBooking/";
+
 var public_shedulDataId = 0;
-//sheduler-calender-timer1
-//sheduler-calender-timer1
 
 function getFormattedDate_WithOut_Zero_Time(dateVal) {
     var newDate = new Date(dateVal);
@@ -1015,13 +1015,6 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     //delete.....End
 
-
-
-
-
-
-
-
     function getAllDates(startDate, stopDate) {          
         var dateArray =[];
         var currentDate = startDate;
@@ -1251,34 +1244,68 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         end_str = new Date(end_str.setHours(conver_Hours(timer2),conver_Minit(timer2),00,0));
         
         obj.start = start_str.toString();
-        obj.end   = end_str.toString();     
-       
-        $.ajax({
-            url: public_URL+"AddSchedule",
-            type: 'POST',
-            dataType: 'json', 
-            data: obj,
-            success: function(datas) { 
-                              
-                if(datas.status == true)
-                {
-                    alert(datas.message);
-                    location.reload();    
-                }
-                else if(datas.status == false)
-                {                    
-                    alert(datas.message);
-                    //location.reload();    
-                }
-            
-    
-            },
-            error: function (error) {               
+        obj.end   = end_str.toString();
+        debugger;
+        
+        if(obj.Is_StandByBooking == true){
+
+            $.ajax({
+                url: public_StandByBooking+"AddStandByBooking",
+                type: 'POST',
+                dataType: 'json', 
+                data: obj,
+                success: function(datas) { 
+                                
+                    if(datas.status == true)
+                    {
+                        alert(datas.message);
+                        location.reload();    
+                    }
+                    else if(datas.status == false)
+                    {                    
+                        alert(datas.message);
+                        //location.reload();    
+                    }
                 
-                console.log(error.responseText);
-                           
-            }
-        });
+        
+                },
+                error: function (error) {               
+                    
+                    console.log(error.responseText);
+                            
+                }
+            });
+
+        }
+        else
+        {       
+            $.ajax({
+                url: public_URL+"AddSchedule",
+                type: 'POST',
+                dataType: 'json', 
+                data: obj,
+                success: function(datas) { 
+                                
+                    if(datas.status == true)
+                    {
+                        alert(datas.message);
+                        location.reload();    
+                    }
+                    else if(datas.status == false)
+                    {                    
+                        alert(datas.message);
+                        //location.reload();    
+                    }
+                
+        
+                },
+                error: function (error) {               
+                    
+                    console.log(error.responseText);
+                            
+                }
+            });
+        }
 
     }
 

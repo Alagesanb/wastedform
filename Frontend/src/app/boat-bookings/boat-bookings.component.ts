@@ -16,6 +16,8 @@ export class BoatBookingsComponent implements OnInit {
   BookingUrl = "http://65.2.28.16/api/Schedule";
   imagePath= "http://65.2.28.16/api/uploads/";
   url = "http://65.2.28.16/api/Boat";
+  standByBooking = "http://65.2.28.16/api/StandByBooking";
+  //url = "http://65.2.28.16/api/Schedule"
 
   bookingInfo: any;
   searchLoction: any = '';
@@ -38,6 +40,8 @@ export class BoatBookingsComponent implements OnInit {
   bookingPushData: any=[];
   bookingDatas: any=[];
   listBooking: any=[];
+  Stand_by_Booking: any=[];
+  Stand_by_Booking_Completed: any=[];
 
   constructor(private http: HttpClient, private fb: FormBuilder, private router: Router,) { }
 
@@ -180,6 +184,119 @@ this.bookingInfo = this.listBooking
     this.bookingDatas = this.bookingInfo
     console.log(this.bookingInfo);
 
+    //////////////////////////
+
+    this.http.get<any>(`${this.standByBooking}/ViewStandByBooking`).subscribe(data => {
+     
+
+    //this is Start..........
+    var standByBooking = data['response'];
+    debugger;
+
+    standByBooking.forEach(element => {
+       
+    if(element.IsActive == true){
+
+      var obj_s = Object();
+
+      if(element.BoatDetails.length !== 0){
+
+        obj_s._Id = element._id;
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imagePath + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
+
+      obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+      obj_s._id = element._id;
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+      obj_s.BookingStatus = element.BookingStatus;
+
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+      this.Stand_by_Booking.push(obj_s);
+
+
+      }      
+
+
+    }
+
+    
+
+    });
+
+    standByBooking.forEach(element => {
+       
+       if(element.IsActive == false){
+   
+         var obj_s = Object();
+   
+         if(element.BoatDetails.length !== 0){
+   
+           obj_s._Id = element._id;
+         obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+         obj_s.imgUrl = this.imagePath + element.BoatDetails[0].Boat_Image[0];
+         obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+         obj_s.start = element.start;
+         obj_s.Boat_Id =  element.BoatDetails[0]._id;
+         obj_s.end = element.end;
+         obj_s.Booking_ID = element.Booking_ID;
+   
+         obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+         obj_s._id = element._id;
+         obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+         obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+         obj_s.BookingStatus = element.BookingStatus;
+   
+         if(element.OwnerDetails.length !== 0){
+   
+           obj_s.First_Name = element.OwnerDetails[0].First_Name;
+           obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+           obj_s.OwnerDetails = element.OwnerDetails[0];
+   
+         } 
+   
+         this.Stand_by_Booking_Completed.push(obj_s);
+   
+   
+         }      
+   
+   
+       }
+   
+       
+   
+       });
+   
+
+
+    ////End................... Stand_by_Booking_Completed
+
+   
+  
+   
+
+   }, err => {
+   })
+
+
+    ////////////////////
+
+
+
+
+
    }, err => {
    })
   }
@@ -213,6 +330,70 @@ console.log(this.bookingInfo)
   pageRefresh(){
     location.reload();
   }
+
+
+  
+  Stand_by_Booking_Accept(datas){    
+
+    var obj = Object();
+    obj._id = datas._Id;
+    obj.action_todo = "Accept";       
+
+    this.http.post<any>(`${this.BookingUrl}/StandByBooking_AcceptReject`,  obj  ).subscribe(data => {
+    
+      if(data.status == true)
+      {
+        alert("Booking is Accepted");
+        location.reload(); 
+            
+        
+      }
+      else if(data.status == false)
+      {
+        alert("No responce");
+
+      }
+        }, err => {
+
+          alert(err.message);
+         
+        })
+
+
+  }
+
+ 
+  Stand_by_Booking_Reject(datas){
+    
+    var obj = Object();
+    obj._id = datas._Id;
+    obj.action_todo = "Reject";       
+
+    this.http.post<any>(`${this.BookingUrl}/StandByBooking_AcceptReject`,  obj  ).subscribe(data => {
+    
+      if(data.status == true)
+      {
+        alert("Booking is Reject");
+        location.reload();      
+        
+      }
+      else if(data.status == false)
+      {
+        alert("No responce");
+
+      }
+        }, err => {
+
+          alert(err.message);
+         
+        })
+
+
+
+
+  }
+
+
 
 
 }
