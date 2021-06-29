@@ -187,6 +187,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       data.response.forEach(element => {
             var obj2 = Object();
             obj2.item_id = element._id,
+            // Concatination firstname and lastname for book for owner//Done By Alagesan on 29.06.2021
             obj2.item_text = (element.First_Name).concat(" ", element.Last_Name);
             tempArry.push(obj2);
 

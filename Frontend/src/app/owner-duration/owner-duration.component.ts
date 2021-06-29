@@ -275,7 +275,8 @@ this.form.reset()
              data.response.forEach(element => {
                    var obj2 = Object();
                    obj2.item_id = element._id,
-                   obj2.item_text = element.First_Name
+                                        // Concatination firstname and lastname for owner duration//Done By Alagesan on 29.06.2021
+                   obj2.item_text = (element.First_Name).concat(" ", element.Last_Name);
                    ownerArray.push(obj2);
  
              });
