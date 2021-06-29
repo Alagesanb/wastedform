@@ -793,7 +793,7 @@ export class DashboardComponent implements OnInit {
      
       
       this.Booking = data['response']
-      console.log(this.Booking)
+      
       this.Booking.forEach(element => {
         
        
@@ -889,6 +889,53 @@ export class DashboardComponent implements OnInit {
       
     }
 
+    /*
+    if(element.Is_StandByBooking == true){
+
+      var obj_s = Object();
+
+      if(element.BoatDetails.length !== 0){
+
+        obj_s._Id = element._id;
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
+
+      obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+      obj_s._id = element._id;
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+      this.Stand_by_Booking.push(obj_s);
+
+
+      }      
+
+
+    }*/
+
+    
+
+    });
+
+
+    //this is Start..........
+    var standByBooking = data['StandbyBooking']
+
+    standByBooking.forEach(element => {
+       
     if(element.Is_StandByBooking == true){
 
       var obj_s = Object();
@@ -929,7 +976,8 @@ export class DashboardComponent implements OnInit {
 
     });
 
-    
+
+    ////End...................
 
     this.Cancellations = data['Cancelledresponse']
     this.Cancellations.forEach(element => {
@@ -1108,6 +1156,8 @@ export class DashboardComponent implements OnInit {
 
     }
 
+
+    /*
     
     if(element.Is_StandByBooking == true){
 
@@ -1142,12 +1192,60 @@ export class DashboardComponent implements OnInit {
 
     }
   
+    */
   
   
   });
-
-
   ///
+
+   //this is Start..........
+   var standByBooking = data['StandbyBooking']
+
+   standByBooking.forEach(element => {
+      
+   if(element.Is_StandByBooking == true){
+
+     var obj_s = Object();
+
+     if(element.BoatDetails.length !== 0){
+
+       obj_s._Id = element._id;
+     obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+     obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+     obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+     obj_s.start = element.start;
+     obj_s.Boat_Id =  element.BoatDetails[0]._id;
+     obj_s.end = element.end;
+     obj_s.Booking_ID = element.Booking_ID;
+
+     obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+     obj_s._id = element._id;
+     obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+     obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+
+     if(element.OwnerDetails.length !== 0){
+
+       obj_s.First_Name = element.OwnerDetails[0].First_Name;
+       obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+       obj_s.OwnerDetails = element.OwnerDetails[0];
+
+     } 
+
+     this.Stand_by_Booking.push(obj_s);
+
+
+     }      
+
+
+   }
+
+   
+
+   });
+
+
+
+
 
   this.Cancellations = data['Cancelledresponse']
   this.Cancellations.forEach(element => {
@@ -1323,6 +1421,7 @@ console.log(this.dropdown_Boat_List);
 
       }
 
+      /*
       if(element.Is_StandByBooking == true){
 
         var obj_s = Object();
@@ -1356,10 +1455,57 @@ console.log(this.dropdown_Boat_List);
   
       }
 
+      */
+
     });
 
 
     //.....
+
+     //this is Start..........
+     var standByBooking = data['StandbyBooking']
+
+     standByBooking.forEach(element => {
+        
+     if(element.Is_StandByBooking == true){
+ 
+       var obj_s = Object();
+ 
+       if(element.BoatDetails.length !== 0){
+ 
+         obj_s._Id = element._id;
+       obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+       obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+       obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+       obj_s.start = element.start;
+       obj_s.Boat_Id =  element.BoatDetails[0]._id;
+       obj_s.end = element.end;
+       obj_s.Booking_ID = element.Booking_ID;
+ 
+       obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+       obj_s._id = element._id;
+       obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+       obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+ 
+       if(element.OwnerDetails.length !== 0){
+ 
+         obj_s.First_Name = element.OwnerDetails[0].First_Name;
+         obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+         obj_s.OwnerDetails = element.OwnerDetails[0];
+ 
+       } 
+ 
+       this.Stand_by_Booking.push(obj_s);
+ 
+ 
+       }      
+ 
+ 
+     }
+ 
+     
+ 
+     });
 
     
   this.Cancellations = data['Cancelledresponse']
@@ -1445,7 +1591,8 @@ console.log(this.dropdown_Boat_List);
   Stand_by_Booking_Accept(datas){    
 
     var obj = Object();
-    obj._id = datas._Id;       
+    obj._id = datas._Id;
+    obj.action_todo = "Accept";       
 
     this.http.post<any>(`${this.url}/StandByBooking_AcceptReject`,  obj  ).subscribe(data => {
     
@@ -1474,7 +1621,8 @@ console.log(this.dropdown_Boat_List);
   Stand_by_Booking_Reject(datas){
     
     var obj = Object();
-    obj._id = datas._Id;       
+    obj._id = datas._Id;
+    obj.action_todo = "Reject";       
 
     this.http.post<any>(`${this.url}/StandByBooking_AcceptReject`,  obj  ).subscribe(data => {
     
