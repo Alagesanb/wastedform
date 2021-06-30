@@ -378,7 +378,8 @@ this.form.reset()
   fromdateChange($event){
     var fromdates = $event.target.value;
     var fromdate = new Date( fromdates);   
-    var dob = (fromdate.getFullYear()+'-' + (fromdate.getMonth()+1) + '-'+ fromdate.getDate());
+    // Change from date format dd/mm/yyyy for owner duration//Done By Alagesan on 30.06.2021
+    var dob = (fromdate.getDate() +'-' + (fromdate.getMonth()+1) + '-'+ fromdate.getFullYear());
     if(fromdates!=""){
     this.form.get('From_Date').setValue(dob);
     }
@@ -388,7 +389,8 @@ this.form.reset()
   todateChange($event){
     var todates = $event.target.value;
     var todate = new Date( todates);   
-    var dob = (todate.getFullYear()+'-' + (todate.getMonth()+1) + '-'+ todate.getDate());
+    // Change to date format dd/mm/yyyy for owner duration//Done By Alagesan on 30.06.2021
+    var dob = (todate.getDate() +'-' + (todate.getMonth()+1) + '-'+ todate.getFullYear());
     if(todates!=""){
     this.form.get('To_Date').setValue(dob);
     }

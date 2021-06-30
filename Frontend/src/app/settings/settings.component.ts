@@ -898,13 +898,15 @@ addShare(){
   startDates($event)
   {
     var date1 =  new Date($event.target.value)  
-    this.startDate = (date1.getFullYear()+'-' + (date1.getMonth()+1) + '-'+date1.getDate())
+    // Change start date format dd/mm/yyyy for settings//Done By Alagesan on 30.06.2021
+    this.startDate = (date1.getDate()+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear())
     this.specialDaysform.get('Start_Date').setValue(this.startDate);
   }
   endDates($event)
   {
     var date2 = new Date($event.target.value);
-    this.endDate = (date2.getFullYear()+'-' + (date2.getMonth()+1) + '-'+date2.getDate())
+    // Change end date format dd/mm/yyyy for settings//Done By Alagesan on 30.06.2021
+    this.endDate = (date2.getDate()+'-' + (date2.getMonth()+1) + '-'+date2.getFullYear())
     this.specialDaysform.get('End_Date').setValue(this.endDate);
 
   }

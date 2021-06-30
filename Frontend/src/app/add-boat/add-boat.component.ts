@@ -519,31 +519,34 @@ export class AddBoatComponent implements OnInit {
     }
   }
 
+  // Change from date format dd/mm/yyyy for add boat//Done By Alagesan on 30.06.2021
   focusOutSFrom($event) {
     this.fromDate = $event.target.value;
     var sssd = new Date(this.fromDate);
-    this.sssD = (sssd.getMonth() + 1) + '/' + (sssd.getDate()) + '/' + sssd.getFullYear();
+    this.sssD = (sssd.getDate() + '/' + (sssd.getMonth() + 1) + '/' + sssd.getFullYear());
     this.boatform.get('SummerSeason_SDate').setValue(this.sssD);
   }
 
+  // Change to date format dd/mm/yyyy for add boat//Done By Alagesan on 30.06.2021
   focusOutSTo($event) {
     this.toDate = $event.target.value;
     var td = new Date(this.toDate);
-    this.stD = (td.getMonth() + 1) + '/' + (td.getDate()) + '/' + td.getFullYear();
-    this.boatform.get('SummerSeason_EDate').setValue(this.stD);
+    this.stD = (td.getDate() + '/' + (td.getMonth() + 1) + '/' + td.getFullYear());
+    this.boatform.get('SummeSeason_EDate').setValue(this.stD);
   }
-
+// Change from date format dd/mm/yyyy for add boat//Done By Alagesan on 30.06.2021
   focusOutWFrom($event) {
     this.fromWDate = $event.target.value;
     var fwd = new Date(this.fromWDate);
-    this.fwD = (fwd.getMonth() + 1) + '/' + (fwd.getDate()) + '/' + fwd.getFullYear();
+    this.fwD = (fwd.getDate() + '/' + (fwd.getMonth() + 1) + '/' + fwd.getFullYear());
     this.boatform.get('WinterSeason_SDate').setValue(this.fwD);
   }
 
+  // Change to date format dd/mm/yyyy for add boat//Done By Alagesan on 30.06.2021
   focusOutWTo($event) {
     this.toWDate = $event.target.value;
     var twD = new Date(this.toWDate);
-    this.fwd = (twD.getMonth() + 1) + '/' + (twD.getDate()) + '/' + twD.getFullYear();
+    this.fwd = (twD.getDate() + '/' + (twD.getMonth() + 1) + '/' + twD.getFullYear());
     this.boatform.get('WinterSeason_EDate').setValue(this.fwd);
   }
 

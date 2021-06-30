@@ -121,7 +121,8 @@ this.getLoction()
     this.previousDate = $event.target.value;
 
     var preLS = new Date( this.previousDate);
-    this.preLaunchDates = preLS.getFullYear() + '-'+(preLS.getMonth()+1)+'-' + (preLS.getDate());
+    // Change from date format dd/mm/yyyy for boat bookings //Done By Alagesan on 30.06.2021
+    this.preLaunchDates = preLS.getDate() + '-'+(preLS.getMonth()+1)+'-' + (preLS.getFullYear());
     console.log(this.preLaunchDates);
     this.boatbookingform.get('Launch_Date1').setValue(this.preLaunchDates);
   }
@@ -130,7 +131,8 @@ this.getLoction()
     this.launchDate = $event.target.value;
 
     var sumerS = new Date( this.launchDate);
-    this.launchDates = sumerS.getFullYear()+ '-'+(sumerS.getMonth()+1)+'-' + (sumerS.getDate()) ;
+        // Change to date format dd/mm/yyyy for boat bookings //Done By Alagesan on 30.06.2021
+    this.launchDates = sumerS.getDate()+ '-'+(sumerS.getMonth()+1)+'-' + (sumerS.getFullYear()) ;
 
     console.log( this.launchDates );
     this.boatbookingform.get('Launch_Date2').setValue(this.launchDates);
