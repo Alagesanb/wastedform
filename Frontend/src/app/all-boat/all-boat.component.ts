@@ -130,7 +130,7 @@ $('#datepiker-all-boat-to-date').Zebra_DatePicker({
   {
     var date1 =  new Date($event.target.value)  
       // Change from date format in dd/mm/yyyy for all boat page //Done By Alagesan on  30.06.2021	
-    this.fromDate = (date1+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear())
+    this.fromDate = (date1.getDate()+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear())
     this.form.get('Launch_Date1').setValue(this.fromDate);
 
 
