@@ -128,8 +128,9 @@ $('#datepiker-all-boat-to-date').Zebra_DatePicker({
   }
   fromDates($event)
   {
-var date1 =  new Date($event.target.value)  
-    this.fromDate = (date1.getFullYear()+'-' + (date1.getMonth()+1) + '-'+date1.getDate())
+    var date1 =  new Date($event.target.value)  
+      // Change from date format in dd/mm/yyyy for all boat page //Done By Alagesan on  30.06.2021	
+    this.fromDate = (date1+'-' + (date1.getMonth()+1) + '-'+date1.getFullYear())
     this.form.get('Launch_Date1').setValue(this.fromDate);
 
 
@@ -138,7 +139,8 @@ var date1 =  new Date($event.target.value)
   toDates($event)
   {
     var date2 = new Date($event.target.value);
-    this.toDate = (date2.getFullYear()+'-' + (date2.getMonth()+1) + '-'+date2.getDate())
+    // Change to date format in dd/mm/yyyy for all boat page //Done By Alagesan on  30.06.2021	
+    this.toDate = (date2.getDate()+'-' + (date2.getMonth()+1) + '-'+date2.getFullYear())
     this.form.get('Launch_Date2').setValue(this.toDate);
 
 
