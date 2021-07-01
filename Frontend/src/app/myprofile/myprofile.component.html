@@ -6,7 +6,7 @@
         <div class="headingz">
             <h4>My profile</h4>
         </div>
-       <div class="page contents">
+       <div class="page contents" style="padding-left: 28%;padding-bottom: 60%;">
            <h4 class="content-title">My Boats</h4>
            <div class="row boat-list">
                       
@@ -96,6 +96,36 @@
                  </div>
              </div>
            </div>
+
+           <!--Show owner duration details for myprofile Done By Alagesan	on 01.07.2021 -->
+
+           <div>
+            <h4 class="content-title">Owner Durations Details</h4>
+            <div class="row">
+                <div class="col-md-4 mr-2 boat-list-1" *ngFor="let owner of ownerdurationsdetails  let i = index;">
+                    <a >
+                    
+                    <div class="info">
+                        <div *ngIf="owner.BoatDetails[0]" >
+                        <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].First_Name}}{{owner.OwnerDetails[0].Last_Name}}</h5>
+                        <h5><span><i ></i>  </span> {{owner.BoatDetails[0].Boat_Name}}</h5>
+                        <h5><span><i ></i>  </span> {{owner.BoatDetails[0].Boattype_Name}}</h5>
+                        <h5><span><i ></i>  </span> {{owner.From_Date | date:'dd/MM/yyyy'}}</h5>
+                        <h5><span><i ></i>  </span> {{owner.To_Date | date:'dd/MM/yyyy'}}</h5>
+                        </div>
+                        <div *ngIf="!owner.BoatDetails[0]">
+                            <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].First_Name}}{{owner.OwnerDetails[0].Last_Name}}</h5>
+                            <h5><span><i ></i>  </span>{{owner.BoatDetails[0].Boat_Name}}</h5>
+    
+                            <h5><span><i ></i>  </span>{{owner.BoatDetails[0].Boattype_Name}}</h5>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+               </div>
+           </div>
+           
+
        </div>
     </div>
 </div>

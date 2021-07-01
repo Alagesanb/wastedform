@@ -112,18 +112,18 @@ function Binding_OwnerDuration(){
        var Boat_name = val.Boat_Name;
 
         if(firstChek == 0){
-
+          // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData = '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
           <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
-          <button  type="button" id="renew" attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" data-toggle="modal" data-target="#renewModal">Renew</button></li></ul></td></tr>';
+          <button  type="button" id="renew" attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
 
           firstChek = firstChek + 1;
         }
         else{
-
+         // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData += '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
           <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
-          <button  type="button" id="renew" attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" data-toggle="modal" data-target="#renewModal">Renew</button></li></ul></td></tr>';
+          <button  type="button" id="renew" attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
 
         }
 

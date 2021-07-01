@@ -18,6 +18,7 @@ export class MyprofileComponent implements OnInit {
   listBoat: any=[];
   ownerlogin: any;
   listBoats: any=[];
+  ownerdurationsdetails: any=[];
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
   }
   // Create Component for myprofile //Done By Alagesan on 17.05.2021
@@ -33,6 +34,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     this.data = JSON.parse(sessionStorage.getItem('Ownerlogin')); 
     console.log(this.data);
     this.getBoteByOwner()
+    this.getOwnerDurationdetails();
   }
   getBoteByOwner(){
     var obj={
@@ -66,6 +68,21 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         console.log(err);
         })
     }
+
+    // Show owner duration details for myprofile Done By Alagesan	on 01.07.2021 
+    getOwnerDurationdetails(){
+      var obj ={
+        Owner_Id:this.data._id
+      }
+      this.http.post<any>(`${this.url}/GetOwnerDurationdetailsbyOwnerId`,obj).subscribe(data => {
+        this.ownerdurationsdetails = data['response'];
+        console.log(this.ownerdurationsdetails);
+      
+       }, err => {
+       })
+    }
+
+
     viewBoat(boat){
       sessionStorage.setItem('boatData', JSON.stringify(boat));   // if it's object
   
