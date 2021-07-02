@@ -768,7 +768,7 @@ ul.menu-list li {
 .contents-page {
     flex: 1;
     padding: 15px 15px 30px 0;
-    max-width: 100%;
+    max-width: 80%;
 }
 .user {
     width: 32px;
@@ -891,6 +891,8 @@ table.dataTable>thead>tr>th:not(.sorting_disabled), table.dataTable>thead>tr>td:
 .headingz {
     margin-bottom: 10px;
     color: #2f2c2c;
+    margin: 0px 0px 0px 36px;
+
 }
 .mobile-menu-icon {
     display: none;
@@ -992,6 +994,8 @@ h6.vendor-name span {
 .user img {
     border: 2px solid #5362c4;
     border-radius: 50%;
+    width: 80%;
+    height: 80%;
 }
 .request .boat-info:first-child{
         border-right: 1px solid #ccc;
@@ -2110,6 +2114,8 @@ ul.top-btn li {
         position: absolute;
         padding: 10px;
         margin-top: 100px;
+        max-width: 100%;
+
     }
     .col-md-12.dash-filter {
         display: flex;
