@@ -20,10 +20,12 @@ export class CancellationComponent implements OnInit {
   adminlogin: any;
   searchLoctions: any = '';
   Location_Name_dropDown: any = "Location";
+  Launch_Date_DropDown: any = "Launch Date";
   url = "http://65.2.28.16/api/Boat";
   loctions: any=[];
   bookingPushData: any[];
   cancellationData: any=[];
+  LanchTYpe: any;
 
   constructor(private http: HttpClient, private router: Router,) { }
   
@@ -41,6 +43,17 @@ export class CancellationComponent implements OnInit {
     this.getCancelInfo();
 this.getLoction()
   }
+
+  // Add launch date for cancellation//Done By Alagesan on 03.07.2021	
+  setLanDates(obj){
+
+    this.LanchTYpe = obj.target.innerHTML
+
+    this.Launch_Date_DropDown = obj.target.innerHTML;
+  
+
+  }
+
   getLoction(){
     this.http.get<any>(`${this.url}/GetLocation`).subscribe(data => {
      

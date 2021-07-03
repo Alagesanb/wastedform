@@ -12,12 +12,13 @@
                    
             <div class="col-md-8 dash-filter">   
              <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Launch Date
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                  {{Launch_Date_DropDown}}
                 <span><i class="fas fa-filter" aria-hidden="true"></i></span></button>
                 <ul class="dropdown-menu">
                 <!--Changes in launch date dropdown for cancellation Done By Alagesan  on 30.06.2021 -->
-                <li><a >Launch Date</a></li>
-                <li><a >Pre-Launch Date</a></li>
+                <li><a (click)="setLanDates($event)" value="swdf">Launch Date</a></li>
+                <li><a (click)="setLanDates($event)" value="sadf">Pre-Launch Date</a></li>
                 </ul>
             </div>
             <div class="dropdown">
