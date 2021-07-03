@@ -41,7 +41,6 @@ export class OwnerDurationComponent implements OnInit {
   dropdownBoat: any;
   durationSubmitted = false;
   adminlogin: any;
-  Suspend_Datas: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) {
     this.createForm();
 
@@ -52,6 +51,9 @@ export class OwnerDurationComponent implements OnInit {
     if(this.adminlogin==false){
       this.router.navigate(['']);
     }
+      
+      var getId = "";
+      var getboatid = "";
       
       var owner_url = "http://65.2.28.16/api/Owner/";
       var suspendUrl = "http://65.2.28.16/api/SuspensionRoute/suspensionRecord/";
@@ -89,21 +91,29 @@ $(document).on("click",".cls-OwnerDuration",function() {
  });
 
  //Suspend the owner and disable suspend button for owner duration //Done By Alagesan on 02.07.2021
-
+ 
  $(document).on("click",".cls-OwnerDuration",function() {
-    var getdeleteid = $(this).attr('attrid');
-    $.post(suspendUrl,
-    {
-      id:getdeleteid,Is_Cancellation:"true"
-    },
-    function(data, status){
-      this.Suspend_Datas = data;
-      if(data.status == true){
-        $('#SuspendMessage').html(data.message); 
-        $('#suspend-popup-btn').trigger('click');
-        $
-      }
-    });
+   getId = $(this).attr('attrid');
+   getboatid = $(this).attr('attrboatId');
+  $('#suspend-popup-btn').trigger('click');
+ })
+ //Suspend the owner  confirm or cancel for owner duration Done By Alagesan  on 03.07.2021
+ $(document).on("click","#suspendConfirm",function() {
+  $.post(suspendUrl,
+  {
+    id:getId,Boat_Id:getboatid,Is_Cancellation:"true"
+  },
+  function(data, status){
+    $("#Idsuspendok").attr('disabled', false);
+    if(data.status == true){
+      $('#SuspendMessage').html(data.message); 
+      $('#suspend-popup-btn').trigger('click');
+      $('#suspend-message-btn').trigger('click');
+      $("#Idsuspendok").attr('disabled', true);
+      $
+    }
+  });
+    
  })
 
  Binding_OwnerDuration();
@@ -123,9 +133,10 @@ function Binding_OwnerDuration(){
       var bindingTableData;
      
       $.each(data.response, function(index, val) {         
-
+        console.log(val)
        var _id = val._id;
        var Owner_Id = val.Owner_Id;
+       var Boat_Id = val.Boat_Id;
        var Owner_Name = val.Owner_Name;
        var Duration_SDate = val.Duration_SDate;
        var Duration_EDate =  val.Duration_EDate;
@@ -136,7 +147,7 @@ function Binding_OwnerDuration(){
           // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData = '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
           <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
-          <button  type="button"  attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
+          <button  type="button" id="Idsuspendok"  attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
 
           firstChek = firstChek + 1;
         }
@@ -144,7 +155,7 @@ function Binding_OwnerDuration(){
          // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData += '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
           <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
-          <button  type="button"  attrId="'+_id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
+          <button  type="button" id="Idsuspendok"   attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
 
         }
 
