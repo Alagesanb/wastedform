@@ -248,6 +248,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
   Fun_getallDropDownDatas(owner_drp_Id){ 
     
+    
      
     this.dropdownList = [];       
     this.set_BoatType = "";
@@ -289,5 +290,13 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
           console.log(err);
         })
   }
+
+
+  getAllBots()
+  {
+    //http://65.2.28.16/api/Owner/GetBoat
+
+  }
+
 
 }
