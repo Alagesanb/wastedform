@@ -249,8 +249,9 @@
                          
                         <div class="row boat-listing">
                            
-                          <div class="col-md-6 boat-list-1" *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
-                                    
+                          <div *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
+                                
+                            <div class="col-md-6 boat-list-1" *ngIf="cancel.BookingStatus != 'Accepted'">
                                     <div class="boat-img">
                                         <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
                                         <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
@@ -269,11 +270,52 @@
                                         <div *ngIf="!cancel.OwnerDetails">
                                             <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
                                             <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
-                                            </div>
+                                        </div>
                                         <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end| date :'short'}}</h5>
+                                        <!-- <span style="margin-left: 104px;" type="button" class="label label-danger">
+                                        APPROVED
+                                      </span> -->
+
+                                      <button *ngIf="cancel.LOA > 0" class="btn-primary btn"> 
+                                        APPROVE
+                                      </button>
+
                                     </div>
-                                    
-                                </div>
+                           </div>
+  
+                         </div>
+
+                         <div *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
+                                
+                            <div class="col-md-6 boat-list-1" *ngIf="cancel.BookingStatus == 'Accepted'">
+                                    <div class="boat-img">
+                                        <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
+                                        <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
+
+                                    </div>
+                                    <div class="info">
+                                        <h4>{{cancel.Boat_Name}}</h4>
+                                        <h4>{{cancel.Boat_Number}}/{{cancel.Booking_ID}}</h4>
+
+                                        <!-- <h5># 1001</h5> -->
+                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start| date :'short'}}</h5>
+                                        <div *ngIf="cancel.OwnerDetails" >
+                                        <h5><span><i class="far fa-user"></i>  </span> {{cancel.First_Name}}</h5>
+                                        <h5><span><i class="fas fa-parking"></i>  </span> {{cancel.Parking_Ability}}</h5>
+                                        </div>
+                                        <div *ngIf="!cancel.OwnerDetails">
+                                            <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
+                                            <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                        </div>
+                                        <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end| date :'short'}}</h5>
+                                        <span style="margin-left: 104px;" type="button" class="label label-danger">
+                                        APPROVED
+                                      </span>
+                                    </div>
+                           </div>
+  
+                         </div>
+                         
                           
                       
                   

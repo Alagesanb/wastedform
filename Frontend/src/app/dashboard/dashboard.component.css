@@ -276,3 +276,27 @@ border-color: #393f4b;
   width: 100%;
 }
 
+
+
+.label{
+  display: inline;
+  padding: .2em .6em .3em;
+  /* font-size: 75%; */
+  /* font-weight: 700; */
+  line-height: 2;
+  color: #fff !important;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  /* border-radius: .25em; */
+  
+}
+.label-success{
+  background-color: #1d2a81;
+
+}
+.label-danger{
+
+  background-color: #dc3545;
+
+}

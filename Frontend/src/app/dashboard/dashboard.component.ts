@@ -889,45 +889,6 @@ export class DashboardComponent implements OnInit {
       
     }
 
-    /*
-    if(element.Is_StandByBooking == true){
-
-      var obj_s = Object();
-
-      if(element.BoatDetails.length !== 0){
-
-        obj_s._Id = element._id;
-      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
-      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
-      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
-      obj_s.start = element.start;
-      obj_s.Boat_Id =  element.BoatDetails[0]._id;
-      obj_s.end = element.end;
-      obj_s.Booking_ID = element.Booking_ID;
-
-      obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
-      obj_s._id = element._id;
-      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
-      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
-
-      if(element.OwnerDetails.length !== 0){
-
-        obj_s.First_Name = element.OwnerDetails[0].First_Name;
-        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
-        obj_s.OwnerDetails = element.OwnerDetails[0];
-
-      } 
-
-      this.Stand_by_Booking.push(obj_s);
-
-
-      }      
-
-
-    }*/
-
-    
-
     });
 
 
@@ -992,9 +953,10 @@ if(to_date_only == start_Date_only)
     ////End...................
 
     this.Cancellations = data['Cancelledresponse']
+    
     this.Cancellations.forEach(element => {
       var obj4 = Object();
-      var date = new Date(element.Current_Time);
+      var date = new Date(element.Updated_time);
       var dates = date.getDate()
       var todaysDate = new Date();
       var todaysDates = todaysDate.getDate()
@@ -1004,6 +966,8 @@ if(to_date_only == start_Date_only)
         var obj_s = Object();
     
         if(element.BoatDetails.length !== 0){
+
+          debugger;
   
         obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
         obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
@@ -1012,6 +976,8 @@ if(to_date_only == start_Date_only)
         obj_s.Boat_Id =  element.BoatDetails[0]._id;
         obj_s.end = element.end;
         obj_s.Booking_ID = element.Booking_ID;
+        obj_s.BookingStatus = element.BookingStatus;
+        obj_s.Approved_LOA = element.Approved_LOA;
 
         obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
         obj_s._id = element._id;
@@ -1038,6 +1004,8 @@ if(to_date_only == start_Date_only)
   
   
     });
+
+    console.log(this.Cancels);
   
     this.Cancellations_Count = this.Cancels.length;
     this.New_Booking_Count = this.newBooking.length;

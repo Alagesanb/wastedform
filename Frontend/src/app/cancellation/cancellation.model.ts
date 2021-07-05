@@ -4,4 +4,6 @@ export class Lopupdate {
   LOA?: string;
   IsActive?: boolean;
   Name?:string; 
+  _id?:any;
+  
 }
