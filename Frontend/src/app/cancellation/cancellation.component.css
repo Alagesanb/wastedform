@@ -1,11 +1,17 @@
-
-.boat-info button.btn.btn-info.btn-lg{
-    border: 0;
-    font-weight: 500;
-    border-radius: 0;
-    margin-left: 5px;
+.boat-info button.btn.btn-info.btn-lg {
+  border: 0;
+  font-weight: 500;
+  border-radius: 0;
+  margin-left: 5px;
 }
 
-.dash-filter .dropdown{
-    padding: 5px 10px 14px 0px;
+.dash-filter .dropdown {
+  padding: 5px 10px 14px 0px;
+}
+
+.Cust_input {
+  border: 0;
+  background: transparent;
+  border-bottom: 1px solid #0b27ed;
+  width: 10%;
 }

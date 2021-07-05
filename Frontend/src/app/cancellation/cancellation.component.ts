@@ -1,105 +1,135 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Lopupdate } from './cancellation.model';
 
 declare var $: any;
-declare var jQuery: any; 
+declare var jQuery: any;
 @Component({
   selector: 'app-cancellation',
   templateUrl: './cancellation.component.html',
-  styleUrls: ['./cancellation.component.css']
+  styleUrls: ['./cancellation.component.css'],
 })
-// Create Component for cancellation//Done By Alagesan on 20.05.2021	
-
+// Create Component for cancellation//Done By Alagesan on 20.05.2021
 export class CancellationComponent implements OnInit {
-
-  cancellationUrl = "http://65.2.28.16/api/Schedule"  
-  imagePath= "http://65.2.28.16/api/uploads/";
+  public ApproveLopDetails: Lopupdate = {};
+  public IsmodelActive: boolean = false;
+  cancellationUrl = 'http://65.2.28.16/api/Schedule';
+  imagePath = 'http://65.2.28.16/api/uploads/';
   cancellationInfo: any;
   searchLoction: any = '';
   adminlogin: any;
   searchLoctions: any = '';
-  Location_Name_dropDown: any = "Location";
-  Launch_Date_DropDown: any = "Launch Date";
-  url = "http://65.2.28.16/api/Boat";
-  loctions: any=[];
+  Location_Name_dropDown: any = 'Location';
+  Launch_Date_DropDown: any = 'Launch Date';
+  url = 'http://65.2.28.16/api/Boat';
+  loctions: any = [];
   bookingPushData: any[];
-  cancellationData: any=[];
+  cancellationData: any = [];
   LanchTYpe: any;
+  public NotFound: string = 'NotFound';
+  public LOPUpdateUrl = 'http://65.2.28.16/api/LOA_Route/LOA_Create';
+  constructor(private http: HttpClient, private router: Router) {}
 
-  constructor(private http: HttpClient, private router: Router,) { }
-  
-// Create Component for cancellation//Done By Alagesan on 20.05.2021	
+  // Create Component for cancellation//Done By Alagesan on 20.05.2021
 
   ngOnInit(): void {
-    this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
-    if(this.adminlogin==false){
+    this.adminlogin = JSON.parse(sessionStorage.getItem('adminLogin'));
+    if (this.adminlogin == false) {
       this.router.navigate(['']);
     }
-    sessionStorage.setItem("relodePg_book-for-owner","1");
-    sessionStorage.setItem("Adminbooking-relodePg","1");
-    sessionStorage.setItem("boat-maintenance-reload","1");
-    sessionStorage.setItem("view-boat-reload","1");
+    sessionStorage.setItem('relodePg_book-for-owner', '1');
+    sessionStorage.setItem('Adminbooking-relodePg', '1');
+    sessionStorage.setItem('boat-maintenance-reload', '1');
+    sessionStorage.setItem('view-boat-reload', '1');
     this.getCancelInfo();
-this.getLoction()
+    this.getLoction();
   }
 
-  // Add launch date for cancellation//Done By Alagesan on 03.07.2021	
-  setLanDates(obj){
-
-    this.LanchTYpe = obj.target.innerHTML
+  // Add launch date for cancellation//Done By Alagesan on 03.07.2021
+  setLanDates(obj) {
+    this.LanchTYpe = obj.target.innerHTML;
 
     this.Launch_Date_DropDown = obj.target.innerHTML;
-  
-
   }
 
-  getLoction(){
-    this.http.get<any>(`${this.url}/GetLocation`).subscribe(data => {
-     
-  this.loctions = data['response']
-  console.log(this.loctions)
-   }, err => {
-   })
+  getLoction() {
+    this.http.get<any>(`${this.url}/GetLocation`).subscribe(
+      (data) => {
+        this.loctions = data['response'];
+        console.log(this.loctions);
+      },
+      (err) => {}
+    );
   }
-  getCancelInfo(){
-    this.http.get<any>(`${this.cancellationUrl}/ViewCancelledBooking`).subscribe(data => {
-     
-    this.cancellationInfo = data['response'];
-this.cancellationData = this.cancellationInfo
-    console.log(this.cancellationInfo);
-
-   }, err => {
-   })
+  /**
+   * Boat cancelation details
+   * Re-writed Ajith
+   */
+  public getCancelInfo(): void {
+    this.http
+      .get<any>(`${this.cancellationUrl}/ViewCancelledBooking`)
+      .subscribe(
+        (data) => {
+          this.cancellationInfo = data['response'];
+          this.cancellationData = this.cancellationInfo;
+          console.log('cancellationData', this.cancellationInfo);
+        },
+        (err) => {}
+      );
   }
-  getLoctionTypeId(ids){
-    this.bookingPushData =[]
-    // this.bookingInfo =[]
-    // this.getBooking()
-    console.log(ids._id)
-    // this.bookingDats = this.bookingInfo
-    this.Location_Name_dropDown = ids.Boat_Location;
-// console.log(this.bookingInfo)
 
-    this.cancellationData.forEach(boat => {
-      
-			if(ids._id == boat.BoatDetails[0].Location_Id){
-	      console.log(boat.BoatDetails[0].Location_Id)
+ /**
+  * Writed By Ajith
+  * Approve button click Function 
+  * @param cancelinfo Recived From template Looping Object
+  */
+  public ApproveLop(cancelinfo): void {
+    this.IsmodelActive = true;
+    this.ApproveLopDetails.Boat_Id = cancelinfo.BoatDetails[0]._id;
+    this.ApproveLopDetails.Booking_ID = cancelinfo.Booking_ID;
+    this.ApproveLopDetails.LOA = cancelinfo.LOA;
+    this.ApproveLopDetails.IsActive = true;
+    if (cancelinfo.OwnerDetails.length) {
+      this.ApproveLopDetails.Name = cancelinfo.OwnerDetails[0].First_Name;
+    } else {
+      this.ApproveLopDetails.Name = this.NotFound; 
+    }
+  }
 
-        this.bookingPushData.push(boat)
-        
-			}
+/**
+ * Update Lop Function 
+ * Writed By Ajith
+ */
+  public UpdateLop(): void {
+    if(this.ApproveLopDetails.LOA){
+      delete this.ApproveLopDetails.Name
+       this.http
+       .post(this.LOPUpdateUrl, this.ApproveLopDetails)
+       .subscribe((data) => {
+        console.log('uploadsuccess', data);
       });
-      
-console.log(this.bookingPushData)
-this.cancellationInfo = this.bookingPushData
-console.log(this.cancellationInfo)
-    // console.log(id)
+     }else{
+     console.log("LOA Is Required");
+    }
   }
 
-  // Location dropdown clear for cancellation //Done By Alagesan on 25.06.2021	
-  pageRefresh(){
+  getLoctionTypeId(ids) {
+    this.bookingPushData = [];
+    console.log(ids._id);
+    this.Location_Name_dropDown = ids.Boat_Location;
+    this.cancellationData.forEach((boat) => {
+      if (ids._id == boat.BoatDetails[0].Location_Id) {
+        console.log(boat.BoatDetails[0].Location_Id);
+
+        this.bookingPushData.push(boat);
+      }
+    });
+    this.cancellationInfo = this.bookingPushData;
+  }
+
+  // Location dropdown clear for cancellation //Done By Alagesan on 25.06.2021
+  pageRefresh() {
     location.reload();
   }
-
 }
