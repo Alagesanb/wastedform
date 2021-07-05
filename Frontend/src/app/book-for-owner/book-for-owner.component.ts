@@ -32,6 +32,13 @@ export class BookForOwnerComponent implements OnInit {
    set_BoatType = "";
    public_selectBoatId :any;
 
+   PENDING_SUMMER_WEEKDAYS:any = 0;
+   PENDING_SUMMER_WEEKENDS: any = 0;
+   PENDING_WINTER_WEEKDAYS: any = 0;
+   PENDING_WINTER_WEEKENDS: any = 0;
+
+
+
   constructor(private fb: FormBuilder,private http: HttpClient) { }
 
 // Create Component for book for owner //Done By Alagesan on 21.05.2021	
@@ -120,6 +127,12 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
      this.Fun_getallDropDownDatas(details._id);   
      sessionStorage.setItem("Owner_SelectOwner",JSON.stringify(details));
      sessionStorage.removeItem('SettNextBookingDays_boat');
+
+     this.PENDING_SUMMER_WEEKDAYS = 0; 
+     this.PENDING_SUMMER_WEEKENDS = 0;
+     this.PENDING_WINTER_WEEKDAYS = 0;
+     this.PENDING_WINTER_WEEKENDS = 0;
+
    
    
   }
@@ -131,6 +144,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     sessionStorage.setItem("AdminSelectBoat",JSON.stringify(finddate)); 
     this.GetNextBookingDaysByBoatId(item.item_id);
     
+
     
     //this.Fun_getallDropDownDatas(this.public_selectBoatId);
    
@@ -159,6 +173,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
           var temp_resp = results.response;
           if (typeof temp_resp  !== 'undefined' && temp_resp.length > 0) {
             sessionStorage.setItem("SettNextBookingDays_boat",JSON.stringify(temp_resp[0]));
+            this.getpendingDays_Calculation();
           }
           else
           {
@@ -292,9 +307,67 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   }
 
 
-  getAllBots()
+  getpendingDays_Calculation()
   {
-    //http://65.2.28.16/api/Owner/GetBoat
+
+    this.PENDING_SUMMER_WEEKDAYS = 0; 
+    this.PENDING_SUMMER_WEEKENDS = 0;
+    this.PENDING_WINTER_WEEKDAYS = 0;
+    this.PENDING_WINTER_WEEKENDS = 0;
+   
+    var Owner_tmp = JSON.parse(sessionStorage.getItem("Owner_SelectOwner")); 
+
+    var Boat_tmp = JSON.parse(sessionStorage.getItem("AdminSelectBoat")); 
+
+    var obj = Object();
+        obj.Owner_Id = Owner_tmp._id;
+        obj.Boat_Id = Boat_tmp._id;
+      this.http.post<any>(`${this.url}GetAllPendingDaysOfOwner`, obj).subscribe(data => { 
+
+       
+        
+        if(data.status == true){
+
+          var dt = data.Response;
+          var BookedDays = dt.BookedDays;
+          var AllocatedDays = dt.AllocatedDays;
+
+          this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays - BookedDays[0].Summer_WeekDays; 
+          this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays - BookedDays[0].Summer_WeekEndDays;
+          this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays - BookedDays[0].Winter_WeekDays;
+          this.PENDING_WINTER_WEEKENDS = AllocatedDays[0].Winter_WeekEndDays - BookedDays[0].Winter_WeekEndDays;
+
+
+
+          /*
+          book day
+                "Summer_WeekDays": 0,
+                "Summer_WeekEndDays": 0,
+                "Winter_WeekDays": 5,
+                "Winter_WeekEndDays": 1
+          
+          */
+         /*
+                "Summer_WeekDays": 23,
+                "Summer_WeekEndDays": 30,
+                "Winter_WeekDays": 28,
+                "Winter_WeekEndDays": 38
+
+         */
+
+
+        }
+        else{
+          alert("data not fount");
+        }
+        
+        
+       
+      
+        }, err => {
+          console.log(err);
+        })
+    
 
   }
 

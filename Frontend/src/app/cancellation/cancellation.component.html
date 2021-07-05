@@ -93,12 +93,15 @@
       <div class="row" style="margin-top: 20px">
         <div class="col-lg-12">
           <div
-            class="request"
+            
             *ngFor="
               let cancelinfo of cancellationInfo | filter: searchLoction;
               let i = index
             "
           >
+          <div class="request" *ngIf="cancelinfo.BookingStatus != 'Accepted'  && cancelinfo.LOA > 0">
+
+          
             <div class="img-boat">
               <img
                 src="{{ imagePath }}{{
@@ -184,7 +187,124 @@
                 </button> -->
               </div>
             </div>
+
           </div>
+
+          </div>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="col-lg-12">
+          <div
+            
+            *ngFor="
+              let cancelinfo of cancellationInfo | filter: searchLoction;
+              let i = index
+            "
+          >
+          <div class="request" *ngIf="cancelinfo.BookingStatus == 'Accepted' || cancelinfo.LOA > 0">
+
+          
+            <div class="img-boat">
+              <img
+                src="{{ imagePath }}{{
+                  cancelinfo.BoatDetails[0].Boat_Image[0]
+                    ? cancelinfo.BoatDetails[0].Boat_Image[0]
+                    : cancelinfo.BoatDetails[0].Boat_Image[1]
+                }}"
+              />
+            </div>
+
+            <div class="boat-info">
+              <div class="row">
+                <h6 class="vendor-name">Booking Number</h6>
+                <span>:</span>
+                <h4>{{ cancelinfo.Booking_ID }}</h4>
+              </div>
+
+              <div class="row">
+                <h6 class="vendor-name">Booking Days</h6>
+                <span>:</span>
+                <h4>
+                  {{ cancelinfo.start_NoTime | date: "dd-MMM-yy h:mm:ss a " }}
+                  To {{ cancelinfo.end_NoTime | date: "dd-MMM-yy h:mm:ss a " }}
+                </h4>
+              </div>
+
+              <div class="row">
+                <h6 class="vendor-name">Owner Name</h6>
+                <span>:</span>
+                <h4>
+                  {{
+                    cancelinfo.OwnerDetails[0]
+                      ? cancelinfo.OwnerDetails[0].First_Name
+                      : NotFound
+                  }}
+                </h4>
+              </div>
+
+              <div class="row">
+                <h6 class="vendor-name">Boat Type</h6>
+                <span>:</span>
+                <h4>{{ cancelinfo.BoatDetails[0].Boattype_Name }}</h4>
+              </div>
+            </div>
+
+            <div class="boat-info">
+              <div class="row">
+                <h6 class="vendor-name">Boat Name</h6>
+                <span>:</span>
+                <h4>{{ cancelinfo.BoatDetails[0].Boat_Name }}</h4>
+              </div>
+
+              <div class="row">
+                <h6 class="vendor-name">No of LOA</h6>
+                <span>:</span>
+                <h4>
+                  <div id="edit" contenteditable="true">
+                    {{ cancelinfo.Approved_LOA  }}
+                  </div>
+                </h4>
+              </div>
+
+              <div
+                style="
+                  text-align: center;
+                  margin: 0 auto;
+                  margin-top: 10px;
+                  width: 100%;
+                  padding: 0;
+                "
+              >
+                <span style="margin-left: 104px;"
+                  
+                  class="label label-danger"               
+                 
+                >
+                  APPROVED
+                </span>
+                <!-- <button type="button" class="btn btn-info btn-lg">
+                  DECLINE
+                </button> -->
+              </div>
+            </div>
+
+          </div>
+
+          </div>
+
+
+
+
+
+
+
         </div>
 
         <style>
@@ -354,3 +474,29 @@
     </div>
   </div>
 </div>
+
+
+
+<button style="display:none" type="button" id="pop-up-btn_btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button>
+            
+              
+<div class="modal fade" id="myModal2"  role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content" sibi="test1">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cancellation</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getResponce}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  (click)= pageRefresh() >OK</button>
+       
+      </div>
+    </div>
+    
+  </div>
+</div>  

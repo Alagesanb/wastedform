@@ -768,7 +768,7 @@ ul.menu-list li {
 .contents-page {
     flex: 1;
     padding: 15px 15px 30px 0;
-    max-width: 80%;
+    max-width: 100%;
 }
 .user {
     width: 32px;

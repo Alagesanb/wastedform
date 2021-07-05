@@ -149,6 +149,35 @@
 <div class="form-row">
 
 
+    <div class="form-group col-md-4">
+        <label>Owner Name</label>
+    
+        <ng-multiselect-dropdown
+        [placeholder]="'Select'"
+        [settings]="dropdownSettings_Owner"
+        [data]="dropdownList_filted_Owner"                                    
+        (onSelect)="onItemSelect_Owner($event)"
+        (onDeSelect)="onDeSelect_Owner($event)"  
+        class="singleselect_drop cls-Boat-Owner"
+        
+        
+    >
+    </ng-multiselect-dropdown>
+    <!-- class="singleselect_drop" -->
+    </div>
+
+
+<!-- singleselect_drop  -->
+<!-- class="singleselect_drop" -->
+<!-- [(ngModel)]="dropdownList_filted"
+[ngModelOptions]="{standalone: true}"  -->
+
+  <!-- <div class="form-group col-md-4">
+<label>Boat type</label>
+<input  type="text" class="form-control" value={{set_BoatType}} readonly>
+
+</div> -->
+
 
 <div class="form-group col-md-4">
     <label>Boat Name</label>
@@ -165,40 +194,18 @@
 >
 </ng-multiselect-dropdown>
 </div>
-<!-- singleselect_drop  -->
-<!-- class="singleselect_drop" -->
-<!-- [(ngModel)]="dropdownList_filted"
-[ngModelOptions]="{standalone: true}"  -->
 
-  <div class="form-group col-md-4">
-<label>Boat type</label>
-<input  type="text" class="form-control" value={{set_BoatType}} readonly>
 
+<div class="form-group col-md-4">     
+            <ul class="col-md-12 bg-win" style="display: flex; float: left;background: #1f2c83;margin-top: 22px;">
+            <li class="li-commen"><h6 class="sum-title">PENDING SUMMER WEEKDAYS </h6> <span class="sum-second">{{ PENDING_SUMMER_WEEKDAYS }}</span></li>
+            <li class="li-commen"><h6 class="sum-title">PENDING SUMMER WEEKENDS </h6> <span class="sum-second">{{ PENDING_SUMMER_WEEKENDS }}</span></li>
+            <li class="li-commen"><h6 class="sum-title">PENDING WINTER WEEKDAYS </h6> <span class="sum-second">{{ PENDING_WINTER_WEEKDAYS }}</span></li>
+            <li class="li-commen"><h6 class="sum-title">PENDING WINTER WEEKENDS </h6> <span class="sum-second">{{ PENDING_WINTER_WEEKENDS }}</span></li>
+            </ul>    
 </div>
 
-<!-- Swap the owner name for book for owner Done By Alagesan on 29.06.2021	-->
-<div class="form-group col-md-4">
-    <label>Owner Name</label>
 
-    <ng-multiselect-dropdown
-    [placeholder]="'Select'"
-    [settings]="dropdownSettings_Owner"
-    [data]="dropdownList_filted_Owner"                                    
-    (onSelect)="onItemSelect_Owner($event)"
-    (onDeSelect)="onDeSelect_Owner($event)"  
-    class="singleselect_drop cls-Boat-Owner"
-    
-    
->
-</ng-multiselect-dropdown>
-<!-- class="singleselect_drop" -->
-</div>
-
-<!-- <div class="form-group col-md-4 days-allowed" style="padding: 29px 0 0 10px;">
-    <p>Pending Summer Days : <span>10/25</span> </p>
-    <p>Pending Winter Days : <span>15/25</span> </p>
-
-</div> -->
 
 </div>                        
                   

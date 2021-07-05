@@ -27,6 +27,7 @@ export class CancellationComponent implements OnInit {
   bookingPushData: any[];
   cancellationData: any = [];
   LanchTYpe: any;
+  getResponce: any;
   public NotFound: string = 'NotFound';
   public LOPUpdateUrl = 'http://65.2.28.16/api/LOA_Route/LOA_Create';
   constructor(private http: HttpClient, private router: Router) {}
@@ -44,6 +45,19 @@ export class CancellationComponent implements OnInit {
     sessionStorage.setItem('view-boat-reload', '1');
     this.getCancelInfo();
     this.getLoction();
+   
+
+    $(document).on("click","#btn-click-reload",function() {
+      //alert("click bound to document listening for #test-element");
+    alert();
+      location.reload();
+      
+    
+     });
+
+
+
+
   }
 
   // Add launch date for cancellation//Done By Alagesan on 03.07.2021
@@ -71,6 +85,7 @@ export class CancellationComponent implements OnInit {
       .get<any>(`${this.cancellationUrl}/ViewCancelledBooking`)
       .subscribe(
         (data) => {
+          
           this.cancellationInfo = data['response'];
           this.cancellationData = this.cancellationInfo;
           console.log('cancellationData', this.cancellationInfo);
@@ -85,11 +100,13 @@ export class CancellationComponent implements OnInit {
   * @param cancelinfo Recived From template Looping Object
   */
   public ApproveLop(cancelinfo): void {
+   
     this.IsmodelActive = true;
     this.ApproveLopDetails.Boat_Id = cancelinfo.BoatDetails[0]._id;
     this.ApproveLopDetails.Booking_ID = cancelinfo.Booking_ID;
     this.ApproveLopDetails.LOA = cancelinfo.LOA;
     this.ApproveLopDetails.IsActive = true;
+    this.ApproveLopDetails._id = cancelinfo._id;
     if (cancelinfo.OwnerDetails.length) {
       this.ApproveLopDetails.Name = cancelinfo.OwnerDetails[0].First_Name;
     } else {
@@ -102,11 +119,22 @@ export class CancellationComponent implements OnInit {
  * Writed By Ajith
  */
   public UpdateLop(): void {
+    
     if(this.ApproveLopDetails.LOA){
       delete this.ApproveLopDetails.Name
-       this.http
-       .post(this.LOPUpdateUrl, this.ApproveLopDetails)
-       .subscribe((data) => {
+      //  this.http
+      //  .post(this.cancellationUrl+"/ApproveCancellation", this.ApproveLopDetails)
+      //  .subscribe((data) => {
+
+        this.http.post<any>(`${this.cancellationUrl}/ApproveCancellation`, this.ApproveLopDetails  ).subscribe(data => {  
+
+         if(data.status == true){
+
+          this.getResponce = data.message;
+          $('#pop-up-btn_btn').trigger('click');
+
+         }
+         
         console.log('uploadsuccess', data);
       });
      }else{
@@ -130,6 +158,7 @@ export class CancellationComponent implements OnInit {
 
   // Location dropdown clear for cancellation //Done By Alagesan on 25.06.2021
   pageRefresh() {
+   
     location.reload();
   }
 }
