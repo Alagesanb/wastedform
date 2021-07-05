@@ -41,6 +41,7 @@ import { ReportBoatComponent } from './report-boat/report-boat.component';
 import { ReportBookingComponent } from './report-booking/report-booking.component';
 import { BookingDetailsComponent} from './booking-details/booking-details.component';
 import { TestTestComponent } from './test-test/test-test.component';
+import { ViewBoatOwnerComponent } from './view-boat-owner/view-boat-owner.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -84,7 +85,9 @@ const routes: Routes = [
   { path: 'report-boat', component: ReportBoatComponent },
   { path: 'report-booking', component: ReportBookingComponent },
   { path: 'booking-details', component: BookingDetailsComponent },
-  {path : 'testsooraj',component : TestTestComponent}
+  { path : 'testsooraj',component : TestTestComponent},
+  // Create view boat owner url for app routing module //Done By Alagesan on 05.07.2021	
+  { path: 'view-boat-owner' , component : ViewBoatOwnerComponent }
 
 ];
 

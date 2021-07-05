@@ -60,6 +60,7 @@ import { ReportBookingComponent } from './report-booking/report-booking.componen
 import { OwnerHeaderComponent } from './owner-header/owner-header.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { TestTestComponent } from './test-test/test-test.component';
+import { ViewBoatOwnerComponent } from './view-boat-owner/view-boat-owner.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { TestTestComponent } from './test-test/test-test.component';
     OwnerHeaderComponent,
     BookingDetailsComponent,
     TestTestComponent,
+    ViewBoatOwnerComponent,
 
   ],
   imports: [

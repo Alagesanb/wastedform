@@ -85,8 +85,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
     viewBoat(boat){
       sessionStorage.setItem('boatData', JSON.stringify(boat));   // if it's object
-  
-      this.router.navigate(['view-boat/']);
+      // Change the view boat url for myprofile Done By Alagesan	on 05.07.2021 
+      this.router.navigate(['view-boat-owner/']);
     }
   editProfile(){
     this.router.navigate(['edit-owner-profile/']);
