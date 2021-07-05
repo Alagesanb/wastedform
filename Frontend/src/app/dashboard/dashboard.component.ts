@@ -967,7 +967,7 @@ if(to_date_only == start_Date_only)
     
         if(element.BoatDetails.length !== 0){
 
-          debugger;
+         
   
         obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
         obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];

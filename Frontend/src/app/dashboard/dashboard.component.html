@@ -247,11 +247,11 @@
                               </div>
                           </div>   
                          
-                        <div class="row boat-listing">
+                        <div class="row boat-listing top-First">
                            
-                          <div *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
+                          <div class="first1 col-md-6" *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
                                 
-                            <div class="col-md-6 boat-list-1" *ngIf="cancel.BookingStatus != 'Accepted'">
+                            <div class="second1  boat-list-1" *ngIf="cancel.BookingStatus != 'Accepted'">
                                     <div class="boat-img">
                                         <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
                                         <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
@@ -285,9 +285,9 @@
   
                          </div>
 
-                         <div *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
+                         <div class="col-md-6" *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
                                 
-                            <div class="col-md-6 boat-list-1" *ngIf="cancel.BookingStatus == 'Accepted'">
+                            <div class=" boat-list-1" *ngIf="cancel.BookingStatus == 'Accepted'">
                                     <div class="boat-img">
                                         <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
                                         <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
