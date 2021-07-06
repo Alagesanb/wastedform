@@ -248,10 +248,59 @@
                           </div>   
                          
                         <div class="row boat-listing top-First">
-                           
-                          <div class="first1 col-md-6" *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
+
+                            <div class="first1 col-md-6" *ngFor="let cancel of Cancels_First | filter: searchText  let i = index;">
                                 
-                            <div class="second1  boat-list-1" *ngIf="cancel.BookingStatus != 'Accepted'">
+                                <div class="second1  boat-list-1">
+                                        <div class="boat-img">
+                                            <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
+                                            <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
+    
+                                        </div>
+                                        <div class="info">
+                                            <h4>{{cancel.Boat_Name}}</h4>
+                                            <h4>{{cancel.Boat_Number}}/{{cancel.Booking_ID}}</h4>
+    
+                                          
+                                            <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start| date :'short'}}</h5>
+                                            <div *ngIf="cancel.OwnerDetails" >
+                                            <h5><span><i class="far fa-user"></i>  </span> {{cancel.First_Name}}</h5>
+                                            <h5><span><i class="fas fa-parking"></i>  </span> {{cancel.Parking_Ability}}</h5>
+                                            </div>
+                                            <div *ngIf="!cancel.OwnerDetails">
+                                                <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
+                                                <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                            </div>
+                                            <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end| date :'short'}}</h5>
+                                           
+    
+                                          <!-- <button  class="btn-primary btn"> 
+                                            APPROVE
+                                          </button> -->
+
+                                          <button *ngIf="cancel.LOA > 0"
+                                          type="button"
+                                          class="btn btn-primary"
+                                          data-toggle="modal"
+                                          data-target="#exampleModal"
+                                          (click)="ApproveLop(cancel)"
+                                        >
+                                          APPROVE
+                                        </button>
+
+
+    
+                                        </div>
+                               </div>
+      
+                             </div>
+                             
+
+
+                           
+                          <div class="first1 col-md-6" *ngFor="let cancel of Cancels_Thread | filter: searchText  let i = index;">
+                                
+                            <div class="second1  boat-list-1">
                                     <div class="boat-img">
                                         <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
                                         <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
@@ -284,10 +333,11 @@
                            </div>
   
                          </div>
+                        
 
-                         <div class="col-md-6" *ngFor="let cancel of Cancels | filter: searchText  let i = index;">
+                         <div class="col-md-6" *ngFor="let cancel of this.Cancels_Second | filter: searchText  let i = index;">
                                 
-                            <div class=" boat-list-1" *ngIf="cancel.BookingStatus == 'Accepted'">
+                            <div class=" boat-list-1" >
                                     <div class="boat-img">
                                         <img *ngIf="!cancel.Boat_Image" src="/assets/images/boat-1.jpg" alt="boat">
                                         <img *ngIf="cancel.Boat_Image" src="{{cancel.imgUrl}}" alt="boat">
@@ -315,7 +365,9 @@
                            </div>
   
                          </div>
-                         
+
+
+                      
                           
                       
                   
@@ -419,3 +471,81 @@
 <div class="dash-footer">
     <app-footer-adminsession></app-footer-adminsession>   
 </div>
+
+
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update LOA</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="IsmodelActive">
+        If you approve this cancellation
+        <strong>{{
+          ApproveLopDetails.Name ? ApproveLopDetails.Name : NotFound
+        }}</strong>
+        will have
+        <strong
+          ><input
+            type="number"
+            class="Cust_input"
+            placeholder="0"
+            [(ngModel)]="ApproveLopDetails.LOA"
+        /></strong>
+        LOA's. Do you want to Proceed?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="UpdateLop()">
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<button style="display:none" type="button" id="pop-up-btn_btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button>
+            
+              
+<div class="modal fade" id="myModal2"  role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content" sibi="test1">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cancellation</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{getResponce}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  (click)= pageRefresh() >OK</button>
+       
+      </div>
+    </div>
+    
+  </div>
+</div>  
