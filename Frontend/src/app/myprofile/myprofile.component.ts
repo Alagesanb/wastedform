@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for myprofile Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -12,8 +14,10 @@ declare var jQuery: any;
 // Create Component for myprofile //Done By Alagesan on 17.05.2021
 export class MyprofileComponent implements OnInit {
   data: any=[];
-  url = "http://65.2.28.16/api/Owner"
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  // Add Base URL for myprofile  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Owner"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
 
   listBoat: any=[];
   ownerlogin: any;

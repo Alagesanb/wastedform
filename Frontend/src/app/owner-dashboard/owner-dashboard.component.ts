@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';//'ng-multiselect-dropdown';
-
+// import environment for owner dashboard Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 
@@ -16,8 +17,10 @@ declare var jQuery: any;
 export class OwnerDashboardComponent implements OnInit {
   ownerlogin: boolean;
   dropdownSettings : IDropdownSettings ;
-  url_Owner = "http://65.2.28.16/api/Owner/";
-  url_Days = "http://65.2.28.16/api/Days/";
+  // Add Base URL for owner dashboard  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url_Owner = this.EnvironmentURL+"api/Owner/";
+  url_Days = this.EnvironmentURL+"api/Days/";
 
   dropdownList_filted = [];
   dropdownList = [];

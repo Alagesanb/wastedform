@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import {GetServiceService} from 'src/app/get-service.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-
+// import environment for settings Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 @Component({
@@ -13,12 +14,14 @@ declare var jQuery: any;
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent implements OnInit {
-  url = "http://65.2.28.16/api/Boat"
-  shareUrl = "http://65.2.28.16/api/Days"
-  allShareUrl = 'http://65.2.28.16/api/Days';
-  OwnerUrl = "http://65.2.28.16/api/Owner"
+  // Add Base URL for settings  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Boat"
+  shareUrl = this.EnvironmentURL+"api/Days"
+  allShareUrl = this.EnvironmentURL+'api/Days';
+  OwnerUrl = this.EnvironmentURL+"api/Owner"
   //Add special days for settings page //Done By Alagesan on 23.06.2021
-  specialDaysUrl = "http://65.2.28.16/api/AddSpecialDaysRout"
+  specialDaysUrl = this.EnvironmentURL+"api/AddSpecialDaysRout"
   specialDaysform: FormGroup;
   specialDaysSubmitted = false;
   startDate: any=[];
@@ -90,8 +93,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.removeItem('UNAVAILABLE_DATE_userSelect_Boat');
  //UNAVAILABLE_DATE_userSelect_Boat
 
-   var url = 'http://65.2.28.16/api/Boat/';
-   var public_url_days = "http://65.2.28.16/api/Days/";
+   var url = this.EnvironmentURL+'api/Boat/';
+   var public_url_days = this.EnvironmentURL+"api/Days/";
 
    this.dropdownSettings = {
     singleSelection: true,
@@ -448,7 +451,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
 
 ///////////data table jitheesh////
-var owner_url = "http://65.2.28.16/api/Days/";
+var owner_url = this.EnvironmentURL+"api/Days/";
 
 Binding_OwnerDuration();
 function Binding_OwnerDuration(){

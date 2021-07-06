@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for booking details Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
+
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -13,15 +16,18 @@ declare var jQuery: any;
 })
 export class BookingDetailsComponent implements OnInit {
   form: FormGroup;
-  url = "http://65.2.28.16/api/Owner";
-  Scheduleurl = "http://65.2.28.16/api/Schedule/";
-  pathImage = "http://65.2.28.16/api/uploads/";
+  // Add Base URL for booking details  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+
+  url = this.EnvironmentURL+"api/Owner";
+  Scheduleurl = this.EnvironmentURL+"api/Schedule/";
+  pathImage = this.EnvironmentURL+"api/uploads/";
   allOwners: any=[];
   allBoats: any=[];
   allBookingDetails: any=[];
   allBookingDetailsFilter: any=[];
-  imgUrl = "http://65.2.28.16/api/uploads/"
-  Boaturl = "http://65.2.28.16/api/Boat"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
+  Boaturl = this.EnvironmentURL+"api/Boat"
  
 
   constructor(private http: HttpClient ,private router: Router,) { 

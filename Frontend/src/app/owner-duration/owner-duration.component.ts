@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
-
+// import environment for owner duration Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -14,8 +15,10 @@ declare var jQuery: any;
 // Create Component for owner duration //Done By Alagesan on 24.05.2021
 
 export class OwnerDurationComponent implements OnInit {
-  url = "http://65.2.28.16/api/Boat"
-  OwnerUrl = "http://65.2.28.16/api/Owner"
+  // Add Base URL for owner duration  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Boat"
+  OwnerUrl = this.EnvironmentURL+"api/Owner"
   form: FormGroup;
   boats: any=[];
   owners: any=[];
@@ -55,8 +58,8 @@ export class OwnerDurationComponent implements OnInit {
       var getId = "";
       var getboatid = "";
       
-      var owner_url = "http://65.2.28.16/api/Owner/";
-      var suspendUrl = "http://65.2.28.16/api/SuspensionRoute/suspensionRecord/";
+      var owner_url = this.EnvironmentURL+"api/Owner/";
+      var suspendUrl = this.EnvironmentURL+"api/SuspensionRoute/suspensionRecord/";
 
       var Binding_OwnerDuration_datas;
     

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';//'ng-multiselect-dropdown';
 import { Router } from '@angular/router';
-
+// import environment for boat maintenance Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 
@@ -15,10 +16,13 @@ declare var jQuery: any;
 // CreateComponent for boat maintenance //Done By Alagesan on 20.05.2021
 export class BoatMaintenanceComponent implements OnInit {
 
+  // Add Base URL for all owners  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+
   moment:any;
    tui:any;
   
-   url = "http://65.2.28.16/api/Schedule/";
+   url = this.EnvironmentURL+"api/Schedule/";
    dropdownList = [];
    dropdownList_filted = [];
    selectedItems = [];

@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment'
-
+// import environment for view boat Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 @Component({
@@ -27,9 +28,11 @@ export class ViewBoatComponent implements OnInit {
 
 	multiImge: any =[];
 	slideIndex = 1;
-	imgUrl = "http://65.2.28.16/api/uploads/"
-	url = "http://65.2.28.16/api/Boat"
-	OwnerUrl = "http://65.2.28.16/api/Owner"
+	// Add Base URL for view boat  Done By Alagesan	on 06.07.2021
+	EnvironmentURL:string = environment.url;
+	imgUrl = this.EnvironmentURL+"api/uploads/"
+	url = this.EnvironmentURL+"api/Boat"
+	OwnerUrl = this.EnvironmentURL+"api/Owner"
 	boat_Id: any;
 	boatOwners: any=[];
 	manageOwnerId: any;
@@ -128,7 +131,7 @@ this.boatStatus = "Enable"
 	 this.boat_Id = this.data._id;
     this.getOwnersByBoatId();
 	  
-	 var urlImg = "http://65.2.28.16/api/uploads/";
+	 var urlImg = this.EnvironmentURL+"api/uploads/";
 
 	 var data_First;
 	 var loopFirstChek = 0;

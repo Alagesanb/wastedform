@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';//'ng-multiselect-dropdown';
-
+// import environment for all owners Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 
@@ -16,11 +17,12 @@ export class BookForOwnerComponent implements OnInit {
 
   moment:any;
    tui:any;
-  
-   url = "http://65.2.28.16/api/Schedule/";
-   url_Owner = "http://65.2.28.16/api/Owner/";
-   url_Days = "http://65.2.28.16/api/Days/";
-   //public_Day_URL = "http://65.2.28.16/api/Days/";
+    // Add Base URL for all owners  Done By Alagesan	on 06.07.2021
+    EnvironmentURL:string = environment.url;
+   url = this.EnvironmentURL+"api/Schedule/";
+   url_Owner = this.EnvironmentURL+"api/Owner/";
+   url_Days = this.EnvironmentURL+"api/Days/";
+   //public_Day_URL = this.EnvironmentURL+"api/Days/";
    dropdownList = [];
    SelectOwner_dropdownList = [];
    dropdownList_filted = [];
@@ -166,7 +168,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
     var obj = Object();
         obj.Boat_Id = Boat_Id;
-        //url_Days = "http://65.2.28.16/api/Days/GetNextBookingDaysByBoatId"
+        //url_Days = this.EnvironmentURL+"api/Days/GetNextBookingDaysByBoatId"
       this.http.post<any>(`${this.url_Days}GetNextBookingDaysByBoatId`, obj).subscribe(results => {           
         if(results.status == true)
         {

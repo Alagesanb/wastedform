@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
-
+// import environment for ownership transfer Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -20,8 +21,10 @@ export class OwnershipTransferComponent implements OnInit {
   dropdownBoat: any;
   dropdownOwnerList_filted = [];
   dropdownOwnerList = [];
-  url = "http://65.2.28.16/api/Boat"
-  OwnerUrl = "http://65.2.28.16/api/Owner" 
+  // Add Base URL for ownership transfer  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Boat"
+  OwnerUrl = this.EnvironmentURL+"api/Owner" 
   owners: any=[];
   boats: any=[];
   dropdownList = [];

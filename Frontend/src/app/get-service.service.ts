@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+// import environment for services Done By Alagesan	on 06.07.2021
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,11 @@ import { HttpClient } from '@angular/common/http';
 export class GetServiceService {
 
   constructor(private http: HttpClient) { }
-  url = "http://65.2.28.16/api/Boat"
+
+   // Add Base URL for all owners  Done By Alagesan	on 06.07.2021
+   EnvironmentURL:string = environment.url;
+
+  url = this.EnvironmentURL+"api/Boat"
 
 
   getboatByLoction(id) {

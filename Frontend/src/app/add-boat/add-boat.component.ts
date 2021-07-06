@@ -6,6 +6,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { from } from 'rxjs';
 import { formatDate } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+// import environment for add boat  Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 
 declare var $: any;
 declare var jQuery: any;
@@ -24,8 +26,10 @@ export class AddBoatComponent implements OnInit {
   launchDate: any;
   imageResponse = "";
   boarText = ""
-  url = "http://65.2.28.16/api/Boat"
-  OwnerUrl = "http://65.2.28.16/api/Owner"
+  EnvironmentURL:string = environment.url;
+
+  url = this.EnvironmentURL+"api/Boat"
+  OwnerUrl = this.EnvironmentURL+"api/Owner"
 
 
   public_MultipleImageName: any = [];

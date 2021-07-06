@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Lopupdate } from './cancellation.model';
-
+// import environment for cancellation Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 @Component({
@@ -14,22 +15,24 @@ declare var jQuery: any;
 export class CancellationComponent implements OnInit {
   public ApproveLopDetails: Lopupdate = {};
   public IsmodelActive: boolean = false;
-  cancellationUrl = 'http://65.2.28.16/api/Schedule';
-  imagePath = 'http://65.2.28.16/api/uploads/';
+  // Add Base URL for cancellation  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  cancellationUrl = this.EnvironmentURL+'api/Schedule';
+  imagePath = this.EnvironmentURL+'api/uploads/';
   cancellationInfo: any;
   searchLoction: any = '';
   adminlogin: any;
   searchLoctions: any = '';
   Location_Name_dropDown: any = 'Location';
   Launch_Date_DropDown: any = 'Launch Date';
-  url = 'http://65.2.28.16/api/Boat';
+  url = this.EnvironmentURL+'api/Boat';
   loctions: any = [];
   bookingPushData: any[];
   cancellationData: any = [];
   LanchTYpe: any;
   getResponce: any;
   public NotFound: string = 'NotFound';
-  public LOPUpdateUrl = 'http://65.2.28.16/api/LOA_Route/LOA_Create';
+  public LOPUpdateUrl = this.EnvironmentURL+'api/LOA_Route/LOA_Create';
   constructor(private http: HttpClient, private router: Router) {}
 
   // Create Component for cancellation//Done By Alagesan on 20.05.2021

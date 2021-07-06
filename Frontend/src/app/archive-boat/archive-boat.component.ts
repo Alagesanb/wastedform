@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { NgxSpinnerService } from "ngx-spinner"; 
+// import environment for  archive boat Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
+
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -13,10 +16,12 @@ declare var jQuery: any;
 // CreateComponent for archive boat//Done By Alagesan on 20.05.2021
 
 export class ArchiveBoatComponent implements OnInit {
-  url = "http://65.2.28.16/api/Boat"
+  // Add Base URL for archive boat Done  By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Boat"
   allBoats: any=[];
   searchText: any = '';
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
   Location_Name_dropDown: any = "Location";
   loctions: any=[];
   searchLoction: any = '';

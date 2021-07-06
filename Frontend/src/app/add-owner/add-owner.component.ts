@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for add owner  Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
+
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -10,10 +13,10 @@ declare var jQuery: any;
   styleUrls: ['./add-owner.component.css']
 })
 export class AddOwnerComponent implements OnInit {
-
+  EnvironmentURL:string = environment.url;
   form: FormGroup;
-  url = "http://65.2.28.16/api/Owner"
-  boaturl = "http://65.2.28.16/api/Boat"
+  url = this.EnvironmentURL+"api/Owner"
+  boaturl = this.EnvironmentURL+"api/Boat"
   submitted = false;
   handBook: File;
   singleFileDetails : any;

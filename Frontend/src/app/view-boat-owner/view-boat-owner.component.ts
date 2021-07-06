@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import * as moment from 'moment'
+// import environment for view boat owner Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
+
 
 declare var $: any;
 declare var jQuery: any; 
@@ -29,8 +32,6 @@ export class ViewBoatOwnerComponent implements OnInit {
 
 	multiImge: any =[];
 	slideIndex = 1;
-	boatUrl = "http://65.2.28.16/api/Boat"
-	OwnerUrl = "http://65.2.28.16/api/Owner"
 	boat_Id: any;
 	boatOwners: any=[];
 	manageOwnerId: any;
@@ -41,6 +42,8 @@ export class ViewBoatOwnerComponent implements OnInit {
 	TotalDaysAssigned_Summer_WeekEndDays :any;
 	TotalDaysAssigned_Winter_WeekDays :any;
 	TotalDaysAssigned_Winter_WeekEndDays :any;
+  Total_Days: any;
+
 	boatStatus: string;
 	allboatdata: any=[];
 
@@ -52,21 +55,28 @@ export class ViewBoatOwnerComponent implements OnInit {
   Location_Name: string;
   Boat_Facility: string;
   Boat_Description:string;
+  // Add the Base URL for view boat owner Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
 
-
-  url = "http://65.2.28.16/api/Owner_Boat_Route"
-  imgUrl = "http://65.2.28.16/api/uploads/"
+// Add the base URL in API for view boat owner Done By Alagesan	on 06.07.2021
+  url = this.EnvironmentURL+"api/Owner_Boat_Route"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
+  boatUrl = this.EnvironmentURL+"api/Boat"
+	OwnerUrl = this.EnvironmentURL+"api/Owner"
   ownerandboatdetails: any=[];
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+
+    console.log(this.EnvironmentURL);
+
     this.OwnerInfo = JSON.parse(sessionStorage.getItem('Ownerlogin')); 
     this.BoatInfo = JSON.parse(sessionStorage.getItem('boatData')); 
     this.data = JSON.parse(sessionStorage.getItem('boatData')); 
     this.multiImge = this.data.BoatDetails[0].Boat_Image;
     this.boat_Id = this.data._id;
 
-    var urlImg = "http://65.2.28.16/api/uploads/";
+    var urlImg = this.EnvironmentURL+"api/uploads/";
 
     var data_First;
     var loopFirstChek = 0;
@@ -272,7 +282,7 @@ export class ViewBoatOwnerComponent implements OnInit {
       Owner_Id: this.OwnerInfo._id
     }
     console.log(this.BoatInfo.Boat_Id);
-    console.log(this.OwnerInfo._id);
+    console.log(this.url);
     this.http.post<any>(`${this.url}/postOwners`,obj).subscribe(data => {
       this.ownerandboatdetails = data['response'];
       console.log(this.ownerandboatdetails);
@@ -299,7 +309,7 @@ export class ViewBoatOwnerComponent implements OnInit {
            this.TotalDaysAssigned_Winter_WeekEndDays = this.ownerandboatdetails[0].BoatDetails[0].Winter_WeekEndDays;
            this.Boat_Facility = this.ownerandboatdetails[0].BoatDetails[0].Boat_Facility;
            this.Boat_Description = this.ownerandboatdetails[0].BoatDetails[0].Boat_Description;
-
+           this.Total_Days = this.ownerandboatdetails[0].BoatDetails[0].Total_Days
 
             var summer_From_Date = new Date(this.ownerandboatdetails[0].BoatDetails[0].SummerSeason_SDate);
            this.Summer_From = (summer_From_Date.getDate())+'-' + (summer_From_Date.getMonth()+1) + '-'+summer_From_Date.getFullYear();

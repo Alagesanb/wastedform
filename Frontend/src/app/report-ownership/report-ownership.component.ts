@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { HttpClient } from '@angular/common/http';
+// import environment for report ownership Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -15,7 +17,9 @@ export class ReportOwnershipComponent implements OnInit {
   dropdownOwner: any;
   dropdownOwnerList_filted = [];
   dropdownOwnerList = [];
-  OwnerUrl = "http://65.2.28.16/api/Owner" 
+  // Add Base URL for report ownership  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  OwnerUrl = this.EnvironmentURL+"api/Owner" 
   owners: any=[];
   adminlogin: any;
 

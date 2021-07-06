@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import { ViewportScroller } from '@angular/common';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+// import environment for manage owner Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 //import { Console } from 'node:console';
 declare var $: any;
 declare var jQuery: any; 
@@ -24,8 +26,10 @@ export class ManageOwnerComponent implements OnInit {
     this.pageYoffset = window.pageYOffset;
   }
   boats: any=[];
-  url = "http://65.2.28.16/api/Boat"
-  OwnerUrl = "http://65.2.28.16/api/Owner"
+  // Add Base URL for manage owner Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Boat"
+  OwnerUrl = this.EnvironmentURL+"api/Owner"
   manageOwnerForms:FormGroup;
   manageOwnerSubmitted = false;
   boatName: any;
@@ -107,7 +111,7 @@ export class ManageOwnerComponent implements OnInit {
 
 //GetAllOwnerDetails
 
-var Owner_url = 'http://65.2.28.16/api/Owner/';
+var Owner_url = this.EnvironmentURL+'api/Owner/';
 
 
 this. startTimer_set_manageOwner_Edit();

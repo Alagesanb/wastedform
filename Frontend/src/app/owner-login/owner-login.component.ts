@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for owner login Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 
@@ -19,7 +21,10 @@ export class OwnerLoginComponent implements OnInit {
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
-  url = "http://65.2.28.16/api/Owner"
+   // Add Base URL for owner login  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  
+  url = this.EnvironmentURL+"api/Owner"
   
   
   ngOnInit(): void {

@@ -5,6 +5,10 @@ import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
 import {GetServiceService} from 'src/app/get-service.service';
 import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpParams } from "@angular/common/http";
+
+// import environment for all boat Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
+
 declare var $: any;
 declare var jQuery: any;
 @Component({
@@ -21,7 +25,10 @@ export class AllBoatComponent implements OnInit {
   toDate: any=[];
   LanchTYpe: any;
   submitted = false;
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  // Add Base URL for all boat Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+
+  imgUrl = this.EnvironmentURL+"api/uploads/"
   boatId: any;
   getResponce: any;
   adminlogin: any;
@@ -31,8 +38,8 @@ export class AllBoatComponent implements OnInit {
     private route: ActivatedRoute,private ps: GetServiceService ,public sanitizer: DomSanitizer) {
       this.createForm();
      }
-  url = "http://65.2.28.16/api/Boat"
-  OwnerUrl = "http://65.2.28.16/api/Owner"
+  url = this.EnvironmentURL+"api/Boat"
+  OwnerUrl = this.EnvironmentURL+"api/Owner"
   searchText: any = '';
   searchLoction: any = '';
 

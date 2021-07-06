@@ -11,7 +11,7 @@
         
         
         
-        <div class="page contents" style="padding-left: 8%;padding-bottom: 60%;">
+        <div class="page contents" style="padding-left: 28%;padding-bottom: 60%;">
             
          <div class="row">
               <div class="container boat-detail">
@@ -115,15 +115,19 @@
 </div>
 <div class="row">
   <div class="col-md-12">
-      <ul class="col-md-6 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
-      <li><h6 class="sum-title">SUMMER WEEKDAYS </h6> <span class="sum-second">{{TotalDaysAssigned_Summer_WeekDays}}</span></li>
-      <li><h6 class="sum-title">SUMMER WEEKENDS </h6> <span class="sum-second">{{TotalDaysAssigned_Summer_WeekEndDays}}</span></li>
+      <ul class="col-md-12 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
+      <li><h6 class="sum-title">SUMMER WEEKDAYS </h6> <span class="sum-second">{{Total_Days }} / {{ TotalDaysAssigned_Summer_WeekDays}}</span></li>
+      <li><h6 class="sum-title">SUMMER WEEKENDS </h6> <span class="sum-second">{{Total_Days }} /{{TotalDaysAssigned_Summer_WeekEndDays}}</span></li>
       </ul>
-      <ul class="col-md-6 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
-      <li><h6 class="sum-title">WINTER WEEKDAYS </h6> <span class="sum-second">{{TotalDaysAssigned_Winter_WeekDays}}</span></li>
-      <li><h6 class="sum-title">WINTER WEEKENDS </h6> <span class="sum-second">{{TotalDaysAssigned_Winter_WeekEndDays}}</span></li>
-      </ul>
+    
   </div>
+
+  <div class="col-md-12">
+    <ul class="col-md-12 bg-win" style="float: left;background: #1f2c83;margin-top: 22px;">
+    <li><h6 class="sum-title">WINTER WEEKDAYS </h6> <span class="sum-second">{{Total_Days }} /{{TotalDaysAssigned_Winter_WeekDays}}</span></li>
+    <li><h6 class="sum-title">WINTER WEEKENDS </h6> <span class="sum-second">{{Total_Days }} /{{TotalDaysAssigned_Winter_WeekEndDays}}</span></li>
+    </ul>
+</div>
 </div>
 
 </div>

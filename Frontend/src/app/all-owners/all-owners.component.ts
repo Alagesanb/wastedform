@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for all owners Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -10,16 +12,19 @@ declare var jQuery: any;
   styleUrls: ['./all-owners.component.css']
 })
 export class AllOwnersComponent implements OnInit {
+  // Add Base URL for all owners  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+
   form: FormGroup;
-  url = "http://65.2.28.16/api/Owner";
-  pathImage = "http://65.2.28.16/api/uploads/";
+  url = this.EnvironmentURL+"api/Owner";
+  pathImage = this.EnvironmentURL+"api/uploads/";
   allOwners: any=[];
   searchLoction: any = '';
   ownerId: any;
   getResponce: any;
   boats: any=[];
   allboatdata: any=[];
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
   adminlogin: any;
   pageOfItems: Array<any>;
 

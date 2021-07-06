@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for view owner Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -11,9 +13,11 @@ declare var jQuery: any;
 })
 export class ViewOwnerComponent implements OnInit {
   data: any=[];
-  url = "http://65.2.28.16/api/Owner"
+  // Add Base URL for view owner  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Owner"
   listBoat: any=[];
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
   adminlogin: any;
   listBoats: any=[];
 

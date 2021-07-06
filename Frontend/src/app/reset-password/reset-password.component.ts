@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for reset password Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -12,8 +14,9 @@ declare var jQuery: any;
 export class ResetPasswordComponent implements OnInit {
   form: FormGroup;
   submitted = false;
-
-  url = "http://65.2.28.16/api/Login"
+  // Add Base URL for reset password  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Login"
   ConfirmPasswords= false;
   getReplay: any;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) {

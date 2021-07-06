@@ -1,10 +1,13 @@
+// import environment for schedule event Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 
+// Add Base URL for schedule event  Done By Alagesan	on 06.07.2021
+EnvironmentURL:string = environment.url;
+var public_URL = this.EnvironmentURL+"api/Schedule/";
 
-var public_URL = "http://65.2.28.16/api/Schedule/";
+var public_Day_URL = this.EnvironmentURL+"api/Days/";
 
-var public_Day_URL = "http://65.2.28.16/api/Days/";
-
-var public_StandByBooking = "http://65.2.28.16/api/StandByBooking/";
+var public_StandByBooking = this.EnvironmentURL+"api/StandByBooking/";
 
 var public_shedulDataId = 0;
 

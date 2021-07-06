@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for edit owner profile Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any; 
 @Component({
@@ -11,9 +13,11 @@ declare var jQuery: any;
 })
 export class EditOwnerProfileComponent implements OnInit {
   form: FormGroup;
-  url = "http://65.2.28.16/api/Owner"
-  boaturl = "http://65.2.28.16/api/Boat"
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  // Add Base URL for edit owner profile  Done By Alagesan	on 06.07.2021
+  EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Owner"
+  boaturl = this.EnvironmentURL+"api/Boat"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
 
   submitted = false;
   handBook: File;

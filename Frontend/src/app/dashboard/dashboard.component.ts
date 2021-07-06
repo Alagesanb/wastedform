@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl,FormBuilder, Validators} from '@angular/forms';
+// import environment for dashboard Done By Alagesan	on 06.07.2021
+import { environment } from '../../environments/environment';
 declare var $: any;
 declare var jQuery: any;
 declare var Swal: any;
@@ -14,14 +16,16 @@ declare var Swal: any;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  url = "http://65.2.28.16/api/Schedule"
-  url_Boat = "http://65.2.28.16/api/Boat"
-  url_Boat_Shedule = "http://65.2.28.16/api/Schedule";
+   // Add Base URL for dashboard Done By Alagesan	on 06.07.2021
+   EnvironmentURL:string = environment.url;
+  url = this.EnvironmentURL+"api/Schedule"
+  url_Boat = this.EnvironmentURL+"api/Boat"
+  url_Boat_Shedule = this.EnvironmentURL+"api/Schedule";
   Booking: any=[];
   newBooking: any=[];
   todaysBooking: any=[];
   Cancellations: any=[];
-  imgUrl = "http://65.2.28.16/api/uploads/"
+  imgUrl = this.EnvironmentURL+"api/uploads/"
   Cancels: any=[];
   adminlogin: any;
 
@@ -50,8 +54,8 @@ export class DashboardComponent implements OnInit {
      }
   ngOnInit(): void {
 
-    var public_URL_Schedule = "http://65.2.28.16/api/Schedule/";
-    var public_URL_Days      = "http://65.2.28.16/api/Days/";
+    var public_URL_Schedule = this.EnvironmentURL+"api/Schedule/";
+    var public_URL_Days      = this.EnvironmentURL+"api/Days/";
      
       var ScheduleList = null;
       var GetAllUnAvailableDays = null;
