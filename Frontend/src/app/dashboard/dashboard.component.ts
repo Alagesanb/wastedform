@@ -8,6 +8,15 @@ declare var $: any;
 declare var jQuery: any;
 declare var Swal: any;
 
+export class Lopupdate {
+  Boat_Id?: string;
+  Booking_ID?: string;
+  LOA?: string;
+  IsActive?: boolean;
+  Name?:string; 
+  _id?:any;
+  
+}
 
 
 @Component({
@@ -28,6 +37,16 @@ export class DashboardComponent implements OnInit {
   imgUrl = this.EnvironmentURL+"api/uploads/"
   Cancels: any=[];
   adminlogin: any;
+
+  Cancels_First: any = [];
+  Cancels_Second: any = [];
+  Cancels_Thread: any = [];
+
+  public ApproveLopDetails: Lopupdate = {};
+  public IsmodelActive: boolean = false;
+  public NotFound: string = 'NotFound';
+
+  getResponce: any;
 
   New_Booking_Count:any = 0;
   Todays_Booking_Count:any = 0;
@@ -958,6 +977,13 @@ if(to_date_only == start_Date_only)
 
     this.Cancellations = data['Cancelledresponse']
     
+   
+
+    /// cancell .... 01
+
+    
+    //Cancell ......02
+
     this.Cancellations.forEach(element => {
       var obj4 = Object();
       var date = new Date(element.Updated_time);
@@ -966,12 +992,14 @@ if(to_date_only == start_Date_only)
       var todaysDates = todaysDate.getDate()
       if(dates  == todaysDates )
       {
-        
-        var obj_s = Object();
-    
+            
         if(element.BoatDetails.length !== 0){
 
-         
+        
+        if(element.BookingStatus == "Accepted"){
+
+          var obj_s = Object();
+          
   
         obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
         obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
@@ -982,8 +1010,65 @@ if(to_date_only == start_Date_only)
         obj_s.Booking_ID = element.Booking_ID;
         obj_s.BookingStatus = element.BookingStatus;
         obj_s.Approved_LOA = element.Approved_LOA;
+        obj_s.LOA = element.LOA;
 
-        obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+        var boatnum = element.BoatDetails[0].Boat_Number;
+
+        if (typeof boatnum !== "undefined" || boatnum != null){
+         
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+        }
+        else{
+
+          obj_s.Boat_Number = 0;
+          
+
+        }
+
+        obj_s._id = element._id;
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+        if(element.OwnerDetails.length !== 0){
+  
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
+  
+        } 
+
+        
+  
+         this.Cancels_Second.push(obj_s);
+  
+  
+        }
+
+        else if(element.BookingStatus != "Accepted") 
+        {
+
+          var obj_s = Object();
+  
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
+        obj_s.BookingStatus = element.BookingStatus;
+        obj_s.Approved_LOA = element.Approved_LOA;
+        obj_s.LOA = element.LOA;
+
+        if (typeof element.BoatDetails[0].Boat_Number !== "undefined" || element.BoatDetails[0].Boat_Number != null){
+          
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+        }
+        else{
+          
+          obj_s.Boat_Number = 0;
+
+        }
+        
         obj_s._id = element._id;
         obj_s.Location_Name = element.BoatDetails[0].Location_Name;
         obj_s.Location_Id = element.BoatDetails[0].Location_Id;
@@ -995,10 +1080,58 @@ if(to_date_only == start_Date_only)
   
         } 
   
-         this.Cancels.push(obj_s);
+         this.Cancels_First.push(obj_s);
   
   
-        }      
+        }
+
+        else
+        {
+
+          var obj_s = Object();
+
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
+        obj_s.BookingStatus = element.BookingStatus;
+        obj_s.Approved_LOA = element.Approved_LOA;
+        obj_s.LOA = element.LOA;
+
+        if (typeof element.BoatDetails[0].Boat_Number !== "undefined" || element.BoatDetails[0].Boat_Number != null){
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+          
+        }
+        else{
+          
+          obj_s.Boat_Number = 0;
+
+        }
+        obj_s._id = element._id;
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+        if(element.OwnerDetails.length !== 0){
+  
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
+  
+        } 
+  
+         this.Cancels_Thread.push(obj_s);
+  
+  
+        
+
+        } 
+        
+        
+
+
+      }     
         
         
         // obj4 = element       
@@ -1008,6 +1141,64 @@ if(to_date_only == start_Date_only)
   
   
     });
+
+
+    /*Cancels_First:any[];
+  Cancels_Second:any[];*/
+
+
+  this.Cancellations.forEach(element => {
+    var obj4 = Object();
+    var date = new Date(element.Updated_time);
+    var dates = date.getDate()
+    var todaysDate = new Date();
+    var todaysDates = todaysDate.getDate()
+    if(dates  == todaysDates )
+    {
+      
+      var obj_s = Object();
+  
+      if(element.BoatDetails.length !== 0){
+
+       
+
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
+      obj_s.BookingStatus = element.BookingStatus;
+      obj_s.Approved_LOA = element.Approved_LOA;
+
+      obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+      obj_s._id = element._id;
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+       this.Cancels.push(obj_s);
+
+
+      }      
+      
+      
+      // obj4 = element       
+      //     this.Cancels.push(obj4);
+      
+    }
+
+
+  });
+
+
 
     console.log(this.Cancels);
   
@@ -1019,6 +1210,51 @@ if(to_date_only == start_Date_only)
    }, err => {
    })
   }
+
+
+  
+   public ApproveLop(cancelinfo): void {
+       
+    this.IsmodelActive = true;
+    this.ApproveLopDetails.Boat_Id = cancelinfo._id;
+    this.ApproveLopDetails.Booking_ID = cancelinfo.Booking_ID;
+    this.ApproveLopDetails.LOA = cancelinfo.LOA;
+    this.ApproveLopDetails.IsActive = true;
+    this.ApproveLopDetails._id = cancelinfo._id;
+    
+      this.ApproveLopDetails.Name = cancelinfo.First_Name;
+   
+  }
+
+
+  public UpdateLop(): void {
+
+    
+    
+    if(this.ApproveLopDetails.LOA){
+      delete this.ApproveLopDetails.Name
+      
+        this.http.post<any>(`${this.url}/ApproveCancellation`, this.ApproveLopDetails  ).subscribe(data => {  
+
+         
+
+         if(data.status == true){
+
+          this.getResponce = data.message;
+          $('#pop-up-btn_btn').trigger('click');
+
+         }
+         
+        console.log('uploadsuccess', data);
+      });
+     }else{
+     console.log("LOA Is Required");
+    }
+  }
+
+
+
+
   
 
   getLoction(){
@@ -1046,11 +1282,16 @@ if(to_date_only == start_Date_only)
   getLoctionTypeId_Boat(loc){
 
     
+    
   this.public_baotType_Single_id = loc._id;
 
     this.newBooking = [];
     this.Stand_by_Booking = [];
     this.todaysBooking = [];
+
+    this.Cancels_Thread = [];
+    this.Cancels_First = [];
+    this.Cancels_Second = [];
     
     this.http.get<any>(`${this.url}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
      
@@ -1282,6 +1523,168 @@ if(to_date_only == start_Date_only)
 
   });
 
+
+   //Cancell ......02
+
+   this.Cancellations.forEach(element => {
+    var obj4 = Object();
+    var date = new Date(element.Updated_time);
+    var dates = date.getDate()
+    var todaysDate = new Date();
+    var todaysDates = todaysDate.getDate()
+    if(dates  == todaysDates )
+    {
+          
+      if(element.BoatDetails.length !== 0){
+
+      
+      if(element.BookingStatus == "Accepted"){
+
+        var obj_s = Object();
+        
+
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
+      obj_s.BookingStatus = element.BookingStatus;
+      obj_s.Approved_LOA = element.Approved_LOA;
+      obj_s.LOA = element.LOA;
+
+      var boatnum = element.BoatDetails[0].Boat_Number;
+
+      if (typeof boatnum !== "undefined" || boatnum != null){
+       
+        obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+      }
+      else{
+
+        obj_s.Boat_Number = 0;
+        
+
+      }
+
+      obj_s._id = element._id;
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+      
+
+       this.Cancels_Second.push(obj_s);
+
+
+      }
+
+      else if(element.BookingStatus != "Accepted") 
+      {
+
+        var obj_s = Object();
+
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
+      obj_s.BookingStatus = element.BookingStatus;
+      obj_s.Approved_LOA = element.Approved_LOA;
+      obj_s.LOA = element.LOA;
+
+      if (typeof element.BoatDetails[0].Boat_Number !== "undefined" || element.BoatDetails[0].Boat_Number != null){
+        
+        obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+      }
+      else{
+        
+        obj_s.Boat_Number = 0;
+
+      }
+      
+      obj_s._id = element._id;
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+       this.Cancels_First.push(obj_s);
+
+
+      }
+
+      else
+      {
+
+        var obj_s = Object();
+
+      obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+      obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+      obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+      obj_s.start = element.start;
+      obj_s.Boat_Id =  element.BoatDetails[0]._id;
+      obj_s.end = element.end;
+      obj_s.Booking_ID = element.Booking_ID;
+      obj_s.BookingStatus = element.BookingStatus;
+      obj_s.Approved_LOA = element.Approved_LOA;
+      obj_s.LOA = element.LOA;
+
+      if (typeof element.BoatDetails[0].Boat_Number !== "undefined" || element.BoatDetails[0].Boat_Number != null){
+        obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+        
+      }
+      else{
+        
+        obj_s.Boat_Number = 0;
+
+      }
+      obj_s._id = element._id;
+      obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+      obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+      if(element.OwnerDetails.length !== 0){
+
+        obj_s.First_Name = element.OwnerDetails[0].First_Name;
+        obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.OwnerDetails = element.OwnerDetails[0];
+
+      } 
+
+       this.Cancels_Thread.push(obj_s);
+
+
+      
+
+      } 
+      
+      
+
+
+    }     
+      
+      
+      // obj4 = element       
+      //     this.Cancels.push(obj4);
+      
+    }
+
+
+  });
+
+
   //
 
     this.Boat_Name_dropDown = loc.Boat_Name;    
@@ -1290,7 +1693,13 @@ if(to_date_only == start_Date_only)
   {    
     this.newBooking = this.newBooking.filter(x => x.Boat_Id == loc._id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Boat_Id == loc._id);
+    
+    this.Cancels_Thread = this.Cancels_Thread.filter(x => x.Boat_Id == loc._id);
+    this.Cancels_First = this.Cancels_First.filter(x => x.Boat_Id == loc._id);
+    this.Cancels_Second = this.Cancels_Second.filter(x => x.Boat_Id == loc._id);   
+    
     this.Cancels = this.Cancels.filter(x => x.Boat_Id == loc._id);
+
     this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Boat_Id == loc._id);
   }
   else
@@ -1298,6 +1707,12 @@ if(to_date_only == start_Date_only)
 
     this.newBooking = this.newBooking.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
+    
+    this.Cancels_Thread = this.Cancels_Thread.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
+    this.Cancels_First = this.Cancels_First.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
+    this.Cancels_Second = this.Cancels_Second.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
+    
+    
     this.Cancels = this.Cancels.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
     this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Boat_Id == loc._id && x.Location_Id == this.public_LocationType_id);
 
@@ -1306,7 +1721,7 @@ if(to_date_only == start_Date_only)
     
     this.New_Booking_Count = this.newBooking.length;
     this.Todays_Booking_Count = this.todaysBooking.length;
-    this.Cancellations_Count = this.Cancels.length;
+    this.Cancellations_Count = this.Cancels_Thread.length + this.Cancels_First.length + this.Cancels_Second.length;
     this.Stand_by_Booking_Count = this.Stand_by_Booking.length;
 
    }, err => {
@@ -1326,6 +1741,11 @@ console.log(this.dropdown_Boat_List);
     this.newBooking = [];
     this.Stand_by_Booking = [];
     this.todaysBooking = [];
+
+    this.Cancels_Thread = [];
+    this.Cancels_First = [];
+    this.Cancels_Second = [];
+
     
     this.http.get<any>(`${this.url}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
      
@@ -1511,7 +1931,7 @@ console.log(this.dropdown_Boat_List);
  
      });
 
-    
+      
   this.Cancellations = data['Cancelledresponse']
   this.Cancellations.forEach(element => {
     var obj4 = Object();
@@ -1555,6 +1975,169 @@ console.log(this.dropdown_Boat_List);
   });
 
 
+    //Cancell ......02
+
+    this.Cancellations.forEach(element => {
+      var obj4 = Object();
+      var date = new Date(element.Updated_time);
+      var dates = date.getDate()
+      var todaysDate = new Date();
+      var todaysDates = todaysDate.getDate()
+      if(dates  == todaysDates )
+      {
+            
+        if(element.BoatDetails.length !== 0){
+  
+          
+        
+        if(element.BookingStatus == "Accepted"){
+  
+          var obj_s = Object();
+          
+  
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
+        obj_s.BookingStatus = element.BookingStatus;
+        obj_s.Approved_LOA = element.Approved_LOA;
+        obj_s.LOA = element.LOA;
+  
+        var boatnum = element.BoatDetails[0].Boat_Number;
+  
+        if (typeof boatnum !== "undefined" || boatnum != null){
+         
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+        }
+        else{
+  
+          obj_s.Boat_Number = 0;
+          
+  
+        }
+  
+        obj_s._id = element._id;
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+        if(element.OwnerDetails.length !== 0){
+  
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
+  
+        } 
+  
+        
+  
+         this.Cancels_Second.push(obj_s);
+  
+  
+        }
+  
+        else if(element.BookingStatus != "Accepted") 
+        {
+  
+          var obj_s = Object();
+  
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
+        obj_s.BookingStatus = element.BookingStatus;
+        obj_s.Approved_LOA = element.Approved_LOA;
+        obj_s.LOA = element.LOA;
+  
+        if (typeof element.BoatDetails[0].Boat_Number !== "undefined" || element.BoatDetails[0].Boat_Number != null){
+          
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+        }
+        else{
+          
+          obj_s.Boat_Number = 0;
+  
+        }
+        
+        obj_s._id = element._id;
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+        if(element.OwnerDetails.length !== 0){
+  
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
+  
+        } 
+  
+         this.Cancels_First.push(obj_s);
+  
+  
+        }
+  
+        else
+        {
+  
+          var obj_s = Object();
+  
+        obj_s.Boat_Image = element.BoatDetails[0].Boat_Image[0];
+        obj_s.imgUrl = this.imgUrl + element.BoatDetails[0].Boat_Image[0];
+        obj_s.Boat_Name = element.BoatDetails[0].Boat_Name;
+        obj_s.start = element.start;
+        obj_s.Boat_Id =  element.BoatDetails[0]._id;
+        obj_s.end = element.end;
+        obj_s.Booking_ID = element.Booking_ID;
+        obj_s.BookingStatus = element.BookingStatus;
+        obj_s.Approved_LOA = element.Approved_LOA;
+        obj_s.LOA = element.LOA;
+  
+        if (typeof element.BoatDetails[0].Boat_Number !== "undefined" || element.BoatDetails[0].Boat_Number != null){
+          obj_s.Boat_Number = element.BoatDetails[0].Boat_Number;
+          
+        }
+        else{
+          
+          obj_s.Boat_Number = 0;
+  
+        }
+        obj_s._id = element._id;
+        obj_s.Location_Name = element.BoatDetails[0].Location_Name;
+        obj_s.Location_Id = element.BoatDetails[0].Location_Id;
+        if(element.OwnerDetails.length !== 0){
+  
+          obj_s.First_Name = element.OwnerDetails[0].First_Name;
+          obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+          obj_s.OwnerDetails = element.OwnerDetails[0];
+  
+        } 
+  
+         this.Cancels_Thread.push(obj_s);
+  
+  
+        
+  
+        } 
+        
+        
+  
+  
+      }     
+        
+        
+        // obj4 = element       
+        //     this.Cancels.push(obj4);
+        
+      }
+  
+  
+    });
+  
+
+
     //.......
 
      
@@ -1564,6 +2147,11 @@ console.log(this.dropdown_Boat_List);
 
     this.newBooking = this.newBooking.filter(x => x.Location_Id == loc._id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Location_Id == loc._id);
+
+    this.Cancels_Thread = this.Cancels_Thread.filter(x => x.Location_Id == loc._id);
+    this.Cancels_First = this.Cancels_First.filter(x => x.Location_Id == loc._id);
+    this.Cancels_Second = this.Cancels_Second.filter(x => x.Location_Id == loc._id); 
+
     this.Cancels = this.Cancels.filter(x => x.Location_Id == loc._id);
     this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Location_Id == loc._id);
 
@@ -1573,6 +2161,11 @@ console.log(this.dropdown_Boat_List);
 
     this.newBooking = this.newBooking.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
     this.todaysBooking = this.todaysBooking.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
+   
+    this.Cancels_Thread = this.Cancels_Thread.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
+    this.Cancels_First = this.Cancels_First.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
+    this.Cancels_Second = this.Cancels_Second.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
+       
     this.Cancels = this.Cancels.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
     this.Stand_by_Booking = this.Stand_by_Booking.filter(x => x.Location_Id == loc._id && x.Boat_Id == this.public_baotType_Single_id);
 
@@ -1581,7 +2174,7 @@ console.log(this.dropdown_Boat_List);
 
     this.New_Booking_Count = this.newBooking.length;
     this.Todays_Booking_Count = this.todaysBooking.length;
-    this.Cancellations_Count = this.Cancels.length;
+    this.Cancellations_Count = this.Cancels_Thread.length + this.Cancels_First.length + this.Cancels_Second.length;
     this.Stand_by_Booking_Count = this.Stand_by_Booking.length;
 
 

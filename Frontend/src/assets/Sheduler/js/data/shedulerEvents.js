@@ -1004,13 +1004,13 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     });
 
-    $(document).on("click",".tui-full-calendar-popup-delete",function() {
+    //$(document).on("click",".tui-full-calendar-popup-delete",function() {
 
         // Not accessing Id ...Pending work...
 
         //alert("sorry delete not allowed (popup) only for  display calendar items");
 
-    });
+   // });
 
 
     //tui-full-calendar-month-more-schedule tui-full-calendar-month-more-allday tui-full-calendar-weekday-schedule-title
