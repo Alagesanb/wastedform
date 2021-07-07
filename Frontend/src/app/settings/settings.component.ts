@@ -215,10 +215,15 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
               $.each(data.response , function(index, val) { 
 
+
+                var count = 35;
+                var discription =val.Type_Description;
+                  discription = discription.slice(0, count) + (discription.length > count ? "..." : "");
+
                 if(firstChek == 0){
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+val.Boat_Type+'\
-                  </td><td>'+ val.Type_Description +'</td><td><ul class="table-action">\
+                  </td><td data-toggle="tooltip" title="'+val.Type_Description+'">'+ discription +'</td><td><ul class="table-action">\
                   <li><a (click)=editBoat(data) class=""><i class="far fa-edit" aria-hidden="true">\
                   </i></a></li><li><a (click)=deleteBoatModel(data)><i class="far fa-trash-alt" aria-hidden="true">\
                   </i></a></li></ul></td></tr>';
@@ -226,7 +231,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+val.Boat_Type+'</td><td>'+ val.Type_Description +'</td><td><ul class="table-action"><li><a (click)=editBoat(data) class=""><i class="far fa-edit" aria-hidden="true"></i></a></li><li><a (click)=deleteBoatModel(data)><i class="far fa-trash-alt" aria-hidden="true"></i></a></li></ul></td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+val.Boat_Type+'</td><td data-toggle="tooltip" title="'+val.Type_Description+'">'+ discription +'</td><td><ul class="table-action"><li><a (click)=editBoat(data) class=""><i class="far fa-edit" aria-hidden="true"></i></a></li><li><a (click)=deleteBoatModel(data)><i class="far fa-trash-alt" aria-hidden="true"></i></a></li></ul></td></tr>';
 
 
                 }
@@ -237,10 +242,10 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
               });
 
               var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+              
 
-
-              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>BOAT TYPE</th><th>DESCRIPTION</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
-
+               var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>BOAT TYPE</th><th>DESCRIPTION</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+                                     
               $("#temp-data-bindings").html(bindingTabledataFirst);
             
             }
@@ -346,7 +351,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
  var dats = public_specialData_getAll_Datas.find(x => x._id == public_Edit_Id);
   $("#text-id-special-days-Name").val(dats.Name);
   $("#text-id-special-days-Start").val(getFormattedDate_second(dats.Start_Date));
-  $("#text-id-special-days-End").val(getFormattedDate_second(dats.Start_Date));
+  $("#text-id-special-days-End").val(getFormattedDate_second(dats.End_Date));
 
  $("#a-Id-special-days-Save").hide();
  $("#a-Id-special-days-Edit").show(); 

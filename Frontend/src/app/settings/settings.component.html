@@ -14,10 +14,10 @@
 <div class="container">
 <ul id="tabs" class="nav nav-tabs booking-tabs" role="tablist">
   <li class="nav-item">
-      <a id="tab-A" href="#pane-A" class="nav-link active" data-toggle="tab" role="tab">Manage Boat Type</a>
+      <a id="tab-A" href="#pane-A" class="nav-link active" data-toggle="tab" role="tab">Boat Type</a>
   </li>
   <li class="nav-item">
-    <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Add Location</a>
+    <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Locations</a>
   </li>
   <li class="nav-item">
       <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab">Unavailable Days</a>
@@ -36,7 +36,7 @@
 <!--Add special days tab for settings Done By Alagesan on 21.06.2021    -->
 
 <li class="nav-item">
-  <a id="tab-G" href="#pane-G" class="nav-link" data-toggle="tab" role="tab">Add Special Days</a>
+  <a id="tab-G" href="#pane-G" class="nav-link" data-toggle="tab" role="tab">Special Days</a>
 </li>
 </ul>
 
@@ -420,13 +420,13 @@
         
           <div class="form-group col-md-4">
             <label>Start Date</label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text" id="text-id-special-days-Start" formControlName="Start_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Start_Date.errors }" (focusout)="startDates($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" readonly="readonly" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text" id="text-id-special-days-Start" formControlName="Start_Date"  class="form-control" data-zdp_readonly_element="true" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Start_Date.errors }" (focusout)="startDates($event)">
             </span>
           </div>  
         
           <div class="form-group col-md-4">
             <label>End Date</label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text" id="text-id-special-days-End" formControlName="End_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.End_Date.errors }" (focusout)="endDates($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" readonly="readonly" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text" id="text-id-special-days-End" formControlName="End_Date"  class="form-control" data-zdp_readonly_element="true" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.End_Date.errors }" (focusout)="endDates($event)">
             </span>         
           </div>  
         </div> 

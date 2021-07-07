@@ -225,7 +225,7 @@ export class AddBoatComponent implements OnInit {
 
     $('#datepicker-prelaunch-date').Zebra_DatePicker({
       //format: 'm/d/yyyy',
-      direction: true,
+      //direction: true,
       pair: $('#datepicker-launch-date')
     });
 
