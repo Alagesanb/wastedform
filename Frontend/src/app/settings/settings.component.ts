@@ -6,6 +6,8 @@ import {GetServiceService} from 'src/app/get-service.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 // import environment for settings Done By Alagesan	on 06.07.2021
 import { environment } from '../../environments/environment';
+import {MainModel} from '../main-model'
+import { observable } from 'rxjs';
 declare var $: any;
 declare var jQuery: any;
 @Component({
@@ -16,6 +18,7 @@ declare var jQuery: any;
 export class SettingsComponent implements OnInit {
   // Add Base URL for settings  Done By Alagesan	on 06.07.2021
   EnvironmentURL:string = environment.url;
+  mainmodel: any = MainModel;
   url = this.EnvironmentURL+"api/Boat"
   shareUrl = this.EnvironmentURL+"api/Days"
   allShareUrl = this.EnvironmentURL+'api/Days';
@@ -95,6 +98,10 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
    var url = this.EnvironmentURL+'api/Boat/';
    var public_url_days = this.EnvironmentURL+"api/Days/";
+   var AddSpecialDaysRout = this.EnvironmentURL+'api/AddSpecialDaysRout/';
+   var public_Edit_Id = "0";
+   var public_specialData_getAll_Datas = null;
+  
 
    this.dropdownSettings = {
     singleSelection: true,
@@ -136,6 +143,39 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    
   };
 
+  $('#text-id-special-days-Start').Zebra_DatePicker({
+    //format: 'm/d/yyyy',
+    direction: true,
+    //pair: $('#datepicker-launch-date')
+    pair: $('#text-id-special-days-End')
+  });
+
+  $('#text-id-special-days-End').Zebra_DatePicker({
+    //format: 'm/d/yyyy',
+    direction: 1,
+    
+
+
+  });
+
+
+  setInterval(function () {
+
+    
+    if ($("#text-id-special-days-Start").val() == "NaN-NaN-NaN") {
+      
+        $("#text-id-special-days-Start").val("");
+    }
+
+    if ($("#text-id-special-days-End").val() == "NaN-NaN-NaN") {
+      console.log("errror...2");
+      $("#text-id-special-days-End").val("");
+    }
+ 
+
+  }, 100);
+  
+
 
    $(document).on("click","#test-element",function() {
     alert("click bound to document listening for #test-element");
@@ -151,7 +191,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       // this.Shareform.get('No_of_WinterWeekEndDays').setValue("");
    });
    
-
+   GetAll_AddSpecial_Days();
    binding_Boat();
     function binding_Boat(){
       $.ajax({
@@ -161,6 +201,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         //data: JSON.stringify(person),
         contentType: 'application/json',
         success: function (data) {
+
+          
 
             if(data.status == true)
             {
@@ -212,6 +254,248 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     });      
       
     }
+
+    function getFormattedDate_second(dateVal) {
+      var newDate = new Date(dateVal);
+  
+      var sMonth = padValue(newDate.getMonth() + 1);
+      var sDay = padValue(newDate.getDate());
+      var sYear = newDate.getFullYear();
+      var sHour = newDate.getHours();
+      var sMinute = padValue(newDate.getMinutes());
+      var sAMPM = "AM";
+  
+      var iHourCheck = Number(sHour);
+  
+      if (iHourCheck > 12) {
+          sAMPM = "PM";
+          sHour = iHourCheck - 12;
+      }
+      else if (iHourCheck === 0) {
+          sHour = 12;
+      }
+  
+      sHour = padValue(sHour);
+  
+      //return sDay + "-" + sMonth + "-" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+      return sDay + "-" + sMonth + "-" + sYear;
+
+  }
+
+  function padValue(value) {
+    return (value < 10) ? "0" + value : value;
+
+  }
+  function string_to_Date_Convert(dateString){   
+
+    var dateArray = dateString.split("-");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    return dateObj;
+
+  }
+
+  $(document).on("click","#a-Id-special-days-Edit",function() {
+
+    
+    var startDate = $("#text-id-special-days-Start").val();
+   var Eenddate = $("#text-id-special-days-End").val();
+
+    var Obj = Object();
+    Obj._id = public_Edit_Id;
+    Obj.Name = $("#text-id-special-days-Name").val();
+    Obj.Start_Date = string_to_Date_Convert(startDate);
+    Obj.End_Date = string_to_Date_Convert(Eenddate);
+
+
+  $.ajax({
+    url: AddSpecialDaysRout+"EditSpecialDays",
+    type: 'POST',
+    dataType: 'json', 
+    data: Obj,
+    success: function(datas) {     
+                    
+        if(datas.status == true)
+        {
+            alert(datas.message);
+            location.reload();    
+        }
+        else if(datas.status == false)
+        {                    
+            alert(datas.message);
+            //location.reload();    
+        }
+    
+
+    },
+    error: function (error) {               
+        
+        console.log(error.responseText);
+                
+    }
+});
+
+
+
+
+  });
+
+$(document).on("click",".cls-special-days-Edit",function() { 
+  
+ public_Edit_Id = $(this).attr('id-Edit');
+ var dats = public_specialData_getAll_Datas.find(x => x._id == public_Edit_Id);
+  $("#text-id-special-days-Name").val(dats.Name);
+  $("#text-id-special-days-Start").val(getFormattedDate_second(dats.Start_Date));
+  $("#text-id-special-days-End").val(getFormattedDate_second(dats.Start_Date));
+
+ $("#a-Id-special-days-Save").hide();
+ $("#a-Id-special-days-Edit").show(); 
+ 
+ });
+
+ $(document).on("mouseover",".cls-special-days-Edit",function() {
+ 
+  var getdeleteid = $(this).attr('id-Edit');
+
+  $('li[id-Edit="'+getdeleteid+'"]').css("color", "red");
+  $('li[id-Edit="'+getdeleteid+'"]').css('cursor','pointer');
+  
+
+ });
+
+ $(document).on("mouseout",".cls-special-days-Edit",function() {
+  
+  var getdeleteid = $(this).attr('id-Edit');
+
+  $('li[id-Edit="'+getdeleteid+'"]').css("color", "black");
+  
+
+ });
+
+
+ $(document).on("click",".cls-special-days-Delete",function() {
+ 
+  var Obj = Object();
+    Obj._id = $(this).attr('id-Delete');
+    
+  $.ajax({
+    url: AddSpecialDaysRout+"DeleteSpecialDays",
+    type: 'POST',
+    dataType: 'json', 
+    data: Obj,
+    success: function(datas) {     
+                    
+        if(datas.status == true)
+        {
+            alert(datas.message);
+            location.reload();    
+        }
+        else if(datas.status == false)
+        {                    
+            alert(datas.message);
+            //location.reload();    
+        }
+    
+
+    },
+    error: function (error) {               
+        
+        console.log(error.responseText);
+                
+    }
+});
+
+
+    
+ });
+
+ $(document).on("mouseover",".cls-special-days-Delete",function() {
+ 
+  var getdeleteid = $(this).attr('id-Delete');
+
+  $('li[id-Delete="'+getdeleteid+'"]').css("color", "red");
+  $('li[id-Delete="'+getdeleteid+'"]').css('cursor','pointer');
+  
+
+ });
+
+ $(document).on("mouseout",".cls-special-days-Delete",function() {
+  
+  var getdeleteid = $(this).attr('id-Delete');
+
+  $('li[id-Delete="'+getdeleteid+'"]').css("color", "black");
+  
+
+ });
+ 
+
+
+    function GetAll_AddSpecial_Days(){
+      $.ajax({
+        url: AddSpecialDaysRout +'List_SpecialDays',
+        type: 'get',
+        dataType: 'json',
+        //data: JSON.stringify(person),
+        contentType: 'application/json',
+        success: function (data) {
+          //debugger;
+
+             if(data.status == true)
+             {
+              var bindingTableData;
+              var bindingNumber = 1;
+              var firstChek = 0;
+              public_specialData_getAll_Datas = data.response;
+              
+
+
+              $.each(data.response , function(index, val) { 
+
+                 var StartDate =  getFormattedDate_second(val.Start_Date);
+                 var EndDate =  getFormattedDate_second(val.End_Date);
+
+                if(firstChek == 0){
+                  
+                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+val.Name+'\
+                  </td><td>'+ StartDate +'</td><td>'+ EndDate +'</td><td><ul class="table-action">\
+                  <li id-Edit ="'+val._id+'" class="cls-special-days-Edit"><a  class=""><i class="far fa-edit" aria-hidden="true">\
+                  </i></a></li><li id-Delete ="'+val._id+'" class="cls-special-days-Delete"><a (click)=deleteBoatModel(data)><i class="far fa-trash-alt" aria-hidden="true">\
+                  </i></a></li></ul></td></tr>';
+                  firstChek = 1;
+
+                }
+                else{
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+val.Name+'</td><td>'+ StartDate +'</td><td>'+ EndDate +'</td><td><ul class="table-action"><li id-Edit ="'+val._id+'"  class="cls-special-days-Edit"><a class=""><i class="far fa-edit" aria-hidden="true"></i></a></li><li id-Delete ="'+val._id+'" class="cls-special-days-Delete"><a><i class="far fa-trash-alt" aria-hidden="true"></i></a></li></ul></td></tr>';
+
+
+                }
+
+                bindingNumber = bindingNumber + 1;
+
+
+              });
+
+              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+
+              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Name</th><th>Start Date</th><th>End Date</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+              $("#temp-data-bindings-specialDays").html(bindingTabledataFirst);
+            
+             }
+             else
+             {
+               alert("Empty datas");
+              
+             }
+
+        }
+       
+    });      
+      
+    }
+
+
     
     $("input[type='number']").inputSpinner()
       $('#example').DataTable( {
@@ -915,14 +1199,38 @@ addShare(){
   }
 
   //Add special days for settings page //Done By Alagesan on 23.06.2021
+  
+  
+  Angular_string_to_Date_Convert(dateString){   
+
+    var dateArray = dateString.split("-");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    return dateObj;
+
+  }
+  
+  location_Reload(){
+    location.reload();
+  }
+  
   saveSpecialDays(){
+  
+
+    var startDate_tmp = this.Angular_string_to_Date_Convert(this.startDate);
+    var EndDate_tmp = this.Angular_string_to_Date_Convert(this.endDate);
+
+    this.specialDaysform.get('Start_Date').setValue(startDate_tmp);
+    this.specialDaysform.get('End_Date').setValue(EndDate_tmp);
+
     this.specialDaysSubmitted = true;
     if (this.specialDaysform.invalid) {
       return;
     }
 
     this.http.post<any>(`${this.specialDaysUrl}/Add_Special_Days_Booking`,  this.specialDaysform.value   ).subscribe(data => {
-        console.log(data);
+       
+      console.log(data);
       if(data.status == true){
         this.modelTitle = "Add Special Days"
         this.getResponce = data.message
@@ -1188,4 +1496,16 @@ addShare(){
     $('#removeBoat').trigger('click');
 
   }
+
+  
+  /*
+  
+  Add spetial days
+  
+  */
+
+  //MainModel
+  
+  
+
 }

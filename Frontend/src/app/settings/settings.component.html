@@ -17,6 +17,9 @@
       <a id="tab-A" href="#pane-A" class="nav-link active" data-toggle="tab" role="tab">Manage Boat Type</a>
   </li>
   <li class="nav-item">
+    <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Add Location</a>
+  </li>
+  <li class="nav-item">
       <a id="tab-B" href="#pane-B" class="nav-link" data-toggle="tab" role="tab">Unavailable Days</a>
   </li>
   <li class="nav-item">
@@ -29,9 +32,7 @@
   <a id="tab-E" href="#pane-E" class="nav-link" data-toggle="tab" role="tab">Share Allocation</a>
 </li>
 <!--Add location tab for settings Done By Alagesan on 21.06.2021    -->
-<li class="nav-item">
-  <a id="tab-F" href="#pane-F" class="nav-link" data-toggle="tab" role="tab">Add Location</a>
-</li>
+
 <!--Add special days tab for settings Done By Alagesan on 21.06.2021    -->
 
 <li class="nav-item">
@@ -414,100 +415,35 @@
         <div class="form-row">
           <div class="form-group col-md-4">
             <label>Name</label>
-            <input type="text" formControlName="Name"  placeholder="Name" class="form-control" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Name.errors }">
+            <input type="text" formControlName="Name" id="text-id-special-days-Name"  placeholder="Name" class="form-control" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Name.errors }">
           </div>  
         
           <div class="form-group col-md-4">
             <label>Start Date</label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text" formControlName="Start_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Start_Date.errors }" (focusout)="startDates($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input  id="datepicker-3" type="text" id="text-id-special-days-Start" formControlName="Start_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.Start_Date.errors }" (focusout)="startDates($event)">
             </span>
           </div>  
         
           <div class="form-group col-md-4">
             <label>End Date</label>
-            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text" formControlName="End_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.End_Date.errors }" (focusout)="endDates($event)">
+            <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 345px;"><input id="datepicker-4" type="text" id="text-id-special-days-End" formControlName="End_Date"  class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 20px;" [ngClass]="{ 'is-invalid': specialDaysSubmitted && sdf.End_Date.errors }" (focusout)="endDates($event)">
             </span>         
           </div>  
         </div> 
         
          <div class="form-row">     
             <div class="col-md-2">
-            <a  class="btn btn-primary"  (click)=saveSpecialDays() >SAVE</a>
+            <a  class="btn btn-primary" id="a-Id-special-days-Save"  (click)=saveSpecialDays() >SAVE</a>
+            <a style="display: none;" class="btn btn-primary" id="a-Id-special-days-Edit" >Edit</a>
             </div>             
          </div>
     </form>     
    </div> 
    <div class="row" style="margin-top: 25px;"> 
             
-    <div class="col-md-12 reports">
+    <div class="col-md-12 reports" id="temp-data-bindings-specialDays">
   
-          <table id="example" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">
-            <thead>
-                <tr>
-                    <th> NAME</th>
-                    <th>START DATE</th>
-                    <th>END DATE</th>
-                    <th>ACTION</th>
-                    </tr>
-            </thead>
-            <tbody>
-                    <tr >
-                        <td>Special Days 1</td>
-                        <td>2021-6-21</td>
-                        <td>2021-6-27</td>
-                        <td>
-                        <ul class="table-action">
-                            <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
-                            <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr >
-                      <td>Special Days 2</td>
-                      <td>2021-6-27</td>
-                      <td>2021-7-04</td>
-                      <td>
-                      <ul class="table-action">
-                          <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
-                          <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
-                          </ul>
-                      </td>
-                  </tr>
-                  <tr >
-                    <td>Special Days 3</td>
-                    <td>2021-7-5</td>
-                    <td>2021-6-12</td>
-                    <td>
-                    <ul class="table-action">
-                        <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
-                        <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr >
-                  <td>Special Days 4</td>
-                  <td>2021-7-13</td>
-                  <td>2021-6-20</td>
-                  <td>
-                  <ul class="table-action">
-                      <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
-                      <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
-                      </ul>
-                  </td>
-              </tr>
-              <tr >
-                <td>Special Days 5</td>
-                <td>2021-7-21</td>
-                <td>2021-7-27</td>
-                <td>
-                <ul class="table-action">
-                    <li><a ><i class="far fa-edit"  aria-hidden="true"></i></a></li>
-                    <li><a ><i class="far fa-trash-alt"  aria-hidden="true"></i></a></li>
-                    </ul>
-                </td>
-            </tr>
-            </tbody>
-          </table>
+          
     
         </div>  
     
@@ -692,7 +628,7 @@
                   <p>{{getResponce}}</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="location_Reload()">OK</button>
                 </div>
               </div>
               
