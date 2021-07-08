@@ -1405,7 +1405,7 @@ addShare(){
       //Change the popup message booking days  for settings page //Done By Alagesan on 08.07.2021
       var startStr = "The maximum days to book in advance for the has been successfully updated to    ";
       var endStr = "  days";
-      this.getResponce = (startStr).concat(this.NEXT_BOOKING_DAYS_ALLOWED, endStr);
+      this.getResponce = (startStr).concat(this.Bookingform.value.Next_BookingDay, endStr);
       this.Bookingform.reset()
       this.bookdropdownOwn =[]; 
 
