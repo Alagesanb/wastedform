@@ -23,6 +23,12 @@ export class MyprofileComponent implements OnInit {
   ownerlogin: any;
   listBoats: any=[];
   ownerdurationsdetails: any=[];
+
+  fromDate: string;
+	toDate: string;
+  today_date:string;
+  endingFormatDate:string;
+  endedFormatDate: string;
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
   }
   // Create Component for myprofile //Done By Alagesan on 17.05.2021
@@ -81,16 +87,78 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       this.http.post<any>(`${this.url}/GetOwnerDurationdetailsbyOwnerId`,obj).subscribe(data => {
         this.ownerdurationsdetails = data['response'];
         console.log(this.ownerdurationsdetails);
-      
+
+           // Get date format for myprofile Done By Alagesan	on 07.07.2021 
+           var from_date = new Date(this.ownerdurationsdetails[0].From_Date);
+           this.fromDate = (from_date.getDate())+'-' + (from_date.getMonth()+1) + '-'+from_date.getFullYear();
+           var to_date = new Date(this.ownerdurationsdetails[0].To_Date);
+           this.toDate = (to_date.getDate())+'-' + (to_date.getMonth()+1) + '-'+to_date.getFullYear();
+           var todaydate = new Date()
+           this.today_date = (todaydate.getDate())+'-' + (todaydate.getMonth()+1) + '-'+todaydate.getFullYear();
+           var sHour = todaydate.getHours();
+          //  console.log(this. today_date);
+          //  console.log(sHour);
+          //  console.log(this.fromDate);
+          //  console.log(this.toDate);
+          console.log(from_date);
+          console.log(to_date);
+
+
+          console.log(todaydate);
+          this.endingtimeDate(todaydate,from_date);
+          this.endedtimeDate(todaydate,to_date);
        }, err => {
        })
     }
 
+   // Show ending date popup for myprofile Done By Alagesan	on 07.07.2021 
+    endingtimeDate(date1: Date, date2: Date)
+    {
+
+      let d1 = new Date(date1); let d2 = new Date(date2);
+
+      if (d1 < d2) 
+      {
+        $('#ending-date-popupbtn').trigger('click');
+        let endingDate = (d2.getDate())+'-' + (d2.getMonth()+1) + '-'+d2.getFullYear();
+
+        this.endingFormatDate = endingDate;
+        return this.endingFormatDate;
+      }
+
+    
+    }
+    
+   // Show ended date popup for myprofile Done By Alagesan	on 07.07.2021 
+    endedtimeDate(date1: Date, date2: Date)
+    {
+
+      let d1 = new Date(date1); let d2 = new Date(date2);
+
+      if (d1 == d2) 
+      {
+        $('#ended-date-popupbtn').trigger('click');
+        let endedDate = (d1.getDate())+'-' + (d1.getMonth()+1) + '-'+d1.getFullYear();
+
+        this.endedFormatDate = endedDate;
+        return this.endedFormatDate;
+      }
+
+    
+    }
+
 
     viewBoat(boat){
+      if(boat.BoatDetails[0].IsActive == true){
+        $('#active-boat-popupbtn').trigger('click');
+      }  
+    }
+
+    activeBoat(boat){
       sessionStorage.setItem('boatData', JSON.stringify(boat));   // if it's object
       // Change the view boat url for myprofile Done By Alagesan	on 05.07.2021 
       this.router.navigate(['view-boat-owner/']);
+
     }
   editProfile(){
     this.router.navigate(['edit-owner-profile/']);
