@@ -268,8 +268,9 @@ console.log(this.allOwners)
   }
 
 
-  deleteownerModel(id){
-    this.ownerId = id
+  deleteownerModel(owner){
+    //debugger;
+    this.ownerId = owner.Owner_id;
     $('#removeBoat').trigger('click');
 
   }
@@ -284,10 +285,12 @@ console.log(this.allOwners)
     this.router.navigate(['edit-owner/']);
   }
   deleteOwner(){
+    
     var boadtId = {
       _id : this.ownerId
     }
     this.http.post<any>(`${this.url}/DeleteOwner`,  boadtId   ).subscribe(data => {
+     
         if(data.status==false){
         alert(data.message)
         }
@@ -295,10 +298,14 @@ console.log(this.allOwners)
           this.getResponce = data.message
           $('#removeBoat').trigger('click');  
           $('#pop-up-btn').trigger('click');
-          this.getAllOwners()
+          //this.getAllOwners()
         } 
         }, err => {
           console.log(err);
         })
+  }
+
+  location_reload(){
+    location.reload();
   }
 }

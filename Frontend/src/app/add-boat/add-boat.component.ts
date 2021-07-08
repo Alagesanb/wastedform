@@ -232,13 +232,13 @@ export class AddBoatComponent implements OnInit {
     $('#datepicker-launch-date').Zebra_DatePicker({
       //format: 'm/d/yyyy',
       direction: 1,
-      pair: $('#datepicker-3')
+      //pair: $('#datepicker-3')
 
 
     });
     $('#datepicker-3').Zebra_DatePicker({
 
-      direction: 1,
+      //direction: 1,
       pair: $('#datepicker-4'),
 
       //   direction: true,
@@ -311,14 +311,14 @@ export class AddBoatComponent implements OnInit {
   focusOutPreLaunch($event) {
     this.previousDate = $event.target.value;
     var preLS = new Date(this.previousDate);
-    this.preLaunchDates = (preLS.getMonth() + 1) + '/' + (preLS.getDate()) + '/' + preLS.getFullYear();
+    this.preLaunchDates =  (preLS.getDate()) + '/' + (preLS.getMonth() + 1)  + '/' + preLS.getFullYear();
     this.boatform.get('PreLaunch_Date').setValue(this.preLaunchDates);
   }
 
   focusOutLaunch($event) {
     this.launchDate = $event.target.value;
     var sumerS = new Date(this.launchDate);
-    this.launchDates = (sumerS.getMonth() + 1) + '/' + (sumerS.getDate()) + '/' + sumerS.getFullYear();
+    this.launchDates =  (sumerS.getDate()) + '/' + (sumerS.getMonth() + 1)  + '/' + sumerS.getFullYear();
     this.boatform.get('Launch_Date').setValue(this.launchDates);
   }
 
@@ -414,11 +414,30 @@ export class AddBoatComponent implements OnInit {
   }
 
   addBoat() { 
-    debugger;
-   
+    
+  
     this.boatform.get('Block').setValue(true);
     this.boatform.get('IsActive').setValue(true); 
     this.boatSubmitted = true; 
+    var Data_Temp = this.boatform.value;
+    this.boatform.get('PreLaunch_Date').setValue(this.string_to_Date_Convert(Data_Temp.PreLaunch_Date));
+    this.boatform.get('Launch_Date').setValue(this.string_to_Date_Convert(Data_Temp.Launch_Date));
+    this.boatform.get('SummerSeason_EDate').setValue(this.string_to_Date_Convert(Data_Temp.SummerSeason_EDate));
+    this.boatform.get('SummerSeason_SDate').setValue(this.string_to_Date_Convert(Data_Temp.SummerSeason_SDate));
+    this.boatform.get('WinterSeason_EDate').setValue(this.string_to_Date_Convert(Data_Temp.WinterSeason_EDate)); 
+    this.boatform.get('WinterSeason_SDate').setValue(this.string_to_Date_Convert(Data_Temp.WinterSeason_SDate)); 
+    //PreLaunch_Date
+    //Launch_Date
+    //SummerSeason_EDate
+    //SummerSeason_SDate
+    //WinterSeason_EDate
+    //WinterSeason_SDate
+
+    
+
+    console.log(this.boatform.value);
+    console.log(Data_Temp);
+
 
     if(this.handBook != null){
       this.boatform.get('Boat_HandBook_span').setValue(true);
@@ -533,10 +552,11 @@ export class AddBoatComponent implements OnInit {
 
   // Change to date format dd/mm/yyyy for add boat//Done By Alagesan on 30.06.2021
   focusOutSTo($event) {
+    
     this.toDate = $event.target.value;
     var td = new Date(this.toDate);
     this.stD = (td.getDate() + '/' + (td.getMonth() + 1) + '/' + td.getFullYear());
-    this.boatform.get('SummeSeason_EDate').setValue(this.stD);
+    this.boatform.get('SummerSeason_EDate').setValue(this.stD);
   }
 // Change from date format dd/mm/yyyy for add boat//Done By Alagesan on 30.06.2021
   focusOutWFrom($event) {
@@ -612,6 +632,8 @@ export class AddBoatComponent implements OnInit {
       SummerSeason_EDate: new FormControl('', [Validators.required,]),//
       WinterSeason_SDate: new FormControl('', [Validators.required,]),//
       WinterSeason_EDate: new FormControl('', [Validators.required,]),//
+
+      //SummeSeason_EDate
 
       Boat_Image_span: new FormControl('', [Validators.required]),
       Boat_HandBook_span: new FormControl('', [Validators.required]),
@@ -783,5 +805,49 @@ export class AddBoatComponent implements OnInit {
     }, err => {
     })
   }
+
+   string_to_Date_Convert(dateString){ 
+        
+    var dateArray = dateString.split("/");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    return this.getFormattedDate_second(dateObj)//dateObj;
+
+  }
+
+   getFormattedDate_second(dateVal) {
+     
+    var newDate = new Date(dateVal);
+
+    var sMonth = this.padValue(newDate.getMonth() + 1);
+    var sDay = this.padValue(newDate.getDate());
+    var sYear = newDate.getFullYear();
+    var sHour = newDate.getHours();
+    var sMinute = this.padValue(newDate.getMinutes());
+    var sAMPM = "AM";
+
+    var iHourCheck = Number(sHour);
+
+    if (iHourCheck > 12) {
+        sAMPM = "PM";
+        sHour = iHourCheck - 12;
+    }
+    else if (iHourCheck === 0) {
+        sHour = 12;
+    }
+
+    sHour = this.padValue(sHour);
+
+    //return sDay + "-" + sMonth + "-" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+    return sYear + "/" + sMonth + "/" + sDay;
+
+}
+
+ padValue(value) {
+  return (value < 10) ? "0" + value : value;
+
+}
+
+
 }
 

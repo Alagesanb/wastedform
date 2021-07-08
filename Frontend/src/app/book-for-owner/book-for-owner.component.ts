@@ -311,7 +311,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
   getpendingDays_Calculation()
   {
-
+    
     this.PENDING_SUMMER_WEEKDAYS = 0; 
     this.PENDING_SUMMER_WEEKENDS = 0;
     this.PENDING_WINTER_WEEKDAYS = 0;
@@ -326,7 +326,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         obj.Boat_Id = Boat_tmp._id;
       this.http.post<any>(`${this.url}GetAllPendingDaysOfOwner`, obj).subscribe(data => { 
 
-       
+        
         
         if(data.status == true){
 
@@ -334,11 +334,22 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
           var BookedDays = dt.BookedDays;
           var AllocatedDays = dt.AllocatedDays;
 
+          if(BookedDays.length == 0){
+
+          this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays ; 
+          this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays ;
+          this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays ;
+          this.PENDING_WINTER_WEEKENDS = AllocatedDays[0].Winter_WeekEndDays ;
+
+          }
+          
+          else{
+
           this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays - BookedDays[0].Summer_WeekDays; 
           this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays - BookedDays[0].Summer_WeekEndDays;
           this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays - BookedDays[0].Winter_WeekDays;
           this.PENDING_WINTER_WEEKENDS = AllocatedDays[0].Winter_WeekEndDays - BookedDays[0].Winter_WeekEndDays;
-
+          }
 
 
           /*
