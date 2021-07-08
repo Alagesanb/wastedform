@@ -642,23 +642,23 @@ else{
 
 
 var Launch_Date = new Date(this.data.Launch_Date);
-this.Launch_Dates = (Launch_Date.getMonth()+1)+'/' + (Launch_Date.getDate()) + '/'+Launch_Date.getFullYear();
+this.Launch_Dates = (Launch_Date.getDate()) + '/'+(Launch_Date.getMonth()+1)+'/' + Launch_Date.getFullYear();
 
 var preDate = new Date(this.data.PreLaunch_Date);
-this.preDates = (preDate.getMonth()+1)+'/' + (preDate.getDate()) + '/'+preDate.getFullYear();
+this.preDates = (preDate.getDate()) + '/'+(preDate.getMonth()+1)+'/' + preDate.getFullYear();
 
 
 var sumerS = new Date(this.data.SummerSeason_SDate);
-this.sumerS = (sumerS.getMonth()+1)+'/' + (sumerS.getDate()) + '/'+sumerS.getFullYear();
+this.sumerS = (sumerS.getDate()) + '/'+(sumerS.getMonth()+1)+'/' + sumerS.getFullYear();
 
 var sumerE = new Date(this.data.SummerSeason_EDate);
-this.sumerE = (sumerE.getMonth()+1)+'/' + (sumerE.getDate()) + '/'+sumerE.getFullYear(); 
+this.sumerE = (sumerE.getDate()) + '/'+(sumerE.getMonth()+1)+'/' + sumerE.getFullYear(); 
 
 var winterS = new Date(this.data.WinterSeason_SDate);
-this.winterS = (winterS.getMonth()+1)+'/' + (winterS.getDate()) + '/'+winterS.getFullYear();
+this.winterS = (winterS.getDate()) + '/'+(winterS.getMonth()+1)+'/' + winterS.getFullYear();
 
 var winterE = new Date(this.data.WinterSeason_EDate);
-this.winterE = (winterE.getMonth()+1)+'/' + (winterE.getDate()) + '/'+winterE.getFullYear();
+this.winterE = (winterE.getDate()) + '/'+(winterE.getMonth()+1)+'/' + winterE.getFullYear();
 
 }
 this.dropdownBoatType = []; 
