@@ -1402,8 +1402,9 @@ addShare(){
       
     if(data.status == true){
       //Add booking days  popup message for settings page //Done By Alagesan on 28.06.2021
-      var startStr = "Next Booking Day will be Open after   ";
-      var endStr = "  days to book in advance";
+      //Change the popup message booking days  for settings page //Done By Alagesan on 08.07.2021
+      var startStr = "The maximum days to book in advance for the has been successfully updated to    ";
+      var endStr = "  days";
       this.getResponce = (startStr).concat(this.NEXT_BOOKING_DAYS_ALLOWED, endStr);
       this.Bookingform.reset()
       this.bookdropdownOwn =[]; 
