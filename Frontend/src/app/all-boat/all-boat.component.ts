@@ -23,8 +23,11 @@ export class AllBoatComponent implements OnInit {
   setLDates= ""
   fromDate: any=[];
   toDate: any=[];
-  LanchTYpe: any;
+  LanchTYpe: any = "Launch Date";
   submitted = false;
+
+  Public_allBoats: any=[];
+
   // Add Base URL for all boat Done By Alagesan	on 06.07.2021
   EnvironmentURL:string = environment.url;
 
@@ -167,7 +170,8 @@ $('#datepiker-all-boat-to-date').Zebra_DatePicker({
   getAllBoat(){
     this.http.get<any>(`${this.url}/GetallBoatDetails`).subscribe(data => {
       
-  this.allBoats = data['response']
+  this.allBoats = data['response'];
+  this.Public_allBoats = data['response'];
   console.log(this.allBoats);
    console.log(this.allBoats)
    }, err => {
@@ -264,23 +268,91 @@ $('#datepiker-all-boat-to-date').Zebra_DatePicker({
 
     this.router.navigate(['edit-boat/']);
   }
-  getSearchData(){
-    this.submitted = true;
-    this.form.get('Launch_Date1').setValue(this.fromDate);
-    this.form.get('Launch_Date2').setValue(this.toDate);
-   
-    if (this.form.invalid) {
-      return;
-  }
-   
-   
-    this.form.get('DateType').setValue(this.LanchTYpe);
-    this.http.post<any>(`${this.url}/LaunchFilter`,  this.form.value   ).subscribe(data => {
-      this.allBoats = data['response']
 
-        }, err => {
-          console.log(err);
-        })
+  string_to_Date_Convert(dateString){     
+        
+    var dateArray = dateString.split("-");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    //return this.getFormattedDate_second(dateObj)//dateObj;
+    return dateObj;
+
+  }
+
+   getFormattedDate_second(dateVal) {    
+     
+    var newDate = new Date(dateVal);
+
+    var sMonth = this.padValue(newDate.getMonth() + 1);
+    var sDay = this.padValue(newDate.getDate());
+    var sYear = newDate.getFullYear();
+    var sHour = newDate.getHours();
+    var sMinute = this.padValue(newDate.getMinutes());
+    var sAMPM = "AM";
+
+    var iHourCheck = Number(sHour);
+
+    if (iHourCheck > 12) {
+        sAMPM = "PM";
+        sHour = iHourCheck - 12;
+    }
+    else if (iHourCheck === 0) {
+        sHour = 12;
+    }
+
+    sHour = this.padValue(sHour);
+
+    //return sDay + "-" + sMonth + "-" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+    return sDay + "-" + sMonth + "-" + sYear;
+
+}
+
+  padValue(value) {
+    return (value < 10) ? "0" + value : value;
+  
+  }
+
+
+  getSearchData(){
+
+    var tempArry = [];
+
+    var StartDate = this.string_to_Date_Convert(this.fromDate);
+    var EndDate = this.string_to_Date_Convert(this.toDate);
+    
+    if(this.LanchTYpe == "Launch Date"){      
+      this.Public_allBoats.forEach(boat1 => {         
+        var date_Start_Server = this.string_to_Date_Convert(this.getFormattedDate_second(boat1.Launch_Date));
+        
+        if(date_Start_Server >= StartDate && date_Start_Server <= EndDate)
+        {
+          tempArry.push(boat1)
+        }
+        else{    
+          console.log(date_Start_Server);
+    
+        }             
+        
+      });
+
+    }
+    else if(this.LanchTYpe == "Pre-Launch Date"){
+      this.Public_allBoats.forEach(boat1 => {  
+      
+        var date_Start_Server = this.string_to_Date_Convert(this.getFormattedDate_second(boat1.PreLaunch_Date));
+        
+        if(date_Start_Server >= StartDate && date_Start_Server <= EndDate)
+        {
+          tempArry.push(boat1)
+        }
+        else{    
+          console.log(date_Start_Server);    
+        }        
+                
+      });
+
+    }
+    this.allBoats = tempArry;
 
   }
 

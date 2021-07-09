@@ -200,7 +200,7 @@ this.bookingInfo = this.listBooking
 
     //this is Start..........
     var standByBooking = data['response'];
-    debugger;
+    
 
     standByBooking.forEach(element => {
        
@@ -425,7 +425,7 @@ this.bookingInfo = this.listBooking
 
 
   string_to_Date_Convert(dateString){ 
-    debugger;
+    
         
     var dateArray = dateString.split("/");
     var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
@@ -437,7 +437,7 @@ this.bookingInfo = this.listBooking
 
    getFormattedDate_second(dateVal) {
 
-    debugger;
+    
      
     var newDate = new Date(dateVal);
 
@@ -495,7 +495,7 @@ get_Search_Data_From_To(){
 
     //   this.bookingPushData.push(boat)        
     // }
-    debugger;
+    
 
 
     var date_Start_Server = this.string_to_Date_Convert(this.getFormattedDate_second(boat.start));
