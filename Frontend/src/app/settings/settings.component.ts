@@ -1503,6 +1503,10 @@ addShare(){
 
   }
 
+  pagereload(){
+    location.reload();
+  }
+
   
   /*
   
