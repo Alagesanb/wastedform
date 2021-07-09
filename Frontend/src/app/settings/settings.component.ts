@@ -1619,6 +1619,10 @@ addShare(){
 
   }
 
+  pagereload(){
+    location.reload();
+  }
+
   
   /*
   

@@ -512,7 +512,7 @@ function generateRandomSchedule(val){
                     schedule.attendees = val.attendees; 
                     schedule.recurrenceRule = val.recurrenceRule;
                     schedule.state = val.state;
-                    schedule.color = "#ffffff";
+                    schedule.color = "#fff";
                     schedule.bgColor = "#047b0f";
                     schedule.dragBgColor = "#047b0f";
                     schedule.borderColor = "#047b0f";
@@ -555,7 +555,7 @@ function generateRandomSchedule(val){
                     schedule.attendees = val.attendees; 
                     schedule.recurrenceRule = val.recurrenceRule;
                     schedule.state = val.state;
-                    schedule.color = "#ffffff";
+                    schedule.color = "#fff";
                     schedule.bgColor = "#D50000";
                     schedule.dragBgColor = "#D50000";
                     schedule.borderColor = "#D50000";
@@ -598,7 +598,7 @@ function generateRandomSchedule(val){
                     schedule.attendees = val.attendees; 
                     schedule.recurrenceRule = val.recurrenceRule;
                     schedule.state = val.state;
-                    schedule.color = "#ffffff";
+                    schedule.color = "#fff";
                     schedule.bgColor = "#2c46f8";
                     schedule.dragBgColor = "#2c46f8";
                     schedule.borderColor = "#2c46f8";

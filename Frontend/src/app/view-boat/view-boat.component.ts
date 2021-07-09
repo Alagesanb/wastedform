@@ -211,6 +211,8 @@ this.boatStatus = "Enable"
 
 	  $.each(dataImages , function(index, val) {
 
+		debugger;
+
 		if(typeof val === "undefined" || val == null || val == ""){
 			val ="boat1.jpg";
 			urlImg = "/assets/images/";

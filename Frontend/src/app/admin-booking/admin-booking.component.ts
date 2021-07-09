@@ -48,6 +48,8 @@ export class AdminBookingComponent implements OnInit {
      sessionStorage.removeItem('AdminSelectBoat');
      sessionStorage.setItem("pageIdentiFiction","AdminBooking");
 
+     //$('#Footer-Success-disp-btns').trigger('click');
+
        function ReloadPages(){
            
            //var sss = public_URL;

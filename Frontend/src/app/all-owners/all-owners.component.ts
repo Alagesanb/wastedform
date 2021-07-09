@@ -123,7 +123,9 @@ export class AllOwnersComponent implements OnInit {
        var boat_Summer_Details = [];
        var first_timeExicute = 0;
        Number = Number + 1;
-      
+
+      if (typeof element !== "undefined" && element != null)
+      {
 
       var obj = Object();
       obj.Profile_Image = element.Profile_Image;
@@ -155,6 +157,10 @@ export class AllOwnersComponent implements OnInit {
       if(tmp_bot_and_summer.length > 0){     
 
       tmp_bot_and_summer[0].BoatDetails.forEach(element2 => {
+
+        if (typeof element2[0] !== "undefined" && element2[0] != null)
+        {
+
         Number = Number + 1 ;
 
         if(first_timeExicute == 0){
@@ -208,6 +214,9 @@ export class AllOwnersComponent implements OnInit {
         
         boat_Summer_Details.push(obj3);
 
+        }
+
+
       });
     }
 
@@ -217,6 +226,8 @@ export class AllOwnersComponent implements OnInit {
       this.allOwners.push(obj);
 
       OwnerBaseNumber = OwnerBaseNumber + 1;
+
+      }
       
     });
     
@@ -268,8 +279,9 @@ console.log(this.allOwners)
   }
 
 
-  deleteownerModel(id){
-    this.ownerId = id
+  deleteownerModel(owner){
+    //debugger;
+    this.ownerId = owner.Owner_id;
     $('#removeBoat').trigger('click');
 
   }
@@ -284,10 +296,12 @@ console.log(this.allOwners)
     this.router.navigate(['edit-owner/']);
   }
   deleteOwner(){
+    
     var boadtId = {
       _id : this.ownerId
     }
     this.http.post<any>(`${this.url}/DeleteOwner`,  boadtId   ).subscribe(data => {
+     
         if(data.status==false){
         alert(data.message)
         }
@@ -295,10 +309,14 @@ console.log(this.allOwners)
           this.getResponce = data.message
           $('#removeBoat').trigger('click');  
           $('#pop-up-btn').trigger('click');
-          this.getAllOwners()
+          //this.getAllOwners()
         } 
         }, err => {
           console.log(err);
         })
+  }
+
+  location_reload(){
+    location.reload();
   }
 }

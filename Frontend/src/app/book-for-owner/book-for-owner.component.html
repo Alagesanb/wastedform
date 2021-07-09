@@ -185,10 +185,12 @@
     <ng-multiselect-dropdown
     [placeholder]="'Select'"      
     [settings]="dropdownSettings"
+    [(ngModel)]="dropdownList_filted_model"
+    [ngModelOptions]="{standalone: true}"
     [data]="dropdownList_filted"                                    
     (onSelect)="onItemSelect($event)" 
     (onDeSelect)="onDeSelect_boat($event)"    
-    class="cls-Boat-name"
+    class="singleselect_drop cls-Boat-name"
    
     
 >

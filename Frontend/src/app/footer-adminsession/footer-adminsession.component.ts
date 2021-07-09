@@ -18,4 +18,8 @@ export class FooterAdminsessionComponent implements OnInit {
     
   }
 
+  locationReaload(){
+    alert("test.....");
+  }
+
 }

@@ -74,7 +74,7 @@ export class AddOwnerComponent implements OnInit {
     this.form = this.fb.group({
       First_Name: new FormControl('', [Validators.required,]),
       Last_Name: new FormControl('', [Validators.required, ]),
-      Home_Address: new FormControl('', [Validators.required, ]),
+      Home_Address: new FormControl('', []),
       Email: new FormControl('', [Validators.required, Validators.email ]),
       Password: new FormControl('', [Validators.required, ]),
       Profile_Image: new FormControl('', [ ]),
@@ -85,7 +85,7 @@ export class AddOwnerComponent implements OnInit {
       Housekeeping: new FormControl('', [Validators.required,]),
       Emergency_Contact_Name: new FormControl('', [Validators.required, ]),
       Emergency_Contact_Mobile: new FormControl('', [Validators.required, ]),
-      Notes: new FormControl('', [Validators.required, ]),
+      Notes: new FormControl('', []),
       
       Parking_Ability: new FormControl('', []),
       Block: new FormControl('', [ ]),
@@ -94,7 +94,7 @@ export class AddOwnerComponent implements OnInit {
   }
   get f() { return this.form.controls; }
   addOwner(){
-
+   
     this.submitted = true;
   
 
@@ -112,6 +112,8 @@ export class AddOwnerComponent implements OnInit {
     this.form.get('IsActive').setValue(true);
     this.form.get('Profile_Image').setValue(this.singleFileDetails);
     this.http.post<any>(`${this.url}/AddOwner`,  this.form.value   ).subscribe(data => {
+
+      debugger;
       
       // Modal popup for add Owner//Done By Alagesan
       if(data.status == true){
