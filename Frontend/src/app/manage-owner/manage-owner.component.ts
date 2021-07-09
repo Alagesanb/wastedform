@@ -58,6 +58,8 @@ export class ManageOwnerComponent implements OnInit {
   dropdownOwn_Boat_selected = [];
   dropdownBoat_Owner_selected = [];
 
+  dropdownBoat_Owner_selected_model: any;
+
   public_Owner_Name : any = null;
   public_Owner_Id : any = null;
 
@@ -414,6 +416,9 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
    this.manageOwnerForms.reset()
   }
   onboatSelect(items: any) { 
+
+    this.dropdownBoat_Owner_selected_model = "";
+
     this.checkCurrent = false
    this.selectedBoat = items
     this.boatId = items.item_id

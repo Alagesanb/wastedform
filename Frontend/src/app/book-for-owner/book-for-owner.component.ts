@@ -39,7 +39,7 @@ export class BookForOwnerComponent implements OnInit {
    PENDING_WINTER_WEEKDAYS: any = 0;
    PENDING_WINTER_WEEKENDS: any = 0;
 
-
+   dropdownList_filted_model: any;
 
   constructor(private fb: FormBuilder,private http: HttpClient) { }
 
@@ -121,6 +121,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
 
   onItemSelect_Owner(item: any) {
+
+    this.dropdownList_filted_model ="";
        
     this.dropdownList_filted = []; 
     sessionStorage.removeItem('AdminSelectBoat');

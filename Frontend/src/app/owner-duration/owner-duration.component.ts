@@ -373,6 +373,9 @@ this.form.reset()
   onSelectAll(items: any) { 
   }
   onItemOwnerSelect(item: any) {
+
+    this.dropdownBoat ="";
+
     var findOwnerList = this.dropdownOwnerList.find(x => x._id == item.item_id);   
     this.form.get('Owner_Name').setValue(findOwnerList.First_Name);
     this.form.get('Owner_Id').setValue(findOwnerList._id);    
