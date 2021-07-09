@@ -101,7 +101,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    var AddSpecialDaysRout = this.EnvironmentURL+'api/AddSpecialDaysRout/';
    var public_Edit_Id = "0";
    var public_specialData_getAll_Datas = null;
-  
+   var unavailable_days_url = this.EnvironmentURL+"api/Days/";
+   var locations_url = this.EnvironmentURL+'api/Boat/';
 
    this.dropdownSettings = {
     singleSelection: true,
@@ -190,7 +191,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       // this.Shareform.get('No_of_WinterWeekDays').setValue("");
       // this.Shareform.get('No_of_WinterWeekEndDays').setValue("");
    });
-   
+   Get_UnAvailabe_Days();
+   Get_Locations_Data();
    GetAll_AddSpecial_Days();
    binding_Boat();
     function binding_Boat(){
@@ -500,6 +502,120 @@ $(document).on("click",".cls-special-days-Edit",function() {
       
     }
 
+    function Get_UnAvailabe_Days(){
+      $.ajax({
+        url: unavailable_days_url +'GetUnAvailabeDaysOfBoats',
+        type: 'get',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+          //debugger;
+
+             if(data.status == true)
+             {
+              var bindingTableData;
+              var bindingNumber = 1;
+              var firstChek = 0;
+            
+              $.each(data.response , function(index, val) { 
+                 var ID        = val._id; 
+                 var Boat_Name =  val.Boat_Name;
+                 var UnAvailableDates =  val.UnAvailableDates;
+
+                if(firstChek == 0){
+                  
+                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+Boat_Name+'\
+                  </td><td>'+ UnAvailableDates +'</td></tr>';
+                  firstChek = 1;
+
+                }
+                else{
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+Boat_Name+'</td><td>'+ UnAvailableDates +'</td></tr>';
+
+
+                }
+
+                bindingNumber = bindingNumber + 1;
+
+
+              });
+
+              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+
+              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Name</th><th>Unavailable <br> Dates</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+              $("#temp-unavailable-days ").html(bindingTabledataFirst);
+            
+             }
+             else
+             {
+               alert("Empty datas");
+              
+             }
+
+        }
+       
+    });      
+      
+    }
+
+    function Get_Locations_Data(){
+      $.ajax({
+        url: locations_url +'GetLocation',
+        type: 'get',
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            if(data.status == true)
+            {
+              var bindingTableData;
+              var bindingNumber = 1;
+              var firstChek = 0;
+            
+              $.each(data.response , function(index, val) { 
+                console.log(val)
+                var ID        = val._id; 
+                var Boat_Location =  val.Boat_Location;
+
+
+                if(firstChek == 0){
+                  
+                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'\
+                  </td><td></td></tr>';
+                  firstChek = 1;
+
+                }
+                else{
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'</td><td></td></tr>';
+
+
+                }
+
+                bindingNumber = bindingNumber + 1;
+
+
+              });
+
+              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+
+              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Location</th><th>Location URL</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+              $("#temp-locations-data").html(bindingTabledataFirst);
+            
+            }
+            else
+            {
+              alert("Empty datas");
+              
+            }
+
+        }
+      
+    });      
+      
+    }
 
     
     $("input[type='number']").inputSpinner()

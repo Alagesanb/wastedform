@@ -107,16 +107,21 @@ $(document).on("click",".cls-OwnerDuration",function() {
     id:getId,Boat_Id:getboatid,Is_Cancellation:"true"
   },
   function(data, status){
-    $("#Idsuspendok").attr('disabled', false);
+    
     if(data.status == true){
       $('#SuspendMessage').html(data.message); 
       $('#suspend-popup-btn').trigger('click');
       $('#suspend-message-btn').trigger('click');
-      $("#Idsuspendok").attr('disabled', true);
-      $
+      $("#Idsuspendok").hide();
+      
     }
   });
     
+ })
+
+ $(document).on("click",".cls-OwnerDuration-activate",function() {
+  $("#Idsuspendok").show();
+  $("#activate-btn").hide();
  })
 
  Binding_OwnerDuration();
@@ -150,7 +155,7 @@ function Binding_OwnerDuration(){
           // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData = '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
           <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
-          <button  type="button" id="Idsuspendok"  attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
+          <button  type="button" id="Idsuspendok"  attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li><li><button  type="button" style="background-color: #28a745;color: #fff !important;" id="activate-btn" class="btn btn-lg cls-OwnerDuration-activate" >Activate</button></li></ul></td></tr>';
 
           firstChek = firstChek + 1;
         }
@@ -158,7 +163,7 @@ function Binding_OwnerDuration(){
          // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData += '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
           <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
-          <button  type="button" id="Idsuspendok"   attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li></ul></td></tr>';
+          <button  type="button" id="Idsuspendok"   attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li><li><button  type="button" style="background-color: #28a745;color: #fff !important;" id="activate-btn"  class="btn btn-lg cls-OwnerDuration-activate" >Activate</button></li></ul></td></tr>';
 
         }
 
