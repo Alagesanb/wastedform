@@ -104,10 +104,10 @@ $(document).on("click",".cls-OwnerDuration",function() {
  $(document).on("click","#suspendConfirm",function() {
   $.post(suspendUrl,
   {
-    id:getId,Boat_Id:getboatid,Is_Cancellation:"true"
+    _id:getId,Is_Cancellation:"true"
   },
   function(data, status){
-    
+    console.log(data);
     if(data.status == true){
       $('#SuspendMessage').html(data.message); 
       $('#suspend-popup-btn').trigger('click');
@@ -136,12 +136,12 @@ $(document).on("click",".cls-OwnerDuration",function() {
  $(document).on("click","#activateConfirm",function() {
   $.post(suspendUrl,
     {
-      id:getId,Boat_Id:getboatid,Is_Cancellation:"false"
+      _id:getId,Is_Cancellation:"false"
     },
     function(data, status){
-
+      console.log(data);
       if(data.status == true){
-        $('#ActivateMessage').html("activated successfully"); 
+        $('#ActivateMessage').html(data.message); 
         $('#activate-popup-btn').trigger('click');
         $('#activate-message-btn').trigger('click');
         $("#Idsuspendok").show();
