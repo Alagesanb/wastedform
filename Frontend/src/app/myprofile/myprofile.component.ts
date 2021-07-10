@@ -149,7 +149,12 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
 
     viewBoat(boat){
-      if(boat.BoatDetails[0].IsActive == true){
+      // Activate the owner in admin message for my profile Done By Alagesan on 10.07.2021
+      var owner_suspend = this.ownerdurationsdetails[0].Is_Cancellation;
+      if(owner_suspend == true){
+        $('#suspend-owner-message-btn').trigger('click');
+      } 
+      if(boat.BoatDetails[0].IsActive == true && owner_suspend == false){
         $('#active-boat-popupbtn').trigger('click');
       }  
     }
