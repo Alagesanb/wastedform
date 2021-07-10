@@ -343,7 +343,7 @@
      
       <div class="form-row">    
             <div class="form-group col-md-4">
-            <label>Next Booking Day Will Be Open After</label>
+            <label>Maximum days to book in advance</label>
             <input type="text" class="form-control" value="{{NEXT_BOOKING_DAYS_ALLOWED}}" formControlName="Next_BookingDay" [ngClass]="{ 'is-invalid': BookingSubmitted && bf.Next_BookingDay.errors }">
             </div>  
          </div>               
@@ -607,7 +607,7 @@
         <p>{{getResponce}}</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-default" (click)="pagereload()" data-dismiss="modal">OK</button>
       </div>
     </div>
     
@@ -659,7 +659,7 @@
                   <p>{{getResponce}}</p>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                  <button type="button" class="btn btn-default" (click)="pagereload()" data-dismiss="modal">OK</button>
                 </div>
               </div>
               
