@@ -435,8 +435,8 @@ export class AddBoatComponent implements OnInit {
 
     
 
-    console.log(this.boatform.value);
-    console.log(Data_Temp);
+    // console.log(this.boatform.value);
+    // console.log(Data_Temp);
 
 
     if(this.handBook != null){

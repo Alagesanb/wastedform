@@ -550,24 +550,37 @@ export class DashboardComponent implements OnInit {
                               var tmp1_dt2 = GetUnAvailabeDaysOfBoats_datas.response;
                               $.each(tmp1_dt2, function(key, val2){
 
-                                $.each(val2.Boat_Id, function(key, val3){
+                                try {
 
-                                  $.each(val2.UnAvailableDates, function(key, val4){
-                                           var obj = Object();
-                                           obj.Boat_Id = val3;
-                                           obj.start = val4;
-                                           GetAllUnAvailableDays_Boats.push(obj);
+                                  $.each(val2.Boat_Id, function(key, val3){
+                                    
+                                   $.each(val2.UnAvailableDates, function(key, val4){
+                                     
+                                            var obj = Object();
+                                            obj.Boat_Id = val3;
+                                            obj.start = val4;
+                                            GetAllUnAvailableDays_Boats.push(obj);
+ 
+                                   });
+ 
+ 
+ 
+                                 }); 
+                                  
+                                }
+                                catch(err) {
+                                  //document.getElementById("demo").innerHTML = err.message;
+                                }
 
-                                  });
 
 
-
-                                });                                
+                                                              
 
                               });
                               
                             } 
 
+                            debugger;
                             
 
                             getDaysInMonth_Sheduler(ScheduleList,GetAllUnAvailableDays,GetAllUnAvailableDays_Boats);

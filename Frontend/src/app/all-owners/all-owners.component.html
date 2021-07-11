@@ -51,7 +51,7 @@
                       <span *ngIf="owner.Boat_Summer_Details.length == 0" class="phone"><i class="fas fa-ship"></i> No Boats Assigned</span>
                       <span *ngIf="owner.Boat_Summer_Details.length > 0" class="phone"><i class="fas fa-ship"></i> 
                         <span style="margin-left: 5px;" *ngFor="let bot_details of owner.Boat_Summer_Details; let index = index" (click)="Boatbase_SummerDetails(owner.Boat_Summer_Details,bot_details)">
-                          <a style="cursor:pointer; color:brown;">{{bot_details.Boat_Name}}, </a>
+                          <a style="cursor:pointer; color:brown;">{{bot_details.Boat_Name}} </a>
                         </span>
                       </span>
 
@@ -69,7 +69,7 @@
 
                      <div *ngIf="visibleIndices.has(bot_details.dynamicNumber)">
 
-                          <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0">
+                          <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0;  else templateName">
                               <ul>
                                 <li><h6>TOTAL DAYS BOOKED </h6> <span>0/{{bot_details.Total_Days}}</span></li>
                                 <li><h6>SUMMER WEEKENDS </h6> <span>0/{{bot_details.Summer_WeekEndDays}}</span></li>
@@ -77,26 +77,33 @@
                             </ul>
                          </div>  
                         
-                          <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0">
+                          <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0; else templateName2">
                             <ul>
                               <li><h6>SUMMER WEEKDAYS </h6> <span>0/{{bot_details.Summer_WeekDays}}</span></li>
                               <li><h6>WINTER WEEKDAYS </h6> <span>0/{{bot_details.Winter_WeekDays}}</span></li>
                             </ul>
-                        </div>  
-                        <div class="col-md-6 owner-datas" *ngIf="owner.Boat_Summer_Details.length == 0">
+                        </div>
+                        
+                        <ng-template #templateName>
+                        <div class="col-md-6 owner-datas">
                             <ul>
                         <li><h6>TOTAL DAYS BOOKED </h6> <span>0/0</span></li>
                         <li><h6>SUMMER WEEKENDS </h6> <span>0/0</span></li>
                         <li><h6>WINTER WEEKENDS </h6> <span>0/0</span></li>
                             </ul>
                         </div>  
+                      </ng-template>
+                      <ng-template #templateName2>
                         
-                          <div class="col-md-6 owner-datas" *ngIf="owner.Boat_Summer_Details.length == 0">
+                          <div class="col-md-6 owner-datas">
                             <ul>
                         <li><h6>SUMMER WEEKDAYS </h6> <span>0/0</span></li>
                         <li><h6>WINTER WEEKDAYS </h6> <span>0/0</span></li>
                             </ul>
                         </div>
+
+                      </ng-template>
+                     
                        </div>
                 </div>
                         

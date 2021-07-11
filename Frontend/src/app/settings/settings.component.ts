@@ -89,6 +89,47 @@ export class SettingsComponent implements OnInit {
     if(this.adminlogin==false){
       this.router.navigate(['']);
     }
+
+    var data_getCurrentTab = sessionStorage.getItem("currentTab_settings");
+    if (typeof data_getCurrentTab !== "undefined" && data_getCurrentTab != null)
+    {
+
+      var getTabDatas = JSON.parse(data_getCurrentTab);
+      $("#"+getTabDatas.tab).attr("class", "active");
+      $("#"+getTabDatas.panel).attr("class", "show active");
+      $("#"+getTabDatas.tab).css({
+        'background-color' : '#222f87',
+        'color' : 'white',
+        'padding' : '10px 30px 10px 30px'
+     });
+
+
+      // obj.tab = tab_tmp;
+      // obj.panel = panel_temp;
+
+      //$("#"+tab_tmp).removeClass('active');
+   // $("#"+panel_temp).removeClass('show active');
+
+
+    }
+    else{
+
+      $("#tab-A").attr("class", "active");
+      $("#pane-A").attr("class", "show active");
+      $("#tab-A").css({
+        'background-color' : '#222f87',
+        'color' : 'white',
+        'padding' : '10px 30px 10px 30px'
+     });
+
+      /*    background-color: #222f87;
+    color: white;
+    padding: 10px 30px 10px 30px; */
+
+    }
+
+
+
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
@@ -144,6 +185,12 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    
   };
 
+  this.getAllBoatTYpes()  
+  this.getAllshare();
+  this.getBoats();
+
+
+
   $('#text-id-special-days-Start').Zebra_DatePicker({
     //format: 'm/d/yyyy',
     direction: true,
@@ -177,6 +224,28 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   }, 100);
   
 
+  $(document).on("click",".nav-link",function() {
+
+    var panel_temp = $(this).attr('linktype');
+    var tab_tmp =  $(this).attr('id');
+    var obj = Object();
+    obj.tab = tab_tmp;
+    obj.panel = panel_temp;
+    sessionStorage.setItem("currentTab_settings",JSON.stringify(obj));
+
+
+    $("#"+tab_tmp).removeClass('active');
+    $("#"+panel_temp).removeClass('show active');
+
+    location.reload();
+
+    //$("#box").attr("class", "active");
+
+
+    //alert(get_hrefValue +"-" + id);
+   });
+
+
 
    $(document).on("click","#test-element",function() {
     alert("click bound to document listening for #test-element");
@@ -191,9 +260,10 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
       // this.Shareform.get('No_of_WinterWeekDays').setValue("");
       // this.Shareform.get('No_of_WinterWeekEndDays').setValue("");
    });
-   Get_UnAvailabe_Days();
-   Get_Locations_Data();
-   GetAll_AddSpecial_Days();
+
+   //Get_UnAvailabe_Days();
+  // Get_Locations_Data();
+  // GetAll_AddSpecial_Days();
    binding_Boat();
     function binding_Boat(){
       $.ajax({
@@ -243,18 +313,24 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
               });
 
-              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+              var sriptTemp = '<script>$(document).ready(function(){$("#example1").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
               
 
-               var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>BOAT TYPE</th><th>DESCRIPTION</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+               var bindingTabledataFirst ='<table id="example1"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>BOAT TYPE</th><th>DESCRIPTION</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
                                      
               $("#temp-data-bindings").html(bindingTabledataFirst);
+
+
+              Get_UnAvailabe_Days();
             
             }
             else
             {
+              Get_UnAvailabe_Days();
               
             }
+
+            
 
         }
        
@@ -482,17 +558,21 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
               });
 
-              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+              var sriptTemp = '<script>$(document).ready(function(){$("#example4").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
 
-              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Name</th><th>Start Date</th><th>End Date</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+              var bindingTabledataFirst ='<table id="example4"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Name</th><th>Start Date</th><th>End Date</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
               $("#temp-data-bindings-specialDays").html(bindingTabledataFirst);
+
+              Binding_OwnerDuration();
             
              }
              else
              {
                alert("Empty datas");
+
+               Binding_OwnerDuration();
               
              }
 
@@ -540,17 +620,20 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
               });
 
-              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+              var sriptTemp = '<script>$(document).ready(function(){$("#example2").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
 
-              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Name</th><th>Unavailable <br> Dates</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+              var bindingTabledataFirst ='<table id="example2"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Name</th><th>Unavailable <br> Dates</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
               $("#temp-unavailable-days ").html(bindingTabledataFirst);
             
+              Get_Locations_Data();
+
              }
              else
              {
                alert("Empty datas");
+               Get_Locations_Data();
               
              }
 
@@ -597,17 +680,20 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
               });
 
-              var sriptTemp = '<script>$(document).ready(function(){$("#example").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+              var sriptTemp = '<script>$(document).ready(function(){$("#example3").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
 
-              var bindingTabledataFirst ='<table id="example"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Location</th><th>Location URL</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+              var bindingTabledataFirst ='<table id="example3"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Location</th><th>Location URL</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
               $("#temp-locations-data").html(bindingTabledataFirst);
+
+              GetAll_AddSpecial_Days();
             
             }
             else
             {
               alert("Empty datas");
+              GetAll_AddSpecial_Days();
               
             }
 
@@ -634,11 +720,11 @@ $(document).on("click",".cls-special-days-Edit",function() {
               }
           }
       } );
+
+
+
       jQuery(document).ready(function() {
-        // executes when HTML-Document is loaded and DOM is ready
        
-         
-         
          jQuery('.btn1[href^=#]').click(function(e){
            e.preventDefault();
            var href = jQuery(this).attr('href');
@@ -648,6 +734,9 @@ $(document).on("click",".cls-special-days-Edit",function() {
          
        
        }); 
+
+
+       
 
        function getFormattedDate(date) {
            date = new Date(date);
@@ -858,7 +947,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
 ///////////data table jitheesh////
 var owner_url = this.EnvironmentURL+"api/Days/";
 
-Binding_OwnerDuration();
+
 function Binding_OwnerDuration(){
 
   /*
@@ -903,9 +992,9 @@ function Binding_OwnerDuration(){
 
       });
 
-      var sriptTemp = '<script>$(document).ready(function(){$("#example1").DataTable({"ordering": false,responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+      var sriptTemp = '<script>$(document).ready(function(){$("#example5").DataTable({"ordering": false,responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
-      var bindingTabledataFirst = '<table id="example1" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">\
+      var bindingTabledataFirst = '<table id="example5" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%">\
       <thead><tr><th>BOAT <br> NAME</th><th>NO:OF <br> SHARES</th><th>NO:OF <br> SUMMER <br> WEEKDAYS</th><th>NO:OF <br>SUMMER <br>WEEKENDS</th><th>NO:OF <br>WINTER <br>WEEKDAYS</th><th>NO:OF <br>WINTER <br>WEEKENDS</th></tr></thead>\
       <tbody>'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
@@ -945,10 +1034,8 @@ $('#datepiker-4').Zebra_DatePicker({
 });
 
 
-      this.getAllBoatTYpes()  
-      this.getAllshare();
-      this.getBoats()
-  }
+     
+}
 
   
   onItemSelect_CONSECUTIVEDAYS(items: any) {

@@ -113,11 +113,305 @@ export class AllOwnersComponent implements OnInit {
    })
   }
 
+  Coma_Filtering(number, name, count){
+
+    if(number == 1){
+      return name;
+      //comen_temp = 1;
+    }
+    else if(number == 2) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name;
+
+      }
+      else
+      {
+        return name;
+
+      }
+
+    }
+
+    else if(number == 3) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else if(number == 4) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name+",";
+
+      }
+
+      else if(count == 3){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else if(number == 5) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name+",";
+
+      }
+
+      else if(count == 3){
+        return name+",";
+
+      }
+
+      else if(count == 4){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else if(number == 6) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name+",";
+
+      }
+
+      else if(count == 3){
+        return name+",";
+
+      }
+
+      else if(count == 4){
+        return name+",";
+
+      }
+
+      else if(count == 5){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else if(number == 7) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name+",";
+
+      }
+
+      else if(count == 3){
+        return name+",";
+
+      }
+
+      else if(count == 4){
+        return name+",";
+
+      }
+
+      else if(count == 5){
+        return name+",";
+
+      }
+
+      else if(count == 6){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else if(number == 8) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name+",";
+
+      }
+
+      else if(count == 3){
+        return name+",";
+
+      }
+
+      else if(count == 4){
+        return name+",";
+
+      }
+
+      else if(count == 5){
+        return name+",";
+
+      }
+
+      else if(count == 6){
+        return name+",";
+
+      }
+
+      else if(count == 7){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else if(number == 9) 
+    {
+      if(count == 0){
+       return name+",";       
+
+      }
+      else if(count == 1){
+        return name+",";
+
+      }
+
+      else if(count == 2){
+        return name+",";
+
+      }
+
+      else if(count == 3){
+        return name+",";
+
+      }
+
+      else if(count == 4){
+        return name+",";
+
+      }
+
+      else if(count == 5){
+        return name+",";
+
+      }
+
+      else if(count == 6){
+        return name+",";
+
+      }
+
+      else if(count == 7){
+        return name+",";
+
+      }
+
+      else if(count == 8){
+        return name;
+
+      }
+
+      else{
+        return name;
+      }
+
+    }
+
+    else{
+      return name+",";
+
+    }
+
+  }
+
 
   getAllBoatData_BindingArry(data1, data2, data3){
 
     var Number = 1000;
     var OwnerBaseNumber = 1;
+
+    
+
+    var tempNum = 0;
 
     data1.forEach(element => {
        var boat_Summer_Details = [];
@@ -150,11 +444,13 @@ export class AllOwnersComponent implements OnInit {
       obj.Block = element.Block;
       obj.IsActive = element.IsActive;
       obj.created = element.created;
-
+      
       
       var tmp_bot_and_summer = data2.filter(x => x.Owner_Id == element._id);
 
-      if(tmp_bot_and_summer.length > 0){     
+      if(tmp_bot_and_summer.length > 0){ 
+        
+       var comen_temp =0; 
 
       tmp_bot_and_summer[0].BoatDetails.forEach(element2 => {
 
@@ -162,6 +458,7 @@ export class AllOwnersComponent implements OnInit {
         {
 
         Number = Number + 1 ;
+        var totalnumber_boat = tmp_bot_and_summer[0].BoatDetails.length;
 
         if(first_timeExicute == 0){
           this.visibleIndices.add(Number);
@@ -175,7 +472,12 @@ export class AllOwnersComponent implements OnInit {
           obj3.OwnerBaseNumber = OwnerBaseNumber;
           obj3.dynamicNumber = Number;
           obj3.Boat_id = element2[0]._id;
-          obj3.Boat_Name = element2[0].Boat_Name;
+          obj3.Boat_Name = this.Coma_Filtering(totalnumber_boat, element2[0].Boat_Name, comen_temp);
+          comen_temp = comen_temp + 1;
+
+          
+
+          
 
           var tmp_manage_owr = data3.find(x => x.Owner_Id == element._id && x.Boat_Id == element2[0]._id);
           var Summer_WeekDays;
@@ -218,7 +520,42 @@ export class AllOwnersComponent implements OnInit {
 
 
       });
-    }
+
+
+      }
+      else{
+
+       
+        if(first_timeExicute == 0){
+          this.visibleIndices.add(Number);
+          first_timeExicute = 1;
+
+        }  
+
+
+        var obj3 = Object();
+        var Summer_WeekDays = 0;
+        var Summer_WeekEndDays = 0;
+        var Winter_WeekDays = 0;
+        var Winter_WeekEndDays = 0;
+        var Total_Days = 0;
+
+        obj3.OwnerBaseNumber = 1;
+          obj3.dynamicNumber = Number;
+          obj3.Boat_id = 0;
+          obj3.Boat_Name = "";
+
+           obj3.Summer_WeekDays = Summer_WeekDays;         
+            obj3.Summer_WeekEndDays = Summer_WeekEndDays;          
+            obj3.Winter_WeekDays = Winter_WeekDays;          
+            obj3.Winter_WeekEndDays = Winter_WeekEndDays;          
+            obj3.Total_Days = Total_Days;
+            
+
+            boat_Summer_Details.push(obj3);
+
+
+      }
 
       obj.Boat_Summer_Details = boat_Summer_Details;
           
@@ -226,6 +563,8 @@ export class AllOwnersComponent implements OnInit {
       this.allOwners.push(obj);
 
       OwnerBaseNumber = OwnerBaseNumber + 1;
+
+      tempNum = tempNum +1;
 
       }
       
