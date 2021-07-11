@@ -59,10 +59,10 @@
                   
                   <div class="col-md-2 update-user">
                       <ul>
-                          <li><button (click)= deleteownerModel(owner)><i class="far fa-trash-alt"></i> </button></li>
                           <li><button (click)= editOwner(owner)><i class="far fa-edit"></i> </button></li>
                           <li><a ><button (click)= viewOwner(owner)><i class="far fa-eye"></i> </button></a></li>
-                      </ul>    
+                          <li><button (click)= deleteownerModel(owner)><i class="far fa-trash-alt"></i> </button></li>
+                        </ul>    
                   </div>
 
                   <div *ngFor="let bot_details of owner.Boat_Summer_Details; let index = index">
