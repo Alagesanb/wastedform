@@ -50,6 +50,11 @@ export class EditBoatComponent implements OnInit {
   handBook: File;
   public_MultipleImageName: any = [];
 
+  previousDate:any;
+  preLaunchDates:any;
+  launchDate:any;
+  launchDates:any;
+
   multiImg:any =[];
   multiImg_Angular:any =[];
 
@@ -380,18 +385,18 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
   $('#datepicker-Boat-Edit-1').Zebra_DatePicker({
       //format: 'd-m-Y'
-      direction: true,
+     // direction: true,
       pair: $('#datepicker-Boat-Edit-2')
   });
   
   $('#datepicker-Boat-Edit-2').Zebra_DatePicker({
       //format: 'd-m-Y'
       direction: 1,
-      pair: $('#datepicker-Boat-Edit-3')
+      //pair: $('#datepicker-Boat-Edit-3')
   });
 $('#datepicker-Boat-Edit-3').Zebra_DatePicker({
     //format: 'd-m-Y'
-    direction: 1,
+    //direction: 1,
      pair: $('#datepicker-Boat-Edit-4')
 });
 
@@ -568,12 +573,24 @@ createBoatForm() {
    }, err => {
    })
   }
+
+  
   
    
-  focusOutPreLaunch(ss){
+  focusOutPreLaunch($event){
+
+    this.previousDate = $event.target.value;
+    var preLS = new Date(this.previousDate);
+    this.preLaunchDates =  (preLS.getDate()) + '/' + (preLS.getMonth() + 1)  + '/' + preLS.getFullYear();
+    this.boatform.get('PreLaunch_Date').setValue(this.preLaunchDates);
 
   }
-  focusOutLaunch(ss){
+  focusOutLaunch($event){
+
+    this.launchDate = $event.target.value;
+    var sumerS = new Date(this.launchDate);
+    this.launchDates =  (sumerS.getDate()) + '/' + (sumerS.getMonth() + 1)  + '/' + sumerS.getFullYear();
+    this.boatform.get('Launch_Date').setValue(this.launchDates);
 
   }
 
@@ -599,28 +616,46 @@ createBoatForm() {
      }
     } 
   }
+
+  summer_date:any;
+  stD:any;
+  fwD:any;
+  fwd_2:any;
+
+
   focusOutWFrom($event)
   {
-    this.fromWDate = $event.target.value; 
-    this.boatform.get('WinterSeason_SDate').setValue(this.fromWDate);
+    this.fromWDate = $event.target.value;
+    var fwd = new Date(this.fromWDate);
+    this.fwD = (fwd.getDate() + '/' + (fwd.getMonth() + 1) + '/' + fwd.getFullYear());
+    this.boatform.get('WinterSeason_SDate').setValue(this.fwD);
   }
   focusOutWTo($event)
   {
-    this.toWDate = $event.target.value; 
-    this.boatform.get('WinterSeason_EDate').setValue(this.toWDate);
+    this.toWDate = $event.target.value;
+    var twD = new Date(this.toWDate);
+    this.fwd_2 = (twD.getDate() + '/' + (twD.getMonth() + 1) + '/' + twD.getFullYear());
+    this.boatform.get('WinterSeason_EDate').setValue(this.fwd_2);
 
   }
   focusOutSTo($event)
   {
-    this.toDate = $event.target.value; 
-    this.boatform.get('SummerSeason_EDate').setValue(this.toDate);
+    this.toDate = $event.target.value;
+    var td = new Date(this.toDate);
+    this.stD = (td.getDate() + '/' + (td.getMonth() + 1) + '/' + td.getFullYear());
+    this.boatform.get('SummerSeason_EDate').setValue(this.stD);
 
   }
-  focusOutSFrom($event)
-  {
-    this.fromDate = $event.target.value; 
-    this.boatform.get('SummerSeason_SDate').setValue(this.fromDate);
+
+
+
+  focusOutSFrom($event) {
+    this.fromDate = $event.target.value;
+    var sssd = new Date(this.fromDate);
+    this.summer_date = (sssd.getDate() + '/' + (sssd.getMonth() + 1) + '/' + sssd.getFullYear());
+    this.boatform.get('SummerSeason_SDate').setValue(this.summer_date);
   }
+ 
   boatData(){
     this.data = JSON.parse(sessionStorage.getItem('boatData')); //forgot to close
     console.log(this.data)
@@ -737,8 +772,28 @@ this.multiMg = this.data.Boat_Image
 
 
   editBoat(){
-    console.log(this.boatform.value)
+    console.log(this.boatform.value);
     this.boatSubmitted = true;
+////
+
+var Data_Temp = this.boatform.value;
+    this.boatform.get('PreLaunch_Date').setValue(this.string_to_Date_Convert(Data_Temp.PreLaunch_Date));
+    this.boatform.get('Launch_Date').setValue(this.string_to_Date_Convert(Data_Temp.Launch_Date));
+    this.boatform.get('SummerSeason_SDate').setValue(this.string_to_Date_Convert(Data_Temp.SummerSeason_SDate));
+    this.boatform.get('SummerSeason_EDate').setValue(this.string_to_Date_Convert(Data_Temp.SummerSeason_EDate));
+    this.boatform.get('WinterSeason_SDate').setValue(this.string_to_Date_Convert(Data_Temp.WinterSeason_SDate)); 
+    this.boatform.get('WinterSeason_EDate').setValue(this.string_to_Date_Convert(Data_Temp.WinterSeason_EDate)); 
+    //PreLaunch_Date
+console.log(this.boatform.value);
+
+
+
+
+
+
+
+/////////
+
 
     if (this.boatform.invalid) {
       return;
@@ -815,7 +870,7 @@ this.multiMg = this.data.Boat_Image
                   //this.boatform.get('Boat_originalhandBook').setValue(this.public_SingleImageName);
                   this.boatform.get('Boat_originalhandBook').setValue(this.Boat_Handbook_Name);
                  
-                                    
+                  console.log(this.boatform.value);
    
                
                   this.http.post<any>(`${this.url}/EditBoat`,  this.boatform.value   ).subscribe(data => {
@@ -959,9 +1014,9 @@ this.multiMg = this.data.Boat_Image
                   this.boatform.get('Boat_HandBook').setValue(this.public_SingleImageName);
                   this.boatform.get('Boat_originalhandBook').setValue(this.Boat_Handbook_Name);
                    
-                  
+                  console.log(this.boatform.value);
                   this.http.post<any>(`${this.url}/EditBoat`,  this.boatform.value   ).subscribe(data => {
-                                       
+                                     
                       if(data.status == true){
                          this.getRes = data.message
                          $('#saveBoatModel').trigger('click');
@@ -1037,4 +1092,47 @@ this.multiMg = this.data.Boat_Image
               this.router.navigate(['/all-boats/']);
 
   }
+
+  string_to_Date_Convert(dateString){ 
+        
+    var dateArray = dateString.split("/");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    return this.getFormattedDate_second(dateObj)//dateObj;
+
+  }
+
+  getFormattedDate_second(dateVal) {
+     
+    var newDate = new Date(dateVal);
+
+    var sMonth = this.padValue(newDate.getMonth() + 1);
+    var sDay = this.padValue(newDate.getDate());
+    var sYear = newDate.getFullYear();
+    var sHour = newDate.getHours();
+    var sMinute = this.padValue(newDate.getMinutes());
+    var sAMPM = "AM";
+
+    var iHourCheck = Number(sHour);
+
+    if (iHourCheck > 12) {
+        sAMPM = "PM";
+        sHour = iHourCheck - 12;
+    }
+    else if (iHourCheck === 0) {
+        sHour = 12;
+    }
+
+    sHour = this.padValue(sHour);
+
+    //return sDay + "-" + sMonth + "-" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+    return sYear + "/" + sMonth + "/" + sDay;
+
+}
+
+ padValue(value) {
+  return (value < 10) ? "0" + value : value;
+
+}
+
 }

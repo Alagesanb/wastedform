@@ -89,6 +89,47 @@ export class SettingsComponent implements OnInit {
     if(this.adminlogin==false){
       this.router.navigate(['']);
     }
+
+    var data_getCurrentTab = sessionStorage.getItem("currentTab_settings");
+    if (typeof data_getCurrentTab !== "undefined" && data_getCurrentTab != null)
+    {
+
+      var getTabDatas = JSON.parse(data_getCurrentTab);
+      $("#"+getTabDatas.tab).attr("class", "active");
+      $("#"+getTabDatas.panel).attr("class", "show active");
+      $("#"+getTabDatas.tab).css({
+        'background-color' : '#222f87',
+        'color' : 'white',
+        'padding' : '10px 30px 10px 30px'
+     });
+
+
+      // obj.tab = tab_tmp;
+      // obj.panel = panel_temp;
+
+      //$("#"+tab_tmp).removeClass('active');
+   // $("#"+panel_temp).removeClass('show active');
+
+
+    }
+    else{
+
+      $("#tab-A").attr("class", "active");
+      $("#pane-A").attr("class", "show active");
+      $("#tab-A").css({
+        'background-color' : '#222f87',
+        'color' : 'white',
+        'padding' : '10px 30px 10px 30px'
+     });
+
+      /*    background-color: #222f87;
+    color: white;
+    padding: 10px 30px 10px 30px; */
+
+    }
+
+
+
     sessionStorage.setItem("relodePg_book-for-owner","1");
 sessionStorage.setItem("Adminbooking-relodePg","1");
  sessionStorage.setItem("boat-maintenance-reload","1");
@@ -148,6 +189,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   this.getAllshare();
   this.getBoats();
 
+
+
   $('#text-id-special-days-Start').Zebra_DatePicker({
     //format: 'm/d/yyyy',
     direction: true,
@@ -180,6 +223,28 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
   }, 100);
   
+
+  $(document).on("click",".nav-link",function() {
+
+    var panel_temp = $(this).attr('linktype');
+    var tab_tmp =  $(this).attr('id');
+    var obj = Object();
+    obj.tab = tab_tmp;
+    obj.panel = panel_temp;
+    sessionStorage.setItem("currentTab_settings",JSON.stringify(obj));
+
+
+    $("#"+tab_tmp).removeClass('active');
+    $("#"+panel_temp).removeClass('show active');
+
+    location.reload();
+
+    //$("#box").attr("class", "active");
+
+
+    //alert(get_hrefValue +"-" + id);
+   });
+
 
 
    $(document).on("click","#test-element",function() {
