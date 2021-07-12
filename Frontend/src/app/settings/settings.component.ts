@@ -596,21 +596,27 @@ $(document).on("click",".cls-special-days-Edit",function() {
               var bindingTableData;
               var bindingNumber = 1;
               var firstChek = 0;
+              
             
               $.each(data.response , function(index, val) { 
+                var count = 30;
+//debugger;
                  var ID        = val._id; 
-                 var Boat_Name =  val.Boat_Name;
+                 var Boat_Name =  val.Boat_Name.toString();
                  var UnAvailableDates =  val.UnAvailableDates;
+                 var strlength = Boat_Name.length;
+                  Boat_Name = Boat_Name.slice(0, count) + (strlength > count ? "..." : "");
+                 //UnAvailableDates = UnAvailableDates.slice(0, 15)+'...'
 
                 if(firstChek == 0){
                   
-                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+Boat_Name+'\
+                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.Boat_Name+'">'+Boat_Name+'\
                   </td><td>'+ UnAvailableDates +'</td></tr>';
                   firstChek = 1;
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+Boat_Name+'</td><td>'+ UnAvailableDates +'</td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.Boat_Name+'">'+Boat_Name+'</td><td>'+ UnAvailableDates +'</td></tr>';
 
 
                 }

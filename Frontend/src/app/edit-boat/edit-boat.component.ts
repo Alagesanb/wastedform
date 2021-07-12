@@ -1005,6 +1005,9 @@ console.log(this.boatform.value);
                  
              this.currentboatdetails = JSON.parse(sessionStorage.getItem("boatData"));
 
+
+            
+
              this.public_SingleImageName = this.currentboatdetails.Boat_HandBook;
 
                   this.boatform.get('Block').setValue(true);
@@ -1015,6 +1018,7 @@ console.log(this.boatform.value);
                   this.boatform.get('Boat_originalhandBook').setValue(this.Boat_Handbook_Name);
                    
                   console.log(this.boatform.value);
+                  
                   this.http.post<any>(`${this.url}/EditBoat`,  this.boatform.value   ).subscribe(data => {
                                      
                       if(data.status == true){
