@@ -29,6 +29,8 @@ export class MyprofileComponent implements OnInit {
   today_date:string;
   endingFormatDate:string;
   endedFormatDate: string;
+  disableBoat: string;
+
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
   }
   // Create Component for myprofile //Done By Alagesan on 17.05.2021
@@ -150,13 +152,27 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
     viewBoat(boat){
       // Activate the owner in admin message for my profile Done By Alagesan on 10.07.2021
-      var owner_suspend = this.ownerdurationsdetails[0].Is_Cancellation;
-      if(owner_suspend == true){
-        $('#suspend-owner-message-btn').trigger('click');
-      } 
-      if(boat.BoatDetails[0].IsActive == true && owner_suspend == false){
-        $('#active-boat-popupbtn').trigger('click');
-      }  
+      // var owner_suspend = this.ownerdurationsdetails[0].Is_Cancellation;
+      // if(owner_suspend == true){
+      //   $('#suspend-owner-message-btn').trigger('click');
+      // } 
+      // if(boat.BoatDetails[0].IsActive == true && owner_suspend == false){
+      //   $('#active-boat-popupbtn').trigger('click');
+      // }  
+      
+      // disable and archive boat view page for myprofile Done By Alagesan	on 12.07.2021 
+      if(boat.BoatDetails[0].Boat_Status == '0' || boat.BoatDetails[0].Boat_Status == '2'){
+        $('#disable-boat-popup-message-btn').trigger('click');
+        this.disableBoat = boat.Boat_Name;
+      }
+
+      // Active boat view page for myprofile Done By Alagesan	on 12.07.2021 
+      if(boat.BoatDetails[0].Boat_Status == '1'){
+        sessionStorage.setItem('boatData', JSON.stringify(boat));
+        // Change the view boat url for myprofile Done By Alagesan	on 12.07.2021 
+        this.router.navigate(['view-boat-owner/']);
+      }
+        
     }
 
     activeBoat(boat){
