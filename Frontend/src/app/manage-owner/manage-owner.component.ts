@@ -369,8 +369,8 @@ function Binding_ManageOwner(){
     this.dropdownOwn_Boat_selected = [];
     this.dropdownOwn_Boat_selected.push({item_id : obj.BoatDetails[0]._id, item_text: obj.Boat_Name});
 
-    this.dropdownBoat_Owner_selected = [];
-    this.dropdownBoat_Owner_selected.push({item_id : obj._id, item_text: obj.Owner_Name})
+    this.dropdownBoat_Owner_selected_model = [];
+    this.dropdownBoat_Owner_selected_model.push({item_id : obj._id, item_text: obj.Owner_Name})
 
     
     
@@ -716,8 +716,9 @@ this.manageOwnerForms.get('Owner_Name').setValue(this.ownerName);
       }
 
       this.manageOwnerForms.get('id').setValue(this.managerOwnerId);
-
-    
+      debugger;
+      console.log(this.manageOwnerForms.value);     
+         
            
       this.http.post<any>(`${this.OwnerUrl}/UpdateManageOwnerById`,this.manageOwnerForms.value  ).subscribe(data => {  
        

@@ -497,7 +497,7 @@ this.form.reset()
      {
        sessionStorage.removeItem("set_Edit_owner_duration");
        var obj = JSON.parse(temp_data);
-        //this.Edit_owner_duration(obj);
+        this.Edit_owner_duration(obj);
         this.Fun_getallDropDownDatas_edit_Get(obj);
      }     
      
