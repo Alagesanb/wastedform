@@ -21,10 +21,13 @@ export class OwnerDashboardComponent implements OnInit {
   EnvironmentURL:string = environment.url;
   url_Owner = this.EnvironmentURL+"api/Owner/";
   url_Days = this.EnvironmentURL+"api/Days/";
+  imgUrl = this.EnvironmentURL+"api/uploads/"
+  urlViewBookingDetails = this.EnvironmentURL+"api/Schedule"
 
   dropdownList_filted = [];
   dropdownList = [];
-
+  viewBookingDetailsdata: any=[];
+  searchText: any = '';
   constructor(private router: Router,private http: HttpClient) { }
 
 // Create Component for owner dashboard //Done By Alagesan on 17.05.2021
@@ -77,7 +80,7 @@ export class OwnerDashboardComponent implements OnInit {
     };
 
     this.Owner_Log_getallDropDownDatas_Boat();
-
+    this.getViewBookingDetailsWithBoatAndOwner();
 
   }
 
@@ -179,6 +182,15 @@ export class OwnerDashboardComponent implements OnInit {
         })
   }
 
+  getViewBookingDetailsWithBoatAndOwner(){
+   // View booking details  API integrations for owner dashboard Done By Alagesan on 13.07.2021
+    this.http.get<any>(`${this.urlViewBookingDetails}/ViewBookingDetailsWithBoatAndOwner`).subscribe(data => {
+      this.viewBookingDetailsdata = data['response']
+      console.log(this.viewBookingDetailsdata);
+ 
+   }, err => {
+   })
+  }
 
 }
 

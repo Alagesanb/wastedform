@@ -174,81 +174,22 @@ width: 97%;">
             </div>
      </div>
      
-     <div class="col-lg-4 boat-list-container" id="style-scrollbar">
-                           
-                             <div class="boat-list-1">
-                                 
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1002 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
-                                 </div>
-                                
-                             </div>  
-         
-           <div class="boat-list-1">
-                                
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1002 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
-                                 </div>
-                                
-                             </div>  
-         
-           <div class="boat-list-1">
-                                 
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1002 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
-                                 </div>
-                                
-                             </div>  
-         
-           <div class="boat-list-1">
-                                
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1002 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
-                                 </div>
-                                 
-                             </div>  
-         
-           <div class="boat-list-1">
-                                 
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1002 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
-                                 </div>
-                               
-                             </div>  
-         
-           <div class="boat-list-1">
-                                
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1002 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
-                                 </div>
-                                
-                             </div>  
-                             
-                         </div>  
+                <div class="col-lg-4 boat-list-container" id="style-scrollbar">
+                   <!--My booking API integrations for owner dashboard Done By Alagesan on 13.07.2021-->
+                    <div class="boat-list-1"  *ngFor="let booking of viewBookingDetailsdata | filter: searchText  let i = index;">
+                        <div class="boat-img">
+                            <img *ngIf="!booking.BoatDetails[0].Boat_Image[0]" src="../../assets/images/boat-1.jpg" alt="boat">
+                            <img *ngIf="booking.BoatDetails[0].Boat_Image[0]" src="{{imgUrl+booking.BoatDetails[0].Boat_Image[0]}}" alt="boat"></div>
+                        <div class="info">
+                            <h6>Booking No:<span> {{booking.Booking_ID}} </span></h6>
+                            <h2>{{booking.BoatDetails[0].Boat_Name}}</h2>
+                            <p>{{booking.start | date :'d MMM y'}} - {{booking.end | date :'d MMM y'}}</p>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#boat-type">Cancel Booking</button>
+                        </div>
+                    
+                    </div>  
+                                        
+                </div>  
      
      
      
@@ -298,45 +239,20 @@ width: 97%;">
      </div>
      
      <div class="col-lg-4 boat-list-container" id="style-scrollbar">
-                           
-                             <div class="boat-list-1">
-                                
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1006 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                 </div>
-                                 
-                             </div>  
-         
-           <div class="boat-list-1">
-                                
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1007 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     </div>
-                                
-                             </div>  
-         
-           <div class="boat-list-1">
-                                 
-                                 <div class="boat-img"><img src="../../assets/images/boat-1.jpg" alt="boat"></div>
-                                 <div class="info">
-                                     <h6>Booking No:<span> 1008 </span></h6>
-                                     <h2>Sailboat DELPHIA YACHTS</h2>
-                                     <p>02 Mar 2021 - 05 Mar 2021</p>
-                                     </div>
-                             
-                             </div>  
-         
-        
-       
-    
-                             
-                         </div>  
+      <!--Cancelled booking API integrations for owner dashboard Done By Alagesan on 13.07.2021-->
+        <div class="boat-list-1" *ngFor="let cancel of viewBookingDetailsdata | filter: searchText  let i = index;">
+        <div class="boat-img">
+            <img *ngIf="!cancel.BoatDetails[0].Boat_Image[0]" src="../../assets/images/boat-1.jpg" alt="boat">
+            <img *ngIf="cancel.BoatDetails[0].Boat_Image[0]" src="{{imgUrl+cancel.BoatDetails[0].Boat_Image[0]}}" alt="boat">
+        </div>
+        <div class="info">
+            <h6>Booking No:<span> {{cancel.Booking_ID}} </span></h6>
+            <h2>{{cancel.BoatDetails[0].Boat_Name}}</h2>
+            <p>{{cancel.start | date :'d MMM y'}} - {{cancel.end | date :'d MMM y'}}</p>
+        </div>
+            
+        </div>  
+    </div>  
      
   </div>
      
