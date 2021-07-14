@@ -1166,13 +1166,16 @@ $('#datepiker-4').Zebra_DatePicker({
 
 
   onItemSelect(item: any) {
+
+    var binding_sharealow = this.shareAllocation.find(x => x.Boat_Id == item.item_id);
  
    this.Shareform.get('Boat_Name').setValue(item.item_text);
    this.Shareform.get('Boat_Id').setValue(item.item_id);
 if(item.item_id){
-  var obj ={
-    boatid:item.item_id
-  }
+  var obj = Object();
+    obj.boatid =item.item_id;
+    obj._id =binding_sharealow._id;
+  
    this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
   
 if(data.Status == true){
@@ -1222,8 +1225,9 @@ else if(data.Status == false){
 
   getAllshare(){
     this.http.get<any>(`${this.allShareUrl}/ViewAllShares`).subscribe(data => {
-     
+    
    this.shareAllocation = data['response']
+   
   
     }, err => {
     })
