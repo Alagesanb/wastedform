@@ -23,6 +23,8 @@ export class AddOwnerComponent implements OnInit {
   adminlogin: any;
   profilePicResponse= "";
   addownerMessage:any;
+  show: boolean = false;
+
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
@@ -197,7 +199,11 @@ if(this.handBook){
   goToViewPage(){
     this.router.navigate(['/all-owner/']);
 
-}
+  }
+
+  password() {
+    this.show = !this.show;
+   }
 
 
 
