@@ -124,6 +124,30 @@
          </div>
          </div> 
 
+          <!--Show ended date popup for myprofile Done By Alagesan	on 07.07.2021 -->
+       <button style="display:none" type="button" data-backdrop="static" data-keyboard="false" id="ended-date-popupbtn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#endedDateModal">Open Modal</button>
+              
+       <div class="modal fade" id="endedDateModal" role="dialog">
+       <div class="modal-dialog">
+       
+           <!-- Modal content-->
+           <div class="modal-content">
+           <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Owner Duration Ended</h4>
+           </div>
+           <div class="modal-body">
+            <p>Owner duration for {{expireBoat}} is expired on {{endedFormatDate}}.</p>
+           </div>
+           <div class="modal-footer">
+               <button type="button" class="btn btn-default"  data-dismiss="modal">OK</button>
+               <button type="button" class="btn btn-default"  data-dismiss="modal">Renew</button>
+           </div>
+           </div>
+           
+       </div>
+       </div>
+
 </div>   
            </div>
            <div class="row user-profile">
@@ -201,29 +225,6 @@
            </div>
            <div class="modal-body">
                <p>{{endingFormatDate}}</p>
-           </div>
-           <div class="modal-footer">
-               <button type="button" class="btn btn-default"  data-dismiss="modal">OK</button>
-           </div>
-           </div>
-           
-       </div>
-       </div>
-     
-       <!--Show ended date popup for myprofile Done By Alagesan	on 07.07.2021 -->
-       <button style="display:none" type="button" data-backdrop="static" data-keyboard="false" id="ended-date-popupbtn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#endedDateModal">Open Modal</button>
-              
-       <div class="modal fade" id="endedDateModal" role="dialog">
-       <div class="modal-dialog">
-       
-           <!-- Modal content-->
-           <div class="modal-content">
-           <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal">&times;</button>
-               <h4 class="modal-title">Ended Date</h4>
-           </div>
-           <div class="modal-body">
-               <p>{{endedFormatDate}}</p>
            </div>
            <div class="modal-footer">
                <button type="button" class="btn btn-default"  data-dismiss="modal">OK</button>

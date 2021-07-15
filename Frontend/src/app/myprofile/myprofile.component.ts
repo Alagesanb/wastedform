@@ -30,6 +30,7 @@ export class MyprofileComponent implements OnInit {
   endingFormatDate:string;
   endedFormatDate: string;
   disableBoat: string;
+  expireBoat: string;
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
   }
@@ -107,47 +108,47 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
 
           console.log(todaydate);
-          this.endingtimeDate(todaydate,from_date);
-          this.endedtimeDate(todaydate,to_date);
+          // this.endingtimeDate(todaydate,from_date);
+          // this.endedtimeDate(todaydate,to_date);
        }, err => {
        })
     }
 
    // Show ending date popup for myprofile Done By Alagesan	on 07.07.2021 
-    endingtimeDate(date1: Date, date2: Date)
-    {
+    // endingtimeDate(date1: Date, date2: Date)
+    // {
 
-      let d1 = new Date(date1); let d2 = new Date(date2);
+    //   let d1 = new Date(date1); let d2 = new Date(date2);
 
-      if (d1 < d2) 
-      {
-        $('#ending-date-popupbtn').trigger('click');
-        let endingDate = (d2.getDate())+'-' + (d2.getMonth()+1) + '-'+d2.getFullYear();
+    //   if (d1 < d2) 
+    //   {
+    //     $('#ending-date-popupbtn').trigger('click');
+    //     let endingDate = (d2.getDate())+'-' + (d2.getMonth()+1) + '-'+d2.getFullYear();
 
-        this.endingFormatDate = endingDate;
-        return this.endingFormatDate;
-      }
+    //     this.endingFormatDate = endingDate;
+    //     return this.endingFormatDate;
+    //   }
 
     
-    }
+    // }
     
    // Show ended date popup for myprofile Done By Alagesan	on 07.07.2021 
-    endedtimeDate(date1: Date, date2: Date)
-    {
+    // endedtimeDate(date1: Date, date2: Date)
+    // {
 
-      let d1 = new Date(date1); let d2 = new Date(date2);
+    //   let d1 = new Date(date1); let d2 = new Date(date2);
 
-      if (d1 == d2) 
-      {
-        $('#ended-date-popupbtn').trigger('click');
-        let endedDate = (d1.getDate())+'-' + (d1.getMonth()+1) + '-'+d1.getFullYear();
+    //   if (d1 == d2) 
+    //   {
+    //     $('#ended-date-popupbtn').trigger('click');
+    //     let endedDate = (d1.getDate())+'-' + (d1.getMonth()+1) + '-'+d1.getFullYear();
 
-        this.endedFormatDate = endedDate;
-        return this.endedFormatDate;
-      }
+    //     this.endedFormatDate = endedDate;
+    //     return this.endedFormatDate;
+    //   }
 
     
-    }
+    // }
 
 
     viewBoat(boat){
@@ -166,12 +167,27 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         this.disableBoat = boat.Boat_Name;
       }
 
-      // Active boat view page for myprofile Done By Alagesan	on 12.07.2021 
       if(boat.BoatDetails[0].Boat_Status == '1'){
-        sessionStorage.setItem('boatData', JSON.stringify(boat));
-        // Change the view boat url for myprofile Done By Alagesan	on 12.07.2021 
-        this.router.navigate(['view-boat-owner/']);
-      }
+        // owner duration ended for my profile Done By Alagesan on 15.07.2021
+        let todaydate = new Date()
+        let to_date = new Date(this.ownerdurationsdetails[0].To_Date);
+
+        if (todaydate < to_date) 
+        {
+          $('#ended-date-popupbtn').trigger('click');
+          let endedDate = (to_date.getDate())+'-' + (to_date.getMonth()+1) + '-'+to_date.getFullYear();
+          this.expireBoat = boat.Boat_Name;
+          this.endedFormatDate = endedDate;
+          return this.endedFormatDate;
+        }
+        }
+
+      // Active boat view page for myprofile Done By Alagesan	on 12.07.2021 
+      // if(boat.BoatDetails[0].Boat_Status == '1'){
+      //   sessionStorage.setItem('boatData', JSON.stringify(boat));
+      //   Change the view boat url for myprofile Done By Alagesan	on 12.07.2021 
+      //   this.router.navigate(['view-boat-owner/']);
+      // }
         
     }
 
