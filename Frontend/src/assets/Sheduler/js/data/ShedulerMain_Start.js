@@ -309,6 +309,8 @@ function generateSchedule(){
         dataType: 'json',        
         success: function(datas) {
             var respon =  datas.response;
+
+            sessionStorage.setItem("load_SpecialDays",JSON.stringify(datas.SpecialDays));
                       
             $.each(respon, function (key, val) {                
                 generateRandomSchedule(val);                 

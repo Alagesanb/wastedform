@@ -1235,7 +1235,9 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
      }
 
 
-    function AddSchedule_ApiCalling(obj){               
+    function AddSchedule_ApiCalling(obj){ 
+        
+        
         
         obj.commends = $(".commen-cammends-sheduler").val();
 
@@ -1251,69 +1253,229 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         
         obj.start = start_str.toString();
         obj.end   = end_str.toString();
-        
-        
-        if(obj.Is_StandByBooking == true){
+        obj.specialDayCheck = false;
 
-            $.ajax({
-                url: public_StandByBooking+"AddStandByBooking",
-                type: 'POST',
-                dataType: 'json', 
-                data: obj,
-                success: function(datas) { 
-                                
-                    if(datas.status == true)
-                    {
-                        alert(datas.message);
-                        location.reload();    
-                    }
-                    else if(datas.status == false)
-                    {                    
-                        alert(datas.message);
-                        //location.reload();    
-                    }
-                
+        var check_SpecialDay = SpecialDaysCalculations(start_str,end_str);
         
-                },
-                error: function (error) {               
+        if(check_SpecialDay.specialday_check == false){
+            
+        
+            if(obj.Is_StandByBooking == true){
+
+                $.ajax({
+                    url: public_StandByBooking+"AddStandByBooking",
+                    type: 'POST',
+                    dataType: 'json', 
+                    data: obj,
+                    success: function(datas) { 
+                                    
+                        if(datas.status == true)
+                        {
+                            alert(datas.message);
+                            location.reload();    
+                        }
+                        else if(datas.status == false)
+                        {                    
+                            alert(datas.message);
+                            //location.reload();    
+                        }
                     
-                    console.log(error.responseText);
-                            
-                }
-            });
+            
+                    },
+                    error: function (error) {               
+                        
+                        console.log(error.responseText);
+                                
+                    }
+                });
 
+            }
+            else
+            {       
+                $.ajax({
+                    url: public_URL+"AddSchedule",
+                    type: 'POST',
+                    dataType: 'json', 
+                    data: obj,
+                    success: function(datas) { 
+                                    
+                        if(datas.status == true)
+                        {
+                            alert(datas.message);
+                            location.reload();    
+                        }
+                        else if(datas.status == false)
+                        {                    
+                            alert(datas.message);
+                            //location.reload();    
+                        }
+                    
+            
+                    },
+                    error: function (error) {               
+                        
+                        console.log(error.responseText);
+                                
+                    }
+                });
+            }
         }
-        else
-        {       
-            $.ajax({
-                url: public_URL+"AddSchedule",
-                type: 'POST',
-                dataType: 'json', 
-                data: obj,
-                success: function(datas) { 
-                                
-                    if(datas.status == true)
-                    {
-                        alert(datas.message);
-                        location.reload();    
-                    }
-                    else if(datas.status == false)
-                    {                    
-                        alert(datas.message);
-                        //location.reload();    
-                    }
-                
-        
-                },
-                error: function (error) {               
+        else{
+           
+            alert("You are booked Special day");
+            obj.specialDayCheck = true;
+            obj.Special_Day = check_SpecialDay.data_SpecialDays_Arry;
+
+            if(obj.Is_StandByBooking == true){
+
+                $.ajax({
+                    url: public_StandByBooking+"AddStandByBooking",
+                    type: 'POST',
+                    dataType: 'json', 
+                    data: obj,
+                    success: function(datas) { 
+                                    
+                        if(datas.status == true)
+                        {
+                            alert(datas.message);
+                            location.reload();    
+                        }
+                        else if(datas.status == false)
+                        {                    
+                            alert(datas.message);
+                            //location.reload();    
+                        }
                     
-                    console.log(error.responseText);
-                            
-                }
-            });
+            
+                    },
+                    error: function (error) {               
+                        
+                        console.log(error.responseText);
+                                
+                    }
+                });
+
+            }
+            else
+            {       
+                $.ajax({
+                    url: public_URL+"AddSchedule",
+                    type: 'POST',
+                    dataType: 'json', 
+                    data: obj,
+                    success: function(datas) { 
+                                    
+                        if(datas.status == true)
+                        {
+                            alert(datas.message);
+                            location.reload();    
+                        }
+                        else if(datas.status == false)
+                        {                    
+                            alert(datas.message);
+                            //location.reload();    
+                        }
+                    
+            
+                    },
+                    error: function (error) {               
+                        
+                        console.log(error.responseText);
+                                
+                    }
+                });
+            }
+
         }
 
     }
+
+    //special day calculations................Start.......
+
+     function SpecialDaysCalculations(start_Date,end_date){
+
+       
+         var data_SpecialDays =[];
+         var specialday_check = false;
+
+         var obj_main = Object();
+
+
+         var date_specialday = JSON.parse(sessionStorage.getItem("load_SpecialDays"));
+
+            var tmp_month_f = start_Date.getMonth();
+            var tmp_year_f = start_Date.getFullYear();
+            var tmp_Date_f = start_Date.getDate();
+            var date_f = new Date(tmp_year_f, tmp_month_f, tmp_Date_f); 
+        
+           do{
+
+         $.each(date_specialday, function (key, val) { 
+
+                       
+            var obj = Object();
+            obj._id =val._id;
+            obj.Name = val.Name;
+            obj.Start_Date = new Date(val.Start_Date); 
+            obj.End_Date = new Date(val.End_Date); 
+
+
+            var tmp_month = obj.Start_Date.getMonth();
+            var tmp_year = obj.Start_Date.getFullYear();
+            var tmp_Date = obj.Start_Date.getDate();
+      
+            var date = new Date(tmp_year, tmp_month, tmp_Date); 
+
+            do
+            {
+                
+                var specialDay_Convert = getFormattedDate_WithOut_Zero_Time(date);
+                var selectedDay_Convert =  getFormattedDate_WithOut_Zero_Time(date_f);
+                
+
+                if(specialDay_Convert == selectedDay_Convert){
+
+                    var obj2 = Object();
+                    obj2._id =val._id;
+                    obj2.Name = val.Name;
+                    obj2.special_date = Jqueary_string_to_Date_Convert(specialDay_Convert);
+                    data_SpecialDays.push(obj2);
+                    specialday_check = true;
+
+                }
+
+
+
+                date.setDate(date.getDate() + 1);
+                var tmp_Add_Date = new Date(date);       
+             }while(tmp_Add_Date <= obj.End_Date)
+
+            
+            //generateRandomSchedule(val);                 
+         });
+
+         date_f.setDate(date_f.getDate() + 1);
+         var tmp_Add_Date_f = new Date(date_f);
+
+        }while(tmp_Add_Date_f <= end_date)
+
+        obj_main.specialday_check = specialday_check;
+        obj_main.data_SpecialDays_Arry = data_SpecialDays;
+
+        return obj_main;
+     }
+
+    function Jqueary_string_to_Date_Convert(dateString){   
+
+        var dateArray = dateString.split("-");
+        var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+      
+        return dateObj;
+    
+      }
+
+
+   //End..................................................
 
 
     function calculate_NextBookingDays(datas,tmb_Obj)
@@ -1701,6 +1863,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                             }
 
                             Is_StandByBooking = JSON.parse("true");
+                            alert("You are trying to make a Standy By Day Booking!");
 
                      }
                        
