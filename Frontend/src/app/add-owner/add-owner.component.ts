@@ -22,6 +22,9 @@ export class AddOwnerComponent implements OnInit {
   singleFileDetails : any;
   adminlogin: any;
   profilePicResponse= "";
+  addownerMessage:any;
+  show: boolean = false;
+
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
@@ -131,6 +134,8 @@ export class AddOwnerComponent implements OnInit {
         else if(data.status==true){
           this.submitted = false;
           $('#error-disp-btns').trigger('click');
+          this.addownerMessage = data.message;
+          /*
           this.form.reset()
           // clear Validators for add Owner//Done By Alagesan
           this.form.get('First_Name').clearValidators();
@@ -147,6 +152,7 @@ export class AddOwnerComponent implements OnInit {
           this.form.get('Mobile').updateValueAndValidity(); 
           this.form.get('Family_Name').clearValidators();
           this.form.get('Family_Name').updateValueAndValidity(); 
+          */
         }
         }, err => {
           console.log(err);
@@ -193,5 +199,12 @@ if(this.handBook){
   goToViewPage(){
     this.router.navigate(['/all-owner/']);
 
-}
+  }
+
+  password() {
+    this.show = !this.show;
+   }
+
+
+
 }

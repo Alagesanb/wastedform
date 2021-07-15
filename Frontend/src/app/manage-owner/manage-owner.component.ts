@@ -343,7 +343,7 @@ function Binding_ManageOwner(){
     }); 
     
     this.getBoats()
-    this.getOwners()
+    //this.getOwners()
     this.getAllManageOwners()
     this.ifEditValue()
   }
@@ -423,7 +423,7 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
    this.selectedBoat = items
     this.boatId = items.item_id
     this.getBoatId(this.boatId)
-    this.getOwners()
+    this.getOwners_New(items.item_id)
   }
   onboatAll(items: any) { 
    
@@ -449,6 +449,81 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
   onOwnerSelectAll(items: any) {
     
   }
+
+  getOwners_New(boat_Id){
+
+    var obj = Object();
+    obj.boatid = boat_Id
+    
+
+    this.http.post<any>(`${this.OwnerUrl}/GetUnAssignedOwnerDetailsByBoatId`, obj  ).subscribe(data => {
+
+  this.owners = data['response']
+  console.log(this.owners);
+
+
+  this.dropdownOwnerList = data.response;   
+      
+            
+             var ownerArray = [];
+             this.allManageData.forEach(ele => {
+             
+
+             this.owner.forEach(element => {
+              
+
+                   var obj2 = Object();
+                   if(element.length > 0 || ele.length > 0){
+
+                   
+                   if(element._id==ele.Owner_Id && this.selectedBoat.item_id == ele.BoatDetails[0]._id){
+                    
+                    this.owners.splice(this.owners.indexOf(element), 1);
+
+                   }
+                  }
+             });
+    
+            });
+
+
+this.owners.forEach(element => {
+
+  var obj2 = Object();
+
+   obj2.item_id = element._id,
+   obj2.item_text =(element.First_Name).concat(" ", element.Last_Name);
+
+   var filter_sowner = ownerArray.find(x => x.item_id == element._id);
+
+   if(filter_sowner == null){
+    ownerArray.push(obj2);
+
+   }
+   
+  
+});
+
+             this.dropdownOwnerList_filted = ownerArray;  
+            
+   }, err => {
+   })
+  
+  
+
+
+
+
+
+  }
+
+
+
+
+
+
+
+
   scrollToTop(){
     this.scroll.scrollToPosition([0,0]);
   }
@@ -550,10 +625,13 @@ this.manageOwnerForms.get('No_of_WinterWeekEndDays').setValue(obj.Winter_WeekEnd
   }
 
 
-  getOwners(){
+ 
+
+  getOwners_(){
    
 
     this.http.get<any>(`${this.OwnerUrl}/GetAllOwnerDetails`).subscribe(data => {
+      
       
       this.allManageData = data['response']
 if(data.status== true){
@@ -606,6 +684,9 @@ this.owners.forEach(element => {
   }, err => {
   })
   }
+
+
+
   getOwnerId(id){   
     for (let i = 0; i < this.owners.length; i++) {
     
@@ -716,7 +797,7 @@ this.manageOwnerForms.get('Owner_Name').setValue(this.ownerName);
       }
 
       this.manageOwnerForms.get('id').setValue(this.managerOwnerId);
-      debugger;
+      
       console.log(this.manageOwnerForms.value);     
          
            
