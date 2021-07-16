@@ -470,6 +470,14 @@ this.bookingInfo = this.listBooking
 
 }
 
+ConvertDateOnley(dt)
+{
+  var date = dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();
+  var data2 = new Date(date);
+  return data2;
+}
+
+
 get_Search_Data_From_To(){
 
   
@@ -479,8 +487,8 @@ get_Search_Data_From_To(){
   var Stand_by_Booking_Completed_Temp =[];
   this.searchLoction ="";
 
-  var StartDate = this.string_to_Date_Convert(this.boatbookingform.value.Launch_Date1);
-  var EndDate = this.string_to_Date_Convert(this.boatbookingform.value.Launch_Date2);
+  var StartDate = this.ConvertDateOnley(this.string_to_Date_Convert(this.boatbookingform.value.Launch_Date1));
+  var EndDate = this.ConvertDateOnley(this.string_to_Date_Convert(this.boatbookingform.value.Launch_Date2));
   var a1 = this.bookingDatas;
   var a2 = this.Public_Stand_by_Booking; //start
   var a3 = this.public_Stand_by_Booking_Completed; //start
@@ -491,14 +499,8 @@ get_Search_Data_From_To(){
 
   
   this.bookingDatas.forEach(boat => {      
-    // if(ids._id == boat.BoatDetails[0].Location_Id){      
-
-    //   this.bookingPushData.push(boat)        
-    // }
     
-
-
-    var date_Start_Server = this.string_to_Date_Convert(this.getFormattedDate_second(boat.start));
+    var date_Start_Server = this.ConvertDateOnley(this.string_to_Date_Convert(this.getFormattedDate_second(boat.start)));
     
     if(date_Start_Server >= StartDate && date_Start_Server <= EndDate)
     {
@@ -520,7 +522,7 @@ get_Search_Data_From_To(){
 
   this.Public_Stand_by_Booking.forEach(boat1 => {   
     
-    var date_Start_Server = this.string_to_Date_Convert(this.getFormattedDate_second(boat1.start));
+    var date_Start_Server = this.ConvertDateOnley(this.string_to_Date_Convert(this.getFormattedDate_second(boat1.start)));
     
     if(date_Start_Server >= StartDate && date_Start_Server <= EndDate)
     {
@@ -539,7 +541,7 @@ get_Search_Data_From_To(){
 
   this.public_Stand_by_Booking_Completed.forEach(boat2 => {      
     
-    var date_Start_Server = this.string_to_Date_Convert(this.getFormattedDate_second(boat2.start));
+    var date_Start_Server = this.ConvertDateOnley(this.string_to_Date_Convert(this.getFormattedDate_second(boat2.start)));
     //var StartDate_1 =StartDate;
     //var StartDate_2 =EndDate;
     if(date_Start_Server >= StartDate && date_Start_Server <= EndDate)
