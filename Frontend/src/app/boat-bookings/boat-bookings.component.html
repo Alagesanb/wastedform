@@ -120,19 +120,19 @@
                         <h4>{{booking.BoatDetails[0].Boat_Number}}/{{booking.Booking_ID}}</h4>
 
                         <!-- <h5>#{{i+1001}}</h5> -->
-                        <h5><span><i class="far fa-calendar-check" aria-hidden="true"></i>  </span>{{booking.start | date :'short'}}</h5>
+                        <h5><span><i class="far fa-calendar-check commen-span-space" aria-hidden="true"></i>  </span>{{booking.start | date :'dd-MM-yy hh:mm a'}}</h5>
                         <!-- <h5><span><i class="far fa-user" aria-hidden="true"></i>  </span> {{booking.OwnerDetails[0].First_Name}}</h5> -->
                         <div *ngIf="booking.OwnerDetails[0]" >
-                            <h5><span><i class="far fa-user" aria-hidden="true"></i>  </span> {{booking.OwnerDetails[0].First_Name}}</h5>
-                        <h5><span><i class="fas fa-parking" aria-hidden="true"></i>  </span> {{booking.OwnerDetails[0].Parking_Ability}}</h5>
+                            <h5><span><i class="far fa-user commen-span-space" aria-hidden="true"></i>  </span>{{booking.OwnerDetails[0].First_Name}}</h5>
+                        <h5><span><i class="fas fa-parking commen-span-space" aria-hidden="true"></i>  </span>{{booking.OwnerDetails[0].Parking_Ability}}</h5>
                         <!--Update the sailing ability for boat bookings Done By Alagesan on 30.06.2021-->
-                        <h5><span><i class="fas fa-parking" aria-hidden="true"></i>  </span> {{booking.OwnerDetails[0].Sailing_Ability}}</h5>
+                        <h5><span><i class="fas fa-parking commen-span-space" aria-hidden="true"></i>  </span>{{booking.OwnerDetails[0].Sailing_Ability}}</h5>
                         </div>
                         <div *ngIf="!booking.OwnerDetails[0]" >
-                            <h5><span><i class="far fa-user" aria-hidden="true"></i>  </span> Admin</h5>
-                            <h5><span><i class="fas fa-parking" aria-hidden="true"></i>  </span> NA</h5>
+                            <h5><span><i class="far fa-user commen-span-space" aria-hidden="true"></i>  </span>Admin</h5>
+                            <h5><span><i class="fas fa-parking commen-span-space" aria-hidden="true"></i>  </span>NA</h5>
                             </div>
-                        <h5><span><i class="fas fa-history" aria-hidden="true"></i>  </span>{{booking.end | date :'short'}}</h5>
+                        <h5><span><i class="fas fa-history commen-span-space" aria-hidden="true"></i>  </span>{{booking.end | date :'dd-MM-yy hh:mm a'}}</h5>
                     </div>
                     </a>
                 </div>    
@@ -158,32 +158,25 @@
                                 
                                 <h4>{{StandbyBooking.Boat_Name}}</h4>
                                 <h4>{{StandbyBooking.Boat_Number}}/{{StandbyBooking.Booking_ID}}</h4>
+                               
 
-                                <!-- <h4>{{booking.Boat_Name}}</h4> -->
-                                <!-- <h5><span><i class="far fa-calendar-check" aria-hidden="true"></i></span> {{ booking.start | date :'short' }}</h5>
-                                <h5><span><i class="far fa-user" aria-hidden="true"></i>  </span> Francis</h5>
-                                <h5><span><i class="fas fa-parking" aria-hidden="true"></i>  </span> Expert</h5>
-                                <h5><span><i class="fas fa-history" aria-hidden="true"></i>  </span>{{ booking.end | date :'short' }}</h5>
-                                </a><a  class="btn btn-primary">Accept</a>
-                                <a class="btn btn-danger">Reject</a>  -->
-
-                                <h5><span><i class="far fa-calendar-check"></i>  </span> {{StandbyBooking.start| date :'short'}} </h5>
+                                <h5><span><i class="far fa-calendar-check commen-span-space"></i>  </span>{{StandbyBooking.start| date :'dd-MM-yy hh:mm a'}} </h5>
                                         
                                          <div *ngIf="StandbyBooking.OwnerDetails" >
-                                          <h5><span><i class="far fa-user"></i>  </span> {{StandbyBooking.First_Name}}</h5>
-                                          <h5><span><i class="fas fa-parking"></i>  </span> {{StandbyBooking.Parking_Ability}}</h5>
+                                          <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{StandbyBooking.First_Name}}</h5>
+                                          <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{StandbyBooking.Parking_Ability}}</h5>
                                           <!--Update the sailing ability for boat bookings Done By Alagesan on 30.06.2021-->
-                                          <h5><span><i class="fas fa-parking"></i>  </span> {{StandbyBooking.Sailing_Ability}}</h5>
+                                          <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{StandbyBooking.Sailing_Ability}}</h5>
                                           </div>
                                           <div *ngIf="!StandbyBooking.OwnerDetails">
-                                              <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
-                                              <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                              <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                              <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>NA</h5>
                                               </div>
                                         
                                         
                                          <!-- <h5><span><i class="far fa-user"></i>  </span> Francis</h5>
                                         <h5><span><i class="fas fa-parking"></i>  </span> Expert</h5> -->
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{StandbyBooking.end| date :'short'}}</h5>
+                                        <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{StandbyBooking.end| date :'dd-MM-yy hh:mm a'}}</h5>
                                         
                                         <a  class="btn btn-primary" (click)= Stand_by_Booking_Accept(StandbyBooking)>Accept</a>
                                         <a  class="btn btn-danger" (click)= Stand_by_Booking_Reject(StandbyBooking)>Reject</a>
@@ -215,29 +208,22 @@
                             <h4>{{StandbyBooking.Boat_Name}}</h4>
                             <h4>{{StandbyBooking.Boat_Number}}/{{StandbyBooking.Booking_ID}}</h4>
 
-                            <!-- <h4>{{booking.Boat_Name}}</h4> -->
-                            <!-- <h5><span><i class="far fa-calendar-check" aria-hidden="true"></i></span> {{ booking.start | date :'short' }}</h5>
-                            <h5><span><i class="far fa-user" aria-hidden="true"></i>  </span> Francis</h5>
-                            <h5><span><i class="fas fa-parking" aria-hidden="true"></i>  </span> Expert</h5>
-                            <h5><span><i class="fas fa-history" aria-hidden="true"></i>  </span>{{ booking.end | date :'short' }}</h5>
-                            </a><a  class="btn btn-primary">Accept</a>
-                            <a class="btn btn-danger">Reject</a>  -->
-
-                            <h5><span><i class="far fa-calendar-check"></i>  </span> {{StandbyBooking.start| date :'short'}} </h5>
+                            
+                            <h5><span><i class="far fa-calendar-check commen-span-space"></i>  </span>{{StandbyBooking.start| date :'dd-MM-yy hh:mm a'}} </h5>
                                     
                                      <div *ngIf="StandbyBooking.OwnerDetails" >
-                                      <h5><span><i class="far fa-user"></i>  </span> {{StandbyBooking.First_Name}}</h5>
-                                      <h5><span><i class="fas fa-parking"></i>  </span> {{StandbyBooking.Parking_Ability}}</h5>
+                                      <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{StandbyBooking.First_Name}}</h5>
+                                      <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{StandbyBooking.Parking_Ability}}</h5>
                                       </div>
                                       <div *ngIf="!StandbyBooking.OwnerDetails">
-                                          <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
-                                          <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                          <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                          <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>NA</h5>
                                           </div>
                                     
                                     
                                      <!-- <h5><span><i class="far fa-user"></i>  </span> Francis</h5>
                                     <h5><span><i class="fas fa-parking"></i>  </span> Expert</h5> -->
-                                    <h5><span><i class="fas fa-history"></i>  </span>{{StandbyBooking.end| date :'short'}}</h5>
+                                    <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{StandbyBooking.end| date :'dd-MM-yy hh:mm a'}}</h5>
 
                                    
                                     <h5 *ngIf="StandbyBooking.BookingStatus == 'Accepted'"><span class="label label-success">Accept</span></h5>

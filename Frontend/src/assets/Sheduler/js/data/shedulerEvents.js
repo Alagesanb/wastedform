@@ -1325,6 +1325,9 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
             alert("You are booked Special day");
             obj.specialDayCheck = true;
             obj.Special_Day = check_SpecialDay.data_SpecialDays_Arry;
+            debugger;
+
+            console.log(obj);
 
             if(obj.Is_StandByBooking == true){
 
