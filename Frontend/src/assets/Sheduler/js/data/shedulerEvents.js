@@ -1237,7 +1237,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     function AddSchedule_ApiCalling(obj){ 
         
-        
+        var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction"); 
         
         obj.commends = $(".commen-cammends-sheduler").val();
 
@@ -1253,11 +1253,12 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         
         obj.start = start_str.toString();
         obj.end   = end_str.toString();
-        obj.specialDayCheck = false;
+        obj.specialDayCheck = 0;
 
         var check_SpecialDay = SpecialDaysCalculations(start_str,end_str);
         
-        if(check_SpecialDay.specialday_check == false){
+        if(check_SpecialDay.specialday_check == false || pageIdentiFication == "AdminBooking" || pageIdentiFication == "boat-maintenance" )
+        {
             
         
             if(obj.Is_StandByBooking == true){
@@ -1298,6 +1299,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     dataType: 'json', 
                     data: obj,
                     success: function(datas) { 
+
+                        
                                     
                         if(datas.status == true)
                         {
@@ -1313,18 +1316,22 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
             
                     },
                     error: function (error) {               
-                        
+                       
                         console.log(error.responseText);
                                 
                     }
                 });
             }
         }
+        
         else{
            
             alert("You are booked Special day");
-            obj.specialDayCheck = true;
+            obj.specialDayCheck = 1;
             obj.Special_Day = check_SpecialDay.data_SpecialDays_Arry;
+            
+
+            console.log(obj);
 
             if(obj.Is_StandByBooking == true){
 
@@ -1363,7 +1370,9 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     type: 'POST',
                     dataType: 'json', 
                     data: obj,
-                    success: function(datas) { 
+                    success: function(datas) {
+                        
+                        
                                     
                         if(datas.status == true)
                         {
@@ -1381,6 +1390,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     error: function (error) {               
                         
                         console.log(error.responseText);
+                        
                                 
                     }
                 });
@@ -1872,7 +1882,9 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                     ///
                                           
-                    var obj = Object();                 
+                    var obj = Object();
+                    
+                    obj.specialDayCheck = false;
 
                     obj.Check_Status = nextBookingDay;
                     obj.Is_StandByBooking = Is_StandByBooking;

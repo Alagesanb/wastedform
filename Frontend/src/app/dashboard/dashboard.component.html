@@ -180,16 +180,16 @@
                                 <h4>{{book.Boat_Name}}</h4>
                                 <h4>{{book.Boat_Number}}/{{book.Booking_ID}}</h4>
 
-                                <h5><span><i class="far fa-calendar-check" ></i>  </span> {{ book.start| date :'short'}}</h5>
+                                <h5><span><i class="far fa-calendar-check commen-span-space" ></i> </span>{{ book.start| date :'dd-MM-yy hh:mm a'}}</h5>
                                 <div *ngIf="book.OwnerDetails">
-                                    <h5><span><i class="far fa-user"></i>  </span> {{book.First_Name}}</h5>
-                                    <h5><span><i class="fas fa-parking"></i>  </span> {{book.Parking_Ability}}</h5>
+                                    <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{book.First_Name}}</h5>
+                                    <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{book.Parking_Ability}}</h5>
                                     </div>
                                     <div *ngIf="!book.OwnerDetails">
-                                        <h5><span><i class="far fa-user"></i>  </span>Admin</h5>
-                                        <h5><span><i class="fas fa-parking"></i>  </span> -</h5>
+                                        <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                        <h5><span><i class="fas fa-parking commen-span-space"></i>  </span> -</h5>
                                     </div>
-                                <h5><span><i class="fas fa-history"></i>  </span> {{book.end| date :'short'}}</h5>
+                                <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{book.end| date :'dd-MM-yy hh:mm a'}}</h5>
                             </div>
                             
                 </div>  
@@ -220,16 +220,17 @@
                                         <h4>{{book.Boat_Number}}/{{book.Booking_ID}}</h4>
 
                                         <!-- <h5># 1001</h5> -->
-                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{book.start| date :'short'}}</h5>
+                                        <h5><span><i class="far fa-calendar-check commen-span-space"></i></span>{{book.start| date :'dd-MM-yy hh:mm a'}}</h5>
                                         <div *ngIf="book.OwnerDetails">
-                                                <h5><span><i class="far fa-user"></i>  </span> {{book.First_Name}}</h5>
-                                                <h5><span><i class="fas fa-parking"></i>  </span> {{book.Parking_Ability}}</h5>
+                                                <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{book.First_Name}}</h5>
+                                                <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{book.Parking_Ability}}</h5>
                                         </div>
                                         <div *ngIf="!book.OwnerDetails">
-                                            <h5><span><i class="far fa-user"></i>  </span>Admin</h5>
-                                            <h5><span><i class="fas fa-parking"></i>  </span> -</h5>
+                                            <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                            <h5><span><i class="fas fa-parking commen-span-space"></i>  </span> -</h5>
                                         </div>
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{book.end| date :'short'}}</h5>
+                                        <!-- <h5><span><i class="fas fa-history"></i>  </span>{{book.end| date :'short'}}</h5> -->
+                                        <h5><span><i class="fas fa-history commen-span-space"></i></span>{{book.end| date :'dd-MM-yy hh:mm a'}}</h5>
                                     </div>
                                    
                                 </div>
@@ -262,16 +263,16 @@
                                             <h4>{{cancel.Boat_Number}}/{{cancel.Booking_ID}}</h4>
     
                                           
-                                            <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start| date :'short'}}</h5>
+                                            <h5><span><i class="far fa-calendar-check commen-span-space"></i>  </span>{{cancel.start| date :'dd-MM-yy hh:mm a'}}</h5>
                                             <div *ngIf="cancel.OwnerDetails" >
-                                            <h5><span><i class="far fa-user"></i>  </span> {{cancel.First_Name}}</h5>
-                                            <h5><span><i class="fas fa-parking"></i>  </span> {{cancel.Parking_Ability}}</h5>
+                                            <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{cancel.First_Name}}</h5>
+                                            <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{cancel.Parking_Ability}}</h5>
                                             </div>
                                             <div *ngIf="!cancel.OwnerDetails">
-                                                <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
-                                                <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                                <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                                <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>NA</h5>
                                             </div>
-                                            <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end| date :'short'}}</h5>
+                                            <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{cancel.end| date :'dd-MM-yy hh:mm a'}}</h5>
                                            
     
                                           <!-- <button  class="btn-primary btn"> 
@@ -311,16 +312,16 @@
                                         <h4>{{cancel.Boat_Number}}/{{cancel.Booking_ID}}</h4>
 
                                         <!-- <h5># 1001</h5> -->
-                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start| date :'short'}}</h5>
+                                        <h5><span><i class="far fa-calendar-check commen-span-space"></i>  </span>{{cancel.start| date :'dd-MM-yy hh:mm a'}}</h5>
                                         <div *ngIf="cancel.OwnerDetails" >
-                                        <h5><span><i class="far fa-user"></i>  </span> {{cancel.First_Name}}</h5>
-                                        <h5><span><i class="fas fa-parking"></i>  </span> {{cancel.Parking_Ability}}</h5>
+                                        <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{cancel.First_Name}}</h5>
+                                        <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{cancel.Parking_Ability}}</h5>
                                         </div>
                                         <div *ngIf="!cancel.OwnerDetails">
-                                            <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
-                                            <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                            <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                            <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>NA</h5>
                                         </div>
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end| date :'short'}}</h5>
+                                        <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{cancel.end| date :'dd-MM-yy hh:mm a'}}</h5>
                                         <!-- <span style="margin-left: 104px;" type="button" class="label label-danger">
                                         APPROVED
                                       </span> -->
@@ -348,16 +349,16 @@
                                         <h4>{{cancel.Boat_Number}}/{{cancel.Booking_ID}}</h4>
 
                                         <!-- <h5># 1001</h5> -->
-                                        <h5><span><i class="far fa-calendar-check"></i>  </span> {{cancel.start| date :'short'}}</h5>
+                                        <h5><span><i class="far fa-calendar-check commen-span-space"></i>  </span>{{cancel.start| date :'dd-MM-yy hh:mm a'}}</h5>
                                         <div *ngIf="cancel.OwnerDetails" >
-                                        <h5><span><i class="far fa-user"></i>  </span> {{cancel.First_Name}}</h5>
-                                        <h5><span><i class="fas fa-parking"></i>  </span> {{cancel.Parking_Ability}}</h5>
+                                        <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{cancel.First_Name}}</h5>
+                                        <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{cancel.Parking_Ability}}</h5>
                                         </div>
                                         <div *ngIf="!cancel.OwnerDetails">
-                                            <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
-                                            <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                            <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                            <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>NA</h5>
                                         </div>
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{cancel.end| date :'short'}}</h5>
+                                        <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{cancel.end| date :'dd-MM-yy hh:mm a'}}</h5>
                                         <span style="margin-left: 104px;" type="button" class="label label-danger">
                                         APPROVED
                                       </span>
@@ -397,21 +398,21 @@
                                         <h4>{{StandbyBooking.Boat_Name}}</h4>
                                         <h4>{{StandbyBooking.Boat_Number}}/{{StandbyBooking.Booking_ID}}</h4>
 
-                                         <h5><span><i class="far fa-calendar-check"></i>  </span> {{StandbyBooking.start| date :'short'}} </h5>
+                                         <h5><span><i class="far fa-calendar-check commen-span-space"></i>  </span>{{StandbyBooking.start| date :'dd-MM-yy hh:mm a'}} </h5>
                                         
                                          <div *ngIf="StandbyBooking.OwnerDetails" >
-                                          <h5><span><i class="far fa-user"></i>  </span> {{StandbyBooking.First_Name}}</h5>
-                                          <h5><span><i class="fas fa-parking"></i>  </span> {{StandbyBooking.Parking_Ability}}</h5>
+                                          <h5><span><i class="far fa-user commen-span-space"></i>  </span>{{StandbyBooking.First_Name}}</h5>
+                                          <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>{{StandbyBooking.Parking_Ability}}</h5>
                                           </div>
                                           <div *ngIf="!StandbyBooking.OwnerDetails">
-                                              <h5><span><i class="far fa-user"></i>  </span> Admin</h5>
-                                              <h5><span><i class="fas fa-parking"></i>  </span> NA</h5>
+                                              <h5><span><i class="far fa-user commen-span-space"></i>  </span>Admin</h5>
+                                              <h5><span><i class="fas fa-parking commen-span-space"></i>  </span>NA</h5>
                                               </div>
                                         
                                         
                                          <!-- <h5><span><i class="far fa-user"></i>  </span> Francis</h5>
                                         <h5><span><i class="fas fa-parking"></i>  </span> Expert</h5> -->
-                                        <h5><span><i class="fas fa-history"></i>  </span>{{StandbyBooking.end| date :'short'}}</h5>
+                                        <h5><span><i class="fas fa-history commen-span-space"></i>  </span>{{StandbyBooking.end| date :'dd-MM-yy hh:mm a'}}</h5>
                                         
                                         <a  class="btn btn-primary" (click)= Stand_by_Booking_Accept(StandbyBooking)>Accept</a>
                                         <a  class="btn btn-danger" (click)= Stand_by_Booking_Reject(StandbyBooking)>Reject</a>

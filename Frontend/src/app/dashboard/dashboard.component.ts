@@ -579,9 +579,7 @@ export class DashboardComponent implements OnInit {
                               });
                               
                             } 
-
-                            debugger;
-                            
+                                                       
 
                             getDaysInMonth_Sheduler(ScheduleList,GetAllUnAvailableDays,GetAllUnAvailableDays_Boats);
                             getallBoats_Func();
@@ -2260,6 +2258,15 @@ console.log(this.dropdown_Boat_List);
 
   pageRefresh(){
     location.reload();
+  }
+
+   Angular_string_to_Date_Convert(dateString){   
+
+    var dateArray = dateString.split("/");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    return dateObj;
+
   }
 
 
