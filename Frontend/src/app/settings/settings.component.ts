@@ -666,17 +666,23 @@ $(document).on("click",".cls-special-days-Edit",function() {
                 console.log(val)
                 var ID        = val._id; 
                 var Boat_Location =  val.Boat_Location;
-
+                var Location_URL = val.Location_URL;
 
                 if(firstChek == 0){
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'\
-                  </td><td></td></tr>';
+                  </td><td>'+Location_URL+'</td><td><ul class="table-action">\
+                  <li><a  class=""><i class="far fa-edit" aria-hidden="true">\
+                  </i></a></li><li><a ><i class="far fa-trash-alt" aria-hidden="true">\
+                  </i></a></li></ul></td></tr>';
                   firstChek = 1;
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'</td><td></td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'</td><td>'+Location_URL+'</td><td><ul class="table-action">\
+                <li><a  class=""><i class="far fa-edit" aria-hidden="true">\
+                </i></a></li><li><a ><i class="far fa-trash-alt" aria-hidden="true">\
+                </i></a></li></ul></td></tr>';
 
 
                 }
@@ -689,7 +695,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
               var sriptTemp = '<script>$(document).ready(function(){$("#example3").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
 
-              var bindingTabledataFirst ='<table id="example3"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Location</th><th>Location URL</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+              var bindingTabledataFirst ='<table id="example3"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Location</th><th>URL</th><th>ACTION</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
               $("#temp-locations-data").html(bindingTabledataFirst);
 
