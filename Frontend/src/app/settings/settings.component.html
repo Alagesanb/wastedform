@@ -386,7 +386,7 @@
 </div>
   <!--Add location tab for settings Done By Alagesan on 21.06.2021    -->
 <div id="pane-F" class="card tab-pane fade" role="tabpanel" aria-labelledby="tab-F">
-  <div class="sbg-form"  style="margin-top: 25px;"> 
+  <div class="sbg-form"  style="margin-top: 25px;" *ngIf="!editBtnFlag"> 
     <form [formGroup]="addBoatLocationform">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -400,11 +400,31 @@
         </div>                  
          <div class="form-row">     
             <div class="col-md-2">
-            <a  class="btn btn-primary"  (click)=saveBoatLocation()>SAVE</a>
+            <a  class="btn btn-primary" *ngIf="addBtnFlag"  (click)=saveBoatLocation()>SAVE</a>
             </div>             
          </div>
     </form>     
-   </div>  
+   </div> 
+   <div class="sbg-form"  style="margin-top: 25px;" *ngIf="!addBtnFlag" > 
+    <form [formGroup]="editBoatLocationform">
+      <input type="text" formControlName="_id" style="display: none;" >
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Location Name</label>
+            <input type="text" formControlName="Boat_Location" class="form-control" [ngClass]="{ 'is-invalid': editboatLocationSubmitted && eblf.Boat_Location.errors }">
+          </div>  
+          <div class="form-group col-md-6">
+            <label>Location URL</label>
+            <input type="text" formControlName="Location_URL" class="form-control" [ngClass]="{ 'is-invalid': editboatLocationSubmitted && eblf.Location_URL.errors }">
+          </div>
+        </div>                  
+         <div class="form-row">     
+            <div class="col-md-2">
+            <a  class="btn btn-primary" *ngIf="editBtnFlag" (click)= editBoatLocation()>Edit</a>
+            </div>             
+         </div>
+    </form>     
+   </div> 
    <div class="row" style="margin-top: 25px;">
     <div class="col-md-12 reports" id="temp-locations-data">
 
@@ -640,7 +660,7 @@
             </div>
           </div>  
 
-          <!--Add boat location data integrations for settings Done By Alagesan on 24.06.2021    -->
+          <!--Add boat location popup message for settings Done By Alagesan on 24.06.2021    -->
 
 
           <button style="display:none" type="button" id="add-boat-location-popup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boatLocationModal">Open Modal</button>
@@ -665,6 +685,32 @@
               
             </div>
           </div>  
+
+           <!--Edit boat location popup message for settings Done By Alagesan on 24.06.2021    -->
+
+
+           <button style="display:none" type="button" id="edit-boat-location-popup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editboatLocationModal">Open Modal</button>
+          
+            
+           <div class="modal fade" id="editboatLocationModal" role="dialog">
+             <div class="modal-dialog">
+             
+               
+               <div class="modal-content">
+                 <div class="modal-header">
+                   <button type="button" class="close" data-dismiss="modal">&times;</button>
+                   <h4 class="modal-title">{{modelTitle}}</h4>
+                 </div>
+                 <div class="modal-body">
+                   <p>{{getResponce}}</p>
+                 </div>
+                 <div class="modal-footer">
+                   <button type="button" class="btn btn-default" (click)="pagereload()"  data-dismiss="modal">OK</button>
+                 </div>
+               </div>
+               
+             </div>
+           </div>  
 
           <!--Add boat type data integrations for settings Done By Alagesan on 25.06.2021    -->
 
@@ -691,7 +737,60 @@
               
             </div>
           </div>  
-                         
+                       
+          
+          <!--Delete locatin confrm / cancel popup modal for settings Done By Alagesan on 17.07.2021    -->
+          <button style="display:none" type="button" id="deleteLocation" class="btn btn-info btn-lg" data-toggle="modal"
+data-target="#delete-location-modal-popup">Open Modal</button>
+
+          <!-- Modal -->
+
+          <div class="modal fade" id="delete-location-modal-popup" role="dialog">
+          <div class="modal-dialog">
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Location</h4>
+              </div>
+              <div class="modal-body">
+            <span class="red">ARE YOU SURE ?</span>
+                <p>You Want To Delete Location!!!.</p>
+              </div>
+              <div class="modal-footer">
+            <span a href="#"  (click)=deleteLocationdata() class="confirm-bttn">CONFIRM</span>
+            <span a href="#" data-dismiss="modal" class="cancel-bttn">CANCEL</span>
+              </div>
+            </div>
+
+          </div>
+          </div>
+
+          <!--Delete locations success popup message for settings Done By Alagesan on 17.07.2021    -->
+          <button style="display:none" type="button" id="delete-location-sucess-btn" class="btn btn-info btn-lg" data-toggle="modal"
+          data-target="#delete-location-sucess-modal">Open Modal</button>
+
+
+          <div class="modal fade" id="delete-location-sucess-modal" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Delete Location </h4>
+              </div>
+              <div class="modal-body">
+                <p>{{getResponce}}</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+
+          </div>
+          </div>
+
         </div>
     </div>
 </div>

@@ -34,6 +34,9 @@ export class SettingsComponent implements OnInit {
   addBoatLocationform: FormGroup;
   boatLocationSubmitted = false;
 
+  editBoatLocationform: FormGroup;
+  editboatLocationSubmitted = false;
+
   //Add boat type for settings page //Done By Alagesan on 25.06.2021
   addBoatTypeform: FormGroup;
   addBoatTypesubmitted = false;
@@ -71,6 +74,10 @@ export class SettingsComponent implements OnInit {
   adminlogin: any;
   GetBoatDetailsByBoatId_AllocatedDays: any;
 
+  editBtnFlag= false
+  addBtnFlag = true
+  locationData:any;
+  locationDeleteId:string;
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute,private ps: GetServiceService) {
@@ -81,10 +88,14 @@ export class SettingsComponent implements OnInit {
       this.createSpecialDaysForm() ;
       this.createBoatLocationForm();
       this.createBoatTypeForm();
+      this.createEditBoatLocationForm();
 
      }
 
   ngOnInit(): void {
+
+    var public_Get_Location_Details = [];
+    this.startTimer_set_locations_Edit()
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){
       this.router.navigate(['']);
@@ -188,6 +199,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   this.getAllBoatTYpes()  
   this.getAllshare();
   this.getBoats();
+  this.getLocationsRedirect();
 
 
 
@@ -649,6 +661,27 @@ $(document).on("click",".cls-special-days-Edit",function() {
       
     }
 
+    $(document).on("click",".cls-location-Edit",function() {
+
+      var getEditid = $(this).attr('id');
+      console.log(getEditid);
+      var temp_Arry = public_Get_Location_Details.find(x => x._id == getEditid);
+      sessionStorage.setItem("set_Location_Details_Edit",JSON.stringify(temp_Arry));
+      
+    
+     });
+
+     $(document).on("click",".cls-location-Delete",function() {
+
+      var getdeleteid = $(this).attr('id');
+      console.log(getdeleteid);
+      $('#deleteLocation').trigger('click');
+      var temp_Arry = public_Get_Location_Details.find(x => x._id == getdeleteid);
+      sessionStorage.setItem("set_Location_Details_Delete",JSON.stringify(temp_Arry));
+      
+    
+     });
+
     function Get_Locations_Data(){
       $.ajax({
         url: locations_url +'GetLocation',
@@ -656,6 +689,8 @@ $(document).on("click",".cls-special-days-Edit",function() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
+          public_Get_Location_Details = data.response;
+
             if(data.status == true)
             {
               var bindingTableData;
@@ -664,7 +699,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
             
               $.each(data.response , function(index, val) { 
                 console.log(val)
-                var ID        = val._id; 
+                var Location_Id        = val._id; 
                 var Boat_Location =  val.Boat_Location;
                 var Location_URL = val.Location_URL;
 
@@ -672,16 +707,16 @@ $(document).on("click",".cls-special-days-Edit",function() {
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'\
                   </td><td>'+Location_URL+'</td><td><ul class="table-action">\
-                  <li><a  class=""><i class="far fa-edit" aria-hidden="true">\
-                  </i></a></li><li><a ><i class="far fa-trash-alt" aria-hidden="true">\
+                  <li><a  class="cls-location-Edit" id="'+Location_Id+'"><i class="far fa-edit" aria-hidden="true">\
+                  </i></a></li><li><a class="cls-location-Delete" id="'+Location_Id+'"><i class="far fa-trash-alt" aria-hidden="true">\
                   </i></a></li></ul></td></tr>';
                   firstChek = 1;
 
                 }
                 else{
                 bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+Boat_Location+'</td><td>'+Location_URL+'</td><td><ul class="table-action">\
-                <li><a  class=""><i class="far fa-edit" aria-hidden="true">\
-                </i></a></li><li><a ><i class="far fa-trash-alt" aria-hidden="true">\
+                <li><a  class="cls-location-Edit" id="'+Location_Id+'"><i class="far fa-edit" aria-hidden="true">\
+                </i></a></li><li><a class="cls-location-Delete" id="'+Location_Id+'"><i class="far fa-trash-alt" aria-hidden="true">\
                 </i></a></li></ul></td></tr>';
 
 
@@ -1049,6 +1084,31 @@ $('#datepiker-4').Zebra_DatePicker({
      
 }
 
+startTimer_set_locations_Edit() {
+  setInterval(() => {
+   //sessionStorage.setItem("set_manageOwner_Edit",JSON.stringify(temp_Arry));
+   var temp_data = sessionStorage.getItem("set_Location_Details_Edit");
+   if(typeof temp_data !== "undefined" && temp_data != null)
+   {
+     sessionStorage.removeItem("set_Location_Details_Edit");
+     var obj = JSON.parse(temp_data);
+     this.editLocations(obj);
+   }     
+
+   var temp_delete_data = sessionStorage.getItem("set_Location_Details_Delete");
+   if(typeof temp_delete_data !== "undefined" && temp_delete_data != null)
+   {
+     sessionStorage.removeItem("set_Location_Details_Delete");
+     var deleteobj = JSON.parse(temp_delete_data);
+     this.deleteLocationsbyId(deleteobj._id);
+   }   
+   
+ },1000)
+}
+
+
+
+
   
   onItemSelect_CONSECUTIVEDAYS(items: any) {
     
@@ -1148,7 +1208,6 @@ $('#datepiker-4').Zebra_DatePicker({
         
         })
   }
-
 
   getBoats(){
     var obj = Object();
@@ -1381,6 +1440,7 @@ addShare(){
     this.http.post<any>(`${this.url}/Add_Location`,  this.addBoatLocationform.value   ).subscribe(data => {
         console.log(data);
       if(data.status == true){
+        this.editBtnFlag= false
         this.modelTitle = "Add Boat Location"
         this.getResponce = data.message
         $('#add-boat-location-popup').trigger('click');
@@ -1396,6 +1456,87 @@ addShare(){
     })
   }
   get ablf() { return this.addBoatLocationform.controls; }
+
+  // Edit boat location for settings page //Done By Alagesan on 16.07.2021
+   createEditBoatLocationForm() {
+    this.editBoatLocationform = this.fb.group({
+      Boat_Location: new FormControl('', [Validators.required,]),
+      Location_URL: new FormControl('', [Validators.required,]),
+      _id :  new FormControl('', ),
+    });
+  }
+  // Edit boat location for settings page //Done By Alagesan on 16.07.2021
+  editLocations(obj){
+    this.addBtnFlag = false;
+   this.editBtnFlag= true
+    console.log(obj)
+    this.editBoatLocationform.get('_id').setValue(obj._id);
+    this.editBoatLocationform.get('Boat_Location').setValue(obj.Boat_Location);
+    this.editBoatLocationform.get('Location_URL').setValue(obj.Location_URL);
+ 
+  }
+ 
+  editBoatLocation(){
+    this.editboatLocationSubmitted = true;
+    if (this.editBoatLocationform.invalid) {
+      return;
+    }
+    
+    console.log(this.editBoatLocationform.value)
+    this.http.post<any>(`${this.url}/EditLocation`,  this.editBoatLocationform.value   ).subscribe(data => {
+        console.log(data);
+      if(data.status == true){
+        this.editBtnFlag= false
+        this.addBtnFlag = true;
+        this.modelTitle = "Edit Boat Location"
+        this.getResponce = data.message
+        $('#edit-boat-location-popup').trigger('click');
+        this.editBoatLocationform.reset()
+        this.editboatLocationSubmitted = false;
+        //this.getLocationsRedirect();
+      }
+      else if(data.status == false){
+      }
+      
+    }, err => {
+    
+    })
+  }
+  get eblf() { return this.editBoatLocationform.controls; }
+
+
+  // Delete boat location for settings page //Done By Alagesan on 17.07.2021
+  deleteLocationsbyId(obj){
+    console.log(obj);
+   this.locationDeleteId = obj;
+  }
+
+  // Delete boat location for settings page //Done By Alagesan on 17.07.2021
+  deleteLocationdata(){
+    var locationId = {
+      _id : this.locationDeleteId
+    }
+    console.log(locationId)
+    this.http.post<any>(`${this.url}/DeleteLocation`,  locationId   ).subscribe(data => {
+      console.log(data);
+        if(data.status==true){
+          this.getResponce = data.message
+          $('#delete-location-modal-popup').trigger('click');
+          $('#delete-location-sucess-btn').trigger('click');
+          this.getLocationsRedirect();
+        } 
+        }, err => {
+          console.log(err);
+        })
+  }
+
+  getLocationsRedirect(){
+    this.http.get<any>(`${this.url}/GetLocation`).subscribe(data => {
+      console.log(data);
+      console.log(data.response);
+    })
+  }
+
   //Add special days for settings page //Done By Alagesan on 23.06.2021
   createSpecialDaysForm() {
     this.specialDaysform = this.fb.group({
