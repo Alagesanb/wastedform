@@ -661,6 +661,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
       
     }
 
+     // Edit location  for settings //Done By Alagesan on 17.07.2021
     $(document).on("click",".cls-location-Edit",function() {
 
       var getEditid = $(this).attr('id');
@@ -668,9 +669,30 @@ $(document).on("click",".cls-special-days-Edit",function() {
       var temp_Arry = public_Get_Location_Details.find(x => x._id == getEditid);
       sessionStorage.setItem("set_Location_Details_Edit",JSON.stringify(temp_Arry));
       
+     });
+
+      // Edit location mouseover  for settings //Done By Alagesan on 17.07.2021
+     $(document).on("mouseover",".cls-location-Edit",function() {
+     
+      var getdEditid = $(this).attr('id');
+    
+      $("#"+getdEditid).css("color", "red");
+      $("#"+getdEditid).css('cursor','pointer');
+      
     
      });
 
+      // Edit location mouseout  for settings //Done By Alagesan on 17.07.2021
+     $(document).on("mouseout",".cls-location-Edit",function() {
+  
+      var getdEditid = $(this).attr('id');
+    
+      $("#"+getdEditid).css("color", "black");
+      
+    
+     });
+
+      // Delete location  for settings //Done By Alagesan on 17.07.2021
      $(document).on("click",".cls-location-Delete",function() {
 
       var getdeleteid = $(this).attr('id');
@@ -681,6 +703,28 @@ $(document).on("click",".cls-special-days-Edit",function() {
       
     
      });
+      // Delete location mouseover  for settings //Done By Alagesan on 17.07.2021
+     $(document).on("mouseover",".cls-location-Delete",function() {
+ 
+      var getdeleteid = $(this).attr('id');
+    
+      $("#"+getdeleteid).css("color", "red");
+      $("#"+getdeleteid).css('cursor','pointer');
+      
+    
+     });
+      // Delete location mouseout  for settings //Done By Alagesan on 17.07.2021
+     $(document).on("mouseout",".cls-location-Delete",function() {
+      
+      var getdeleteid = $(this).attr('id');
+    
+      $("#"+getdeleteid).css("color", "black");
+      
+    
+     });
+    
+    
+     
 
     function Get_Locations_Data(){
       $.ajax({
