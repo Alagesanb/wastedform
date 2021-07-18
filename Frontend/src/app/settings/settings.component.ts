@@ -41,6 +41,10 @@ export class SettingsComponent implements OnInit {
   addBoatTypeform: FormGroup;
   addBoatTypesubmitted = false;
 
+  //Edit boat type for settings page //Done By Alagesan on 18.07.2021
+  editBoatTypeform: FormGroup;
+  editBoatTypesubmitted = false;
+
   boats: any=[];
   allBoatsType: any =[];
   searchText: any = '';
@@ -53,7 +57,7 @@ export class SettingsComponent implements OnInit {
   ConsecutiveSubmitted = false;
   BookingSubmitted = false;
   getResponce: any;
-  boatTypeId: any;
+  boatTypeId: string;
   modelTitle: string;
   shareAllocation: any=[];
   set_BoatType = "";
@@ -89,6 +93,7 @@ export class SettingsComponent implements OnInit {
       this.createBoatLocationForm();
       this.createBoatTypeForm();
       this.createEditBoatLocationForm();
+      this.createEditBoatTypeForm();
 
      }
 
@@ -96,6 +101,9 @@ export class SettingsComponent implements OnInit {
 
     var public_Get_Location_Details = [];
     this.startTimer_set_locations_Edit()
+    var public_Get_Boat_Type = [];
+    this.startTimer_set_boat_type_Edit()
+
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){
       this.router.navigate(['']);
@@ -276,6 +284,68 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
    //Get_UnAvailabe_Days();
   // Get_Locations_Data();
   // GetAll_AddSpecial_Days();
+     
+       // Edit boat type  for settings //Done By Alagesan on 18.07.2021
+      $(document).on("click",".cls-boat-type-edit",function() {
+
+        var getEditid = $(this).attr('id');
+        console.log(getEditid);
+        var temp_Arry = public_Get_Boat_Type.find(x => x._id == getEditid);
+        sessionStorage.setItem("set_boat_type_Edit",JSON.stringify(temp_Arry));
+        
+      });
+
+        // Edit boat type mouseover  for settings //Done By Alagesan on 18.07.2021
+      $(document).on("mouseover",".cls-boat-type-edit",function() {
+      
+        var getdEditid = $(this).attr('id');
+
+        $("#"+getdEditid).css("color", "red");
+        $("#"+getdEditid).css('cursor','pointer');
+        
+
+      });
+
+        // Edit boat type mouseout  for settings //Done By Alagesan on 18.07.2021
+      $(document).on("mouseout",".cls-boat-type-edit",function() {
+
+        var getdEditid = $(this).attr('id');
+
+        $("#"+getdEditid).css("color", "black");
+        
+
+      });
+
+        // Delete boat type  for settings //Done By Alagesan on 18.07.2021
+      $(document).on("click",".cls-boat-type-delete",function() {
+
+        var getdeleteid = $(this).attr('id');
+        console.log(getdeleteid);
+        var temp_Arry = public_Get_Boat_Type.find(x => x._id == getdeleteid);
+        sessionStorage.setItem("set_boat_type_Delete",JSON.stringify(temp_Arry));
+        
+
+      });
+        // Delete boat type mouseover  for settings //Done By Alagesan on 18.07.2021
+      $(document).on("mouseover",".cls-boat-type-delete",function() {
+
+        var getdeleteid = $(this).attr('id');
+
+        $("#"+getdeleteid).css("color", "red");
+        $("#"+getdeleteid).css('cursor','pointer');
+        
+
+      });
+        // Delete boat type mouseout  for settings //Done By Alagesan on 18.07.2021
+      $(document).on("mouseout",".cls-boat-type-delete",function() {
+        
+        var getdeleteid = $(this).attr('id');
+
+        $("#"+getdeleteid).css("color", "black");
+        
+
+      });
+  
    binding_Boat();
     function binding_Boat(){
       $.ajax({
@@ -286,7 +356,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         contentType: 'application/json',
         success: function (data) {
 
-          
+          public_Get_Boat_Type = data.response;
 
             if(data.status == true)
             {
@@ -301,6 +371,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
 
                 var count = 35;
+                var boatTypeDataId = val._id;
                 var discription =val.Type_Description;
                   discription = discription.slice(0, count) + (discription.length > count ? "..." : "");
 
@@ -308,14 +379,14 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td>'+val.Boat_Type+'\
                   </td><td data-toggle="tooltip" title="'+val.Type_Description+'">'+ discription +'</td><td><ul class="table-action">\
-                  <li><a (click)=editBoat(data) class=""><i class="far fa-edit" aria-hidden="true">\
-                  </i></a></li><li><a (click)=deleteBoatModel(data)><i class="far fa-trash-alt" aria-hidden="true">\
+                  <li><a class="cls-boat-type-edit" id="'+boatTypeDataId+'"><i class="far fa-edit" aria-hidden="true">\
+                  </i></a></li><li><a class="cls-boat-type-delete" id="'+boatTypeDataId+'"><i class="far fa-trash-alt" aria-hidden="true">\
                   </i></a></li></ul></td></tr>';
                   firstChek = 1;
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+val.Boat_Type+'</td><td data-toggle="tooltip" title="'+val.Type_Description+'">'+ discription +'</td><td><ul class="table-action"><li><a (click)=editBoat(data) class=""><i class="far fa-edit" aria-hidden="true"></i></a></li><li><a (click)=deleteBoatModel(data)><i class="far fa-trash-alt" aria-hidden="true"></i></a></li></ul></td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td>'+val.Boat_Type+'</td><td data-toggle="tooltip" title="'+val.Type_Description+'">'+ discription +'</td><td><ul class="table-action"><li><a class="cls-boat-type-edit" id="'+boatTypeDataId+'"><i class="far fa-edit" aria-hidden="true"></i></a></li><li><a class="cls-boat-type-delete" id="'+boatTypeDataId+'"><i class="far fa-trash-alt" aria-hidden="true"></i></a></li></ul></td></tr>';
 
 
                 }
@@ -1128,9 +1199,9 @@ $('#datepiker-4').Zebra_DatePicker({
      
 }
 
+// Edit and delete location for settings Done By Alagesan on 17.07.2021  
 startTimer_set_locations_Edit() {
   setInterval(() => {
-   //sessionStorage.setItem("set_manageOwner_Edit",JSON.stringify(temp_Arry));
    var temp_data = sessionStorage.getItem("set_Location_Details_Edit");
    if(typeof temp_data !== "undefined" && temp_data != null)
    {
@@ -1150,7 +1221,27 @@ startTimer_set_locations_Edit() {
  },1000)
 }
 
-
+// Edit and delete boat type for settings Done By Alagesan on 18.07.2021  
+startTimer_set_boat_type_Edit(){
+  setInterval(() => {
+    var boat_type_data = sessionStorage.getItem("set_boat_type_Edit");
+    if(typeof boat_type_data !== "undefined" && boat_type_data != null)
+    {
+      sessionStorage.removeItem("set_boat_type_Edit");
+      var obj = JSON.parse(boat_type_data);
+      this.editBoat(obj);
+    }     
+ 
+    var boat_type_delete = sessionStorage.getItem("set_boat_type_Delete");
+    if(typeof boat_type_delete !== "undefined" && boat_type_delete != null)
+    {
+      sessionStorage.removeItem("set_boat_type_Delete");
+      var deleteobj = JSON.parse(boat_type_delete);
+      this.deleteBoatModel(deleteobj._id);
+    }   
+    
+  },1000)
+}
 
 
   
@@ -1350,28 +1441,31 @@ else if(data.Status == false){
     
   }
   
+  // Edit boat type for settings Done By Alagesan on 18.07.2021  
   editBoat(data){
-    this.form.get('_id').setValue(data._id);
-    this.form.get('Boat_Type').setValue(data.Boat_Type);
-    this.form.get('Type_Description').setValue(data.Type_Description);
+    this.editBoatTypeform.get('_id').setValue(data._id);
+    this.editBoatTypeform.get('Boat_Type').setValue(data.Boat_Type);
+    this.editBoatTypeform.get('Type_Description').setValue(data.Type_Description);
    
-    $('#error-disp-btns').trigger('click');
+    $('#edit-boat-type-modal-btn').trigger('click');
   }
 updateBoattype(){
-  this.submitted = true;
+  this.editBoatTypesubmitted = true;
 
-  if (this.form.invalid) {
+  if (this.editBoatTypeform.invalid) {
     return;
   }
-
- 
-  this.http.post<any>(`${this.url}/EditBoatType`,  this.form.value   ).subscribe(data => {
-   
+  this.editBoatTypeform.get('Block').setValue("true");
+  this.editBoatTypeform.get('IsActive').setValue("true");
+  console.log(this.editBoatTypeform.value);
+  this.http.post<any>(`${this.url}/EditBoatType`,  this.editBoatTypeform.value   ).subscribe(data => {
+   console.log(data);
 if(data.status == true){
   this.getResponce = data.message
-  $("#pop-up-btn").trigger('click')
-  $('#error-disp-btns').trigger('click');
-  this.form.reset()
+  this.modelTitle = "Edit Boat Type"
+  $("#edit-boat-type-popup-btn").trigger('click')
+  $('#edit-boat-type-modal-btn').trigger('click');
+  this.editBoatTypeform.reset()
   this.getAllBoatTYpes()  
 }
 else if(data.status == false){
@@ -1386,19 +1480,30 @@ get sf() { return this.Shareform.controls; }
 get cf() { return this.Consecutiveform.controls; }
 get bf() { return this.Bookingform.controls; }
 
+// Delete boat type for settings Done By Alagesan on 18.07.2021  
 
+deleteBoatModel(id){
+  console.log(id);
+   this.boatTypeId = id
+   $('#removeBoat').trigger('click');
+
+ }
+ 
+// Delete boat type for settings Done By Alagesan on 18.07.2021  
 deleteBoat(){
 
 var obj={
   _id : this.boatTypeId
 }
+console.log(obj);
 this.http.post<any>(`${this.url}/DeleteBoatType`,  obj  ).subscribe(data => {
- 
+  console.log(data);
 if(data.status == true){
  
   this.getResponce = data.message
+  this.modelTitle = "Delete Boat Type"
   $('#removeBoat').trigger('click');
-  $('#pop-up-btn').trigger('click');
+  $('#delete-boat-type-popup-btn').trigger('click');
 
   this.getAllBoatTYpes()  
 }
@@ -1669,6 +1774,18 @@ addShare(){
   }
   get abtf() { return this.addBoatTypeform.controls; }
 
+
+  createEditBoatTypeForm() {
+    this.editBoatTypeform = this.fb.group({
+      _id: new FormControl('', [Validators.required,]),
+      Boat_Type: new FormControl('', [Validators.required,]),
+      Block: new FormControl('', []),
+      IsActive: new FormControl('', []),
+      Type_Description: new FormControl('', [Validators.required,]),
+    });
+  }
+  get ebtf() { return this.editBoatTypeform.controls; }
+
   addBoatType() {
     this.addBoatTypesubmitted = true;
   
@@ -1900,12 +2017,7 @@ addShare(){
   
   
   }
-  deleteBoatModel(id){
-   
-    this.boatTypeId = id._id
-    $('#removeBoat').trigger('click');
-
-  }
+ 
 
   pagereload(){
     location.reload();

@@ -113,11 +113,11 @@
       
       
        
-<button style="display:none" type="button" id="error-disp-btns" class="btn btn-info btn-lg" data-toggle="modal" data-target="#boat-type">Open Modal</button>
+<button style="display:none" type="button" id="edit-boat-type-modal-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#edit-boat-type">Open Modal</button>
 
 
 
-<div class="modal fade" id="boat-type" tabindex="-1" role="dialog" aria-labelledby="boat-typeModalLabel" aria-hidden="true">
+<div class="modal fade" id="edit-boat-type" tabindex="-1" role="dialog" aria-labelledby="boat-typeModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
 <div class="modal-header">
@@ -126,17 +126,17 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<form [formGroup]="form"  novalidate>
+<form [formGroup]="editBoatTypeform"  novalidate>
 <div class="modal-body">
   <div class="form-group col-md-12">
 <label>Boat Type Name</label>
-<input type="text" class="form-control"   formControlName="Boat_Type" [ngClass]="{ 'is-invalid': submitted && f.Boat_Type.errors }">
+<input type="text" class="form-control"   formControlName="Boat_Type" [ngClass]="{ 'is-invalid': editBoatTypesubmitted && ebtf.Boat_Type.errors }">
 </div>
 
 
       <div class="form-group col-md-12">
 <label>Description</label>
-  <textarea class="form-control" rows="3"   formControlName="Type_Description" [ngClass]="{ 'is-invalid': submitted && f.Type_Description.errors }"> </textarea>
+  <textarea class="form-control" rows="3"   formControlName="Type_Description" [ngClass]="{ 'is-invalid': editBoatTypesubmitted && ebtf.Type_Description.errors }"> </textarea>
 </div>
 
 
@@ -711,6 +711,58 @@
                
              </div>
            </div>  
+
+            <!--Edit boat type popup message for settings Done By Alagesan on 18.07.2021    -->
+
+
+            <button style="display:none" type="button" id="edit-boat-type-popup-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#editboattypemodal">Open Modal</button>
+          
+            
+            <div class="modal fade" id="editboattypemodal" role="dialog">
+              <div class="modal-dialog">
+              
+                
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modelTitle}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>{{getResponce}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="pagereload()"  data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
+
+            <!--Delete boat type popup message for settings Done By Alagesan on 18.07.2021    -->
+
+
+            <button style="display:none" type="button" id="delete-boat-type-popup-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#deleteboattypemodal">Open Modal</button>
+          
+            
+            <div class="modal fade" id="deleteboattypemodal" role="dialog">
+              <div class="modal-dialog">
+              
+                
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{modelTitle}}</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>{{getResponce}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="pagereload()"  data-dismiss="modal">OK</button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>  
 
           <!--Add boat type data integrations for settings Done By Alagesan on 25.06.2021    -->
 
