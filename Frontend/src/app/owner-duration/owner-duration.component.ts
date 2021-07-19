@@ -343,7 +343,7 @@ $(document).on("click",".cls-Edit-owner-duration",function() {
   if(data.status == true){
     this.ngOnInit()
     this.dropdownOwn =[]; 
-    this.dropdownBoat = []
+    //this.dropdownBoat = []
     this.getResponce = data.message
     this.modelTitle = "Ownership Duration"
     $('#Sharepop-up-btn').trigger('click');
@@ -440,6 +440,7 @@ this.form.reset()
   }
 
   Fun_getallDropDownDatas(owner_drp_Id){ 
+    debugger;
     this.dropdownList = [];       
       var obj = Object();
         obj.owner_id = owner_drp_Id;
@@ -519,15 +520,16 @@ this.form.reset()
      {
        sessionStorage.removeItem("set_Edit_owner_duration");
        var obj = JSON.parse(temp_data);
-        this.Edit_owner_duration(obj);
-        this.Fun_getallDropDownDatas_edit_Get(obj);
+       this.Fun_getallDropDownDatas_edit_Get(obj);
+       // this.Edit_owner_duration(obj);
+        
      }     
      
    },500)
  }
 
  Edit_owner_duration(obj){
-  
+  debugger;
    this.dropdownOwn = [];
    this.dropdownOwn.push({item_id : obj.Owner_Id, item_text: obj.Owner_Name});
 
@@ -535,6 +537,8 @@ this.form.reset()
   
    var data_tmp_Boat = this.dropdownList_filted.find(x => x.item_id == obj.Boat_Id);
    this.dropdownBoat.push({item_id : data_tmp_Boat.item_id, item_text: data_tmp_Boat.item_text});
+   //this.dropdownBoat = data_tmp_Boat.item_text;
+
 
    //Jun-24-2021.. 
    this.form.get('_id').setValue(obj._id);

@@ -604,8 +604,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
         //data: JSON.stringify(person),
         contentType: 'application/json',
         success: function (data) {
-          //debugger;
-
+         
              if(data.status == true)
              {
               var bindingTableData;
@@ -672,7 +671,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
         dataType: 'json',
         contentType: 'application/json',
         success: function (data) {
-          //debugger;
+          
 
              if(data.status == true)
              {
@@ -683,7 +682,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
             
               $.each(data.response , function(index, val) { 
                 var count = 30;
-//debugger;
+
                  var ID        = val._id; 
                  var Boat_Name =  val.Boat_Name.toString();
                  var UnAvailableDates =  val.UnAvailableDates;
@@ -1329,6 +1328,7 @@ startTimer_set_boat_type_Edit(){
 
     this.http.post<any>(`${this.shareUrl}/GetConsecutiveDaysByBoatId`,  dattr  ).subscribe(data => {
     
+      
       if(data.Status == true){
         this.SUMMER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Summer_ConsecutiveDays;
         this.WINTER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Winter_ConsecutiveDays;
@@ -1367,6 +1367,8 @@ startTimer_set_boat_type_Edit(){
 
   onItemSelect(item: any) {
 
+   
+
     var binding_sharealow = this.shareAllocation.find(x => x.Boat_Id == item.item_id);
  
    this.Shareform.get('Boat_Name').setValue(item.item_text);
@@ -1374,7 +1376,7 @@ startTimer_set_boat_type_Edit(){
 if(item.item_id){
   var obj = Object();
     obj.boatid =item.item_id;
-    obj._id =binding_sharealow._id;
+    //obj._id =binding_sharealow._id;
   
    this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
   
@@ -1424,8 +1426,9 @@ else if(data.Status == false){
   }
 
   getAllshare(){
+   
     this.http.get<any>(`${this.allShareUrl}/ViewAllShares`).subscribe(data => {
-    
+   
    this.shareAllocation = data['response']
    
   
@@ -1541,6 +1544,7 @@ addShare(){
       IsActive: new FormControl('', ),
       Status: new FormControl('', ),
       Block: new FormControl('', ),
+      _id: new FormControl('', ),
 
     });
   }
@@ -1850,6 +1854,18 @@ addShare(){
   this.Shareform.get('Status').setValue("Enable");
   this.Shareform.get('Block').setValue(true);
 
+  //console.log(this.Shareform.value);
+
+  var datta_tmp = this.Shareform.value;
+  var dt_tmp = this.shareAllocation.find(x => x.Boat_Id == datta_tmp.Boat_Id);
+  if(typeof dt_tmp !== "undefined" && dt_tmp != null){
+    this.Shareform.get('_id').setValue(dt_tmp._id);
+  }
+  
+console.log(this.Shareform.value);
+  
+
+  
     
     this.http.post<any>(`${this.shareUrl}/AddNewShares`,  this.Shareform.value   ).subscribe(data => {
     
