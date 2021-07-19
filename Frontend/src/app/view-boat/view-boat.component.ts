@@ -211,7 +211,7 @@ this.boatStatus = "Enable"
 
 	  $.each(dataImages , function(index, val) {
 
-		debugger;
+	
 
 		if(typeof val === "undefined" || val == null || val == ""){
 			val ="boat1.jpg";
@@ -338,6 +338,9 @@ this.boatStatus = "Enable"
 	var obj={
 		Boat_id :boatdats._id
 	}	
+
+	console.log();
+
 	this.http.post<any>(`${this.OwnerUrl}/GetTotalDaysAssigned`, obj   ).subscribe(data => {
 		var resu = data.Response;
 
@@ -364,6 +367,7 @@ getOwnersByBoatId(){
 		console.log(data.Data)
 	    this.boatOwners = data.Data
 		  
+		
 
 			this.http.get<any>(`${this.OwnerUrl}/GetAllOwnerssWithBoatDetails`).subscribe(data => {
 			  console.log(data)
@@ -373,7 +377,9 @@ getOwnersByBoatId(){
 		  this.boatOwners.forEach(owner => {
 			var obj2 = Object();
 			this.allboatdata.forEach(boat => {
+				
 			if(owner._id == boat.Owner_Id){
+				
 			  owner.boatName = boat.BoatDetails[0][0].Boat_Name
 			  owner.Summer_WeekDays = boat.BoatDetails[0][0].Summer_WeekDays
 			  owner.Summer_WeekEndDays = boat.BoatDetails[0][0].Summer_WeekEndDays
