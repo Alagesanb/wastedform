@@ -151,6 +151,28 @@ $(document).on("click",".cls-OwnerDuration",function() {
 
  })
 
+  // Edit owner duration mouseover  for owner duration //Done By Alagesan on 19.07.2021
+  $(document).on("mouseover",".cls-Edit-owner-duration",function() {
+      
+    var Editid = $(this).attr('id');
+  
+    $("#"+Editid).css("color", "red");
+    $("#"+Editid).css('cursor','pointer');
+    
+  
+  });
+  
+  // Edit owner duration mouseout  for owner duration //Done By Alagesan on 19.07.2021
+  $(document).on("mouseout",".cls-Edit-owner-duration",function() {
+  
+    var getEditid = $(this).attr('id');
+  
+    $("#"+getEditid).css("color", "black");
+    
+  
+  });
+
+
  Binding_OwnerDuration();
 function Binding_OwnerDuration(){
 
@@ -181,7 +203,7 @@ function Binding_OwnerDuration(){
         if(firstChek == 0){
           // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData = '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
-          <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
+          <td><ul class="table-action"><li><a id="'+_id+'" attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
           <button  type="button" id="Idsuspendok"  attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li><li><button  type="button" style="display:none;" id="activate-btn" attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-success btn-lg cls-OwnerDuration-activate" >Activate</button></li></ul></td></tr>';
           // Add activate button  for owner duration //Done By Alagesan on 09.07.2021
 
@@ -190,7 +212,7 @@ function Binding_OwnerDuration(){
         else{
          // Add suspend button  for owner duration //Done By Alagesan on 01.07.2021
           bindingTableData += '<tr><td>'+Owner_Name+'</td><td>'+Boat_name+'</td><td>'+Duration_SDate+'</td><td>'+Duration_EDate+'</td>\
-          <td><ul class="table-action"><li><a attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
+          <td><ul class="table-action"><li><a id="'+_id+'" attrId="'+_id+'" class="cls-Edit-owner-duration"><i class="far fa-edit" aria-hidden="true"></i></a></li><li>\
           <button  type="button" id="Idsuspendok"   attrId="'+_id+'" attrboatId="'+Boat_Id+'" class="btn btn-primary btn-lg cls-OwnerDuration" >Suspend</button></li><li><button  type="button" style="display:none;" id="activate-btn" attrId="'+_id+'" attrboatId="'+Boat_Id+'"  class="btn btn-success btn-lg cls-OwnerDuration-activate" >Activate</button></li></ul></td></tr>';
           // Add activate button  for owner duration //Done By Alagesan on 09.07.2021
 
