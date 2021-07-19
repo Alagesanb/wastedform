@@ -813,9 +813,12 @@ $(document).on("click",".cls-special-days-Edit",function() {
             
               $.each(data.response , function(index, val) { 
                 console.log(val)
+                var count = 30;
                 var Location_Id        = val._id; 
                 var Boat_Location =  val.Boat_Location;
                 var Location_URL = val.Location_URL;
+                 // Set location URL size  for settings //Done By Alagesan on 19.07.2021
+                Location_URL = Location_URL.slice(0, count) + (Location_URL.length > count ? "..." : "");
 
                 if(firstChek == 0){
                   
