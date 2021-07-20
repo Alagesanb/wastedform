@@ -20,3 +20,12 @@
     top: 118px;
     left: 10px;
 }
+
+/*  Add error message css Done By Alagesan on 20.07.2021*/
+.error-msg{
+    color: red;
+    text-align: center;
+    background: #ffd8d8;
+    padding: 14px;
+    width: 100%;
+  }

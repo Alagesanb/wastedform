@@ -62,92 +62,59 @@
 </div>    
 </div>                     
                     
-
-<div class="form-row">
-<div class="form-group col-md-12">
-<label style="font-weight: bold; text-transform: none; margin-right: 15px;">Parking Ability :</label>
-<div class="form-check-inline">
-<label class="form-check-label">
-<input type="radio" class="form-check-input" formControlName="Parking_Ability" value="Expert" name="Parking_Ability">Expert
-</label>
-</div>
-<div class="form-check-inline">
-<label class="form-check-label">
-<input type="radio" class="form-check-input" formControlName="Parking_Ability" value="Intermediate"  name="Parking_Ability">Intermediate 
-</label>
-</div>
-  
-<div class="form-check-inline">
-<label class="form-check-label">
-<input type="radio" class="form-check-input" formControlName="Parking_Ability" value="Beginner"  name="Parking_Ability">Beginner
-</label>
-</div> 
-  
-<div class="form-check-inline">
-<label class="form-check-label">
-<input type="radio" class="form-check-input" formControlName="Parking_Ability" value="Need Assistance"  name="Parking_Ability">Need Assistance
-</label>
-</div>        
-
-</div>    
-</div>   
-          
+    <!-- Parking Ability for add owner  Done By Alagesan	on 20.07.2021 -->
+    <div class="form-row">
+      <div>
+        <span class="error-msg" *ngIf="submitted && !this.parkingAbilityMessage">
+          Please select any option below in parking ability!
+        </span>
+      </div>
+      <label style="font-weight: bold; text-transform: none; margin-right: 15px;">Parking Ability :</label>
+    <div class="form-group" *ngFor="let item of Parking_Ability_List; let i=index">
+    <div class="form-check-inline">
+    <label class="form-check-label">
+    <input type="radio" class="form-check-input" (change)="onParkingItemChange($event.target.checked)" formControlName="Parking_Ability" [name]="item.name" [value]="item.value" [checked]="item.checked" >{{item.value}}
+    </label>
+    </div>
+    </div> 
+    </div>   
+     
 
 <!-- ........................Start................... -->
 
-
-<div class="form-row">
-  <div class="form-group col-md-12">
-  <label style="font-weight: bold; text-transform: none; margin-right: 15px;">Sailing Ability :</label>
-  <div class="form-check-inline">
-  <label class="form-check-label">
-  <input type="radio" class="form-check-input" formControlName="Sailing_Ability" value="Expert" name="Sailing_Ability">Expert
-  </label>
-  </div>
-  <div class="form-check-inline">
-  <label class="form-check-label">
-  <input type="radio" class="form-check-input" formControlName="Sailing_Ability" value="Intermediate"  name="Sailing_Ability">Intermediate 
-  </label>
-  </div>
-    
-  <div class="form-check-inline">
-  <label class="form-check-label">
-  <input type="radio" class="form-check-input" formControlName="Sailing_Ability" value="Beginner"  name="Sailing_Ability">Beginner
-  </label>
-  </div> 
-    
-  <div class="form-check-inline">
-  <label class="form-check-label">
-  <input type="radio" class="form-check-input" formControlName="Sailing_Ability" value="Need Assistance"  name="Sailing_Ability">Need Assistance
-  </label>
-  </div>        
-  
-  </div>    
-  </div>   
-
-  <div class="form-row">
-    <div class="form-group col-md-12">
-    <label style="font-weight: bold; text-transform: none; margin-right: 15px;">Housekeeping Time :</label>
+    <!-- Sailing ability  for add owner  Done By Alagesan	on 20.07.2021 -->
+    <div class="form-row">
+      <div>
+        <span class="error-msg" *ngIf="submitted && !this.sailingabilityMessage">
+          Please select any option below in sailing ability!
+        </span>
+      </div>
+      <label style="font-weight: bold; text-transform: none; margin-right: 15px;">Sailing Ability :</label>
+    <div class="form-group" *ngFor="let item of Sailing_Ability_List; let i=index">
     <div class="form-check-inline">
     <label class="form-check-label">
-    <input type="radio" class="form-check-input" formControlName="Housekeeping" value="High" name="Housekeeping">High
+    <input type="radio" class="form-check-input" (change)="onSailingItemChange($event.target.checked)" formControlName="Sailing_Ability" [name]="item.name" [value]="item.value" [checked]="item.checked" >{{item.value}}
     </label>
     </div>
-    <div class="form-check-inline">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" formControlName="Housekeeping" value="Medium"  name="Housekeeping">Medium 
-    </label>
-    </div>
-      
-    <div class="form-check-inline">
-    <label class="form-check-label">
-    <input type="radio" class="form-check-input" formControlName="Housekeeping" value="Low"  name="Housekeeping">Low
-    </label>
     </div> 
-   
-    
     </div>    
-    </div>   
+
+    <!-- Housekeeping  for add owner  Done By Alagesan	on 20.07.2021 -->
+    <div class="form-row">
+      <div>
+        <span class="error-msg" *ngIf="submitted && !this.housekeepingMessage">
+          Please select any option below in housekeeping time !
+        </span>
+      </div>
+      <label style="font-weight: bold; text-transform: none; margin-right: 15px;">Housekeeping Time :</label>
+    <div class="form-group" *ngFor="let item of Housekeeping_List; let i=index">
+    <div class="form-check-inline">
+    <label class="form-check-label">
+    <input type="radio" class="form-check-input" (change)="onHousekeepingItemChange($event.target.checked)" formControlName="Housekeeping" [name]="item.name" [value]="item.value" [checked]="item.checked" >{{item.value}}
+    </label>
+    </div>
+    </div> 
+    </div>    
           
 
     <div class="form-row">

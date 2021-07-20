@@ -24,12 +24,38 @@ export class AddOwnerComponent implements OnInit {
   profilePicResponse= "";
   addownerMessage:any;
   show: boolean = false;
+  // Parking Ability, sailing ability, housekeeping  for add owner  Done By Alagesan	on 20.07.2021
+  parkingAbilityMessage: boolean =false;
+  sailingabilityMessage: boolean =false;
+  housekeepingMessage: boolean =false;
+
+  // Parking Ability for add owner  Done By Alagesan	on 20.07.2021
+  Parking_Ability_List = [
+    {name: 'Parking_Ability', value: 'Expert', checked: false},
+    {name: 'Parking_Ability', value: 'Intermediate', checked: false},
+    {name: 'Parking_Ability', value: 'Beginner', checked: false},
+    {name: 'Parking_Ability', value: 'Need Assistance', checked: false}
+  ]
+  // Sailing ability  for add owner  Done By Alagesan	on 20.07.2021
+  Sailing_Ability_List = [
+    {name: 'Sailing_Ability', value: 'Expert', checked: false},
+    {name: 'Sailing_Ability', value: 'Intermediate', checked: false},
+    {name: 'Sailing_Ability', value: 'Beginner', checked: false},
+    {name: 'Sailing_Ability', value: 'Need Assistance', checked: false}
+  ]
+  // Housekeeping  for add owner  Done By Alagesan	on 20.07.2021
+  Housekeeping_List = [
+    {name: 'Housekeeping', value: 'High', checked: false},
+    {name: 'Housekeeping', value: 'Medium', checked: false},
+    {name: 'Housekeeping', value: 'Low', checked: false},
+  ]
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
 
   ngOnInit(): void {
+
     this.adminlogin = JSON.parse(sessionStorage.getItem("adminLogin"));
     if(this.adminlogin==false){
       this.router.navigate(['']);
@@ -65,6 +91,20 @@ export class AddOwnerComponent implements OnInit {
      $(".file-upload").click();
   });
   }
+
+  // Parking Ability for add owner  Done By Alagesan	on 20.07.2021
+  onParkingItemChange(parkingvalue){
+    this.parkingAbilityMessage = parkingvalue;
+  }
+  // Sailing ability  for add owner  Done By Alagesan	on 20.07.2021
+  onSailingItemChange(sailingvalue){
+    this.sailingabilityMessage = sailingvalue;
+  }
+  // Housekeeping  for add owner  Done By Alagesan	on 20.07.2021
+  onHousekeepingItemChange(housekeepingvalue){
+    this.housekeepingMessage = housekeepingvalue;
+  }
+
   sidemenuloder(){    
     $("#a-menu-Owners-main").attr("aria-expanded","true");        
     $("#a-menu-Owners-main").removeClass("collapsed"); 
@@ -90,7 +130,7 @@ export class AddOwnerComponent implements OnInit {
       Emergency_Contact_Mobile: new FormControl('', [Validators.required, ]),
       Notes: new FormControl('', []),
       
-      Parking_Ability: new FormControl('', []),
+      Parking_Ability: new FormControl('', [Validators.required,]),
       Block: new FormControl('', [ ]),
       IsActive: new FormControl('', [ ]),
     });
@@ -102,6 +142,7 @@ export class AddOwnerComponent implements OnInit {
   
 
     if (this.form.invalid) {
+      console.log(this.form.value);
       console.log("iii")
       return;
   }
@@ -114,6 +155,7 @@ export class AddOwnerComponent implements OnInit {
     this.form.get('Block').setValue(true);
     this.form.get('IsActive').setValue(true);
     this.form.get('Profile_Image').setValue(this.singleFileDetails);
+    console.log(this.form.value );
     this.http.post<any>(`${this.url}/AddOwner`,  this.form.value   ).subscribe(data => {
 
       debugger;
