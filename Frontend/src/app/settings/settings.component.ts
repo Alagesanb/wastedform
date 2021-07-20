@@ -472,7 +472,9 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     Obj.Name = $("#text-id-special-days-Name").val();
     Obj.Start_Date = string_to_Date_Convert(startDate);
     Obj.End_Date = string_to_Date_Convert(Eenddate);
+debugger;
 
+console.log(Obj);
 
   $.ajax({
     url: AddSpecialDaysRout+"EditSpecialDays",
@@ -1748,6 +1750,9 @@ addShare(){
     if (this.specialDaysform.invalid) {
       return;
     }
+
+     debugger;
+     console.log(this.specialDaysform.value);
 
     this.http.post<any>(`${this.specialDaysUrl}/Add_Special_Days_Booking`,  this.specialDaysform.value   ).subscribe(data => {
        

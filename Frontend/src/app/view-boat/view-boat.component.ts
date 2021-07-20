@@ -339,7 +339,7 @@ this.boatStatus = "Enable"
 		Boat_id :boatdats._id
 	}	
 
-	console.log();
+	
    
 	this.http.post<any>(`${this.OwnerUrl}/GetTotalDaysAssigned`, obj   ).subscribe(data => {
 		var resu = data.Response;

@@ -195,8 +195,9 @@ function Binding_OwnerDuration(){
        var Owner_Id = val.Owner_Id;
        var Boat_Id = val.Boat_Id;
        var Owner_Name = val.Owner_Name;
+      
        var Duration_SDate = val.Duration_SDate;
-       var Duration_EDate =  val.Duration_EDate;
+       var Duration_EDate = val.Duration_EDate;
        var Boat_Type = val.Boat_Type;
        var Boat_name = val.Boat_Name;
 
@@ -331,31 +332,7 @@ $(document).on("click",".cls-Edit-owner-duration",function() {
   }
   get df() { return this.form.controls; }
 
-  saveDuration(){    
-    this.form.get('IsActive').setValue(true);
-    this.form.get('Block').setValue(true); 
-    this.durationSubmitted = true;
-    if (this.form.invalid) {
-      return;
-  }
-    this.http.post<any>(`${this.OwnerUrl}/AddDuration`,  this.form.value  ).subscribe(data => {
-      
-  if(data.status == true){
-    this.ngOnInit()
-    this.dropdownOwn =[]; 
-    //this.dropdownBoat = []
-    this.getResponce = data.message
-    this.modelTitle = "Ownership Duration"
-    $('#Sharepop-up-btn').trigger('click');
-    this.getDuration()
-    this.durationSubmitted = false;
-this.form.reset()
-  }
 
-        }, err => {
-         
-        })
-  }
   getOwners(){
    
     this.http.get<any>(`${this.OwnerUrl}/GetOwners`).subscribe(data => {
@@ -440,7 +417,7 @@ this.form.reset()
   }
 
   Fun_getallDropDownDatas(owner_drp_Id){ 
-    debugger;
+    
     this.dropdownList = [];       
       var obj = Object();
         obj.owner_id = owner_drp_Id;
@@ -529,7 +506,7 @@ this.form.reset()
  }
 
  Edit_owner_duration(obj){
-  debugger;
+  
    this.dropdownOwn = [];
    this.dropdownOwn.push({item_id : obj.Owner_Id, item_text: obj.Owner_Name});
 
@@ -549,8 +526,10 @@ this.form.reset()
     this.form.get('Boat_Id').setValue(data_tmp_Boat.item_id); 
  
   this.form.get('Boat_Type').setValue(obj.Boat_Type);
-  this.form.get('From_Date').setValue(this.Conver_Usr_Date(obj.From_Date));
-  this.form.get('To_Date').setValue(this.Conver_Usr_Date(obj.To_Date));
+
+ 
+  this.form.get('From_Date').setValue(obj.Duration_SDate);
+  this.form.get('To_Date').setValue(obj.Duration_EDate);
  
   $(".cls-btn-save").hide();
   $(".cls-btn-Edit").show();
@@ -562,10 +541,13 @@ this.form.reset()
   this.dropdownList = [];       
     var obj = Object();
       obj.owner_id = objdatas.Owner_Id;
+      
+      console.log(obj);
+
     this.http.post<any>(`${this.OwnerUrl}/GetBoatNameByOwnerId`, obj).subscribe(data => {      
                           
       var tempArry = [];
-    
+          
       data.response.forEach(element => {
 
         element.BoatDetails.forEach(element2 => {
@@ -610,12 +592,29 @@ return (value < 10) ? "0" + value : value;
 
 EditDuration(){
 
+
+  var dats_tmp = this.form.value;
+  
+  
+  var From_Date = this.Angular_string_to_Date_Convert(dats_tmp.From_Date);
+  var To_Date = this.Angular_string_to_Date_Convert(dats_tmp.To_Date);
+
+  this.form.get('From_Date').setValue(From_Date);
+  this.form.get('To_Date').setValue(To_Date);
+
+
+
   this.form.get('IsActive').setValue(true);
   this.form.get('Block').setValue(true);
   this.durationSubmitted = true;
   if (this.form.invalid) {
     return;
 }
+
+debugger;
+console.log(this.form.value);
+
+
   this.http.post<any>(`${this.OwnerUrl}/EditDuration`,  this.form.value  ).subscribe(data => {
   
 if(data.status == true){
@@ -634,6 +633,106 @@ this.form.reset()
        
       })
 }
+
+
+saveDuration(){  
+
+      
+  var dats_tmp = this.form.value;
+  
+  
+  var From_Date = this.Angular_string_to_Date_Convert(dats_tmp.From_Date);
+  var To_Date = this.Angular_string_to_Date_Convert(dats_tmp.To_Date);
+
+  this.form.get('From_Date').setValue(From_Date);
+  this.form.get('To_Date').setValue(To_Date);
+
+
+
+  this.form.get('IsActive').setValue(true);
+  this.form.get('Block').setValue(true); 
+  this.durationSubmitted = true;
+  if (this.form.invalid) {
+    return;
+}
+  this.http.post<any>(`${this.OwnerUrl}/AddDuration`,  this.form.value  ).subscribe(data => {
+    
+if(data.status == true){
+  this.ngOnInit()
+  this.dropdownOwn =[]; 
+  //this.dropdownBoat = []
+  this.getResponce = data.message
+  this.modelTitle = "Ownership Duration"
+  $('#Sharepop-up-btn').trigger('click');
+  this.getDuration()
+  this.durationSubmitted = false;
+this.form.reset()
+}
+
+      }, err => {
+       
+      })
+}
+
+Angular_string_to_Date_Convert(dateString){   
+debugger;
+  var dateArray = dateString.split("-");
+  var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]} 05:30`);
+
+  return dateObj;
+
+}
+
+
+ getFormattedDate(dateVal) {
+ 
+  var newDate = this.string_to_Date_Convert(dateVal);
+
+
+  var sMonth = this.padValue(newDate.getMonth() + 1);
+  var sDay = this.padValue(newDate.getDate());
+  var sYear = newDate.getFullYear();
+  // var sHour = newDate.getHours();
+  // var sMinute = this.padValue(newDate.getMinutes());
+  // var sAMPM = "AM";
+
+  // var iHourCheck = Number(sHour);
+
+  // if (iHourCheck > 12) {
+  //     sAMPM = "PM";
+  //     sHour = iHourCheck - 12;
+  // }
+  // else if (iHourCheck === 0) {
+  //     sHour = 12;
+  // }
+
+  // sHour = this.padValue(sHour);
+
+  //return sDay + "-" + sMonth + "-" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+  return sDay + "-" + sMonth + "-" + sYear;
+
+}
+
+ string_to_Date_Convert(dt){   
+
+
+
+  var datemen = dt.split("T");
+  var dateArray_arr = datemen[0].split("-");
+  
+  var dt2 = dateArray_arr[2];
+  var dt1 = dateArray_arr[1];
+  var dt0 = dateArray_arr[0];
+
+  var dateString = dt2 +"-"+ dt1 + "-" + dt0;
+
+  var dateArray = dateString.split("-");
+    var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+  
+    return dateObj;
+
+}
+
 
 PageReload(){
   location.reload();

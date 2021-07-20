@@ -168,12 +168,71 @@ $('#datepiker-all-boat-to-date').Zebra_DatePicker({
   get f() { return this.form.controls; }
 
   getAllBoat(){
+    debugger;
     this.http.get<any>(`${this.url}/GetallBoatDetails`).subscribe(data => {
+
+debugger;
+
+      //////////////////
+      this.http.get<any>(`${this.url}/GetTotal_PendingAllocatedDays`).subscribe(data2 => {
+debugger;
+
+
+      var commen = data2['Response']
+      var BookedDays = commen.BookedDays;
+      var AllocatedDays = commen.AllocatedDays;      
+      var responce =  data['response'];
+
+      BookedDays.forEach(element1 => {
+        responce.forEach(element2 => {
+
+          ///this to start..............
+          if(element2._id == element1.Boat_Id)
+          {
+            element2.BookedDaystotal = element1.total;
+          }
+  
+          
+          
+        });
+        
+      });
+
+      AllocatedDays.forEach(element1 => {
+        responce.forEach(element2 => {
+
+          ///this to start..............
+          if(element2._id == element1.Boat_Id)
+          {
+            element2.AllocatedDaystotal = element1.total;
+          }
+  
+          
+          
+        });
+        
+      });
       
-  this.allBoats = data['response'];
-  this.Public_allBoats = data['response'];
-  console.log(this.allBoats);
-   console.log(this.allBoats)
+      debugger;
+      console.log(responce);
+
+
+        this.allBoats = responce;//data['response'];
+        this.Public_allBoats = responce;//data['response'];
+        console.log(this.allBoats);
+         console.log(this.allBoats)
+         }, err => {
+         })
+
+
+
+     ///////////////////////
+
+      
+  // this.allBoats = data['response'];
+  // this.Public_allBoats = data['response'];
+  // console.log(this.allBoats);
+  //  console.log(this.allBoats)
    }, err => {
    })
   }

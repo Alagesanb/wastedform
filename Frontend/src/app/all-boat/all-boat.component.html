@@ -180,7 +180,7 @@
                 <div class="booking-days col-md-6">
                   <!-- <h6>100/300 Days </h6> -->
                   <h6  *ngIf="!boat.Total_Days">0/0 Days </h6>
-                  <h6  *ngIf="boat.Total_Days">0/ {{boat.Total_Days}} Days </h6>
+                  <h6  *ngIf="boat.Total_Days">{{boat.BookedDaystotal}}/ {{boat.AllocatedDaystotal}} Days </h6>
 
                 </div>
                  <!--Update the boat details for all boat Done By Alagesan  on 20.06.2021 -->
