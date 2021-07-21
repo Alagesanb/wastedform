@@ -1007,13 +1007,41 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
     });
 
-    //$(document).on("click",".tui-full-calendar-popup-delete",function() {
+    //$("#sheduler-calender-timer1").val( "09:00" );
 
-        // Not accessing Id ...Pending work...
+    $(document).on("click",".tui-full-calendar-weekday-grid-line",function() {
 
-        //alert("sorry delete not allowed (popup) only for  display calendar items");
+        
+        var text_val = $(this).children('.tui-full-calendar-weekday-grid-header').children('span').children('.tui-full-calendar-weekday-grid-date').text();
 
-   // });
+        var Month_Year = $(".render-range").text();
+        var dataAtty = Month_Year.split('.');
+
+        var d = new Date();
+        var sMonth = padValue(d.getMonth() + 1);
+        var sDay = padValue(d.getDate());
+        var sYear = d.getFullYear();  
+
+        var currentDate = sDay+"-"+sMonth+"-"+sYear;
+        var selectedDate = text_val+"-"+dataAtty[1]+"-"+dataAtty[0];
+        debugger
+        if(currentDate == selectedDate)
+        {
+            //alert("Today..");
+            
+            $("#sheduler-calender-timer1").val( "10:15" );
+        }
+        else{
+
+            $("#sheduler-calender-timer1").val( "09:00" );
+
+        }
+
+
+        //alert(text_val);
+        //This to start...........
+
+    });
 
 
     //tui-full-calendar-month-more-schedule tui-full-calendar-month-more-allday tui-full-calendar-weekday-schedule-title
