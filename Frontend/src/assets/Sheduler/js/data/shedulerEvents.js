@@ -1021,10 +1021,68 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         var sMonth = padValue(d.getMonth() + 1);
         var sDay = padValue(d.getDate());
         var sYear = d.getFullYear();  
+        var sHour = d.getHours();
+        var sMinute = padValue(d.getMinutes());
 
         var currentDate = sDay+"-"+sMonth+"-"+sYear;
         var selectedDate = text_val+"-"+dataAtty[1]+"-"+dataAtty[0];
-        debugger
+        
+        var obj = Object();
+        obj.currentDate = currentDate;
+        obj.selectedDate = selectedDate;
+        obj.Hour_Minitu = sHour+":"+sMinute;
+        obj.Hour = sHour;
+        obj.minitu = sMinute;
+        sessionStorage.setItem("currentDateFormat",JSON.stringify(obj));
+        
+        if(currentDate == selectedDate)
+        {
+            //alert("Today..");
+            
+            $("#sheduler-calender-timer1").val( "10:15" );
+        }
+        else{
+
+            $("#sheduler-calender-timer1").val( "09:00" );
+
+        }
+
+
+        //alert(text_val);
+        //This to start...........
+
+    });
+
+    $(document).on("mousedown",".tui-full-calendar-weekday-grid-line",function(event) {
+
+        
+        var text_val = $(this).children('.tui-full-calendar-weekday-grid-header').children('span').children('.tui-full-calendar-weekday-grid-date').text();
+
+        //alert(text_val);
+
+
+
+        var Month_Year = $(".render-range").text();
+        var dataAtty = Month_Year.split('.');
+
+        var d = new Date();
+        var sMonth = padValue(d.getMonth() + 1);
+        var sDay = padValue(d.getDate());
+        var sYear = d.getFullYear();  
+        var sHour = d.getHours();
+        var sMinute = padValue(d.getMinutes());
+
+        var currentDate = sDay+"-"+sMonth+"-"+sYear;
+        var selectedDate = text_val+"-"+dataAtty[1]+"-"+dataAtty[0];
+        
+        var obj = Object();
+        obj.currentDate = currentDate;
+        obj.selectedDate = selectedDate;
+        obj.Hour_Minitu = sHour+":"+sMinute;
+        obj.Hour = sHour;
+        obj.minitu = sMinute;
+        sessionStorage.setItem("currentDateFormat",JSON.stringify(obj));
+        
         if(currentDate == selectedDate)
         {
             //alert("Today..");
