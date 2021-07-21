@@ -27,6 +27,8 @@ export class OwnerDashboardComponent implements OnInit {
   dropdownList_filted = [];
   dropdownList = [];
   viewBookingDetailsdata: any=[];
+  viewBookingByOwnerIddata: any=[];
+  viewCancelBookingByOwnerIddata: any=[];
   searchText: any = '';
   constructor(private router: Router,private http: HttpClient) { }
 
@@ -81,6 +83,7 @@ export class OwnerDashboardComponent implements OnInit {
 
     this.Owner_Log_getallDropDownDatas_Boat();
     this.getViewBookingDetailsWithBoatAndOwner();
+    this.getviewbookingByOwnerId();
 
   }
 
@@ -180,6 +183,30 @@ export class OwnerDashboardComponent implements OnInit {
         }, err => {
           console.log(err);
         })
+  }
+
+  getviewbookingByOwnerId(){
+    var owner_drp_Id = JSON.parse(sessionStorage.getItem("Ownerlogin"));
+    console.log(owner_drp_Id)
+    let obj = {
+      User_Id:owner_drp_Id._id
+    }
+   // Cancel booking for owner dashboard Done By Alagesan on 21.07.2021
+   this.http.post<any>(`${this.urlViewBookingDetails}/ViewCancelledBookingById`, obj).subscribe(data => { 
+      console.log(data);
+      this.viewCancelBookingByOwnerIddata  = data['response'];
+      console.log(this.viewCancelBookingByOwnerIddata );
+    }, err => {
+      console.log(err);
+    })
+   // Owner booking for owner dashboard Done By Alagesan on 21.07.2021
+    this.http.post<any>(`${this.urlViewBookingDetails}/ViewBookingById`, obj).subscribe(data => { 
+      console.log(data);
+      this.viewBookingByOwnerIddata  = data['response'];
+      console.log(this.viewBookingByOwnerIddata );
+    }, err => {
+      console.log(err);
+    })
   }
 
   getViewBookingDetailsWithBoatAndOwner(){
