@@ -229,6 +229,8 @@ this.bookingInfo = this.listBooking
 
         obj_s.First_Name = element.OwnerDetails[0].First_Name;
         obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+        obj_s.Housekeeping = element.OwnerDetails[0].Housekeeping;
+        obj_s.Sailing_Ability = element.OwnerDetails[0].Sailing_Ability;
         obj_s.OwnerDetails = element.OwnerDetails[0];
 
       } 
@@ -272,6 +274,8 @@ this.bookingInfo = this.listBooking
    
            obj_s.First_Name = element.OwnerDetails[0].First_Name;
            obj_s.Parking_Ability = element.OwnerDetails[0].Parking_Ability;
+           obj_s.Housekeeping = element.OwnerDetails[0].Housekeeping;
+           obj_s.Sailing_Ability = element.OwnerDetails[0].Sailing_Ability;
            obj_s.OwnerDetails = element.OwnerDetails[0];
    
          } 
