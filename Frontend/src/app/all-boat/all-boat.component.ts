@@ -189,7 +189,8 @@ debugger;
           ///this to start..............
           if(element2._id == element1.Boat_Id)
           {
-            element2.BookedDaystotal = element1.total;
+            var datasint = parseInt(element2.BookedDaystotal);
+            element2.BookedDaystotal = parseInt(element1.total) + datasint;
           }
   
           
@@ -204,7 +205,9 @@ debugger;
           ///this to start..............
           if(element2._id == element1.Boat_Id)
           {
-            element2.AllocatedDaystotal = element1.total;
+            var datasint = parseInt(element2.AllocatedDaystotal);
+
+            element2.AllocatedDaystotal = parseInt(element1.total) + datasint;
           }
   
           

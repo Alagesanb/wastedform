@@ -72,7 +72,7 @@ export class BookingDetailsComponent implements OnInit {
     
     }
   console.log(this.allBookingDetailsFilter);
-   console.log(this.allBookingDetails)
+   //console.log(this.allBookingDetails)
    }, err => {
    })
   }
