@@ -331,8 +331,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
         var getdeleteid = $(this).attr('id');
 
-        $("#"+getdeleteid).css("color", "red");
-        $("#"+getdeleteid).css('cursor','pointer');
+        $(this).css("color", "red");
+        $(this).css('cursor','pointer');
         
 
       });
@@ -341,7 +341,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         
         var getdeleteid = $(this).attr('id');
 
-        $("#"+getdeleteid).css("color", "black");
+        $(this).css("color", "black");
         
 
       });
@@ -780,8 +780,8 @@ $(document).on("click",".cls-special-days-Edit",function() {
  
       var getdeleteid = $(this).attr('id');
     
-      $("#"+getdeleteid).css("color", "red");
-      $("#"+getdeleteid).css('cursor','pointer');
+      $(this).css("color", "red");
+      $(this).css('cursor','pointer');
       
     
      });
@@ -790,7 +790,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
       
       var getdeleteid = $(this).attr('id');
     
-      $("#"+getdeleteid).css("color", "black");
+      $(this).css("color", "black");
       
     
      });

@@ -152,6 +152,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
 
     viewBoat(boat){
+      console.log(boat);
       // Activate the owner in admin message for my profile Done By Alagesan on 10.07.2021
       // var owner_suspend = this.ownerdurationsdetails[0].Is_Cancellation;
       // if(owner_suspend == true){
@@ -166,28 +167,27 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         $('#disable-boat-popup-message-btn').trigger('click');
         this.disableBoat = boat.Boat_Name;
       }
-
-      if(boat.BoatDetails[0].Boat_Status == '1'){
         // owner duration ended for my profile Done By Alagesan on 15.07.2021
-        let todaydate = new Date()
-        let to_date = new Date(this.ownerdurationsdetails[0].To_Date);
+      // if(boat.BoatDetails[0].Boat_Status == '1'){
+      //   let todaydate = new Date()
+      //   let to_date = new Date(this.ownerdurationsdetails[0].To_Date);
 
-        if (todaydate < to_date) 
-        {
-          $('#ended-date-popupbtn').trigger('click');
-          let endedDate = (to_date.getDate())+'-' + (to_date.getMonth()+1) + '-'+to_date.getFullYear();
-          this.expireBoat = boat.Boat_Name;
-          this.endedFormatDate = endedDate;
-          return this.endedFormatDate;
-        }
-        }
+      //   if (todaydate < to_date) 
+      //   {
+      //     $('#ended-date-popupbtn').trigger('click');
+      //     let endedDate = (to_date.getDate())+'-' + (to_date.getMonth()+1) + '-'+to_date.getFullYear();
+      //     this.expireBoat = boat.Boat_Name;
+      //     this.endedFormatDate = endedDate;
+      //     return this.endedFormatDate;
+      //   }
+      //   }
 
       // Active boat view page for myprofile Done By Alagesan	on 12.07.2021 
-      // if(boat.BoatDetails[0].Boat_Status == '1'){
-      //   sessionStorage.setItem('boatData', JSON.stringify(boat));
+      if(boat.BoatDetails[0].Boat_Status == '1'){
+        sessionStorage.setItem('boatData', JSON.stringify(boat));
       //   Change the view boat url for myprofile Done By Alagesan	on 12.07.2021 
-      //   this.router.navigate(['view-boat-owner/']);
-      // }
+        this.router.navigate(['view-boat-owner/']);
+      }
         
     }
 
