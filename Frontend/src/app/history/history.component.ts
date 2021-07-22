@@ -13,6 +13,7 @@ export class HistoryComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
+    sessionStorage.setItem("owner-dashboard-relodePg","1");
     this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
     if(this.ownerlogin==false){
       this.router.navigate(['/owner-login/']);

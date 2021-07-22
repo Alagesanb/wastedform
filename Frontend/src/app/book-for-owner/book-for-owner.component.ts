@@ -386,5 +386,9 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
 
   }
 
+  locationReload(){
+    location.reload();
+  }
+
 
 }

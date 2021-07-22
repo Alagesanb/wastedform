@@ -14,6 +14,8 @@ var public_StandByBooking = "http://65.2.28.16/api/StandByBooking/";
 
 var public_shedulDataId = 0;
 
+
+
 function getFormattedDate_WithOut_Zero_Time(dateVal) {
     var newDate = new Date(dateVal);
 
@@ -35,9 +37,6 @@ function generateNames() {
 
     return names;
 }
-
-
-
 
  function getFormattedDate(dateVal) {
     var newDate = new Date(dateVal);
@@ -615,7 +614,8 @@ function generateRandomSchedule(val){
             
         }
         else{
-            alert("Empty_Boat......");
+           // alert("Empty_Boat......");
+            CommenMessage("Empty_Boat......")
         }
 
        
@@ -812,7 +812,8 @@ function generateRandomSchedule(val){
 
         }
         else{
-            alert("Owner details empty or Boat Empty");
+            CommenMessage("Owner details empty or Boat Empty");
+
         }
 
         
@@ -963,6 +964,11 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
             roletype = "Maintenance";
 
         }
+        else if(pageIdentiFication == "owner-dashboard-Reservation"){
+
+            roletype = "Owner";
+        }
+        //
 
         if(roletype != null){
 
@@ -980,12 +986,12 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                 //
                 if(datas.status == true)
                 {
-                    alert(datas.message);
-                    location.reload();    
+                    CommenMessage(datas.message);
+                    //location.reload();    
                 }
                 else if(datas.status == false)
                 {
-                    alert(datas.message);                     
+                    CommenMessage(datas.message);                     
                 }
 
                
@@ -998,8 +1004,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
         }
         else{
-            alert("Page error.");
-            location.reload();
+            CommenMessage("Page error.");
+            //location.reload();
 
         }
 
@@ -1083,17 +1089,17 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         obj.minitu = sMinute;
         sessionStorage.setItem("currentDateFormat",JSON.stringify(obj));
         
-        if(currentDate == selectedDate)
-        {
-            //alert("Today..");
+        // if(currentDate == selectedDate)
+        // {
+        //     //alert("Today..");
             
-            $("#sheduler-calender-timer1").val( "10:15" );
-        }
-        else{
+        //     $("#sheduler-calender-timer1").val( "10:15" );
+        // }
+        // else{
 
-            $("#sheduler-calender-timer1").val( "09:00" );
+        //     $("#sheduler-calender-timer1").val( "09:00" );
 
-        }
+        // }
 
 
         //alert(text_val);
@@ -1120,7 +1126,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
   function GetAllUnAvailableDays_settings(obj){
 
-         
+        
         var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));         
             //
         if (typeof datas !== "undefined" && datas != null) 
@@ -1153,7 +1159,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                            
                         if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {  
                              //console.log("is in array");                        
-                            alert("This date ( "+tmp_values+" ) is unavilable");
+                             CommenMessage("This date ( "+tmp_values+" ) is unavilable");
                             return false;
                         } else {
                             //console.log("is NOT in array");
@@ -1168,7 +1174,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                                             
                         if(jQuery.inArray(tmp_values, temp_unAvilable) !== -1) {
                             //console.log("is in array");
-                            alert("This date ( "+tmp_values+" ) is unavilable");
+                            CommenMessage("This date ( "+tmp_values+" ) is unavilable");
                             return false;
                         } else {
                             //console.log("is NOT in array");
@@ -1215,7 +1221,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                                             
                                             if(jQuery.inArray(tmp_values, temp_unAvilable_Boats) !== -1) {  
                                                 //console.log("is in array");                        
-                                                alert("This date ( "+tmp_values+" ) is unavilable");
+                                                CommenMessage("This date ( "+tmp_values+" ) is unavilable");
                                                 return false;
                                             } else {
                                                 //console.log("is NOT in array");
@@ -1230,7 +1236,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                                                                 
                                             if(jQuery.inArray(tmp_values, temp_unAvilable_Boats) !== -1) {
                                                 //console.log("is in array");
-                                                alert("This date ( "+tmp_values+" ) is unavilable");
+                                                CommenMessage("This date ( "+tmp_values+" ) is unavilable");
                                                 return false;
                                             } else {
                                                 //console.log("is NOT in array");
@@ -1288,7 +1294,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
            
         }
         else{
-            alert("You cannot book on these days since the date of booking selection is before pre-launch date.")
+            CommenMessage("You cannot book on these days since the date of booking selection is before pre-launch date.")
         }           
      
      }
@@ -1322,7 +1328,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
 
     function AddSchedule_ApiCalling(obj){ 
-        
+       
+        debugger;
         var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction"); 
         
         obj.commends = $(".commen-cammends-sheduler").val();
@@ -1358,12 +1365,12 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                     
                         if(datas.status == true)
                         {
-                            alert(datas.message);
-                            location.reload();    
+                            CommenMessage_save(datas.message);
+                            //location.reload();    
                         }
                         else if(datas.status == false)
                         {                    
-                            alert(datas.message);
+                            CommenMessage(datas.message);
                             //location.reload();    
                         }
                     
@@ -1372,38 +1379,42 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     error: function (error) {               
                         
                         console.log(error.responseText);
-                                
+                        CommenMessage(error.responseText);   
                     }
                 });
 
             }
             else
-            {       
+            { 
+                debugger;
+                console.log(obj);               
                 $.ajax({
                     url: public_URL+"AddSchedule",
                     type: 'POST',
                     dataType: 'json', 
                     data: obj,
                     success: function(datas) { 
-
-                        
+                     
+                      debugger;
                                     
                         if(datas.status == true)
                         {
-                            alert(datas.message);
-                            location.reload();    
+                            CommenMessage_save(datas.message);
+                            //location.reload();    
                         }
                         else if(datas.status == false)
                         {                    
-                            alert(datas.message);
+                            CommenMessage(datas.message);
                             //location.reload();    
                         }
                     
             
                     },
-                    error: function (error) {               
+                    error: function (error) {  
+                                     
                        
                         console.log(error.responseText);
+                        CommenMessage(error.responseText);
                                 
                     }
                 });
@@ -1412,7 +1423,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
         
         else{
            
-            alert("You are booked Special day");
+            CommenMessage("You are booked Special day");
             obj.specialDayCheck = 1;
             obj.Special_Day = check_SpecialDay.data_SpecialDays_Arry;
             
@@ -1430,12 +1441,12 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                     
                         if(datas.status == true)
                         {
-                            alert(datas.message);
-                            location.reload();    
+                            CommenMessage_save(datas.message);
+                            //location.reload();    
                         }
                         else if(datas.status == false)
                         {                    
-                            alert(datas.message);
+                            CommenMessage(datas.message);
                             //location.reload();    
                         }
                     
@@ -1444,6 +1455,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     error: function (error) {               
                         
                         console.log(error.responseText);
+                        CommenMessage(error.responseText);
                                 
                     }
                 });
@@ -1462,12 +1474,12 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                                     
                         if(datas.status == true)
                         {
-                            alert(datas.message);
-                            location.reload();    
+                            CommenMessage_save(datas.message);
+                            //location.reload();    
                         }
                         else if(datas.status == false)
                         {                    
-                            alert(datas.message);
+                            CommenMessage(datas.message);
                             //location.reload();    
                         }
                     
@@ -1476,7 +1488,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     error: function (error) {               
                         
                         console.log(error.responseText);
-                        
+                        CommenMessage(error.responseText);
                                 
                     }
                 });
@@ -1599,35 +1611,27 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
             if(PreLaunch_Date <= Start_Date && Launch_Date >=  Start_Date)
             {
-                //prelaunch date..
-               // alert("pre-"+ PreLaunch_Date +"-Start_Date-"+Start_Date+"-Launch_Date-"+Launch_Date+"prelaunch date..");
-               // alert(1);
+               
                return 1;
 
             }
             else if(PreLaunch_Date <= Start_Date && Launch_Date <=  Start_Date && currentDate <= Launch_Date)
             {
-                //launch date after
-               // alert("pre-"+ PreLaunch_Date +"-Start_Date-"+Start_Date+"-Launch_Date-"+Launch_Date+"-currentDate-"+currentDate+"launch date after..");
-                //alert("launch date after");
-                //alert(2);
+               
 
                 return 2;
             }
             else if(PreLaunch_Date <= Start_Date && Launch_Date <=  Start_Date && Launch_Date <= currentDate )
             {
-                //current day after the launch date
-
-               // alert("pre-"+ PreLaunch_Date +"-Start_Date-"+Start_Date+"-Launch_Date-"+Launch_Date+"-currentDate-"+currentDate+"current day after the launch date..");
-                //alert(3);
+                
 
                 return 3;
 
-               // alert("current day after the launch date");
+               
             }
             else
             {
-                alert("You are trying to book this boat before its pre-launch date. This boat is not open for booking now. Please try after its pre-launch date.");
+                CommenMessage("You are trying to book this boat before its pre-launch date. This boat is not open for booking now. Please try after its pre-launch date.");
                 //location.reload();
                
 
@@ -1679,7 +1683,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
 
 $(document).on("click",".tui-full-calendar-popup-save",function() { 
-    
+        
+   debugger;
     var pageIdentiFication = sessionStorage.getItem("pageIdentiFiction");    
 
     if(pageIdentiFication == "AdminBooking")
@@ -1856,13 +1861,13 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                             success: function(datas) {
                                 if(datas.status == true)
                                 {
-                                    alert(datas.message);
-                                    location.reload();
+                                    CommenMessage(datas.message);
+                                    //location.reload();
 
                                 }
                                 else if(datas.status == false){
                                     
-                                    alert(datas.message);                                   
+                                    CommenMessage(datas.message);                                   
                     
                                 }
                             
@@ -1878,7 +1883,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
             }
             else{
-                alert("select BOAT NAME");
+                CommenMessage("select BOAT NAME");
             }
     }
     else if(pageIdentiFication == "book-for-owner"){
@@ -1959,7 +1964,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                             }
 
                             Is_StandByBooking = JSON.parse("true");
-                            alert("You are trying to make a Standy By Day Booking!");
+                            CommenMessage("You are trying to make a Standy By Day Booking!");
 
                      }
                        
@@ -2084,13 +2089,13 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                         success: function(datas) {
                             if(datas.status == true)
                             {
-                                alert(datas.message);
-                                location.reload();
+                                CommenMessage(datas.message);
+                               // location.reload();
 
                             }
                             else if(datas.status == false){
                                     
-                                alert(datas.message);                                   
+                                CommenMessage(datas.message);                                   
                 
                             }
                         
@@ -2106,7 +2111,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
         }
         else{
-            alert("select BOAT NAME");
+            CommenMessage("select BOAT NAME");
         }
 
     }
@@ -2278,13 +2283,13 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                          success: function(datas) {
                              if(datas.status == true)
                              {
-                                 alert(datas.message);
-                                 location.reload();
+                                CommenMessage(datas.message);
+                                // location.reload();
  
                              }
                              else if(datas.status == false){
                                     
-                                alert(datas.message);                                   
+                                CommenMessage(datas.message);                                   
                 
                             }
                          
@@ -2300,7 +2305,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
  
          }
          else{
-             alert("select BOAT NAME");
+            CommenMessage("select BOAT NAME");
          }
  
 
@@ -2312,8 +2317,10 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
             
         var dataGet_AdminSelectBoat = sessionStorage.getItem("Owner_pg_boatListed");
         var dataSelected_OwnerDropDown = sessionStorage.getItem("Ownerlogin");
+        var selectedBotCheking = sessionStorage.getItem("SettNextBookingDays_boat");
         if ((typeof dataGet_AdminSelectBoat !== "undefined" && dataGet_AdminSelectBoat != null) 
-           &&(typeof dataSelected_OwnerDropDown !== "undefined" && dataSelected_OwnerDropDown != null) )
+           &&(typeof dataSelected_OwnerDropDown !== "undefined" && dataSelected_OwnerDropDown != null)
+           && (typeof selectedBotCheking !== "undefined" && selectedBotCheking != null) )
         {
            
             dataSelected_OwnerDropDown = JSON.parse(dataSelected_OwnerDropDown);
@@ -2392,6 +2399,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                                           
                     var obj = Object();                   
                     
+                    obj.specialDayCheck = false;
                     obj.Check_Status = nextBookingDay;
                     obj.Is_StandByBooking = Is_StandByBooking;
 
@@ -2503,13 +2511,13 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                         success: function(datas) {
                             if(datas.status == true)
                             {
-                                alert(datas.message);
-                                location.reload();
+                                CommenMessage(datas.message);
+                                //location.reload();
 
                             }
                             else if(datas.status == false){
                                     
-                                alert(datas.message);                                   
+                                CommenMessage(datas.message);                                   
                 
                             }
                         
@@ -2525,7 +2533,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
         }
         else{
-            alert("select BOAT NAME");
+            CommenMessage("select BOAT NAME");
         }
 
     }
@@ -2534,4 +2542,17 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 });
 
 
+function CommenMessage(obj){
+    $("#h4-message-type").text("Message");
+    $("#p-message-content").text(obj);
+    $('#btn-CommenMessage-disp-btns').trigger('click');
+    //alert();
+}
+
+function CommenMessage_save(obj){
+    $("#h4-message-save-type").text("Message");
+    $("#p-message-save-content").text(obj);
+    $('#btn-CommenMessage-save-disp-btns').trigger('click');
+    //alert();
+}
 

@@ -36,6 +36,9 @@ export class MyprofileComponent implements OnInit {
   }
   // Create Component for myprofile //Done By Alagesan on 17.05.2021
   ngOnInit(): void {
+
+    sessionStorage.setItem("owner-dashboard-relodePg","1");
+
     this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
     if(this.ownerlogin==false){
       this.router.navigate(['/owner-login/']);
