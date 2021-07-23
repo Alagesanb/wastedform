@@ -1528,6 +1528,21 @@ addShare(){
   $('#addshare').trigger('click');
 
 }
+
+// Clear share for settings Done By Alagesan on 22.07.2021  
+clearShare(){
+  this.Shareform.get('Boat_Id').setValue("");
+  this.Shareform.get('Boat_Name').setValue("");
+  this.Shareform.get('No_of_Shares').setValue("");
+  this.Shareform.get('No_of_SummerWeekDays').setValue("");
+  this.Shareform.get('No_of_SummerWeekEndDays').setValue("");
+  this.Shareform.get('No_of_WinterWeekDays').setValue("");
+  this.Shareform.get('No_of_WinterWeekEndDays').setValue("");
+  this.Shareform.get('Status').setValue("");
+  this.Shareform.get('Block').setValue("");
+  this.Shareform.get('IsActive').setValue(false);
+}
+
   createForm() {
     this.form = this.fb.group({
       _id: new FormControl('', [Validators.required,]),
@@ -1825,6 +1840,15 @@ addShare(){
 
       console.log(err);
     })
+  }
+   
+  // Clear boat type for settings Done By Alagesan on 22.07.2021  
+  addBoatTypeClear(){
+    this.addBoatTypeform.get('Boat_Type').setValue("");
+    this.addBoatTypeform.get('Type_Description').setValue("");
+    this.addBoatTypeform.get('Block').setValue("false");
+    this.addBoatTypeform.get('IsActive').setValue("false");
+
   }
 
   saveShare(){

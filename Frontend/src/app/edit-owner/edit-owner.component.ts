@@ -26,6 +26,8 @@ export class EditOwnerComponent implements OnInit {
 
   singleFileDetails: any;
   adminlogin: any;
+  getResponce: any;
+
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
     this.createForm();
    }
@@ -127,6 +129,7 @@ editOwner(){
               }
               else if(data.status==true){
                 $('#error-disp-btns').trigger('click');
+                this.getResponce = data.message
 
               } 
               }, err => {
@@ -164,7 +167,8 @@ editOwner(){
         if(data.status==false){
         }
         else if(data.status==true){
-          $("#wner_id_edit").text(data.message);
+          //$("#wner_id_edit").text(data.message);
+          this.getResponce = data.message
           $('#error-disp-btns').trigger('click');
 
         } 

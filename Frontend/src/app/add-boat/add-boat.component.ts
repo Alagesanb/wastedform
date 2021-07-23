@@ -193,7 +193,7 @@ export class AddBoatComponent implements OnInit {
       var tmp_mul = sessionStorage.getItem("multifile_Ang_Addboat");
       if(typeof tmp_mul === "undefined" || tmp_mul == null  || tmp_mul == "")
       {
-        location.reload();
+        //location.reload();
       }
 
     });

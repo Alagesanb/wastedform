@@ -53,7 +53,7 @@
     <div class="col-md-12 add-boat-type" > 
          
       <!-- Button boat type modal -->
-  <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#boat-type" style="float: right; ">
+  <button type="button" class="btn btn-secondary" (click)=addBoatTypeClear() data-toggle="modal" data-target="#boat-type" style="float: right; ">
    BOAT TYPE 
   </button>
   
@@ -562,7 +562,7 @@
   
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" (click)=clearShare() class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Add Share</h4>
       </div>
        <!-- Clear the multiselect dropdown changes for settings  Done By Alagesan on 13.06.2021	-->
