@@ -986,7 +986,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                 //
                 if(datas.status == true)
                 {
-                    CommenMessage(datas.message);
+                    CommenMessage_save(datas.message);
                     //location.reload();    
                 }
                 else if(datas.status == false)
@@ -2312,7 +2312,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
     }
     else if(pageIdentiFication == "owner-dashboard-Reservation"){
 
-        
+        debugger;
         var checkController = $('.tui-full-calendar-popup-save').children('span').first().text();
             
         var dataGet_AdminSelectBoat = sessionStorage.getItem("Owner_pg_boatListed");
@@ -2335,7 +2335,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                 var enddate_date = new Date( $("#tui-full-calendar-schedule-end-date").val());
                 var start_str =startdate_date.toString();
                 var end_str = enddate_date.toString();    
-                var AdminId_get = sessionStorage.getItem("UserId");
+                var AdminId_get = user_id_owner; //sessionStorage.getItem("UserId");
 
                   
                 //this to start
