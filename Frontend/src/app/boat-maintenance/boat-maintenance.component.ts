@@ -127,5 +127,9 @@ sessionStorage.setItem("view-boat-reload","1");
         })
   }
 
+  locationReload(){
+    location.reload();
+  }
+
 
 }

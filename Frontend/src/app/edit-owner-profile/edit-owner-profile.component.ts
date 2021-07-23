@@ -29,6 +29,7 @@ export class EditOwnerProfileComponent implements OnInit {
 
  
    ngOnInit(): void {
+    sessionStorage.setItem("owner-dashboard-relodePg","1");
     this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
     if(this.ownerlogin==false){
       this.router.navigate(['/owner-login/']);

@@ -179,6 +179,8 @@ export class OwnerDashboardComponent implements OnInit {
         this.dropdownList = tempArry2;
         sessionStorage.setItem("Owner_pg_boatListed",JSON.stringify(tempArry2)); 
 
+        this.GetAllUnAvailableDays();
+
       
         }, err => {
           console.log(err);
@@ -218,6 +220,56 @@ export class OwnerDashboardComponent implements OnInit {
    }, err => {
    })
   }
+
+  locationReload(){
+    location.reload();
+  }
+
+  GetAllUnAvailableDays(){
+
+
+    this.http.get<any>(`${this.url_Days}GetAllUnAvailableDays`).subscribe(data => { 
+     
+  
+      sessionStorage.setItem("GetAllUnAvailableDays_Owners",JSON.stringify(data));             
+  
+  
+      this.http.get<any>(`${this.url_Days}GetUnAvailabeDaysOfBoats`).subscribe(datas => { 
+     
+        if(datas.status == true){
+      
+          var tmp_1 = datas.response;
+          var tmp_arry_1 = [];
+  
+          $.each(datas.response, function(index, val) {        
+  
+            var obj = Object();
+            obj.Boat_Id =  val.Boat_Id[0];//a1.toString();
+            obj.Boat_Name = val.Boat_Name[0];//a2.toString();
+            obj.UnAvailableDates = val.UnAvailableDates;
+            obj._id = val._id;
+            tmp_arry_1.push(obj);
+  
+          });
+          sessionStorage.setItem("GetUnAvailabeDaysOfBoats_Owners",JSON.stringify(tmp_arry_1));
+           
+         }    
+    
+      }, err => {
+        console.log(err);
+      })
+  
+    
+      }, err => {
+        console.log(err);
+      })
+  
+      
+     }
+  
+
+
+
 
 }
 

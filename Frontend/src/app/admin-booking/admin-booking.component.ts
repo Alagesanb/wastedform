@@ -129,7 +129,9 @@ export class AdminBookingComponent implements OnInit {
              })
        }
  
-      
+       locationReload(){
+        location.reload();
+      }
  
       
    }

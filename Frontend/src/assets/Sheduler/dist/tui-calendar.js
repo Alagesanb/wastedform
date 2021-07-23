@@ -22962,6 +22962,29 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
         return undefined
     };
 /// sibi
+
+///
+
+var obj_tmp = JSON.parse(sessionStorage.getItem("currentDateFormat"));
+var print_time_start = "09:00";
+var print_time_End  ="17:00";   
+if (typeof obj_tmp !== "undefined" && obj_tmp != null)
+{
+   sessionStorage.removeItem("currentDateFormat");
+    if(obj_tmp.currentDate == obj_tmp.selectedDate)
+    {
+        print_time_start = obj_tmp.Hour_Minitu;
+    }
+    else
+    {
+      
+
+    }
+}
+
+
+
+//
   return "<div id='' class=\"calbox_outer "
   // sibi
     + alias4(((helper = (helper = lookupProperty(helpers,"CSS_PREFIX") || (depth0 != null ? lookupProperty(depth0,"CSS_PREFIX") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"CSS_PREFIX","hash":{},"data":data,"loc":{"start":{"line":1,"column":12},"end":{"line":1,"column":26}}}) : helper)))
@@ -23111,7 +23134,7 @@ module.exports = (Handlebars['default'] || Handlebars).template({"1":function(co
     + ((stack1 = ((helper = (helper = lookupProperty(helpers,"popupIsAllDay-tmpl") || (depth0 != null ? lookupProperty(depth0,"popupIsAllDay-tmpl") : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"popupIsAllDay-tmpl","hash":{},"data":data,"loc":{"start":{"line":48,"column":52},"end":{"line":48,"column":76}}}) : helper))) != null ? stack1 : "")
    // Sibi-Time 0001 popup
 
-    + "</span>\n </div>\n </div>\n <div div-sibi-first-2 class='new-timer'> <input id='sheduler-calender-timer1' value='09:00' class='timer_input cls-firstTimer' type='time' id='appt' name='appt'> <span class='cls-span-Timer'></span> <input type='time' id='sheduler-calender-timer2' value='17:00' class='timer_input' id='appt' name='appt'> </div><div div-test-001 class=\""
+    + "</span>\n </div>\n </div>\n <div div-sibi-first-2 class='new-timer'> <input id='sheduler-calender-timer1' value='"+print_time_start+"' class='timer_input cls-firstTimer' type='time' id='appt' name='appt'> <span class='cls-span-Timer'></span> <input type='time' id='sheduler-calender-timer2' value='"+print_time_End+"' class='timer_input' id='appt' name='appt'> </div><div div-test-001 class=\""
     
     // Sibi-Time End..........
     
