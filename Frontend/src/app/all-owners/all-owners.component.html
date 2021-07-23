@@ -71,16 +71,16 @@
 
                           <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0;  else templateName">
                               <ul>
-                                <li><h6>TOTAL DAYS BOOKED </h6> <span>0/{{bot_details.Total_Days}}</span></li>
-                                <li><h6>SUMMER WEEKENDS </h6> <span>0/{{bot_details.Summer_WeekEndDays}}</span></li>
-                                <li><h6>WINTER WEEKENDS </h6> <span>0/{{bot_details.Winter_WeekEndDays}}</span></li>
+                                <li><h6>TOTAL DAYS BOOKED </h6> <span>{{bot_details.Total_Days_BookedDays}}/{{bot_details.Total_Days}}</span></li>
+                                <li><h6>SUMMER WEEKENDS </h6> <span>{{bot_details.Summer_WeekEndDays_BookedDays}}/{{bot_details.Summer_WeekEndDays}}</span></li>
+                                <li><h6>WINTER WEEKENDS </h6> <span>{{bot_details.Winter_WeekEndDays_BookedDays}}/{{bot_details.Winter_WeekEndDays}}</span></li>
                             </ul>
                          </div>  
                         
                           <div class="col-md-6 owner-datas"  *ngIf="owner.Boat_Summer_Details.length > 0; else templateName2">
                             <ul>
-                              <li><h6>SUMMER WEEKDAYS </h6> <span>0/{{bot_details.Summer_WeekDays}}</span></li>
-                              <li><h6>WINTER WEEKDAYS </h6> <span>0/{{bot_details.Winter_WeekDays}}</span></li>
+                              <li><h6>SUMMER WEEKDAYS </h6> <span>{{bot_details.Summer_WeekDays_BookedDays}}/{{bot_details.Summer_WeekDays}}</span></li>
+                              <li><h6>WINTER WEEKDAYS </h6> <span>{{bot_details.Winter_WeekDays_BookedDays}}/{{bot_details.Winter_WeekDays}}</span></li>
                             </ul>
                         </div>
                         

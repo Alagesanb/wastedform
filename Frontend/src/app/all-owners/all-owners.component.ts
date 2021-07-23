@@ -92,7 +92,7 @@ export class AllOwnersComponent implements OnInit {
         
        //this.allboatdata = data2['result'] 
 
-       this.getAllBoatData_BindingArry(data['response'], data2['result'], data2['OwnerAllocatedDays']);
+       this.getAllBoatData_BindingArry(data['response'], data2['result'], data2['OwnerAllocatedDays'], data2['OwnerBookedDaysDays']);
 
 
       
@@ -404,7 +404,7 @@ export class AllOwnersComponent implements OnInit {
   }
 
 
-  getAllBoatData_BindingArry(data1, data2, data3){
+  getAllBoatData_BindingArry(data1, data2, data3,data4){
 
     var Number = 1000;
     var OwnerBaseNumber = 1;
@@ -486,6 +486,15 @@ export class AllOwnersComponent implements OnInit {
           var Winter_WeekEndDays;
           var Total_Days;
 
+          var tmp_manage_owr_BookedDays = data4.find(x => x.Owner_Id == element._id && x.Boat_Id == element2[0]._id);
+          var Summer_WeekDays_BookedDays;
+          var Summer_WeekEndDays_BookedDays;
+          var Winter_WeekDays_BookedDays;
+          var Winter_WeekEndDays_BookedDays;
+          var Total_Days_BookedDays;
+
+
+          //debugger;
 
           if(tmp_manage_owr != null)
           {
@@ -494,6 +503,27 @@ export class AllOwnersComponent implements OnInit {
             Winter_WeekDays = tmp_manage_owr.Winter_WeekDays;
             Winter_WeekEndDays = tmp_manage_owr.Winter_WeekEndDays;
             Total_Days = Summer_WeekDays + Summer_WeekEndDays + Winter_WeekDays + Winter_WeekEndDays;
+
+
+            if(typeof tmp_manage_owr_BookedDays !== "undefined" && tmp_manage_owr_BookedDays != null)
+             {
+            Summer_WeekDays_BookedDays = tmp_manage_owr_BookedDays.Summer_WeekDays;
+            Summer_WeekEndDays_BookedDays = tmp_manage_owr_BookedDays.Summer_WeekEndDays;
+            Winter_WeekDays_BookedDays = tmp_manage_owr_BookedDays.Winter_WeekDays;
+            Winter_WeekEndDays_BookedDays = tmp_manage_owr_BookedDays.Winter_WeekEndDays;
+            Total_Days_BookedDays = Summer_WeekDays_BookedDays + Summer_WeekEndDays_BookedDays + Winter_WeekDays_BookedDays + Winter_WeekEndDays_BookedDays;
+             }
+             else{
+
+              Summer_WeekDays_BookedDays = 0;
+           Summer_WeekEndDays_BookedDays = 0;
+           Winter_WeekDays_BookedDays = 0;
+           Winter_WeekEndDays_BookedDays = 0;
+           Total_Days_BookedDays = 0;
+
+             }
+
+
           }
           else{
 
@@ -503,6 +533,12 @@ export class AllOwnersComponent implements OnInit {
            Winter_WeekEndDays = 0;
            Total_Days = 0;
 
+           Summer_WeekDays_BookedDays = 0;
+           Summer_WeekEndDays_BookedDays = 0;
+           Winter_WeekDays_BookedDays = 0;
+           Winter_WeekEndDays_BookedDays = 0;
+           Total_Days_BookedDays = 0;
+
           }
           
             obj3.Summer_WeekDays = Summer_WeekDays;         
@@ -510,6 +546,12 @@ export class AllOwnersComponent implements OnInit {
             obj3.Winter_WeekDays = Winter_WeekDays;          
             obj3.Winter_WeekEndDays = Winter_WeekEndDays;          
             obj3.Total_Days = Total_Days;
+
+            obj3.Summer_WeekDays_BookedDays = Summer_WeekDays_BookedDays;         
+            obj3.Summer_WeekEndDays_BookedDays = Summer_WeekEndDays_BookedDays;          
+            obj3.Winter_WeekDays_BookedDays = Winter_WeekDays_BookedDays;          
+            obj3.Winter_WeekEndDays_BookedDays = Winter_WeekEndDays_BookedDays;          
+            obj3.Total_Days_BookedDays = Total_Days_BookedDays;
          
            
         
@@ -517,6 +559,7 @@ export class AllOwnersComponent implements OnInit {
         boat_Summer_Details.push(obj3);
 
         }
+
 
 
       });
@@ -540,6 +583,12 @@ export class AllOwnersComponent implements OnInit {
         var Winter_WeekEndDays = 0;
         var Total_Days = 0;
 
+        var Summer_WeekDays_BookedDays =0;
+        var Summer_WeekEndDays_BookedDays =0;
+        var Winter_WeekDays_BookedDays =0;
+        var Winter_WeekEndDays_BookedDays =0;
+        var Total_Days_BookedDays =0;
+
         obj3.OwnerBaseNumber = 1;
           obj3.dynamicNumber = Number;
           obj3.Boat_id = 0;
@@ -550,6 +599,12 @@ export class AllOwnersComponent implements OnInit {
             obj3.Winter_WeekDays = Winter_WeekDays;          
             obj3.Winter_WeekEndDays = Winter_WeekEndDays;          
             obj3.Total_Days = Total_Days;
+
+            obj3.Summer_WeekDays_BookedDays = Summer_WeekDays_BookedDays;         
+            obj3.Summer_WeekEndDays_BookedDays = Summer_WeekEndDays_BookedDays;          
+            obj3.Winter_WeekDays_BookedDays = Winter_WeekDays_BookedDays;          
+            obj3.Winter_WeekEndDays_BookedDays = Winter_WeekEndDays_BookedDays;          
+            obj3.Total_Days_BookedDays = Total_Days_BookedDays;
             
 
             boat_Summer_Details.push(obj3);

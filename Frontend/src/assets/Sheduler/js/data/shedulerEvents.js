@@ -1724,7 +1724,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                         obj.Check_Status = 3;
                         
-                        obj.TotalDay_Count = Temp_Date_dateDiff;
+                        obj.TotalDay_Count = parseInt(Temp_Date_dateDiff) + 1;
                         obj.WeekEnd_Count = Temp_Date_weekenddays;
                         obj.WeekDay_Count = Temp_Date_weekdays;
                     
@@ -1980,7 +1980,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     obj.Check_Status = nextBookingDay;
                     obj.Is_StandByBooking = Is_StandByBooking;
 
-                    obj.TotalDay_Count = Temp_Date_dateDiff;
+                    obj.TotalDay_Count =  parseInt(Temp_Date_dateDiff) + 1;
                     obj.WeekEnd_Count = Temp_Date_weekenddays;
                     obj.WeekDay_Count = Temp_Date_weekdays;
                 
@@ -2148,7 +2148,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                  // ...................  
                      var obj = Object();
 
-                     obj.TotalDay_Count = Temp_Date_dateDiff;
+                     obj.TotalDay_Count = parseInt(Temp_Date_dateDiff) + 1;;
                      obj.WeekEnd_Count = Temp_Date_weekenddays;
                      obj.WeekDay_Count = Temp_Date_weekdays;
                  
@@ -2403,7 +2403,7 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                     obj.Check_Status = nextBookingDay;
                     obj.Is_StandByBooking = Is_StandByBooking;
 
-                    obj.TotalDay_Count = Temp_Date_dateDiff;
+                    obj.TotalDay_Count =  parseInt(Temp_Date_dateDiff) + 1;
                     obj.WeekEnd_Count = Temp_Date_weekenddays;
                     obj.WeekDay_Count = Temp_Date_weekdays;
                 

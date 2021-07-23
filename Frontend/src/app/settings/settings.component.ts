@@ -73,6 +73,7 @@ export class SettingsComponent implements OnInit {
   WINTER_CONSECUTIVE_DAYS_ALLOWED : any;
   NEXT_BOOKING_DAYS_ALLOWED: any;
   UNAVAILABLE_DATE_userSelect = [];
+  ViewAllPreLaunchAndLaunchBookingDays: any;
   dropdownOwn: any;
   bookdropdownOwn: any;
   adminlogin: any;
@@ -208,6 +209,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   this.getAllshare();
   this.getBoats();
   this.getLocationsRedirect();
+  this.getAll_ViewAllPreLaunchAndLaunchBookingDays();
+
 
 
 
@@ -472,7 +475,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     Obj.Name = $("#text-id-special-days-Name").val();
     Obj.Start_Date = string_to_Date_Convert(startDate);
     Obj.End_Date = string_to_Date_Convert(Eenddate);
-debugger;
+
 
 console.log(Obj);
 
@@ -680,27 +683,75 @@ $(document).on("click",".cls-special-days-Edit",function() {
               var bindingTableData;
               var bindingNumber = 1;
               var firstChek = 0;
+              var unavilableBoats = data.response;
+          
+              var allBoatsList = JSON.parse(sessionStorage.getItem("CurrentBoatListingsettings"));
               
-            
-              $.each(data.response , function(index, val) { 
-                var count = 30;
+              var commenDays ="";
+              var commn_tmp = data.CommonDays;
 
-                 var ID        = val._id; 
-                 var Boat_Name =  val.Boat_Name.toString();
-                 var UnAvailableDates =  val.UnAvailableDates;
-                 var strlength = Boat_Name.length;
-                  Boat_Name = Boat_Name.slice(0, count) + (strlength > count ? "..." : "");
-                 //UnAvailableDates = UnAvailableDates.slice(0, 15)+'...'
+              $.each(commn_tmp[0].UnAvailableDates , function(index, val) { 
+
+                var ConvertedData = split_String(val);
+                commenDays += ConvertedData +" , ";
+
+
+              });
+              
+
+            
+              $.each(allBoatsList , function(index, val) { 
+             
+               var obj_tmp_date =""; 
+
+               $.each(unavilableBoats , function(index1, val1) { 
+
+                
+                //var boatSelectionId = 0;
+                $.each(val1.Boat_Id , function(index2, val2) { 
+                  
+                  if(val.item_id == val2)
+                  {
+
+                    $.each(val1.UnAvailableDates , function(index3, val3) {
+                      
+                      var ConvertedData = split_String(val3);
+                        obj_tmp_date += ConvertedData +" , ";
+    
+    
+                    });
+
+                    
+
+                  }
+
+
+                });
+
+
+               });
+                
+               //var unAvilableDays = unavilableBoats.filter()
+
+              
+               obj_tmp_date += commenDays;
+
+                var stringLength =  obj_tmp_date.length;
+
+                var stringLength2 = stringLength -2 ;
+                
+
+               obj_tmp_date = obj_tmp_date.slice(0, stringLength2);
 
                 if(firstChek == 0){
                   
-                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.Boat_Name+'">'+Boat_Name+'\
-                  </td><td>'+ UnAvailableDates +'</td></tr>';
+                  bindingTableData = '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'\
+                  </td><td>'+ obj_tmp_date +'</td></tr>';
                   firstChek = 1;
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.Boat_Name+'">'+Boat_Name+'</td><td>'+ UnAvailableDates +'</td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td></tr>';
 
 
                 }
@@ -732,6 +783,17 @@ $(document).on("click",".cls-special-days-Edit",function() {
     });      
       
     }
+
+
+    function split_String(valData){
+      
+      var valNew=valData.split('/');
+      var returnValue =  valNew[1]+"/"+valNew[0]+"/"+valNew[2];
+      return returnValue;
+
+    }
+
+
 
      // Edit location  for settings //Done By Alagesan on 17.07.2021
     $(document).on("click",".cls-location-Edit",function() {
@@ -945,14 +1007,15 @@ $(document).on("click",".cls-special-days-Edit",function() {
           if(temp_data1.length != 0){
                   var obj = Object();
                   obj.UnAvailableDates = unique(temp_data1);
-
+                  debugger;
+                  console.log(obj);
               $.ajax({
                 url: public_url_days + "AddUnavailabledaysForAll",
                 type: 'POST',
                 dataType: 'json', 
                 data: obj,
                 success: function(Related_datas) {
-                  
+                  debugger;
                   if(Related_datas.status == true)
                   {
                     $("#myModalUpdatemsg").find(".modal-body").append("<p>"+Related_datas.message+ "</p>");
@@ -1335,10 +1398,26 @@ startTimer_set_boat_type_Edit(){
     
       
       if(data.Status == true){
-        this.SUMMER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Summer_ConsecutiveDays;
-        this.WINTER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Winter_ConsecutiveDays;
-        this.Consecutiveform.get('Summer_ConsecutiveDays').setValue(data.Data.Summer_ConsecutiveDays);
-        this.Consecutiveform.get('Winter_ConsecutiveDays').setValue(data.Data.Winter_ConsecutiveDays);
+
+        if(data.Data != null)
+          {
+            this.SUMMER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Summer_ConsecutiveDays;
+            this.WINTER_CONSECUTIVE_DAYS_ALLOWED = data.Data.Winter_ConsecutiveDays;
+            this.Consecutiveform.get('Summer_ConsecutiveDays').setValue(data.Data.Summer_ConsecutiveDays);
+            this.Consecutiveform.get('Winter_ConsecutiveDays').setValue(data.Data.Winter_ConsecutiveDays);
+          }
+          if(this.ViewAllPreLaunchAndLaunchBookingDays != null)
+          {
+            var getdatsa = this.ViewAllPreLaunchAndLaunchBookingDays.find(x => x.Boat_Id == id);
+            if(getdatsa != null){
+
+              this.Consecutiveform.get('Booking_Days').setValue(getdatsa.Booking_Days);
+            }
+          }
+
+
+
+
 
         
       }
@@ -1363,7 +1442,9 @@ startTimer_set_boat_type_Edit(){
                    tempArry.push(obj2);
  
              });
+             
              this.dropdownList_filted = tempArry;  
+             sessionStorage.setItem("CurrentBoatListingsettings",JSON.stringify(tempArry));
   
    }, err => {
    })
@@ -1440,6 +1521,20 @@ else if(data.Status == false){
     }, err => {
     })
   }
+
+  getAll_ViewAllPreLaunchAndLaunchBookingDays(){
+   
+    this.http.get<any>(`${this.shareUrl}/ViewAllPreLaunchAndLaunchBookingDays`).subscribe(data => {
+   
+   this.ViewAllPreLaunchAndLaunchBookingDays = data['response']
+   
+  
+    }, err => {
+    })
+  }
+
+
+
 
   editShare(data){
 
@@ -1574,6 +1669,7 @@ clearShare(){
     this.Consecutiveform = this.fb.group({
       Summer_ConsecutiveDays: new FormControl('', [Validators.required,]),
       Winter_ConsecutiveDays: new FormControl('', [Validators.required,]),
+      Booking_Days: new FormControl('', [Validators.required,]),
       IsActive: new FormControl('', ),
       Status: new FormControl('', ),
       Block: new FormControl('', ),
@@ -1766,7 +1862,7 @@ clearShare(){
       return;
     }
 
-     debugger;
+
      console.log(this.specialDaysform.value);
 
     this.http.post<any>(`${this.specialDaysUrl}/Add_Special_Days_Booking`,  this.specialDaysform.value   ).subscribe(data => {
@@ -2014,13 +2110,76 @@ console.log(this.Shareform.value);
 
     this.Consecutiveform.get('Boat_Name').setValue(temp_Boat_Name);
     this.Consecutiveform.get('Boat_Id').setValue(temp_boat_id);
+
+    var obj_tmp = Object()
+    obj_tmp.values = this.Consecutiveform.value;
+    
+    console.log(this.Consecutiveform.value);
+
    
   
      
       this.http.post<any>(`${this.shareUrl}/AddConsecutiveDays`,  this.Consecutiveform.value   ).subscribe(data => {
-      
+     
+    
     if(data.status == true){
-      this.getResponce = data.message
+      //this.getResponce = data.message;
+
+      obj_tmp.messsage = data.message
+
+      this.Consecutivedays_Between_pre_Launch_and_launch(obj_tmp)
+
+      //this.Consecutiveform.reset()
+      //this.dropdownOwn =[]; 
+
+      //this.modelTitle = "Consecutive Days"
+      //$('#Sharepop-up-btn').trigger('click');
+  
+    }
+    else if(data.status == false){
+    }
+          }, err => {
+           
+          })
+  
+  
+  }
+
+  Consecutivedays_Between_pre_Launch_and_launch(values){
+
+    // this.Consecutiveform.get('IsActive').setValue(true);
+    // this.Consecutiveform.get('Status').setValue("Enable");
+    // this.Consecutiveform.get('Block').setValue(true);
+    // this.shareSubmitted = true;
+   
+
+    // if (this.Consecutiveform.invalid) {
+    //   return;
+    // }
+    
+  
+
+    
+    // var CONSECUTIVEDAYS_selected_Boat = sessionStorage.getItem("CONSECUTIVEDAYS_boat");
+    // CONSECUTIVEDAYS_selected_Boat = JSON.parse(CONSECUTIVEDAYS_selected_Boat);
+
+    // var temp_boat_id = CONSECUTIVEDAYS_selected_Boat["_id"];
+    // var temp_Boat_Name = CONSECUTIVEDAYS_selected_Boat["Boat_Name"];
+
+    // this.Consecutiveform.get('Boat_Name').setValue(temp_Boat_Name);
+    // this.Consecutiveform.get('Boat_Id').setValue(temp_boat_id);
+
+    console.log(values);
+
+ 
+   
+  
+     
+      this.http.post<any>(`${this.shareUrl}/AddBookingForLaunch_PreLuanch`,  values.values  ).subscribe(data => {
+     
+
+    if(data.status == true){
+      this.getResponce = data.message +" - "+ values.messsage;
       this.Consecutiveform.reset()
       this.dropdownOwn =[]; 
 
@@ -2034,7 +2193,8 @@ console.log(this.Shareform.value);
            
           })
   
-  
+
+
   }
 
   addConsecutive(){
