@@ -51,4 +51,9 @@ export class ForgotPasswordComponent implements OnInit {
           console.log(err);
         })
   }
+
+  reset(){
+    this.router.navigate(['reset/']);
+  }
+
 }
