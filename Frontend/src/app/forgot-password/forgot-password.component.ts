@@ -37,9 +37,10 @@ export class ForgotPasswordComponent implements OnInit {
     if (this.form.invalid) {
       return;
   }
-
+     console.log(this.form.value );
     this.http.post<any>(`${this.url}/ResetPassword`,  this.form.value   ).subscribe(data => {
-        if(data.status==false){
+      console.log(data);  
+      if(data.status==false){
           this.getReplay = data.info
           $('#error-disp-btns').trigger('click');
         }

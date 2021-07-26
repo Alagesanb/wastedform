@@ -52,6 +52,7 @@
                       <span *ngIf="owner.Boat_Summer_Details.length > 0" class="phone"><i class="fas fa-ship"></i> 
                         <span style="margin-left: 5px;" *ngFor="let bot_details of owner.Boat_Summer_Details; let index = index" (click)="Boatbase_SummerDetails(owner.Boat_Summer_Details,bot_details)">
                           <a style="cursor:pointer; color:brown;">{{bot_details.Boat_Name}} </a>
+                          <a style="cursor:pointer; color:brown;" *ngIf="bot_details.Boat_Name == ''"> No Boats Assigned </a>
                         </span>
                       </span>
 

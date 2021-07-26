@@ -33,9 +33,12 @@ export class OwnershipTransferComponent implements OnInit {
   dropdownOwn: any;
 
   adminlogin: any;
-
+  expDateCurrentOwner: any = [];
+  startDateNewOwner: any = [];
+  form: FormGroup;
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router, private scroll: ViewportScroller) { 
+    this.createForm();
   }
 
   // CreateComponent for ownership transfer//Done By Alagesan on 20.05.2021
@@ -79,8 +82,55 @@ this.dropdownOwnerSettings = {
  
 };
 
+setInterval(function () {
+
+  if ($("#datepicker-3").val() == "NaN/NaN/NaN") {
+    $("#datepicker-3").val("");
+  }
+  if ($("#datepicker-4").val() == "NaN/NaN/NaN") {
+    $("#datepicker-4").val("");
+  }
+
+
+}, 500);
+
+$('#datepicker-3').Zebra_DatePicker({
+  pair: $('#datepicker-4')
+});
+
+$('#datepicker-4').Zebra_DatePicker({
+  direction: 1,
+});
+
+
 
   }
+
+  createForm() {
+    this.form = this.fb.group({
+      exp_date_of_current_owner: new FormControl('', [Validators.required,]),
+      start_date_of_new_owner: new FormControl('', [Validators.required,]), 
+
+    });
+  }
+  get df() { return this.form.controls; }
+  // Change the exp date of current owner for ownership transfer//Done By Alagesan on 26.07.2021
+  focusOutSFrom($event) {
+    this.expDateCurrentOwner = $event.target.value;
+    var sssd = new Date(this.expDateCurrentOwner);
+    let expdate = (sssd.getDate() + '/' + (sssd.getMonth() + 1) + '/' + sssd.getFullYear());
+    this.form.get('exp_date_of_current_owner').setValue(expdate);
+  }
+
+  // Change the start date of new owner for ownership transfer//Done By Alagesan on 26.07.2021
+  focusOutSTo($event) {
+    
+    this.startDateNewOwner = $event.target.value;
+    var td = new Date(this.startDateNewOwner);
+    let startDate = (td.getDate() + '/' + (td.getMonth() + 1) + '/' + td.getFullYear());
+    this.form.get('start_date_of_new_owner').setValue(startDate);
+  }
+
   getOwners(){
    
     this.http.get<any>(`${this.OwnerUrl}/GetOwners`).subscribe(data => {

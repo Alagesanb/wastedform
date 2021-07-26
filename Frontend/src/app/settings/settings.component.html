@@ -279,7 +279,8 @@
             [placeholder]="'Select'"
             [settings]="dropdownSettings_CONSECUTIVEDAYS"
             [data]="dropdownList_filted"                                    
-            (onSelect)="onItemSelect_CONSECUTIVEDAYS($event)"            
+            (onSelect)="onItemSelect_CONSECUTIVEDAYS($event)" 
+            (onDeSelect)="onItemDeSelect_CONSECUTIVEDAYS($event)" 
             class="singleselect_drop"
         >
         </ng-multiselect-dropdown>
@@ -343,7 +344,8 @@
           [placeholder]="'Select'"
           [settings]="dropdownSettings_CONSECUTIVEDAYS"
           [data]="dropdownList_filted"                                    
-          (onSelect)="onItemSelect_Next_Booking_Day($event)"            
+          (onSelect)="onItemSelect_Next_Booking_Day($event)" 
+          (onDeSelect)="onItemDeSelect_Next_Booking_Day($event)"            
           class="singleselect_drop"
       >
       </ng-multiselect-dropdown>

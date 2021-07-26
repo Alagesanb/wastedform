@@ -1320,12 +1320,22 @@ startTimer_set_boat_type_Edit(){
     this.GetConsecutiveDaysByBoatId(items.item_id)
   }
 
+  onItemDeSelect_CONSECUTIVEDAYS(items: any){
+    this.Consecutiveform.get('Summer_ConsecutiveDays').setValue("");
+    this.Consecutiveform.get('Winter_ConsecutiveDays').setValue("");
+    this.Consecutiveform.get('Booking_Days').setValue("");
+  }
+
   onItemSelect_Next_Booking_Day(items: any) {
     
     var finddate = this.dropdownList.find(x => x._id == items.item_id);
    // this.CONSECUTIVEDAYS_selected_Boat = JSON.parse(finddate);
     sessionStorage.setItem("Next_Booking_Day_boat",JSON.stringify(finddate));
     this.GetNextBookingDaysByBoatId(items.item_id);
+  }
+
+  onItemDeSelect_Next_Booking_Day(items: any){
+    this.Bookingform.get('Next_BookingDay').setValue("");
   }
 
   onItemSelect_UNAVAILABLE_DATE(items: any) {

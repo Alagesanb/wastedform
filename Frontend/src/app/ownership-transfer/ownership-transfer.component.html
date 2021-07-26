@@ -17,7 +17,7 @@
                <div class="col-md-12">
           <div class="sbg-form row">
               <div class="col-md-12">   
-                 <form>
+                 <form [formGroup]="form">
 <div class="form-row">
 <div class="form-group col-md-4">
     <label>Owner Name</label> 
@@ -51,9 +51,10 @@
  
 <div class="form-group col-md-4">
  <label>Exp Date of Current Owner</label>
- <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 283px;"><input id="datepicker" type="text" class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;">
+ <!-- <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 283px;"><input id="datepicker" type="text" class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;"> -->
     <!-- <button type="button" class="Zebra_DatePicker_Icon" style="top: 11px; right: 12px;">Pick a date</button> -->
-</span>
+    <input id="datepicker-3" type="text" class="form-control" data-zdp_readonly_element="true"  formControlName="exp_date_of_current_owner" (focusout)="focusOutSFrom($event)">
+<!-- </span> -->
 </div>
 </div>
                      
@@ -76,9 +77,11 @@
  
   <div class="form-group col-md-4">
  <label>Start Date of New owner</label>
-<span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 283px;"><input id="datepicker-2" type="text" class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;">
+ <input id="datepicker-4" type="text" class="form-control" data-zdp_readonly_element="true"  formControlName="start_date_of_new_owner" (focusout)="focusOutSTo($event)">
+
+<!-- <span class="Zebra_DatePicker_Icon_Wrapper" style="display: block; position: relative; float: none; inset: auto; margin: 0px; padding: 0px; width: 283px;"><input id="datepicker-2" type="text" class="form-control" data-zdp_readonly_element="false" style="position: relative; float: none; inset: auto; margin: 0px; padding-right: 40px;"> -->
     <!-- <button type="button" class="Zebra_DatePicker_Icon" style="top: 11px; right: 12px;">Pick a date</button> -->
-</span>
+<!-- </span> -->
 </div>
  
 <div class="form-group col-md-4">

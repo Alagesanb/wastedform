@@ -75,8 +75,8 @@ export class OwnerDurationComponent implements OnInit {
 
     $('#datepicker-3').Zebra_DatePicker({
    
-      direction: 1,
-        pair: $('#datepicker-4') ,       
+     // direction: 1,
+       // pair: $('#datepicker-4') ,       
              
    });
 
@@ -257,8 +257,8 @@ $(document).on("click",".cls-Edit-owner-duration",function() {
   
   $('#datepicker-4').Zebra_DatePicker({
      
-    direction: 1,
-    pair: $('#datepicker-5') 
+    //direction: 1,
+   // pair: $('#datepicker-5') 
   
   });
     this.dropdownSettings = {
