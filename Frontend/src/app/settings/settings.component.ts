@@ -742,16 +742,21 @@ $(document).on("click",".cls-special-days-Edit",function() {
                 
 
                obj_tmp_date = obj_tmp_date.slice(0, stringLength2);
+               var count = 30;
+
+              var obj_tmp_date = obj_tmp_date.slice(0, count) + (obj_tmp_date.length > count ? "..." : "");
 
                 if(firstChek == 0){
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'\
-                  </td><td>'+ obj_tmp_date +'</td></tr>';
+                  </td><td>'+ obj_tmp_date +'</td><td><li id-Delete-unAvilableDay ="No-Id" class="cls-unAvilableDay-Delete"><a><i class="far fa-trash-alt" aria-hidden="true">\
+                  </i></a></li></td></tr>';
                   firstChek = 1;
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td><td><li id-Delete-unAvilableDay ="No-Id" class="cls-unAvilableDay-Delete"><a><i class="far fa-trash-alt" aria-hidden="true">\
+                </i></a></li></td></tr>';
 
 
                 }
@@ -764,7 +769,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
               var sriptTemp = '<script>$(document).ready(function(){$("#example2").DataTable({responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
 
 
-              var bindingTabledataFirst ='<table id="example2"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Name</th><th>Unavailable <br> Dates</th></tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+              var bindingTabledataFirst ='<table id="example2"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Name</th><th>Unavailable <br> Dates</th><th>ACTION</th> </tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
 
               $("#temp-unavailable-days ").html(bindingTabledataFirst);
             
@@ -1007,7 +1012,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
           if(temp_data1.length != 0){
                   var obj = Object();
                   obj.UnAvailableDates = unique(temp_data1);
-                  debugger;
+                  
                   console.log(obj);
               $.ajax({
                 url: public_url_days + "AddUnavailabledaysForAll",
@@ -1015,7 +1020,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
                 dataType: 'json', 
                 data: obj,
                 success: function(Related_datas) {
-                  debugger;
+                 
                   if(Related_datas.status == true)
                   {
                     $("#myModalUpdatemsg").find(".modal-body").append("<p>"+Related_datas.message+ "</p>");
@@ -1473,19 +1478,22 @@ if(item.item_id){
   var obj = Object();
     obj.boatid =item.item_id;
     //obj._id =binding_sharealow._id;
+
+   
   
-   this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
+   //this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
+     this.http.post<any>(`${this.shareUrl}/GetShareDetailsByBoatId`,  obj  ).subscribe(data => {
   
 if(data.Status == true){
   this.getBoat = data.Data;
   this.getBoat = this.getBoat.response;
   this.GetBoatDetailsByBoatId_AllocatedDays =  data.Data;
  
-  this.Shareform.get('No_of_Shares').setValue(this.getBoat.Owners_Allowed);
-  this.Shareform.get('No_of_SummerWeekDays').setValue(this.getBoat.Summer_WeekDays);
-  this.Shareform.get('No_of_SummerWeekEndDays').setValue(this.getBoat.Summer_WeekEndDays);
-  this.Shareform.get('No_of_WinterWeekDays').setValue(this.getBoat.Winter_WeekDays);
-  this.Shareform.get('No_of_WinterWeekEndDays').setValue(this.getBoat.Winter_WeekEndDays);
+  this.Shareform.get('No_of_Shares').setValue(this.getBoat.No_of_Shares);
+  this.Shareform.get('No_of_SummerWeekDays').setValue(this.getBoat.No_of_SummerWeekDays);
+  this.Shareform.get('No_of_SummerWeekEndDays').setValue(this.getBoat.No_of_SummerWeekEndDays);
+  this.Shareform.get('No_of_WinterWeekDays').setValue(this.getBoat.No_of_WinterWeekDays);
+  this.Shareform.get('No_of_WinterWeekEndDays').setValue(this.getBoat.No_of_WinterWeekEndDays);
 }
 else if(data.Status == false){
 }

@@ -1611,6 +1611,9 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
 
             if(PreLaunch_Date <= Start_Date && Launch_Date >=  Start_Date)
             {
+
+               // CommenMessage("You are trying to make a booking before Launch date.");
+               alert("You are trying to make a booking before Launch date.");
                
                return 1;
 
@@ -1632,6 +1635,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
             else
             {
                 CommenMessage("You are trying to book this boat before its pre-launch date. This boat is not open for booking now. Please try after its pre-launch date.");
+                alert("You are trying to book this boat before its pre-launch date. This boat is not open for booking now. Please try after its pre-launch date.");
+                
                 //location.reload();
                
 
@@ -1964,7 +1969,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
                             }
 
                             Is_StandByBooking = JSON.parse("true");
-                            CommenMessage("You are trying to make a Standy By Day Booking!");
+                           // CommenMessage("You are trying to make a Standy By Day Booking!");
+                           alert("You are trying to make a Standy By Day Booking!");
 
                      }
                        
@@ -2388,7 +2394,8 @@ $(document).on("click",".tui-full-calendar-popup-save",function() {
 
                             }
 
-                            Is_StandByBooking = true;
+                            Is_StandByBooking = JSON.parse("true");
+                            alert("You are trying to make a Standy By Day Booking!");
 
                      }
                        
