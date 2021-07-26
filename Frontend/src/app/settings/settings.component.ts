@@ -669,6 +669,37 @@ $(document).on("click",".cls-special-days-Edit",function() {
       
     }
 
+    //id-Delete-unAvilableDay
+
+    $(document).on("mouseover",".cls-unAvilableDay-Delete",function() {
+ 
+      var getdeleteid = $(this).attr('id-Delete-unAvilableDay');
+    
+      $('a[id-Delete-unAvilableDay="'+getdeleteid+'"]').css("color", "red");
+      $('a[id-Delete-unAvilableDay="'+getdeleteid+'"]').css('cursor','pointer');
+      
+    
+     });
+    
+     $(document).on("mouseout",".cls-unAvilableDay-Delete",function() {
+      
+      var getdeleteid = $(this).attr('id-Delete-unAvilableDay');
+    
+      $('a[id-Delete-unAvilableDay="'+getdeleteid+'"]').css("color", "black");
+      
+    
+     });
+
+     // $('#deleteLocation').trigger('click');
+
+     $(document).on("click",".cls-unAvilableDay-Delete",function() {
+      
+      $('#id-Unavilable-Day').trigger('click'); //this to start...............
+      
+    
+     });
+
+
     function Get_UnAvailabe_Days(){
       $.ajax({
         url: unavailable_days_url +'GetUnAvailabeDaysOfBoats',
@@ -677,7 +708,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
         contentType: 'application/json',
         success: function (data) {
           
-
+              debugger;
              if(data.status == true)
              {
               var bindingTableData;
@@ -709,7 +740,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
                 
                 //var boatSelectionId = 0;
                 $.each(val1.Boat_Id , function(index2, val2) { 
-                  
+                  debugger
                   if(val.item_id == val2)
                   {
 
@@ -743,20 +774,20 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
                obj_tmp_date = obj_tmp_date.slice(0, stringLength2);
                var count = 30;
-
+                var full_date_data = obj_tmp_date;
               var obj_tmp_date = obj_tmp_date.slice(0, count) + (obj_tmp_date.length > count ? "..." : "");
 
                 if(firstChek == 0){
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'\
-                  </td><td>'+ obj_tmp_date +'</td><td><li id-Delete-unAvilableDay ="No-Id" class="cls-unAvilableDay-Delete"><a><i class="far fa-trash-alt" aria-hidden="true">\
-                  </i></a></li></td></tr>';
+                  </td><td data-toggle="tooltip" title="'+full_date_data+'">'+ obj_tmp_date +'</td><td><a id-Delete-unAvilableDay ="'+val.item_id+'" class="cls-unAvilableDay-Delete"><i class="far fa-trash-alt" aria-hidden="true">\
+                  </i></a></td></tr>';
                   firstChek = 1;
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td><td><li id-Delete-unAvilableDay ="No-Id" class="cls-unAvilableDay-Delete"><a><i class="far fa-trash-alt" aria-hidden="true">\
-                </i></a></li></td></tr>';
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td><td><a id-Delete-unAvilableDay ="'+val.item_id+'" class="cls-unAvilableDay-Delete"><i class="far fa-trash-alt" aria-hidden="true">\
+                </i></a></td></tr>';
 
 
                 }
