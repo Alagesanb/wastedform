@@ -786,7 +786,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td><td><a id-Delete-unAvilableDay ="'+val.item_id+'" class="cls-unAvilableDay-Delete"><i class="far fa-trash-alt" aria-hidden="true">\
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td data-toggle="tooltip" title="'+full_date_data+'">'+ obj_tmp_date +'</td><td><a id-Delete-unAvilableDay ="'+val.item_id+'" class="cls-unAvilableDay-Delete"><i class="far fa-trash-alt" aria-hidden="true">\
                 </i></a></td></tr>';
 
 
