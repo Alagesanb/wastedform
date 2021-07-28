@@ -731,6 +731,12 @@ $(document).on("click",".cls-special-days-Edit",function() {
      $(document).on("click",".cls-unAvilableDay-Delete-popup",function() {
       
       var getdeleteid = $(this).attr('id');
+       
+      var lengthChek = unAvilabel_boat_BySingle_sorted.length;
+      if(lengthChek == 1){
+        BotIdZeroThenValue =  unAvilabel_boat_BySingle_sorted[0].boat_id;
+
+      }
       
       var sortedData = $.grep(unAvilabel_boat_BySingle_sorted, function(e){ 
         return e.serialNumber != getdeleteid; 
@@ -750,17 +756,22 @@ $(document).on("click",".cls-special-days-Edit",function() {
       var arrayPush = [];
 
       $.each(unAvilabel_boat_BySingle_sorted , function(index, val) {
+        debugger;
       
           boatId = val.boat_id;
-        arrayPush.push(val.unAvilableDate);
+          arrayPush.push(val.unAvilableDate);
 
       })
-
+    debugger;
       var obj = Object();
 
+      if(boatId == "0"){
+        boatId = BotIdZeroThenValue;
+      }
+      
       obj.Boat_id = boatId;
       obj.UnavailableDays = unique(arrayPush);
-debugger;
+
       //if(selected_bots.length != 0 && temp_data_datte.length != 0){
           console.log(obj);
 
@@ -856,6 +867,7 @@ debugger;
 
      var unAvilabel_boat_BySingle =[];
      var unAvilabel_boat_BySingle_sorted =[];
+     var BotIdZeroThenValue;
     
 
     function Get_UnAvailabe_Days(){
@@ -866,7 +878,7 @@ debugger;
         contentType: 'application/json',
         success: function (data) {
           
-              debugger;
+              
              if(data.status == true)
              {
               var bindingTableData;
@@ -894,38 +906,56 @@ debugger;
              
                var obj_tmp_date =""; 
 
+               try{
+
                $.each(unavilableBoats , function(index1, val1) { 
 
-                
+                var val2 = val1.Boat_Id;
+              //  debugger;
                 //var boatSelectionId = 0;
-                $.each(val1.Boat_Id , function(index2, val2) { 
-                  debugger
+               // $.each(val1.Boat_Id , function(index2, val2) { 
+
+                //  debugger;
+                  
                   if(val.item_id == val2)
                   {
 
-                    $.each(val1.UnAvailableDates , function(index3, val3) {
-                      
-                      var ConvertedData = split_String(val3);
-                        obj_tmp_date += ConvertedData +" , ";
-                        var obj_tmp = Object();
-                        obj_tmp.serialNumber = serialnumber;
-                        obj_tmp.boat_id = val2;
-                        obj_tmp.unAvilableDate = ConvertedData;
-                        unAvilabel_boat_BySingle.push(obj_tmp);
+                    debugger;
+                    try {
 
-                        serialnumber = serialnumber + 1;
-    
-                    });
+                      $.each(val1.UnAvailableDates , function(index3, val3) {
+
+                        debugger;
+                        
+                        var ConvertedData = split_String(val3);
+                          obj_tmp_date += ConvertedData +" , ";
+                          var obj_tmp = Object();
+                          obj_tmp.serialNumber = serialnumber;
+                          obj_tmp.boat_id = val2;
+                          obj_tmp.unAvilableDate = ConvertedData;
+                          unAvilabel_boat_BySingle.push(obj_tmp);
+
+                          serialnumber = serialnumber + 1;
+      
+                      });
+                  }
+                  catch(err) {
+                    //alert(err.message);
+                  }
 
                     
 
                   }
 
 
-                });
+                //});
 
 
                });
+              }
+              catch(ex){
+                //alert(ex)
+              }
                 
                //var unAvilableDays = unavilableBoats.filter()
 
@@ -1258,7 +1288,7 @@ debugger;
 
         var temp_data_datte = [];
           $('.input_fields_wrap_single').find('input').each(function(){
-           debugger;
+          
             var tmp1 = $(this).val();
             if(tmp1 !== '')
             {
@@ -1276,26 +1306,28 @@ debugger;
             
           });
 
-debugger;
+          debugger;
+
            var selected_bots = sessionStorage.getItem("UNAVAILABLE_DATE_userSelect_Boat");
-           selected_bots = JSON.parse(selected_bots);
-           var temp_botId = [];
-           var temp_boatName = [];
+           var selected_bots_tmp = JSON.parse(selected_bots);
+          // var temp_botId = selected_bots_tmp.item_id;         
+           //var temp_boatName = selected_bots_tmp.item_text;
 
-           $.each(selected_bots, function (key, val) {
+          //  $.each(selected_bots, function (key, val) {
 
-            temp_botId.push(val.item_id);
-            temp_boatName.push(val.item_text);
+          //   temp_botId.push(val.item_id);
+          //   temp_boatName.push(val.item_text);
             
-            });
+          //   });
 
          
-          if(selected_bots.length != 0 && temp_data_datte.length != 0){
+          //if(selected_bots.length != 0 && temp_data_datte.length != 0){
+          if(selected_bots != null){
             var obj = Object();
-            obj.Boat_Id = temp_botId;//unique(temp_data1);
-            obj.Boat_Name = temp_boatName;
+            obj.Boat_Id = selected_bots_tmp[0].item_id;//temp_botId;//unique(temp_data1);
+            obj.Boat_Name = selected_bots_tmp[0].item_text; //temp_boatName;
             obj.UnAvailableDates = unique(temp_data_datte);;
-debugger;
+
             console.log(obj);
 
 
@@ -1354,6 +1386,8 @@ debugger;
         $(default_wrapper).on("click",".remove_default_field", function(e){ //user click on remove text
           e.preventDefault(); $(this).parent('div').remove(); x--;
         })
+
+        
         
 
 
