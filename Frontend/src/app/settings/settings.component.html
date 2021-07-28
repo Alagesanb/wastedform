@@ -200,7 +200,8 @@
       (onSelect)="onItemSelect_UNAVAILABLE_DATE($event)"
       (onDeSelect)="onDeSelect_UNAVAILABLE_DATE($event)"
       (onSelectAll)="onSelectAll_UNAVAILABLE_DATE($event)"
-      (onDeSelectAll)="onDeSelectAll_UNAVAILABLE_DATE($event)"            
+      (onDeSelectAll)="onDeSelectAll_UNAVAILABLE_DATE($event)" 
+      class="singleselect_drop"           
       
     >
     </ng-multiselect-dropdown>
@@ -880,14 +881,14 @@ data-target="#delete-location-modal-popup">Open Modal</button>
        
        
 
-          <div class="col-md-12 reports" id="temp-unavailable-days">
+          <div class="col-md-12 reports" id="temp-unavailable-days-popup">
 
           </div> 
 
        
         
       <div class="modal-footer">
-        <span class="confirm-bttn">Save</span>
+        <span class="confirm-bttn"  id="id-unAvilableDay-Delete-popup-save">Save</span>
        </div>
        </form>
     </div>

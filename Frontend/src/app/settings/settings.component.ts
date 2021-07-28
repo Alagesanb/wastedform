@@ -192,7 +192,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   };
 
   this.dropdownSettings_UNAVAILABLE_DATE = {
-    singleSelection: false,
+    singleSelection: true,
     idField: 'item_id',
     textField: 'item_text',
     selectAllText: 'Select All',
@@ -690,15 +690,147 @@ $(document).on("click",".cls-special-days-Edit",function() {
     
      });
 
+
+     $(document).on("mouseover",".cls-unAvilableDay-Delete-popup",function() {
+ 
+      var getdeleteid = $(this).attr('id');
+    
+      $('a[id="'+getdeleteid+'"]').css("color", "red");
+      $('a[id="'+getdeleteid+'"]').css('cursor','pointer');
+      
+    
+     });
+    
+     $(document).on("mouseout",".cls-unAvilableDay-Delete-popup",function() {
+      
+      var getdeleteid = $(this).attr('id');
+    
+      $('a[id="'+getdeleteid+'"]').css("color", "black");
+      
+    
+     });
+
+
+
+
+     $(document).on("click",".cls-unAvilableDay-Delete-popup",function() {
+      
+      var getdeleteid = $(this).attr('id');
+  
+      var sortedData = $.grep(unAvilabel_boat_BySingle_sorted, function(e){ 
+        return e.serialNumber != getdeleteid; 
+      });
+
+      unAvilabel_boat_BySingle_sorted = sortedData;
+
+      $('tr[id-tr-delete="'+getdeleteid+'"]').remove();//id-tr-delete
+      console.log(unAvilabel_boat_BySingle_sorted);
+    
+     });
+
+     $(document).on("click","#id-unAvilableDay-Delete-popup-save",function() {
+      
+      var datas = unAvilabel_boat_BySingle_sorted;
+
+      /*
+      
+      //if(selected_bots.length != 0 && temp_data_datte.length != 0){
+            var obj = Object();
+            obj.Boat_Id = temp_botId;//unique(temp_data1);
+            obj.Boat_Name = temp_boatName;
+            obj.UnAvailableDates = unique(temp_data_datte);;
+
+
+        $.ajax({
+          url: public_url_days + "AddUnavailabledaysSingle",
+          type: 'POST',
+          dataType: 'json', 
+          data: obj,
+          success: function(Related_datas) {
+                       
+            if(Related_datas.status == true)
+            {
+             alert(Related_datas.message);
+             location.reload();
+
+            }
+            else if(Related_datas.status == false)
+            {
+              alert(Related_datas.message);
+              
+            }
+
+                          
+          }
+        });
+          // }
+          // else{
+
+          //   alert("Empty date");
+
+          // }
+      
+      */
+      
+      
+
+
+      alert("hhhh");      
+    
+     });
+
+     
+     //cls-unAvilableDay-Delete-popup
+
      // $('#deleteLocation').trigger('click');
 
-     $(document).on("click",".cls-unAvilableDay-Delete",function() {
-      
+     $(document).on("click",".cls-unAvilableDay-Delete",function() {      
+
+      var getdeleteid = $(this).attr('id-Delete-unAvilableDay');
+      var tmp_sortBoat = unAvilabel_boat_BySingle.filter(x => x.boat_id == getdeleteid);
+      unAvilabel_boat_BySingle_sorted = tmp_sortBoat;
+
+      var bindingTableData;
+      var bindingNumber = 1;
+      var firstChek = 0;
+
+      $.each(tmp_sortBoat , function(index, val) { 
+
+        if(firstChek == 0){
+                  
+          bindingTableData = '<tr id-tr-delete="'+val.serialNumber+'"><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.unAvilableDate+'">'+val.unAvilableDate+'\
+          </td><td><a id="'+val.serialNumber+'" class="cls-unAvilableDay-Delete-popup"><i class="far fa-trash-alt" aria-hidden="true">\
+          </i></a></td></tr>';
+          firstChek = 1;
+
+        }
+        else{
+        bindingTableData += '<tr id-tr-delete="'+val.serialNumber+'"><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.unAvilableDate+'">'+val.unAvilableDate+'</td><td><a id="'+val.serialNumber+'" class="cls-unAvilableDay-Delete-popup"><i class="far fa-trash-alt" aria-hidden="true">\
+        </i></a></td></tr>';
+
+
+        }
+
+        bindingNumber = bindingNumber + 1;
+
+      });
+
+      var sriptTemp = '<script>$(document).ready(function(){$("#datatable-unavilable-temp").DataTable({"searching": false, responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+      var bindingTabledataFirst ='<table id="datatable-unavilable-temp"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Date</th><th>ACTION</th> </tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+      $("#temp-unavailable-days-popup").html(bindingTabledataFirst);
+
+      //$('#datatable-unavilable-temp').dataTable({searching: false, paging: false, info: false});
+
+
       $('#id-Unavilable-Day').trigger('click'); //this to start...............
       
     
      });
 
+     var unAvilabel_boat_BySingle =[];
+     var unAvilabel_boat_BySingle_sorted =[];
 
     function Get_UnAvailabe_Days(){
       $.ajax({
@@ -715,6 +847,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
               var bindingNumber = 1;
               var firstChek = 0;
               var unavilableBoats = data.response;
+              var serialnumber = 1000;
           
               var allBoatsList = JSON.parse(sessionStorage.getItem("CurrentBoatListingsettings"));
               
@@ -748,7 +881,13 @@ $(document).on("click",".cls-special-days-Edit",function() {
                       
                       var ConvertedData = split_String(val3);
                         obj_tmp_date += ConvertedData +" , ";
-    
+                        var obj_tmp = Object();
+                        obj_tmp.serialNumber = serialnumber;
+                        obj_tmp.boat_id = val2;
+                        obj_tmp.unAvilableDate = ConvertedData;
+                        unAvilabel_boat_BySingle.push(obj_tmp);
+
+                        serialnumber = serialnumber + 1;
     
                     });
 
