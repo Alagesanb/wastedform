@@ -200,7 +200,8 @@
       (onSelect)="onItemSelect_UNAVAILABLE_DATE($event)"
       (onDeSelect)="onDeSelect_UNAVAILABLE_DATE($event)"
       (onSelectAll)="onSelectAll_UNAVAILABLE_DATE($event)"
-      (onDeSelectAll)="onDeSelectAll_UNAVAILABLE_DATE($event)"            
+      (onDeSelectAll)="onDeSelectAll_UNAVAILABLE_DATE($event)" 
+      class="singleselect_drop"           
       
     >
     </ng-multiselect-dropdown>
@@ -862,6 +863,10 @@ data-target="#delete-location-modal-popup">Open Modal</button>
 <!-- ................................. -->
 
 
+
+
+
+
 <button style="display:none" type="button" id="id-Unavilable-Day" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Unavilable-Day-Model">Open Modal</button>
 
 <!--Update modalpopup for settings Done By Alagesan        -->
@@ -880,14 +885,14 @@ data-target="#delete-location-modal-popup">Open Modal</button>
        
        
 
-          <div class="col-md-12 reports" id="temp-unavailable-days">
+          <div class="col-md-12 reports" id="temp-unavailable-days-popup">
 
           </div> 
 
        
         
       <div class="modal-footer">
-        <span class="confirm-bttn">Save</span>
+        <span class="confirm-bttn"  id="id-unAvilableDay-Delete-popup-save">Save</span>
        </div>
        </form>
     </div>
@@ -896,6 +901,53 @@ data-target="#delete-location-modal-popup">Open Modal</button>
 </div>  
 
 
+
+
+<button style="display:none" type="button" id="btn-CommenMessage-disp-btns" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Footer-Success-Modal">Open Modal</button>
+            
+              
+<div class="modal fade" id="Footer-Success-Modal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="h4-message-type"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="p-message-content"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"  data-dismiss="modal">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<button style="display:none" type="button" id="btn-CommenMessage-save-disp-btns" class="btn btn-info btn-lg" data-toggle="modal" data-target="#CommenSave-Success-Modal">Open Modal</button>
+            
+              
+<div class="modal fade" id="CommenSave-Success-Modal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="h4-message-save-type"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="p-message-save-content"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)=pagereload() data-dismiss="modal">OK</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
 
 
 

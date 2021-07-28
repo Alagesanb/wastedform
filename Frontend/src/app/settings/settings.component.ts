@@ -192,7 +192,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
   };
 
   this.dropdownSettings_UNAVAILABLE_DATE = {
-    singleSelection: false,
+    singleSelection: true,
     idField: 'item_id',
     textField: 'item_text',
     selectAllText: 'Select All',
@@ -488,12 +488,12 @@ console.log(Obj);
                     
         if(datas.status == true)
         {
-            alert(datas.message);
-            location.reload();    
+          CommenMessage_save(datas.message);
+            //location.reload();    
         }
         else if(datas.status == false)
         {                    
-            alert(datas.message);
+          CommenMessage(datas.message);
             //location.reload();    
         }
     
@@ -558,12 +558,12 @@ $(document).on("click",".cls-special-days-Edit",function() {
                     
         if(datas.status == true)
         {
-            alert(datas.message);
-            location.reload();    
+          CommenMessage_save(datas.message);
+            //location.reload();    
         }
         else if(datas.status == false)
         {                    
-            alert(datas.message);
+          CommenMessage(datas.message);
             //location.reload();    
         }
     
@@ -657,7 +657,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
              }
              else
              {
-               alert("Empty datas");
+              CommenMessage("Empty datas");
 
                Binding_OwnerDuration();
               
@@ -690,15 +690,185 @@ $(document).on("click",".cls-special-days-Edit",function() {
     
      });
 
+
+     $(document).on("mouseover",".cls-unAvilableDay-Delete-popup",function() {
+ 
+      var getdeleteid = $(this).attr('id');
+    
+      $('a[id="'+getdeleteid+'"]').css("color", "red");
+      $('a[id="'+getdeleteid+'"]').css('cursor','pointer');
+      
+    
+     });
+    
+     $(document).on("mouseout",".cls-unAvilableDay-Delete-popup",function() {
+      
+      var getdeleteid = $(this).attr('id');
+    
+      $('a[id="'+getdeleteid+'"]').css("color", "black");
+      
+    
+     });
+
+     function CommenMessage(obj){
+      $("#h4-message-type").text("Message");
+      $("#p-message-content").text(obj);
+      $('#btn-CommenMessage-disp-btns').trigger('click');
+      //alert();
+  }
+  
+  function CommenMessage_save(obj){
+      $("#h4-message-save-type").text("Message");
+      $("#p-message-save-content").text(obj);
+      $('#btn-CommenMessage-save-disp-btns').trigger('click');
+      //alert();
+  }
+  
+
+
+
+
+     $(document).on("click",".cls-unAvilableDay-Delete-popup",function() {
+      
+      var getdeleteid = $(this).attr('id');
+       
+      var lengthChek = unAvilabel_boat_BySingle_sorted.length;
+      if(lengthChek == 1){
+        BotIdZeroThenValue =  unAvilabel_boat_BySingle_sorted[0].boat_id;
+
+      }
+      
+      var sortedData = $.grep(unAvilabel_boat_BySingle_sorted, function(e){ 
+        return e.serialNumber != getdeleteid; 
+      });
+
+      unAvilabel_boat_BySingle_sorted = sortedData;
+
+      $('tr[id-tr-delete="'+getdeleteid+'"]').remove();//id-tr-delete
+      console.log(unAvilabel_boat_BySingle_sorted);
+    
+     });
+
+     $(document).on("click","#id-unAvilableDay-Delete-popup-save",function() {
+      debugger;
+      var datas = unAvilabel_boat_BySingle_sorted;
+      var boatId = "0";
+      var arrayPush = [];
+
+      $.each(unAvilabel_boat_BySingle_sorted , function(index, val) {
+        debugger;
+      
+          boatId = val.boat_id;
+          arrayPush.push(val.unAvilableDate);
+
+      })
+    debugger;
+      var obj = Object();
+
+      if(boatId == "0"){
+        boatId = BotIdZeroThenValue;
+      }
+      
+      obj.Boat_id = boatId;
+      obj.UnavailableDays = unique(arrayPush);
+
+      //if(selected_bots.length != 0 && temp_data_datte.length != 0){
+          console.log(obj);
+
+        $.ajax({
+          url: public_url_days + "DeleteUnAvailableDaySingle",
+          type: 'POST',
+          dataType: 'json', 
+          data: obj,
+          success: function(Related_datas) {
+            debugger;
+                       
+            if(Related_datas.status == true)
+            {
+
+              $('#id-Unavilable-Day').trigger('click');
+
+              CommenMessage_save(Related_datas.message);
+             //location.reload();
+
+            }
+            else if(Related_datas.status == false)
+            {
+              CommenMessage(Related_datas.message);
+              
+            }
+
+                          
+          }
+        });
+          
+      
+    
+     });
+
+
+     function Jqueary_string_to_Date_Convert(dateString){   
+
+      var dateArray = dateString.split("/");
+      var dateObj = new Date(`${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`);
+    
+      return dateObj;
+  
+    }
+     
+     //cls-unAvilableDay-Delete-popup
+
      // $('#deleteLocation').trigger('click');
 
-     $(document).on("click",".cls-unAvilableDay-Delete",function() {
-      
+     $(document).on("click",".cls-unAvilableDay-Delete",function() {      
+
+      var getdeleteid = $(this).attr('id-Delete-unAvilableDay');
+      var tmp_sortBoat = unAvilabel_boat_BySingle.filter(x => x.boat_id == getdeleteid);
+      unAvilabel_boat_BySingle_sorted = tmp_sortBoat;
+
+      var bindingTableData;
+      var bindingNumber = 1;
+      var firstChek = 0;
+
+      $.each(tmp_sortBoat , function(index, val) { 
+    
+        if(firstChek == 0){
+                  
+          bindingTableData = '<tr id-tr-delete="'+val.serialNumber+'"><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.unAvilableDate+'">'+val.unAvilableDate+'\
+          </td><td><a id="'+val.serialNumber+'"  class="cls-unAvilableDay-Delete-popup"><i class="far fa-trash-alt" aria-hidden="true">\
+          </i></a></td></tr>';
+          firstChek = 1;
+
+        }
+        else{
+        bindingTableData += '<tr id-tr-delete="'+val.serialNumber+'"><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.unAvilableDate+'">'+val.unAvilableDate+'</td><td><a id="'+val.serialNumber+'" class="cls-unAvilableDay-Delete-popup"><i class="far fa-trash-alt" aria-hidden="true">\
+        </i></a></td></tr>';
+
+
+        }
+
+        bindingNumber = bindingNumber + 1;
+
+      });
+
+      var sriptTemp = '<script>$(document).ready(function(){$("#datatable-unavilable-temp").DataTable({"searching": false, "bPaginate": false, responsive:{details:{display: $.fn.dataTable.Responsive.display.modal({header: function ( row ){var data = row.data(); return "Details for "+data[0]+" "+data[1];} }),renderer: $.fn.dataTable.Responsive.renderer.tableAll( {tableClass:"table"})}}} );} );</script>'
+
+      var bindingTabledataFirst ='<table id="datatable-unavilable-temp"class="table table-striped table-bordered dt-responsive nowrap" style="width:100%"><thead><tr><th>SL No</th><th>Boat Date</th><th>ACTION</th> </tr></thead><tbody id="id-tbody-allBoats">'+bindingTableData+'</tbody></table>'+sriptTemp+'';
+
+      $("#temp-unavailable-days-popup").html(bindingTabledataFirst);
+
+      //$('#datatable-unavilable-temp').dataTable({searching: false, paging: false, info: false});
+
+
       $('#id-Unavilable-Day').trigger('click'); //this to start...............
       
     
      });
 
+     var unAvilabel_boat_BySingle =[];
+     var unAvilabel_boat_BySingle_sorted =[];
+     var BotIdZeroThenValue;
+    
 
     function Get_UnAvailabe_Days(){
       $.ajax({
@@ -708,13 +878,14 @@ $(document).on("click",".cls-special-days-Edit",function() {
         contentType: 'application/json',
         success: function (data) {
           
-              debugger;
+              
              if(data.status == true)
              {
               var bindingTableData;
               var bindingNumber = 1;
               var firstChek = 0;
               var unavilableBoats = data.response;
+              var serialnumber = 1000;
           
               var allBoatsList = JSON.parse(sessionStorage.getItem("CurrentBoatListingsettings"));
               
@@ -735,32 +906,56 @@ $(document).on("click",".cls-special-days-Edit",function() {
              
                var obj_tmp_date =""; 
 
+               try{
+
                $.each(unavilableBoats , function(index1, val1) { 
 
-                
+                var val2 = val1.Boat_Id;
+              //  debugger;
                 //var boatSelectionId = 0;
-                $.each(val1.Boat_Id , function(index2, val2) { 
-                  debugger
+               // $.each(val1.Boat_Id , function(index2, val2) { 
+
+                //  debugger;
+                  
                   if(val.item_id == val2)
                   {
 
-                    $.each(val1.UnAvailableDates , function(index3, val3) {
-                      
-                      var ConvertedData = split_String(val3);
-                        obj_tmp_date += ConvertedData +" , ";
-    
-    
-                    });
+                    debugger;
+                    try {
+
+                      $.each(val1.UnAvailableDates , function(index3, val3) {
+
+                        debugger;
+                        
+                        var ConvertedData = split_String(val3);
+                          obj_tmp_date += ConvertedData +" , ";
+                          var obj_tmp = Object();
+                          obj_tmp.serialNumber = serialnumber;
+                          obj_tmp.boat_id = val2;
+                          obj_tmp.unAvilableDate = ConvertedData;
+                          unAvilabel_boat_BySingle.push(obj_tmp);
+
+                          serialnumber = serialnumber + 1;
+      
+                      });
+                  }
+                  catch(err) {
+                    //alert(err.message);
+                  }
 
                     
 
                   }
 
 
-                });
+                //});
 
 
                });
+              }
+              catch(ex){
+                //alert(ex)
+              }
                 
                //var unAvilableDays = unavilableBoats.filter()
 
@@ -777,6 +972,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
                 var full_date_data = obj_tmp_date;
               var obj_tmp_date = obj_tmp_date.slice(0, count) + (obj_tmp_date.length > count ? "..." : "");
 
+             
                 if(firstChek == 0){
                   
                   bindingTableData = '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'\
@@ -786,7 +982,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
                 }
                 else{
-                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td>'+ obj_tmp_date +'</td><td><a id-Delete-unAvilableDay ="'+val.item_id+'" class="cls-unAvilableDay-Delete"><i class="far fa-trash-alt" aria-hidden="true">\
+                bindingTableData += '<tr><td>'+bindingNumber +'</td><td data-toggle="tooltip" title="'+val.item_text+'">'+val.item_text+'</td><td data-toggle="tooltip" title="'+full_date_data+'">'+ obj_tmp_date +'</td><td><a id-Delete-unAvilableDay ="'+val.item_id+'" class="cls-unAvilableDay-Delete"><i class="far fa-trash-alt" aria-hidden="true">\
                 </i></a></td></tr>';
 
 
@@ -809,7 +1005,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
              }
              else
              {
-               alert("Empty datas");
+              CommenMessage("Empty datas");
                Get_Locations_Data();
               
              }
@@ -956,7 +1152,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
             }
             else
             {
-              alert("Empty datas");
+              CommenMessage("Empty datas");
               GetAll_AddSpecial_Days();
               
             }
@@ -1092,7 +1288,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
         var temp_data_datte = [];
           $('.input_fields_wrap_single').find('input').each(function(){
-           
+          
             var tmp1 = $(this).val();
             if(tmp1 !== '')
             {
@@ -1110,25 +1306,29 @@ $(document).on("click",".cls-special-days-Edit",function() {
             
           });
 
+          debugger;
 
            var selected_bots = sessionStorage.getItem("UNAVAILABLE_DATE_userSelect_Boat");
-           selected_bots = JSON.parse(selected_bots);
-           var temp_botId = [];
-           var temp_boatName = [];
+           var selected_bots_tmp = JSON.parse(selected_bots);
+          // var temp_botId = selected_bots_tmp.item_id;         
+           //var temp_boatName = selected_bots_tmp.item_text;
 
-           $.each(selected_bots, function (key, val) {
+          //  $.each(selected_bots, function (key, val) {
 
-            temp_botId.push(val.item_id);
-            temp_boatName.push(val.item_text);
+          //   temp_botId.push(val.item_id);
+          //   temp_boatName.push(val.item_text);
             
-            });
+          //   });
 
          
-          if(selected_bots.length != 0 && temp_data_datte.length != 0){
+          //if(selected_bots.length != 0 && temp_data_datte.length != 0){
+          if(selected_bots != null){
             var obj = Object();
-            obj.Boat_Id = temp_botId;//unique(temp_data1);
-            obj.Boat_Name = temp_boatName;
+            obj.Boat_Id = selected_bots_tmp[0].item_id;//temp_botId;//unique(temp_data1);
+            obj.Boat_Name = selected_bots_tmp[0].item_text; //temp_boatName;
             obj.UnAvailableDates = unique(temp_data_datte);;
+
+            console.log(obj);
 
 
         $.ajax({
@@ -1140,13 +1340,13 @@ $(document).on("click",".cls-special-days-Edit",function() {
                        
             if(Related_datas.status == true)
             {
-             alert(Related_datas.message);
-             location.reload();
+              CommenMessage_save(Related_datas.message);
+             //location.reload();
 
             }
             else if(Related_datas.status == false)
             {
-              alert(Related_datas.message);
+              CommenMessage(Related_datas.message);
               
             }
 
@@ -1156,7 +1356,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
           }
           else{
 
-            alert("Empty date");
+            CommenMessage("Empty date");
 
           }
 
@@ -1186,6 +1386,8 @@ $(document).on("click",".cls-special-days-Edit",function() {
         $(default_wrapper).on("click",".remove_default_field", function(e){ //user click on remove text
           e.preventDefault(); $(this).parent('div').remove(); x--;
         })
+
+        
         
 
 
