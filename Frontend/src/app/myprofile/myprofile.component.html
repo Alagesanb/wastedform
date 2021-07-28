@@ -178,29 +178,86 @@
                      </div>
                  </div>
              </div>
+             <div class="col-xs-12 col-sm-6 col-md-6 user-contents">
+                 <!--Change password for myprofile Done By Alagesan on 28.07.2021    -->
+                <div class="sbg-form row">
+                    <div class="col-md-12">
+                        <h4 class="report-title">Change Password</h4>
+                    <form [formGroup]="saveChangePasswordform"  novalidate>
+                        <div class="form-row">                         
+                            <div class="form-group col-md-12">
+                                <input [type]="showOldPassword ? 'text' : 'password'" autocomplete="off" class="form-control" formControlName="OldPassword" [ngClass]="{ 'is-invalid': changePasswordSubmitted && cpf.OldPassword.errors }" placeholder="Current Password">
+                                <span class="" (click)="showOldPasswordText()" style="position: absolute;right: 7px; bottom: 0px; z-index: 1; font-size: x-large;" ><i class="fas fa-eye"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-row">                         
+                            <div class="form-group col-md-12">
+                                <input [type]="showNewPassword ? 'text' : 'password'" autocomplete="off" class="form-control" formControlName="NewPassword" [ngClass]="{ 'is-invalid': changePasswordSubmitted && cpf.NewPassword.errors }" placeholder="New Password">
+                                <span class="" (click)="showNewPasswordText()" style="position: absolute;right: 7px; bottom: 0px; z-index: 1; font-size: x-large;" ><i class="fas fa-eye"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-row"> 
+                            <span class="error-msg" *ngIf="enterValidPassword != ''">
+                               {{enterValidPassword}}
+                            </span>                        
+                            <div class="form-group col-md-12">
+                                <input [type]="showConfirmPassword ? 'text' : 'password'" autocomplete="off" class="form-control" formControlName="ConfirmPassword" [ngClass]="{ 'is-invalid': changePasswordSubmitted && cpf.ConfirmPassword.errors }" placeholder="Confirm Password">
+                                <span class="" (click)="showConfirmPasswordText()" style="position: absolute;right: 7px; bottom: 0px; z-index: 1; font-size: x-large;" ><i class="fas fa-eye"></i></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-8" style="padding-top: 10px;">
+                            <button type="submit" class="btn btn-primary" (click)="saveChangePassword()">Save</button>
+                        </div>   
+                        </form>
+                    </div>
+                  
+                
+                </div>
+             </div>
            </div>
+
+           <!--Change password for myprofile Done By Alagesan on 28.07.2021    -->
+
+          <button style="display:none" type="button" id="change-password-btn" class="btn btn-info btn-lg" data-toggle="modal" data-target="#change-password-modal">Open Modal</button>
+        
+          <div class="modal fade" id="change-password-modal" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">{{modelTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                  <p>{{getResponce}}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" (click)="pagereload()" data-dismiss="modal">OK</button>
+                </div>
+              </div>
+              
+            </div>
+          </div>
 
            <!--Show owner duration details for myprofile Done By Alagesan	on 01.07.2021 -->
 
            <div>
             <h4 class="content-title">Owner Durations Details</h4>
             <div class="row">
-                <div class="col-md-4 mr-2 boat-list-1" *ngFor="let owner of ownerdurationsdetails  let i = index;">
+                <div class="col-md-10 mr-2 boat-list-1" *ngFor="let owner of ownerdurationsdetails  let i = index;">
                     <a >
                     
-                    <div class="info">
+                    <div class="col-md-8 info">
                         <div *ngIf="owner.BoatDetails[0]" >
-                        <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].First_Name}}{{owner.OwnerDetails[0].Last_Name}}</h5>
-                        <h5><span><i ></i>  </span> {{owner.BoatDetails[0].Boat_Name}}</h5>
-                        <h5><span><i ></i>  </span> {{owner.BoatDetails[0].Boattype_Name}}</h5>
-                        <h5><span><i ></i>  </span> {{owner.From_Date | date:'dd/MM/yyyy'}}</h5>
-                        <h5><span><i ></i>  </span> {{owner.To_Date | date:'dd/MM/yyyy'}}</h5>
+                        <h5><strong>Boat Name: <i ></i>  </strong> {{owner.BoatDetails[0].Boat_Name}}</h5>
+                        <h5><strong>Boat Type:<i ></i>  </strong> {{owner.BoatDetails[0].Boattype_Name}}</h5>
+                        <h5><strong>Ownership Duration Start Date:<i ></i>  </strong> {{owner.From_Date | date:'dd/MM/yyyy'}}</h5>
+                        <h5><strong>Ownership Duration End Date: <i ></i>  </strong> {{owner.To_Date | date:'dd/MM/yyyy'}}</h5>
                         </div>
                         <div *ngIf="!owner.BoatDetails[0]">
-                            <h5><span><i class="far fa-user"></i>  </span> {{owner.OwnerDetails[0].First_Name}}{{owner.OwnerDetails[0].Last_Name}}</h5>
-                            <h5><span><i ></i>  </span>{{owner.BoatDetails[0].Boat_Name}}</h5>
+                            <h5><strong><i class="far fa-user"></i>  </strong> {{owner.OwnerDetails[0].First_Name}}{{owner.OwnerDetails[0].Last_Name}}</h5>
+                            <h5><strong><i ></i>  </strong>{{owner.BoatDetails[0].Boat_Name}}</h5>
     
-                            <h5><span><i ></i>  </span>{{owner.BoatDetails[0].Boattype_Name}}</h5>
+                            <h5><strong><i ></i>  </strong>{{owner.BoatDetails[0].Boattype_Name}}</h5>
                         </div>
                     </div>
                     </a>

@@ -31,8 +31,18 @@ export class MyprofileComponent implements OnInit {
   endedFormatDate: string;
   disableBoat: string;
   expireBoat: string;
-
+  //Change password for myprofile page //Done By Alagesan on 28.07.2021
+  saveChangePasswordform: FormGroup;
+  changePasswordSubmitted = false;
+  modelTitle: string;
+  getResponce: any;
+  enterValidPassword: string;
+  showOldPassword: boolean = false;
+  showNewPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+  
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,) { 
+    this.createChangePasswordForm();
   }
   // Create Component for myprofile //Done By Alagesan on 17.05.2021
   ngOnInit(): void {
@@ -40,6 +50,7 @@ export class MyprofileComponent implements OnInit {
     sessionStorage.setItem("owner-dashboard-relodePg","1");
 
     this.ownerlogin = JSON.parse(sessionStorage.getItem("userlogin"));
+    console.log(this.ownerlogin);
     if(this.ownerlogin==false){
       this.router.navigate(['/owner-login/']);
     }
@@ -52,6 +63,79 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     this.getBoteByOwner()
     this.getOwnerDurationdetails();
   }
+
+    //Change password for myprofile page //Done By Alagesan on 28.07.2021
+  createChangePasswordForm() {
+    this.saveChangePasswordform = this.fb.group({
+      OldPassword: new FormControl('', [Validators.required,]),
+      NewPassword: new FormControl('', [Validators.required,]),
+      ConfirmPassword: new FormControl('', [Validators.required,]),
+      Owner_Id: new FormControl(''),
+    }, { 
+      validators: this.passwordValidation.bind(this)
+    })
+  }
+  get cpf() { return this.saveChangePasswordform.controls; }
+  //Change password for myprofile page //Done By Alagesan on 28.07.2021
+  passwordValidation(formGroup: FormGroup) {
+    const { value: password } = formGroup.get('NewPassword');
+    const { value: confirmPassword } = formGroup.get('ConfirmPassword');
+    this.enterValidPassword = "New and confirm password not same"
+    if(password === confirmPassword){
+      return this.enterValidPassword = "";
+    }
+    if(password !== confirmPassword){
+      return this.enterValidPassword ;
+    }
+  }
+  showOldPasswordText() {
+    this.showOldPassword = !this.showOldPassword;
+   }
+
+   showNewPasswordText() {
+    this.showNewPassword = !this.showNewPassword;
+   }
+  //Change password for myprofile page //Done By Alagesan on 28.07.2021
+   showConfirmPasswordText() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+   }
+  //Change password for myprofile page //Done By Alagesan on 28.07.2021
+  saveChangePassword() {
+    this.changePasswordSubmitted = true;
+  
+    if(this.saveChangePasswordform.invalid) {
+      return;
+    }
+      console.log(this.saveChangePasswordform.value);
+    this.saveChangePasswordform.get('Owner_Id').setValue(this.data._id);
+
+    this.http.post<any>(`${this.url}/ChangeNewPassword`, this.saveChangePasswordform.value).subscribe(data => {
+     console.log(data);
+      if(data.Status == true) {
+        this.modelTitle = "Change Password"
+        this.getResponce = data.message
+        $('#change-password-btn').trigger('click');
+        this.saveChangePasswordform.reset()
+        this.changePasswordSubmitted = false;
+      }
+      else if(data.status == false){
+        this.modelTitle = "Change Password"
+        this.getResponce = data.message
+        $('#change-password-btn').trigger('click');
+        this.saveChangePasswordform.reset()
+        this.changePasswordSubmitted = false;
+      }
+    }, err => {
+
+
+      console.log(err);
+    })
+  }
+  //Change password for myprofile page //Done By Alagesan on 28.07.2021
+  pagereload(){
+    location.reload();
+  }
+
   getBoteByOwner(){
     var obj={
       owner_id:this.data._id
