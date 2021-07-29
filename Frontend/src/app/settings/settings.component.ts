@@ -1712,17 +1712,20 @@ if(item.item_id){
     obj.boatid =item.item_id;
     //obj._id =binding_sharealow._id;
 
-   
+   debugger;
   
    //this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
      this.http.post<any>(`${this.shareUrl}/GetShareDetailsByBoatId`,  obj  ).subscribe(data => {
   
 if(data.Status == true){
+  debugger;
   this.getBoat = data.Data;
   this.getBoat = this.getBoat.response;
   this.GetBoatDetailsByBoatId_AllocatedDays =  data.Data;
+  var AllocatedDays = data.Data.AllocatedDays[0];
+  var No_of_Shares_tmp = AllocatedDays.No_Of_Shares;
  
-  this.Shareform.get('No_of_Shares').setValue(this.getBoat.No_of_Shares);
+  this.Shareform.get('No_of_Shares').setValue(No_of_Shares_tmp);
   this.Shareform.get('No_of_SummerWeekDays').setValue(this.getBoat.No_of_SummerWeekDays);
   this.Shareform.get('No_of_SummerWeekEndDays').setValue(this.getBoat.No_of_SummerWeekEndDays);
   this.Shareform.get('No_of_WinterWeekDays').setValue(this.getBoat.No_of_WinterWeekDays);
