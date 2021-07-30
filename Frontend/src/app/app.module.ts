@@ -62,6 +62,7 @@ import { BookingDetailsComponent } from './booking-details/booking-details.compo
 import { TestTestComponent } from './test-test/test-test.component';
 import { ViewBoatOwnerComponent } from './view-boat-owner/view-boat-owner.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import { AddAdminComponent } from './add-admin/add-admin.component';
     TestTestComponent,
     ViewBoatOwnerComponent,
     AddAdminComponent,
+    ProfileSettingsComponent,
 
   ],
   imports: [

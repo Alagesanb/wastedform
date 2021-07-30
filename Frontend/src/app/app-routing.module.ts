@@ -43,6 +43,7 @@ import { BookingDetailsComponent} from './booking-details/booking-details.compon
 import { TestTestComponent } from './test-test/test-test.component';
 import { ViewBoatOwnerComponent } from './view-boat-owner/view-boat-owner.component';
 import { AddAdminComponent } from './add-admin/add-admin.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
@@ -88,8 +89,10 @@ const routes: Routes = [
   { path : 'testsooraj',component : TestTestComponent},
   // Create view boat owner url for app routing module //Done By Alagesan on 05.07.2021	
   { path: 'view-boat-owner' , component : ViewBoatOwnerComponent },
-    // Create add admin url for app routing module //Done By Alagesan on 29.07.2021	
+  // Create add admin url for app routing module //Done By Alagesan on 29.07.2021	
   { path: 'add-admin' , component: AddAdminComponent},
+  // Create add admin url for app routing module //Done By Alagesan on 30.07.2021	
+  {path:'profile-settings' ,component: ProfileSettingsComponent}
 ];
 
 @NgModule({
