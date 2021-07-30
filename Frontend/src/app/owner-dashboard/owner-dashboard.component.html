@@ -115,9 +115,28 @@ width: 97%;">
         </ng-multiselect-dropdown>
 
         </div>
+        
 
     </div>
-
+    <div class="form-row">
+      <!-- Pre launch date and boat anniversary date for book for owner Done By Alagesan on 29.07.2021	-->
+      <div class="col-lg-12">
+        <div class="form-group col-md-12">     
+          <ul class="col-md-12 bg-win" style="display: flex; float: left;background: #1f2c83;margin-top: 22px;">
+          <li class="li-commen"><h6 class="sum-title">PENDING SUMMER WEEKDAYS </h6> <span class="sum-second">{{ PENDING_SUMMER_WEEKDAYS }}</span></li>
+          <li class="li-commen"><h6 class="sum-title">PENDING SUMMER WEEKENDS </h6> <span class="sum-second">{{ PENDING_SUMMER_WEEKENDS }}</span></li>
+          <li class="li-commen"><h6 class="sum-title">PENDING WINTER WEEKDAYS </h6> <span class="sum-second">{{ PENDING_WINTER_WEEKDAYS }}</span></li>
+          <li class="li-commen"><h6 class="sum-title">PENDING WINTER WEEKENDS </h6> <span class="sum-second">{{ PENDING_WINTER_WEEKENDS }}</span></li>
+          </ul>    
+      </div>
+      <div class="form-group col-md-12">     
+        <ul class="col-md-12 bg-win" style="display: flex; float: left;background: #1f2c83;margin-top: 22px;">
+        <li class="li-commen" style="width: 45%;"><h6 class="sum-title">Pre Launch Date </h6> <span class="sum-second">{{ pre_launch_date | date :'dd/MM/yyyy' }}</span></li>
+        <li class="li-commen" style="width: 45%;"><h6 class="sum-title">Boat Anniversary Date </h6> <span class="sum-second">{{ boat_anniversary_date | date :'dd/MM/yyyy' }}</span></li>
+        </ul>    
+      </div>
+      </div>
+    </div>
     <div class="row">                      
 
         <div class="col-lg-12">

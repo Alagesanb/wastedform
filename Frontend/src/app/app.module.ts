@@ -61,6 +61,7 @@ import { OwnerHeaderComponent } from './owner-header/owner-header.component';
 import { BookingDetailsComponent } from './booking-details/booking-details.component';
 import { TestTestComponent } from './test-test/test-test.component';
 import { ViewBoatOwnerComponent } from './view-boat-owner/view-boat-owner.component';
+import { AddAdminComponent } from './add-admin/add-admin.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { ViewBoatOwnerComponent } from './view-boat-owner/view-boat-owner.compon
     BookingDetailsComponent,
     TestTestComponent,
     ViewBoatOwnerComponent,
+    AddAdminComponent,
 
   ],
   imports: [

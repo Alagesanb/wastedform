@@ -391,7 +391,7 @@ $(document).on("click",".cls-Edit-owner-duration",function() {
         boatid:finddate.item_id
       }
        this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {       
-       
+       console.log( data.Data);
     if(data.Status == true){
       this.getBoat = data.Data;     
       this.form.get('Boat_Type').setValue(this.getBoat.response.Boattype_Name);    

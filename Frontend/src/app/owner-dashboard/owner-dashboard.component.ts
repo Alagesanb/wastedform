@@ -30,6 +30,16 @@ export class OwnerDashboardComponent implements OnInit {
   viewBookingByOwnerIddata: any=[];
   viewCancelBookingByOwnerIddata: any=[];
   searchText: any = '';
+  url = this.EnvironmentURL+"api/Schedule/";
+  PENDING_SUMMER_WEEKDAYS:any = 0;
+  PENDING_SUMMER_WEEKENDS: any = 0;
+  PENDING_WINTER_WEEKDAYS: any = 0;
+  PENDING_WINTER_WEEKENDS: any = 0;
+
+  dropdownList_filted_model: any;
+  boat_anniversary_date: string;
+  pre_launch_date: string;
+
   constructor(private router: Router,private http: HttpClient) { }
 
 // Create Component for owner dashboard //Done By Alagesan on 17.05.2021
@@ -98,7 +108,8 @@ export class OwnerDashboardComponent implements OnInit {
    sessionStorage.setItem("Owner_pg_boatListed",JSON.stringify(Filterboat));
    this.GetNextBookingDaysByBoatId(item.item_id)
     
-    
+   this.getpendingDays_Calculation(item.item_id);
+
     //this.Fun_getallDropDownDatas(this.public_selectBoatId);
    
   }
@@ -180,7 +191,6 @@ export class OwnerDashboardComponent implements OnInit {
         sessionStorage.setItem("Owner_pg_boatListed",JSON.stringify(tempArry2)); 
 
         this.GetAllUnAvailableDays();
-
       
         }, err => {
           console.log(err);
@@ -266,6 +276,99 @@ export class OwnerDashboardComponent implements OnInit {
   
       
      }
+
+     getpendingDays_Calculation(boatId)
+  {
+    //Pre launch date and boat anniversary date for book for owner Done By Alagesan on 29.07.2021
+    this.PENDING_SUMMER_WEEKDAYS = 0; 
+    this.PENDING_SUMMER_WEEKENDS = 0;
+    this.PENDING_WINTER_WEEKDAYS = 0;
+    this.PENDING_WINTER_WEEKENDS = 0;
+    this.boat_anniversary_date = "";
+    this.pre_launch_date = "";
+    // var Owner_tmp = JSON.parse(sessionStorage.getItem("Owner_SelectOwner")); 
+
+    // var Boat_tmp = JSON.parse(sessionStorage.getItem("AdminSelectBoat")); 
+    var owner_drp_Id = JSON.parse(sessionStorage.getItem("Ownerlogin"));
+    console.log(owner_drp_Id)
+    
+    var Boat_tmp = JSON.parse(sessionStorage.getItem("Owner_pg_boatListed"));
+    console.log(Boat_tmp);
+    var obj = Object();
+        obj.Owner_Id = owner_drp_Id._id;
+        obj.Boat_Id = boatId;
+        console.log(obj);
+      this.http.post<any>(`${this.url}GetAllPendingDaysOfOwner`, obj).subscribe(data => { 
+
+        console.log(data);
+        
+        if(data.status == true){
+
+          var dt = data.Response;
+          console.log(dt);
+          var BookedDays = dt.BookedDays;
+          var AllocatedDays = dt.AllocatedDays;
+          console.log(BookedDays);
+
+          // this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays ; 
+          // this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays ;
+          // this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays ;
+          // this.PENDING_WINTER_WEEKENDS = AllocatedDays[0].Winter_WeekEndDays ;
+
+          if(BookedDays[0].BoatDetails.length > 0){
+            this.boat_anniversary_date = BookedDays[0].BoatDetails[0].Launch_Date;
+            console.log(this.boat_anniversary_date);
+            this.pre_launch_date = BookedDays[0].BoatDetails[0].PreLaunch_Date;
+            console.log(this.pre_launch_date);
+          }
+          if(BookedDays.length == 0){
+          this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays ; 
+          this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays ;
+          this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays ;
+          this.PENDING_WINTER_WEEKENDS = AllocatedDays[0].Winter_WeekEndDays ;
+
+          }
+          
+          else{
+
+          this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays - BookedDays[0].Summer_WeekDays; 
+          this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays - BookedDays[0].Summer_WeekEndDays;
+          this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays - BookedDays[0].Winter_WeekDays;
+          this.PENDING_WINTER_WEEKENDS = AllocatedDays[0].Winter_WeekEndDays - BookedDays[0].Winter_WeekEndDays;
+          }
+
+
+          /*
+          book day
+                "Summer_WeekDays": 0,
+                "Summer_WeekEndDays": 0,
+                "Winter_WeekDays": 5,
+                "Winter_WeekEndDays": 1
+          
+          */
+         /*
+                "Summer_WeekDays": 23,
+                "Summer_WeekEndDays": 30,
+                "Winter_WeekDays": 28,
+                "Winter_WeekEndDays": 38
+
+         */
+
+
+        }
+        else{
+          alert("data not fount");
+        }
+        
+        
+       
+      
+        }, err => {
+          console.log(err);
+        })
+    
+
+  }
   
 
 

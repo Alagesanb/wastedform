@@ -40,6 +40,8 @@ export class BookForOwnerComponent implements OnInit {
    PENDING_WINTER_WEEKENDS: any = 0;
 
    dropdownList_filted_model: any;
+   boat_anniversary_date: string;
+   pre_launch_date: string;
 
   constructor(private fb: FormBuilder,private http: HttpClient) { }
 
@@ -318,7 +320,8 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
     this.PENDING_SUMMER_WEEKENDS = 0;
     this.PENDING_WINTER_WEEKDAYS = 0;
     this.PENDING_WINTER_WEEKENDS = 0;
-   
+    this.boat_anniversary_date = "";
+    this.pre_launch_date = "";
     var Owner_tmp = JSON.parse(sessionStorage.getItem("Owner_SelectOwner")); 
 
     var Boat_tmp = JSON.parse(sessionStorage.getItem("AdminSelectBoat")); 
@@ -333,11 +336,18 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
         if(data.status == true){
 
           var dt = data.Response;
+          console.log(dt);
           var BookedDays = dt.BookedDays;
           var AllocatedDays = dt.AllocatedDays;
-
+          console.log(BookedDays);
+          //Pre launch date and boat anniversary date for book for owner Done By Alagesan on 29.07.2021
+          if(BookedDays[0].BoatDetails.length > 0){
+            this.boat_anniversary_date = BookedDays[0].BoatDetails[0].Launch_Date;
+            console.log(this.boat_anniversary_date);
+            this.pre_launch_date = BookedDays[0].BoatDetails[0].PreLaunch_Date;
+            console.log(this.pre_launch_date);
+          }
           if(BookedDays.length == 0){
-
           this.PENDING_SUMMER_WEEKDAYS = AllocatedDays[0].Summer_WeekDays ; 
           this.PENDING_SUMMER_WEEKENDS = AllocatedDays[0].Summer_WeekEndDays ;
           this.PENDING_WINTER_WEEKDAYS = AllocatedDays[0].Winter_WeekDays ;

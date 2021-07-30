@@ -83,6 +83,9 @@ export class SettingsComponent implements OnInit {
   addBtnFlag = true
   locationData:any;
   locationDeleteId:string;
+  SummerConsecutiveDaysMessage:string;
+  WinterConsecutiveDaysMessage:string;
+  BookingDaysMessage:string;
 
   constructor(private http: HttpClient ,private fb: FormBuilder, private router: Router,
     private route: ActivatedRoute,private ps: GetServiceService) {
@@ -1930,7 +1933,45 @@ clearShare(){
       Boat_Name: new FormControl('', ),
       Boat_Id: new FormControl('', ),    
 
+    }, { 
+      validators: this.ConsecutiveFormValidations.bind(this)
     });
+  }
+
+  // for settings page //Done By Alagesan on 29.07.2021
+  ConsecutiveFormValidations(formGroup: FormGroup) {
+    const { value: SummerConsecutiveDays } = formGroup.get('Summer_ConsecutiveDays');
+    const { value: WinterConsecutiveDays } = formGroup.get('Winter_ConsecutiveDays');
+    const { value: BookingDays } = formGroup.get('Booking_Days');
+    this.SummerConsecutiveDaysMessage = "Enter the values numbers only"
+    this.WinterConsecutiveDaysMessage = "Enter the values numbers only"
+    this.BookingDaysMessage = "Enter the values numbers only"
+    console.log(SummerConsecutiveDays);
+    let summerconsecutivedays = typeof SummerConsecutiveDays;
+    let winterconsecutivedays = typeof WinterConsecutiveDays;
+    let bookingdays = typeof BookingDays;
+    console.log(summerconsecutivedays);
+    console.log(winterconsecutivedays);
+    console.log(bookingdays);
+   (summerconsecutivedays !== 'number' && SummerConsecutiveDays !== ''  ) ? this.SummerConsecutiveDaysMessage : this.SummerConsecutiveDaysMessage = "";
+   (winterconsecutivedays !== 'number' && WinterConsecutiveDays !== ''  ) ? this.WinterConsecutiveDaysMessage : this.WinterConsecutiveDaysMessage = "";
+   (bookingdays !== 'number' && BookingDays !== ''  ) ? this.BookingDaysMessage :this.BookingDaysMessage = ""
+      
+    
+
+    // if(winterconsecutivedays !== 'number' && WinterConsecutiveDays !== ''  ){
+    //   return this.WinterConsecutiveDaysMessage;
+    // }
+    // else{
+    //   return this.WinterConsecutiveDaysMessage = "" ;
+    // }
+
+    // if(bookingdays !== 'number' && BookingDays !== ''  ){
+    //   return this.BookingDaysMessage;
+    // }
+    // else{
+    //   return this.BookingDaysMessage = "" ;
+    // }
   }
 
   createBookingForm() {

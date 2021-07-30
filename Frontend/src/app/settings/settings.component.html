@@ -292,6 +292,9 @@
            
           <div class="form-group col-md-4">
           <label>Summer Consecutive Days Allowed For Booking</label>
+          <span class="error-msg" *ngIf="!ConsecutiveSubmitted && SummerConsecutiveDaysMessage !== ''">
+            {{SummerConsecutiveDaysMessage}}
+         </span> 
           <input type="text" class="form-control" value="{{SUMMER_CONSECUTIVE_DAYS_ALLOWED}}" formControlName="Summer_ConsecutiveDays" [ngClass]="{ 'is-invalid': ConsecutiveSubmitted && cf.Summer_ConsecutiveDays.errors }">
           </div>  
       </div>               
@@ -300,6 +303,9 @@
            
             <div class="form-group col-md-4">
             <label>Winter Consecutive Days Allowed For Booking</label>
+            <span class="error-msg" *ngIf="!ConsecutiveSubmitted && WinterConsecutiveDaysMessage !== ''">
+              {{WinterConsecutiveDaysMessage}}
+           </span> 
             <input type="text" class="form-control" value="{{WINTER_CONSECUTIVE_DAYS_ALLOWED}}" formControlName="Winter_ConsecutiveDays" [ngClass]="{ 'is-invalid': ConsecutiveSubmitted && cf.Winter_ConsecutiveDays.errors }">
             </div>  
                        </div> 
@@ -309,6 +315,9 @@
            
                         <div class="form-group col-md-4">
                         <label>Consecutive days Between pre-Launch and launch</label>
+                        <span class="error-msg" *ngIf="!ConsecutiveSubmitted && BookingDaysMessage !== ''">
+                          {{BookingDaysMessage}}
+                       </span> 
                         <input type="text" class="form-control" value="0" formControlName="Booking_Days" [ngClass]="{ 'is-invalid': ConsecutiveSubmitted && cf.Booking_Days.errors }">
                         </div>  
                                    </div>            

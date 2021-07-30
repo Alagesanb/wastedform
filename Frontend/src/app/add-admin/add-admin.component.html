@@ -1,0 +1,46 @@
+<div class="main-page">
+    <app-sidemenu></app-sidemenu>
+  
+    <div class="contents-page ">
+      <app-header></app-header>
+        <div class="headingz">
+          <!-- Create component for add admin   Done By Alagesan on 29.07.2021	-->
+            <h4> Add Admin</h4>
+        </div>
+        <div class="page contents">
+            <div class="sbg-form"> 
+                <form >
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Username</label> 
+                            <input type="text" class="form-control" placeholder="Username">
+                        </div>
+                    </div>  
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Email Id</label> 
+                            <input type="text" class="form-control" placeholder="Email Id">
+                        </div>
+                    </div> 
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label>Password</label> 
+                            <input [type]="show ? 'text' : 'password'" placeholder="Password" autocomplete="off" class="form-control" >
+                            <span class="" (click)="password()" style="position: absolute;right: 7px; bottom: 0px; z-index: 1; font-size: x-large;" ><i class="fas fa-eye"></i></span>
+
+                        </div> 
+                   </div>                
+                    <div class="form-row">     
+                        <div class="col-md-2">
+                            <a  class="btn btn-primary" style="margin-top: 10px;" >Create</a>
+                        </div>             
+                    </div>
+                </form>     
+            </div>  
+        </div>
+    </div>  
+</div>
+          <!-- Create component for add admin   Done By Alagesan on 29.07.2021	-->
+<div class="dash-footer">
+    <app-footer-adminsession></app-footer-adminsession>   
+</div>

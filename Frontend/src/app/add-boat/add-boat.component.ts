@@ -509,7 +509,47 @@ export class AddBoatComponent implements OnInit {
                             this.resultBoatType = data.data.Boat_Name
                             this.Boattype_Name = data.data.Boattype_Name
                             this.ownersAllowed = data.data.Owners_Allowed
-                            this.boatform.reset()
+                            this.boatform.reset();
+                            this.boatform.get('Boat_Name').clearValidators();
+ this.boatform.get('Boat_Name').updateValueAndValidity(); 
+ this.boatform.get('Boattype_Name').clearValidators();
+ this.boatform.get('Boattype_Name').updateValueAndValidity(); 
+ this.boatform.get('Boat_Description').clearValidators();
+ this.boatform.get('Boat_Description').updateValueAndValidity(); 
+ this.boatform.get('Boat_HandBook_span').clearValidators();
+ this.boatform.get('Boat_HandBook_span').updateValueAndValidity(); 
+ this.boatform.get('Boat_Image_span').clearValidators();
+ this.boatform.get('Boat_Image_span').updateValueAndValidity(); 
+ this.boatform.get('Boat_HandBook_span').clearValidators();
+ this.boatform.get('Boat_HandBook_span').updateValueAndValidity(); 
+ this.boatform.get('Launch_Date').clearValidators();
+ this.boatform.get('Launch_Date').updateValueAndValidity(); 
+ this.boatform.get('PreLaunch_Date').clearValidators();
+ this.boatform.get('PreLaunch_Date').updateValueAndValidity(); 
+ this.boatform.get('Boat_Facility').clearValidators();
+ this.boatform.get('Boat_Facility').updateValueAndValidity(); 
+ this.boatform.get('Boat_Number').clearValidators();
+ this.boatform.get('Boat_Number').updateValueAndValidity(); 
+ this.boatform.get('Boat_Status').clearValidators();
+ this.boatform.get('Boat_Status').updateValueAndValidity(); 
+ this.boatform.get('SummerSeason_SDate').clearValidators();
+ this.boatform.get('SummerSeason_SDate').updateValueAndValidity(); 
+ this.boatform.get('SummerSeason_EDate').clearValidators();
+ this.boatform.get('SummerSeason_EDate').updateValueAndValidity(); 
+ this.boatform.get('WinterSeason_SDate').clearValidators();
+ this.boatform.get('WinterSeason_SDate').updateValueAndValidity(); 
+ this.boatform.get('WinterSeason_EDate').clearValidators();
+ this.boatform.get('WinterSeason_EDate').updateValueAndValidity(); 
+ this.boatform.get('Boat_originalhandBook').clearValidators();
+ this.boatform.get('Boat_originalhandBook').updateValueAndValidity(); 
+ this.boatform.get('Boat_Image').clearValidators();
+ this.boatform.get('Boat_Image').updateValueAndValidity(); 
+ this.boatform.get('Location_Name').clearValidators();
+ this.boatform.get('Location_Name').updateValueAndValidity();      
+ this.boatform.get('Owners_Allowed').clearValidators();
+ this.boatform.get('Owners_Allowed').updateValueAndValidity();
+ this.boatform.get('Location_Id').clearValidators();
+ this.boatform.get('Location_Id').updateValueAndValidity();
                             this.getBoatAndSeason = data.message
                           }
                         }, err => {
