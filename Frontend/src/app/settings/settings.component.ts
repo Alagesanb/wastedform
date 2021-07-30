@@ -753,19 +753,19 @@ $(document).on("click",".cls-special-days-Edit",function() {
      });
 
      $(document).on("click","#id-unAvilableDay-Delete-popup-save",function() {
-      debugger;
+     
       var datas = unAvilabel_boat_BySingle_sorted;
       var boatId = "0";
       var arrayPush = [];
 
       $.each(unAvilabel_boat_BySingle_sorted , function(index, val) {
-        debugger;
+      
       
           boatId = val.boat_id;
           arrayPush.push(val.unAvilableDate);
 
       })
-    debugger;
+   
       var obj = Object();
 
       if(boatId == "0"){
@@ -784,7 +784,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
           dataType: 'json', 
           data: obj,
           success: function(Related_datas) {
-            debugger;
+           
                        
             if(Related_datas.status == true)
             {
@@ -923,14 +923,14 @@ $(document).on("click",".cls-special-days-Edit",function() {
                   if(val.item_id == val2)
                   {
 
-                    debugger;
+                  
                     try {
 
                       $.each(val1.UnAvailableDates , function(index3, val3) {
 
                         debugger;
                         
-                        var ConvertedData = split_String(val3);
+                        var ConvertedData = split_String_second(val3);
                           obj_tmp_date += ConvertedData +" , ";
                           var obj_tmp = Object();
                           obj_tmp.serialNumber = serialnumber;
@@ -1022,6 +1022,15 @@ $(document).on("click",".cls-special-days-Edit",function() {
 
     function split_String(valData){
       
+      var valNew=valData.split('/');
+      var returnValue =  valNew[1]+"/"+valNew[0]+"/"+valNew[2];
+      return returnValue;
+
+    }
+    //split_String_second
+
+    function split_String_second(valData){
+      debugger;
       var valNew=valData.split('/');
       var returnValue =  valNew[1]+"/"+valNew[0]+"/"+valNew[2];
       return returnValue;
@@ -1309,7 +1318,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
             
           });
 
-          debugger;
+        
 
            var selected_bots = sessionStorage.getItem("UNAVAILABLE_DATE_userSelect_Boat");
            var selected_bots_tmp = JSON.parse(selected_bots);
@@ -1323,7 +1332,7 @@ $(document).on("click",".cls-special-days-Edit",function() {
             
           //   });
 
-         
+       
           //if(selected_bots.length != 0 && temp_data_datte.length != 0){
           if(selected_bots != null){
             var obj = Object();
@@ -1715,13 +1724,13 @@ if(item.item_id){
     obj.boatid =item.item_id;
     //obj._id =binding_sharealow._id;
 
-   debugger;
+  
   
    //this.http.post<any>(`${this.url}/GetBoatDetailsByBoatId`,  obj  ).subscribe(data => {
      this.http.post<any>(`${this.shareUrl}/GetShareDetailsByBoatId`,  obj  ).subscribe(data => {
   
 if(data.Status == true){
-  debugger;
+ 
   this.getBoat = data.Data;
   this.getBoat = this.getBoat.response;
   this.GetBoatDetailsByBoatId_AllocatedDays =  data.Data;

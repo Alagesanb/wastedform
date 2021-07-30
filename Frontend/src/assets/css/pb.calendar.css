@@ -3,7 +3,7 @@
 .calendar-block{
     width: 100%;
     float: left;
-    padding: 25px;
+    padding: 0px;
     border-right: dotted 2px #ccc;
     margin-top: 20px;
 }

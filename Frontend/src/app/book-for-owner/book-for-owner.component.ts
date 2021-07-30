@@ -225,7 +225,7 @@ sessionStorage.setItem("Adminbooking-relodePg","1");
  GetAllUnAvailableDays(){
 
 
-  this.http.get<any>(`${this.url_Days}GetAllUnAvailableDays`).subscribe(data => { 
+  this.http.get<any>(`${this.url_Days}GetUnAvailabeDaysOfBoats`).subscribe(data => { 
    
 
     sessionStorage.setItem("GetAllUnAvailableDays_Owners",JSON.stringify(data));             

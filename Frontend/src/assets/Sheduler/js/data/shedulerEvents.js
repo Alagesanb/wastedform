@@ -1125,10 +1125,20 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
     }
 
   function GetAllUnAvailableDays_settings(obj){
-
+debugger;
         
-        var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));         
-            //
+        var datas = JSON.parse(sessionStorage.getItem("GetAllUnAvailableDays_Owners"));
+        var data_2_boat_Temp = JSON.parse(sessionStorage.getItem("Owner_pg_boatListed"));         
+        
+        if(data_2_boat_Temp == null){
+            
+         data_2_boat_Temp = JSON.parse(sessionStorage.getItem("AdminSelectBoat"));         
+
+
+        }
+        
+        
+        //
         if (typeof datas !== "undefined" && datas != null) 
         {
 
@@ -1136,7 +1146,8 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
             {
             var startDate = new Date(obj.start);
             var stopDate = new Date(obj.end);
-            var temp_res = datas.response[0];            
+            var temp_res = datas.CommonDays[0]; 
+            //var response = datas.response;           
             var temp_unAvilable = []; 
             
             if (typeof temp_res !== "undefined" && temp_res != null) 
@@ -1145,6 +1156,30 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     var str_tmp = new Date(val);
                     temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
                 }); 
+
+                    
+                 $.each(datas.response, function(index, val) {
+                    
+                     
+                     
+                     if(data_2_boat_Temp._id == val.Boat_Id){
+                         
+                        
+                        $.each(val.UnAvailableDates, function(index, val) { 
+                                           
+                            
+                            var str_tmp = new Date(val);
+                            temp_unAvilable.push(getFormattedDate_WithOut_Zero_Time(str_tmp));               
+                        });
+
+                     } 
+                    
+                 });
+                 
+
+                 debugger;
+
+                 var xxxxx = temp_unAvilable;
                 
                 
     
@@ -1274,7 +1309,7 @@ function ConvertUTCTimeToLocalTime(UTCDateString)
                     } 
                     else{
                         //alert("Error..");
-                        AddSchedule_ApiCalling(obj); 
+                        //AddSchedule_ApiCalling(obj); /// dont this feeld api call
                     }          
             }
             else{

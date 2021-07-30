@@ -274,7 +274,7 @@ export class DashboardComponent implements OnInit {
 
     function getDaysInMonth_Sheduler(datas_Arry,data_UnAvailableDays,data_UnAvailableDays_Boats){
 
-    
+    debugger;
         var monthNames = [ "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December" ];
         var monthNames_Number = [ "1", "2", "3", "4", "5", "6",
@@ -375,8 +375,9 @@ export class DashboardComponent implements OnInit {
 
       });
 
-
+debugger;
       $.each(data_UnAvailableDays_Boats, function(key, val){
+        debugger;
 
         var tmp1 = val;
         var tmp1_StartDate = new Date(tmp1.start);
@@ -544,28 +545,32 @@ export class DashboardComponent implements OnInit {
                           type: 'GET',
                           dataType: 'json',        
                           success: function(GetUnAvailabeDaysOfBoats_datas) {
+
+                            
                            
                             if(GetUnAvailabeDaysOfBoats_datas.status == true)
                             {
                               var tmp1_dt2 = GetUnAvailabeDaysOfBoats_datas.response;
                               $.each(tmp1_dt2, function(key, val2){
+                                
 
                                 try {
 
-                                  $.each(val2.Boat_Id, function(key, val3){
+                                 // $.each(val2.Boat_Id, function(key, val3){
                                     
                                    $.each(val2.UnAvailableDates, function(key, val4){
                                      
+                                     
                                             var obj = Object();
-                                            obj.Boat_Id = val3;
-                                            obj.start = val4;
+                                            obj.Boat_Id = val2.Boat_Id;//val3;
+                                            obj.start = val4; //Jqueary_string_to_Date_Convert(val4);
                                             GetAllUnAvailableDays_Boats.push(obj);
  
                                    });
  
  
  
-                                 }); 
+                                 //}); 
                                   
                                 }
                                 catch(err) {
@@ -801,6 +806,18 @@ export class DashboardComponent implements OnInit {
   
 
   }
+
+
+  function Jqueary_string_to_Date_Convert(dateString){   
+   debugger;
+    var dateArray = dateString.split("/");
+    //var dateObj = new Date(`${dateArray[2]}-${dateArray[0]}-${dateArray[1]}`);
+    var dateObj =dateArray[1] +"/"+dateArray[0]+"/"+ dateArray[2];
+  
+    return dateObj;
+
+  }
+
 
 ///////...................Resource Timeline end...............
   }
